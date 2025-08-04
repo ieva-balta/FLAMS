@@ -44,7 +44,7 @@ Linux 64-bit, Windows and Mac OS supported.
 
 ### Third-party dependencies
 
-* [BLAST+ v.13](https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.13.0/)
+* [BLAST+ (>=2.13, tested until 2.16)](https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.16.0/)
 
 ## Installation
 
@@ -129,6 +129,7 @@ FLAMS updates its search databases regularly. To get an overview of the supporte
 
 |FLAMS version|CPLM version|dbPTM version|database available for download|UniProt release|
 |:----|:----|:----|:----|:----|
+|v1.1.6|v4 (Feb '25 update)|2025_July|[yes](https://doi.org/10.5281/zenodo.16737546)|2025_03|
 |v1.1.5|v4|2025_January|[yes](https://doi.org/10.5281/zenodo.14616210)|2024_06|
 |v1.1.4|v4|2024_April|[yes](https://doi.org/10.5281/zenodo.10958721)|2024_02|
 |v1.1.0-3|v4|2023_November|[yes](https://doi.org/10.5281/zenodo.10171879)|2023_05|
@@ -245,12 +246,12 @@ However, if desired, follow these instructions to modify the scripts:
 
   * on a fresh install (= never ran FLAMS before, so no FLAMS databases yet):
     - go to `src/flams/databases/setup.py`
-    - comment out lines 515-520 (function `_generate_blastdb_if_not_up_to_date` - the try/except _get_fasta_from_zenodo)
-    - uncomment line 524 (function `_generate_blastdb_if_not_up_to_date` - the _get_fasta_for_blast)
+    - comment out lines 516-521 (function `_generate_blastdb_if_not_up_to_date` - the try/except _get_fasta_from_zenodo)
+    - uncomment line 525 (function `_generate_blastdb_if_not_up_to_date` - the _get_fasta_for_blast)
 
   * on a FLAMS version with previously generated BLAST databases:
     - go to `src/flams/databases/setup.py`
-    - change the version numbers of the databases you wish to update on lines 76-472.  E.g.:
+    - change the version numbers of the databases you wish to update on lines 77-473.  E.g.:
 
     `"2-hydroxyisobutyrylation": ModificationType(
         "2-hydroxyisobutyrylation", 1.0, [ModificationDatabase(cplmv4, "2-Hydroxyisobutyrylation")],
