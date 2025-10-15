@@ -51,18 +51,15 @@ def query_uniprot_ptm(ptm_type, taxon_id, limit=10):
   LIMIT {limit}
   """
 
-
   print("Generated SPARQL Query (paste into https://sparql.uniprot.org/):")
   print(query)
   print("\nExecuting...")
 
+
   # Execute the query
   try:
-    # start_time = time.time()
     sparql.setQuery(query)
     results = sparql.query().convert()
-    # elapsed_time = time.time() - start_time
-    # print(f"\nQuery executed in {elapsed_time:.2f} seconds")
     print("Raw results (first 500 chars for brevity):")
     print(json.dumps(results, indent=2)[:500] + "...")
     print(f"Raw bindings count: {len(results['results']['bindings'])}")
@@ -86,7 +83,7 @@ def query_uniprot_ptm(ptm_type, taxon_id, limit=10):
 
 if __name__ == "__main__":
   ptm = input("Enter PTM keyword (e.g. acetyl, phospho, ubiquitin): ").strip()
-  taxon_input = input("Enter NCBI Taxonomy ID (e.g. 9606 for human): ").strip()
+  taxon_input = input("Enter NCBI Taxonomy ID: ").strip()
   limit_input = input("Enter number of results to retrieve (default = 10): ").strip()
   # epitope_input = input("Enter sequence epitope (e.g. VSTQ, or press Enter for none): ").strip()
     
