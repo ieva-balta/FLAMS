@@ -30,7 +30,7 @@ def query_uniprot_ptm(ptm_type, taxon_id, limit=10):
   PREFIX faldo: <http://biohackathon.org/resource/faldo#>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   
-  SELECT ?accession ?position ?ptm_note
+  SELECT ?accession ?position ?ptm_note ?aaSequence
   WHERE {{
     ?protein a up:Protein . # select proteins
     ?protein up:reviewed true . # only reviewed swiss-Prot entries
@@ -73,10 +73,13 @@ def query_uniprot_ptm(ptm_type, taxon_id, limit=10):
   # Extract and return results
   ptm_sites = []
   for row in results["results"]["bindings"]:
+    sequence = row["aaSequence"]["value"]
     ptm_sites.append({
       "accession": row["accession"]["value"],
       "position": row["position"]["value"],
-      "ptm_note": row["ptm_note"]["value"]
+      "ptm_note": row["ptm_note"]["value"],
+      "sequence": sequence
+      # sequence[:50] + "..." if len(sequence) > 50 else sequence
       })
 
   return ptm_sites
