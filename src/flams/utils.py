@@ -14,6 +14,7 @@ E.g. on     Linux: ~/.local/share/<AppName>
             Mac: '/Users/trentm/Library/Application Support/SuperApp'
             Windows: 'C:\\Users\\trentm\\AppData\\Local\\Acme\\SuperApp'
 """
+#made changes to change the location of database instalation for me specifically
 
 def get_data_dir(app_name="flams"):
     """
@@ -25,10 +26,18 @@ def get_data_dir(app_name="flams"):
     Name of application, i.e., flams
 
     """
-    # Ensure data dir exists and return.
-    data_dir = os.environ.get(
-        'FLAMS_DATA_DIR', appdirs.user_data_dir(app_name)
-    )
+
+    # HPC default path
+    default_path = "/data/leuven/368/vsc36826/flams/flams2/dbs/"
+
+
+    # # Ensure data dir exists and return.
+    # data_dir = os.environ.get(
+    #     'FLAMS_DATA_DIR', appdirs.user_data_dir(app_name)
+    # )
+
+    data_dir = os.environ.get('FLAMS_DATA_DIR', default_path)
+
     Path(data_dir).mkdir(parents=True, exist_ok=True)
     return data_dir
 
