@@ -14,7 +14,7 @@ version = "1.1.6"
 FLAMS = "flams.flams:main"
 
 [project.urls]
-repository = "https://github.com/hannelorelongin/FLAMS"
+repository = "https://github.com/ieva-balta/FLAMS"
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
