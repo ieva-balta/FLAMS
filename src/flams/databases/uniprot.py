@@ -101,77 +101,162 @@ def validate_ptm_keyword(ptm_keyword):
     return []
 
 def fetch_uniprot_ptm_sequences(ptm_term):
-  base_url = "https://rest.uniprot.org/uniprotkb/search"
-  headers = {"Accept": "application/json"}
+    base_url = "https://rest.uniprot.org/uniprotkb/search"
+    headers = {"Accept": "application/json"}
+    url = f"{base_url}?query=reviewed:true AND ft_mod_res:{ptm_term} AND existence:1&format=json"
 
-  # Query for reviewed entries with specified PTM and protein existence level 1
-  url = f"{base_url}?query=reviewed:true AND ft_mod_res:{ptm_term} AND existence:1&format=json"
+    proteins = {}
+    ptms = []
+    records = {}
+    tally = 0
 
-  proteins = {}
-  ptms = []
-  records = []
-  tally = 0
+    while url:
+        r = requests.get(url, headers=headers)
+        r.raise_for_status()
+        data = r.json()
 
-  while url:
-      r = requests.get(url, headers=headers)
-      r.raise_for_status()
-      data = r.json()
+        for entry in data.get("results", []):
+            accession = entry.get("primaryAccession")
+            sequence = entry.get("sequence", {}).get("value", "")
+            protein_name = (
+                entry.get("proteinDescription", {})
+                .get("recommendedName", {})
+                .get("fullName", {})
+                .get("value", "")
+            )
+            organism = entry.get("organism", {}).get("scientificName", "")
 
-      # Extract entries
-      for entry in data.get("results", []):
-          accession = entry.get("primaryAccession")
-          sequence = entry.get("sequence", {}).get("value", "")
-          protein_name = (
-              entry.get("proteinDescription", {})
-              .get("recommendedName", {})
-              .get("fullName", {})
-              .get("value", "")
-          )
-          organism = entry.get("organism", {}).get("scientificName", "")
+            # Store protein info
+            proteins[accession] = {
+                "sequence": sequence,
+                "protein_name": protein_name,
+                "organism": organism
+            }
+
+            # Initialize PTM list for this protein if not already present
+            if accession not in records:
+                records[accession] = {
+                    "sequence": sequence,
+                    "protein_name": protein_name,
+                    "organism": organism,
+                    "ptms": []
+                }
+
+            # PTM annotations
+            for feature in entry.get("features", []):
+                if feature.get("type") != "Modified residue":
+                    continue
+                desc = feature.get("description", "N/A")
+                if ptm_term.lower() not in desc.lower():
+                    continue
+                pos = feature.get("location", {}).get("start", {}).get("value", "N/A")
+                evidences = [ev.get("evidenceCode") for ev in feature.get("evidences", [])]
+                eco_code = evidences[0] if evidences else "N/A"
+
+                ptms.append({
+                    "accession": accession,
+                    "ptm": desc,
+                    "position": pos,
+                    "evidence": eco_code
+                })
+
+                # Aggregate PTM info for this protein
+                records[accession]["ptms"].append(f"{desc}|{pos}|{eco_code}")
+
+        tally += len(data["results"])
+        total = r.headers.get("x-total-results", "?")
+        logging.info("Retrieved %d of %s total results", tally, total)
+        print(f"Retrieved {tally} of {total} total results")
+
+        url = r.links.get("next", {}).get("url")
+        if tally >= int(total):
+            break
+
+    # Create SeqRecords with aggregated PTM info
+    seq_records = []
+    for accession, info in records.items():
+        ptm_info = ";".join(info["ptms"])  # Combine PTM info into a single string
+        record = SeqRecord(
+            Seq(info["sequence"]),
+            id=f"{accession}|UniProt",
+            description=f"{info['protein_name']}|{ptm_info}|{info['organism']}"
+        )
+        seq_records.append(record)
+
+    return proteins, ptms, seq_records
+
+# def fetch_uniprot_ptm_sequences(ptm_term):
+#   base_url = "https://rest.uniprot.org/uniprotkb/search"
+#   headers = {"Accept": "application/json"}
+
+#   # Query for reviewed entries with specified PTM and protein existence level 1
+#   url = f"{base_url}?query=reviewed:true AND ft_mod_res:{ptm_term} AND existence:1&format=json"
+
+#   proteins = {}
+#   ptms = []
+#   records = []
+#   tally = 0
+
+#   while url:
+#       r = requests.get(url, headers=headers)
+#       r.raise_for_status()
+#       data = r.json()
+
+#       # Extract entries
+#       for entry in data.get("results", []):
+#           accession = entry.get("primaryAccession")
+#           sequence = entry.get("sequence", {}).get("value", "")
+#           protein_name = (
+#               entry.get("proteinDescription", {})
+#               .get("recommendedName", {})
+#               .get("fullName", {})
+#               .get("value", "")
+#           )
+#           organism = entry.get("organism", {}).get("scientificName", "")
           
-          proteins[accession] = {
-              "sequence": sequence,
-              "protein_name": protein_name,
-              "organism": organism
-          }
+#           proteins[accession] = {
+#               "sequence": sequence,
+#               "protein_name": protein_name,
+#               "organism": organism
+#           }
 
-          #PTM annotations
-          for feature in entry.get("features", []):
-              if feature.get("type") != "Modified residue":
-                  continue
-              desc = feature.get("description", "N/A")
-              if ptm_term.lower() not in desc.lower():
-                  continue
-              pos = feature.get("location", {}).get("start", {}).get("value", "N/A")
-              evidences = [ev.get("evidenceCode") for ev in feature.get("evidences", [])]
-              eco_code = evidences[0] if evidences else "N/A"
+#           #PTM annotations
+#           for feature in entry.get("features", []):
+#               if feature.get("type") != "Modified residue":
+#                   continue
+#               desc = feature.get("description", "N/A")
+#               if ptm_term.lower() not in desc.lower():
+#                   continue
+#               pos = feature.get("location", {}).get("start", {}).get("value", "N/A")
+#               evidences = [ev.get("evidenceCode") for ev in feature.get("evidences", [])]
+#               eco_code = evidences[0] if evidences else "N/A"
 
-              ptms.append({
-                  "accession": accession,
-                  "ptm": desc,
-                  "position": pos,
-                  "evidence": eco_code
-              })
+#               ptms.append({
+#                   "accession": accession,
+#                   "ptm": desc,
+#                   "position": pos,
+#                   "evidence": eco_code
+#               })
           
-              record = SeqRecord(
-                Seq(sequence),
-                id=f"{accession}|{pos}|UniProt",
-                description=f"{protein_name}|{desc}|{pos}|{eco_code}|{organism}"
-              )
-              records.append(record)
+#               record = SeqRecord(
+#                 Seq(sequence),
+#                 id=f"{accession}|{pos}|UniProt",
+#                 description=f"{protein_name}|{desc}|{pos}|{eco_code}|{organism}"
+#               )
+#               records.append(record)
 
-      tally += len(data["results"])
-      total = r.headers.get("x-total-results", "?")
-      logging.info("Retrieved %d of %s total results", tally, total)
-      print(f"Retrieved {tally} of {total} total results")
+#       tally += len(data["results"])
+#       total = r.headers.get("x-total-results", "?")
+#       logging.info("Retrieved %d of %s total results", tally, total)
+#       print(f"Retrieved {tally} of {total} total results")
 
-      # Follow pagination link
-      url = r.links.get("next", {}).get("url")
+#       # Follow pagination link
+#       url = r.links.get("next", {}).get("url")
 
-      if tally >= int(total):
-          break
+#       if tally >= int(total):
+#           break
   
-  return proteins, ptms, records
+#   return proteins, ptms, records
 
 # print(f"Total records fetched: {len(records)}")
 # SeqIO.write(records, "uniprot_phosphoserine.fasta", "fasta")
@@ -193,6 +278,14 @@ if __name__ == "__main__":
         SeqIO.write(records, fasta_file, "fasta")
         logging.info("✅ FASTA file written: %s", fasta_file)
 
+        # Optionally: Write PTM annotations to a separate file for FLAMS
+        ptm_file = f"uniprot_{ptm.replace(' ', '_').lower()}_ptms.csv"
+        with open(ptm_file, "w") as f:
+            f.write("accession,ptm,position,evidence\n")
+            for ptm_entry in ptms:
+                f.write(f"{ptm_entry['accession']},{ptm_entry['ptm']},{ptm_entry['position']},{ptm_entry['evidence']}\n")
+        logging.info("✅ PTM annotation file written: %s", ptm_file)
+        
         # Example: print first 3 proteins and PTMs
         print("\nSample proteins:")
         for acc, info in list(proteins.items())[:3]:
