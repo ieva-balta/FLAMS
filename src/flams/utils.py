@@ -25,10 +25,15 @@ def get_data_dir(app_name="flams"):
     Name of application, i.e., flams
 
     """
-    # Ensure data dir exists and return.
-    data_dir = os.environ.get(
-        'FLAMS_DATA_DIR', appdirs.user_data_dir(app_name)
-    )
+    # # Ensure data dir exists and return.
+    # data_dir = os.environ.get(
+    #     'FLAMS_DATA_DIR', appdirs.user_data_dir(app_name)
+    # )
+
+    default_path = "/data/leuven/368/vsc36828/IBP/flams_cache"
+    
+    data_dir = os.environ.get('FLAMS_DATA_DIR', default_path)
+    
     Path(data_dir).mkdir(parents=True, exist_ok=True)
     return data_dir
 
