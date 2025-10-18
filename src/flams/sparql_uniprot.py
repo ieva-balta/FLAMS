@@ -2,8 +2,6 @@
 from SPARQLWrapper import SPARQLWrapper, JSON
 import sys
 import csv
-import threading
-from concurrent.futures import ThreadPoolExecutor
 import time
 
 class ThreadSafeSPARQL:
@@ -15,165 +13,106 @@ class ThreadSafeSPARQL:
         with self._lock:
             sparql = SPARQLWrapper(self.endpoint)
             sparql.setReturnFormat(JSON)
+            sparql.setMethod('POST')  # Use POST for large queries
             sparql.setQuery(query_str)
             return sparql.query().convert()
 
-def query_uniprot_ptm_parallel(ptm_type, taxon_id, limit=50, output_file="uniprot_ptm_results.tsv"):
+def query_uniprot_ptm_single_query(ptm_type, taxon_id, limit=50, output_file="uniprot_ptm_results.tsv"):
     """
-    Parallel approach: Run core query and evidence query simultaneously
+    Single query approach: Get everything in one query - much faster
     """
     endpoint = "https://sparql.uniprot.org/sparql"
-    sparql = ThreadSafeSPARQL(endpoint)
+    sparql = SPARQLWrapper(endpoint)
     ptm_lower = ptm_type.lower()
     
-    def get_core_data():
-        """Get core PTM data without evidence codes"""
-        print("Starting core PTM data query...")
-        
-        core_query = f"""
-        PREFIX up: <http://purl.uniprot.org/core/>
-        PREFIX taxon: <http://purl.uniprot.org/taxonomy/>
-        PREFIX faldo: <http://biohackathon.org/resource/faldo#>
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
-        SELECT DISTINCT
-        ?accession
-        ?protein_name
-        ?gene_name
-        ?organism_name
-        ?position
-        ?ptm_note
-        ?sequence
-        
-        WHERE {{
-        ?protein a up:Protein ;
-                up:reviewed true ;
-                up:organism taxon:{taxon_id} ;
-                up:sequence ?seq ;
-                up:organism/up:scientificName ?organism_name .
-
-        ?seq rdf:value ?sequence .
-
-        OPTIONAL {{
-            ?protein up:recommendedName/up:fullName ?protein_name .
-        }}
-
-        OPTIONAL {{
-            ?protein up:encodedBy/skos:prefLabel ?gene_name .
-        }}
-
-        ?protein up:annotation ?ptmAnn .
-        ?ptmAnn a up:Modified_Residue_Annotation ;
-                rdfs:comment ?ptm_note ;
-                up:range/faldo:begin/faldo:position ?position .
-
-        FILTER(CONTAINS(LCASE(?ptm_note), "{ptm_lower}"))
-
-        BIND(REPLACE(STR(?protein), "^.*/", "") AS ?accession)
-        }}
-        ORDER BY ?accession ?position
-        LIMIT {limit}
-        """
-        
-        results = sparql.query(core_query)
-        print(f"Core query complete: {len(results['results']['bindings'])} results")
-        return results
+    # Handle no limit case
+    limit_clause = f"LIMIT {limit}" if limit is not None else ""
     
-    def get_evidence_codes():
-        """Get evidence codes for all proteins matching the search (runs in parallel)"""
-        print("Starting evidence codes query...")
-        
-        # First, get all accessions that match our PTM search
-        accessions_query = f"""
-        PREFIX up: <http://purl.uniprot.org/core/>
-        PREFIX taxon: <http://purl.uniprot.org/taxonomy/>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        
-        SELECT DISTINCT ?protein
-        WHERE {{
-          ?protein a up:Protein ;
-                  up:reviewed true ;
-                  up:organism taxon:{taxon_id} ;
-                  up:annotation ?ptmAnn .
-          
-          ?ptmAnn a up:Modified_Residue_Annotation ;
-                  rdfs:comment ?ptm_note .
-          
-          FILTER(CONTAINS(LCASE(?ptm_note), "{ptm_lower}"))
-        }}
-        LIMIT {limit}
-        """
-        
-        accessions_result = sparql.query(accessions_query)
-        proteins = [row['protein']['value'] for row in accessions_result['results']['bindings']]
-        
-        if not proteins:
-            return {}
-        
-        # Get evidence codes
-        protein_values = " ".join([f'<{protein}>' for protein in proteins])
-        
-        evidence_query = f"""
-        PREFIX up: <http://purl.uniprot.org/core/>
-        PREFIX taxon: <http://purl.uniprot.org/taxonomy/>
-        
-        SELECT ?protein ?evidence_code
-        WHERE {{
-          VALUES ?protein {{ {protein_values} }}
-          
-          ?protein up:reviewed true ;
-                   up:organism taxon:{taxon_id} ;
-                   up:attribution/up:evidence ?evidence .
-          
-          BIND(REPLACE(STR(?evidence), "^.*/(ECO_[0-9]+)$", "$1") AS ?evidence_code)
-        }}
-        """
-        
-        evidence_results = sparql.query(evidence_query)
-        
-        evidence_map = {}
-        for row in evidence_results["results"]["bindings"]:
-            protein_uri = row.get("protein", {}).get("value", "")
-            evidence_code = row.get("evidence_code", {}).get("value", "N/A")
-            if "/" in protein_uri:
-                accession = protein_uri.split("/")[-1]
-                evidence_map[accession] = evidence_code
-        
-        print(f"Evidence query complete: {len(evidence_map)} codes found")
-        return evidence_map
-    
-    # Run both queries in parallel
-    print("Starting parallel queries...")
+    print("Starting single query for PTM data with evidence codes...")
     start_time = time.time()
     
-    with ThreadPoolExecutor(max_workers=2) as executor:
-        # Submit both tasks
-        core_future = executor.submit(get_core_data)
-        evidence_future = executor.submit(get_evidence_codes)
+    # Single query that gets everything at once
+    query = f"""
+    PREFIX up: <http://purl.uniprot.org/core/>
+    PREFIX taxon: <http://purl.uniprot.org/taxonomy/>
+    PREFIX faldo: <http://biohackathon.org/resource/faldo#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+    SELECT DISTINCT
+    ?accession
+    ?protein_name
+    ?gene_name
+    ?organism_name
+    ?position
+    ?ptm_note
+    ?sequence
+    ?evidence_code
+    
+    WHERE {{
+    ?protein a up:Protein ;
+            up:reviewed true ;
+            up:organism taxon:{taxon_id} ;
+            up:sequence ?seq ;
+            up:organism/up:scientificName ?organism_name ;
+            up:annotation ?ptmAnn .
+
+    ?seq rdf:value ?sequence .
+
+    OPTIONAL {{
+        ?protein up:recommendedName/up:fullName ?protein_name .
+    }}
+
+    OPTIONAL {{
+        ?protein up:encodedBy/skos:prefLabel ?gene_name .
+    }}
+
+    ?ptmAnn a up:Modified_Residue_Annotation ;
+            rdfs:comment ?ptm_note ;
+            up:range/faldo:begin/faldo:position ?position .
+
+    # Get evidence code from protein attribution
+    OPTIONAL {{
+        ?protein up:attribution/up:evidence ?evidence .
+        BIND(REPLACE(STR(?evidence), "^.*/(ECO_[0-9]+)$", "$1") AS ?evidence_code)
+    }}
+
+    FILTER(CONTAINS(LCASE(?ptm_note), "{ptm_lower}"))
+
+    BIND(REPLACE(STR(?protein), "^.*/", "") AS ?accession)
+    }}
+    ORDER BY ?accession ?position
+    {limit_clause}
+    """
+    
+    try:
+        # Use POST method for the single query
+        sparql.setReturnFormat(JSON)
+        sparql.setMethod('POST')
+        sparql.setQuery(query)
+        results = sparql.query().convert()
         
-        # Wait for both to complete and get results
-        core_results = core_future.result()
-        evidence_map = evidence_future.result()
+        end_time = time.time()
+        print(f"Single query completed in {end_time - start_time:.2f} seconds")
+        print(f"Found {len(results['results']['bindings'])} PTM sites")
+        
+    except Exception as e:
+        print(f"Query failed: {e}")
+        return []
     
-    end_time = time.time()
-    print(f"Parallel queries completed in {end_time - start_time:.2f} seconds")
-    
-    # Combine results
+    # Process results
     ptm_sites = []
-    for row in core_results["results"]["bindings"]:
-        accession = row.get("accession", {}).get("value", "N/A")
-        
+    for row in results["results"]["bindings"]:
         site = {
-            "accession": accession,
+            "accession": row.get("accession", {}).get("value", "N/A"),
             "protein_name": row.get("protein_name", {}).get("value", "N/A"),
             "gene_name": row.get("gene_name", {}).get("value", "N/A"),
             "organism_name": row.get("organism_name", {}).get("value", "N/A"),
             "position": row.get("position", {}).get("value", "N/A"),
             "ptm_note": row.get("ptm_note", {}).get("value", "N/A"),
             "sequence": row.get("sequence", {}).get("value", "N/A"),
-            "evidence_code": evidence_map.get(accession, "N/A")
+            "evidence_code": row.get("evidence_code", {}).get("value", "N/A")
         }
         ptm_sites.append(site)
     
@@ -218,9 +157,19 @@ if __name__ == "__main__":
     if not output_file:
         output_file = "uniprot_ptm_results.tsv"
 
-    results = query_uniprot_ptm_parallel(ptm, taxon_id, limit, output_file)
+    # Use the single query version
+    results = query_uniprot_ptm_single_query(ptm, taxon_id, limit, output_file)
     
     if results:
-        print(f"\nSummary: Found {len(results)} PTM sites across {len(set(s['accession'] for s in results))} proteins")
+        unique_proteins = len(set(s['accession'] for s in results))
+        print(f"\nSummary: Found {len(results)} PTM sites across {unique_proteins} proteins")
+        
+        # Show evidence code statistics
+        evidence_counts = {}
+        for site in results:
+            code = site['evidence_code']
+            evidence_counts[code] = evidence_counts.get(code, 0) + 1
+        
+        print(f"Evidence codes: {', '.join([f'{k}: {v}' for k, v in evidence_counts.items() if k != 'N/A'])}")
     else:
         print("No results found.")
