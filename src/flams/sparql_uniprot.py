@@ -202,12 +202,15 @@ def query_uniprot_ptm_parallel(ptm_type, taxon_id, limit=50, output_file="unipro
 if __name__ == "__main__":
     ptm = input("Enter PTM keyword: ").strip()
     taxon_input = input("Enter NCBI Taxonomy ID: ").strip()
-    limit_input = input("Enter number of results to retrieve (default = 50): ").strip()
+    limit_input = input("Enter number of results (default = 50, 'all' for no limit): ").strip()
     output_file = input("Enter output file name (default = uniprot_ptm_results.tsv): ").strip()
 
     try:
         taxon_id = int(taxon_input)
-        limit = int(limit_input) if limit_input else 50
+        if limit_input.lower() == 'all':
+            limit = None
+        else:
+            limit = int(limit_input) if limit_input else 50
     except ValueError:
         print("Invalid input for taxon ID or limit.")
         sys.exit(1)
@@ -215,9 +218,8 @@ if __name__ == "__main__":
     if not output_file:
         output_file = "uniprot_ptm_results.tsv"
 
-
     results = query_uniprot_ptm_parallel(ptm, taxon_id, limit, output_file)
-
+    
     if results:
         print(f"\nSummary: Found {len(results)} PTM sites across {len(set(s['accession'] for s in results))} proteins")
     else:
