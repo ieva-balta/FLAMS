@@ -34,7 +34,7 @@ def validate_ptm_keyword(ptm_keyword):
     logging.error("Invalid PTM keyword '%s'. Did you mean one of: %s?", ptm_keyword, ", ".join(m[0] for m in matches))
     return []
 
-def fetch_uniprot_ptm_sequences(ptm_terms):
+def fetch_uniprot_ptm_sequences():
     base_url = "https://rest.uniprot.org/uniprotkb/search"
     headers = {"Accept": "application/json"}
     proteins = {}
@@ -180,7 +180,7 @@ def fetch_uniprot_ptm_sequences(ptm_terms):
 #Trying to make it more general
 def main():
     parser = argparse.ArgumentParser(description="Fetch UniProt protein sequences with all PTMs for FLAMS database.")
-    parser.add_argument("--out-dir", default="output", help="Output directory for FASTA and CSV files")
+    parser.add_argument("--out-dir", default="output", help="Output directory for FASTA and TSV files")
     args = parser.parse_args()
 
     # Create output directory if it doesn't exist
@@ -193,7 +193,7 @@ def main():
     print(f"Fetching sequences for all PTMs: {', '.join(all_ptm_terms)}")
     
     try:
-        proteins, ptms, records = fetch_uniprot_ptm_sequences(all_ptm_terms)
+        proteins, ptms, records = fetch_uniprot_ptm_sequences()
         if not records:
             logging.warning("No records found for any PTMs")
             print("No records found for any PTMs")
