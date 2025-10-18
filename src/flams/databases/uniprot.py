@@ -126,6 +126,10 @@ import requests
 from fuzzywuzzy import process
 import logging
 
+#might remove
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+
+
 def get_fasta_rest(descriptor, location):
     """
     will download uniprot data for each descriptor (modification) seperately
@@ -133,101 +137,17 @@ def get_fasta_rest(descriptor, location):
     return the multi fasta file for the specified decriptor
     """
 
-#     with open(location, "a", encoding="UTF-8") as out:
-#         ptm_data, protein_data = _fetch_uniprot_rest(descriptor)
-#         SeqIO.write(_convert_uniprot_to_fasta_rest(ptm_data, protein_data), out, "fasta")
+    logging.info(f"Downloading UniProt {descriptor} Database, please wait.")
 
-
-# def _fetch_uniprot_rest(descriptor):
-#     # url
-#     base_url = "https://rest.uniprot.org/uniprotkb/search"
-#     headers = {"Accept": "application/json"}
-#     url = f"{base_url}?query=reviewed:true AND ft_mod_res:{descriptor} AND existence:1&format=json"
-
-#     tally = 0
-#     protein_data = {}
-#     ptm_data = []
-#     while url:
-#         response = requests.get(url, headers=headers)
-#         response.raise_for_status()
-#         data = response.json()
-
-#        # parse through results
-#         for entry in data.get("results", []):
-#             accession = entry.get("primaryAccession")
-
-#             # find PTM site
-#             for feature in entry.get("features", []):
-#                 if feature.get("type") != "Modified residue":
-#                     continue
-#                 desc = feature.get("description", "N/A")
-#                 if descriptor.lower() not in desc.lower():
-#                     continue
-#                 pos = feature.get("location", {}).get("start", {}).get("value", "N/A")
-#                 evidences = [ev.get("evidenceCode") for ev in feature.get("evidences", [])]
-#                 eco_code = evidences[0] if evidences else "N/A"
-
-#                 ptm_data.append({
-#                     "accession": accession,
-#                     "position": pos,
-#                     "ptm_note": desc,
-#                     "evidence": eco_code
-#                 })
-
-#             if accession not in protein_data.keys():
-#                 sequence = entry.get("sequence", {}).get("value", "")
-#                 name = entry.get("proteinDescription", {}).get("recommendedName", {}).get("fullName", {}).get("value", "")
-#                 organism = entry.get("organism", {}).get("scientificName", "")
-#                 protein_data[accession] = {
-#                     "name": name,
-#                     "organism": organism,
-#                     "sequence": sequence,
-#                 }
-
-            
-#         tally += len(data["results"])
-#         total = response.headers.get("x-total-results", "?")
-
-#         url = response.links.get("next", {}).get("url")
-#         if tally >= int(total):
-#             break
-
-#     return ptm_data, protein_data
-
-# def _convert_uniprot_to_fasta_rest(ptm_data, protein_data):
-#     """
-#     takes the ptm list and protein data and converts to fasta records
-#     """
-#     fasta_records = []
-#     for ptm in ptm_data:
-#         accession = ptm["accession"]
-#         protein = protein_data.get(accession, {})
-#         protein_name = f"{protein.get('name', '')}".replace(" ","__")
-#         organism_name = f"{protein.get('organism', '')}".replace(" ","__")
-#         seq = Seq(protein.get("sequence", ""))
-#         length = len(seq)
-#         id = f"{accession}|{ptm['position']}|{length}|UniProt"
-#         rec = SeqRecord(
-#             seq,
-#             id=id,
-#             description=f"{protein_name}|{ptm['ptm_note']}|{organism_name} [UniProt|Swissprot|{ptm['evidence']}]",
-#         )
-#         fasta_records.append(rec)
-#     return fasta_records
-
-    # with open(location, "a", encoding="UTF-8") as out:
-    #     SeqIO.write(_fetch_uniprot_rest(descriptor), out, "fasta")
-
-    SeqIO.write(_fetch_uniprot_rest(descriptor), location, "fasta")
-
-def _fetch_uniprot_rest(descriptor):
-    # url
     base_url = "https://rest.uniprot.org/uniprotkb/search"
     headers = {"Accept": "application/json"}
-    url = f"{base_url}?query=reviewed:true AND ft_mod_res:{descriptor} AND existence:1&format=json"
+    #tried adding *
+    url = f"{base_url}?query=reviewed:true AND ft_mod_res:*{descriptor}* AND existence:1&format=json"
 
     tally = 0
     fasta_records = []
+
+    
     while url:
         response = requests.get(url, headers=headers)
         response.raise_for_status()
@@ -251,6 +171,7 @@ def _fetch_uniprot_rest(descriptor):
                 evidences = [ev.get("evidenceCode") for ev in feature.get("evidences", [])]
                 eco_code = evidences[0] if evidences else "N/A"
 
+                #write the fasta record for each PTM site
                 protein_name = f"{name}".replace(" ","__")
                 organism_name = f"{organism}".replace(" ","__")
                 seq = Seq(sequence)
@@ -265,9 +186,14 @@ def _fetch_uniprot_rest(descriptor):
             
         tally += len(data["results"])
         total = response.headers.get("x-total-results", "?")
+        logging.info("Retrieved %d of %s total results for descriptor %s", tally, total, descriptor)
 
         url = response.links.get("next", {}).get("url")
         if tally >= int(total):
             break
 
-    return fasta_records
+    with open(location, "a", encoding="UTF-8") as out:
+        SeqIO.write(fasta_records, out, "fasta")
+
+    logging.info(f"Converted and stored UniProt {descriptor} Database entries as FASTA entries for the local {descriptor} BLAST database format.")
+    logging.info(f"Total of {len(fasta_records)} entries stored for descriptor {descriptor}.")
