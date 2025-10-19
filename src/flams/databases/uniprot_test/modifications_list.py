@@ -7,10 +7,6 @@ to run on bash cd into the uniprot_test folder and run this file
 """
 from uniprot import get_fasta_rest
 
-# code to run through the list and create the databases
-for m, desc in MODIFICATIONS.items():
-    get_fasta_rest(desc, f"./dbs/{m}.fasta")
-
 
 # Here we store a dict of modifications that can be queried for.
     # sorted alphabetically
@@ -205,7 +201,7 @@ MODIFICATIONS = {
     #     [ModificationDatabase(dbptm, "Geranylgeranylation")],
     #     ["C"]
     # ),
-    "glutarylation": "ft_mod_res:glutaryllysine"
+    "glutarylation": "ft_mod_res:glutaryllysine",
     #ModificationType(
     #     "glutarylation", 1.4,
     #     [ModificationDatabase(cplmv4, "Glutarylation"), ModificationDatabase(dbptm, "Glutarylation")],
@@ -458,4 +454,6 @@ MODIFICATIONS = {
     # ),
     }
 
- 
+# code to run through the list and create the databases
+for m, desc in MODIFICATIONS.items():
+    get_fasta_rest(desc, f"./dbs/{m}.fasta")
