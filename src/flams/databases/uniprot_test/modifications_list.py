@@ -1,9 +1,19 @@
 
+"""
+taking the modification list from setup.py
+making a dictionary with the uniprot query terms for each modification
+
+to run on bash cd into the uniprot_test folder and run this file
+"""
 from uniprot import get_fasta_rest
+
+# code to run through the list and create the databases
+for m, desc in MODIFICATIONS.items():
+    get_fasta_rest(desc, f"./dbs/{m}.fasta")
+
 
 # Here we store a dict of modifications that can be queried for.
     # sorted alphabetically
-    # don't know what to do with the version number
 MODIFICATIONS = {
     "acetylation": "ft_mod_res:acetyl*",
     #     ModificationType(
@@ -124,71 +134,85 @@ MODIFICATIONS = {
     #     [ModificationDatabase(uniprot), "ft_mod_res:deamidated"],
     #     ["N","Q"]
     # ),
-    # "deamination": ModificationType(
+    "deamination": "ft_mod_res:allysine",
+        #ModificationType(
     #     "deamination", 1.4,
     #     [ModificationDatabase(dbptm, "Deamination")],
     #     ["K"]
     # ),
-    # "decanoylation": ModificationType(
+    "decanoylation": "ft_lipid:*decanoyl*",
+    #ModificationType(
     #     "decanoylation", 1.4,
     #     [ModificationDatabase(dbptm, "Decanoylation")],
     #     ["S","T"]
     # ),
-    # "decarboxylation": ModificationType(
+    "decarboxylation": "ft_mod_res:decarboxylated",
+        #ModificationType(
     #     "decarboxylation", 1.4,
     #     [ModificationDatabase(dbptm, "Decarboxylation")],
     #     ["D","T"]
     # ),
-    # "dephosphorylation": ModificationType(
+    "dephosphorylation": "ft_mod_res:dephospho",
+        #ModificationType(
     #     "dephosphorylation", 1.4,
     #     [ModificationDatabase(dbptm, "Dephosphorylation")],
     #     ["S","T","Y"]
     # ),
-    # "dietylphosphorylation": ModificationType(
-    #     "dietylphosphorylation", 1.4, [ModificationDatabase(cplmv4, "Dietylphosphorylation")],
-    #     ["K"] #OK
-    # ),
-    # "disulfide_bond": ModificationType(
+    # "dietylphosphorylation": "ft_mod_res:dietylphosphorylated",
+    # #ModificationType(
+    # #     "dietylphosphorylation", 1.4, [ModificationDatabase(cplmv4, "Dietylphosphorylation")],
+    # #     ["K"] #OK
+    # # ), #??? not on uniprot
+    "disulfide_bond": "ft_disulfid:*", # maybe ft_chain: disulfide bond as well? or smotheing liek it
+        #ModificationType(
     #     "disulfide_bond", 1.4,
     #     [ModificationDatabase(dbptm, "Disulfide bond")],
     #     ["C"]
     # ),
-    # "d-glucuronoylation": ModificationType(
+    "d-glucuronoylation": "ft_mod_res:d-glucuronoyl",
+    #ModificationType(
     #     "d-glucuronoylation", 1.4,
     #     [ModificationDatabase(dbptm, "D-glucuronoylation")],
     #     ["G"]
     # ),
-    # "farnesylation": ModificationType(
+    "farnesylation": "ft_lipid:farnesyl",
+    #ModificationType(
     #     "farnesylation", 1.4,
     #     [ModificationDatabase(dbptm, "Farnesylation")],
     #     ["C"]
     # ),
-    # "formation_of_an_isopeptide_bond": ModificationType(
+    "formation_of_an_isopeptide_bond": "ft_crosslnk:isopeptide",
+    #ModificationType(
     #     "formation_of_an_isopeptide_bond", 1.4,
     #     [ModificationDatabase(dbptm, "Formation of an isopeptide bond")],
     #     ["E","Q"]
     # ),
-    # "formylation": ModificationType(
+    "formylation": "ft_mod_res:formyl*",
+    #ModificationType(
     #     "formylation", 1.4,
     #     [ModificationDatabase(cplmv4, "Formylation"), ModificationDatabase(dbptm, "Formylation")],
     #     ["G","K","M"]
     # ),
-    # "gamma-carboxyglutamic_acid": ModificationType(
+    "gamma-carboxyglutamic_acid": "ft_chain:gamma-carboxyglutamic acid",
+    #ModificationType(
     #     "gamma-carboxyglutamic_acid", 1.4,
     #     [ModificationDatabase(dbptm, "Gamma-carboxyglutamic acid")],
     #     ["E"]
     # ),
-    # "geranylgeranylation": ModificationType(
+    "geranylgeranylation": "ft_lipid:geranylgeranyl cysteine",
+    #ModificationType(
     #     "geranylgeranylation", 1.4,
     #     [ModificationDatabase(dbptm, "Geranylgeranylation")],
     #     ["C"]
     # ),
-    # "glutarylation": ModificationType(
+    "glutarylation": "ft_mod_res:glutaryllysine"
+    #ModificationType(
     #     "glutarylation", 1.4,
     #     [ModificationDatabase(cplmv4, "Glutarylation"), ModificationDatabase(dbptm, "Glutarylation")],
     #     ["K"]
     # ),
-    # "glutathionylation": ModificationType(
+    "glutathionylation": "ft_mod_res:glutathionyl cysteine",
+    #ModificationType(
     #     "glutathionylation", 1.4,
     #     [ModificationDatabase(dbptm, "Glutathionylation")],
     #     ["C"]
@@ -434,7 +458,4 @@ MODIFICATIONS = {
     # ),
     }
 
-# code to run through the list and create the databases
-for m, desc in MODIFICATIONS.items():
-    get_fasta_rest(desc, f"./dbs/{m}.fasta")
-    
+ 

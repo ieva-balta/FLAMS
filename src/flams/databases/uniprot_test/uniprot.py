@@ -174,9 +174,15 @@ def get_fasta_rest(descriptor, location):
                             "Initiator methionine"]:
                     continue
                 desc = feature.get("description", "N/A")
-                #try to match them ignoring the extra characthers like * and -
-                if descriptor_text.lower().replace("*","").replace("-"," ") not in desc.lower().replace("-"," "):
+                # special case - disulfide bonds
+                if descriptor == "ft_disulfid:*" and feature.get("type") != "Disulfide bond":
                     continue
+                #try to match them ignoring the extra characthers like * and -
+                elif descriptor_text.lower().replace("*","").replace("-"," ") not in desc.lower().replace("-"," "):
+                    continue
+                # special case - disulfide bonds
+                if descriptor == "ft_disulfid:*":
+                    desc = "Disulfide bond"
                 pos = feature.get("location", {}).get("start", {}).get("value", "N/A")
                 evidences = [ev.get("evidenceCode") for ev in feature.get("evidences", [])]
                 eco_code = evidences[0] if evidences else "N/A"
