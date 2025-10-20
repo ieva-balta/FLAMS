@@ -7,7 +7,6 @@ import logging
 import argparse
 import os
 
-
 # ---- Logging setup ----
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -38,15 +37,16 @@ def fetch_uniprot_ptm_sequences():
     base_url = "https://rest.uniprot.org/uniprotkb/search"
     headers = {"Accept": "application/json"}
     proteins = {}
-    ptms = []
-    records = {}
+    ptm_records = {}
+    seq_records = {}
     
-    # Now, take all the PTM terms and fetch data
+    # Now, take all the PTM terms and fetch data, use evidence level 1 (experimental) to show that it has a protein level evidence
     # for ptm in ptm_terms:
-    url = f"{base_url}?query=reviewed:true AND existence:1&format=json" 
+    # url = f"{base_url}?query=reviewed:true AND existence:1&format=json&size=500" 
         # + f"AND (ft_mod_res:{ptm} OR ft_lipid:{ptm} OR ft_glyco:{ptm} OR ft_crosslnk:{ptm} OR ft_disulfide:{ptm})" 
         # 
-        
+    url = f"{base_url}?query=existence:1&format=json&size=500"
+
     tally = 0
 
     while url:
@@ -57,6 +57,7 @@ def fetch_uniprot_ptm_sequences():
         for entry in data.get("results", []):
             accession = entry.get("primaryAccession")
             sequence = entry.get("sequence", {}).get("value", "")
+
             protein_name = (
                     entry.get("proteinDescription", {})
                     .get("recommendedName", {})
@@ -72,82 +73,107 @@ def fetch_uniprot_ptm_sequences():
                 "organism": organism
                }
 
-            # Initialize PTM list for this protein if not already present
-            if accession not in records:
-                records[accession] = {
-                    "sequence": sequence,
-                    "protein_name": protein_name,
-                    "organism": organism,
-                    "ptms": []
-                    }
+            # # Initialize PTM list for this protein if not already present
+            # if accession not in records:
+            #     records[accession] = {
+            #         "sequence": sequence,
+            #         "protein_name": protein_name,
+            #         "organism": organism,
+            #         "ptms": []
+            #         }
 
             #Relevant feature types:
             ptm_feature_types = {
                 "Modified residue",
+                "Modified residue (large scale data)",
                 "Lipidation",
                 "Glycosylation",
                 "Cross-link",
                 "Disulfide bond"
                }
-                
+            
             # PTM annotations from features
             for feature in entry.get("features", []):
-                if feature.get("type") not in ptm_feature_types:
+                if feature.get("type") not in ptm_feature_types or feature.get("type") == "Chain":
                     continue
                     
                 orig_desc = feature.get("description", "N/A")
                 desc = orig_desc.split(";")[0].strip() # Clean description to get only the name
                 
-                if not desc:
+                if not desc or feature.get("type") == "Disulfide bond":
                     desc = feature.get("type", "N/A")
 
                     # if ptm.lower() not in desc.lower():
                     #     continue
+                
+                if desc not in ptm_records:
+                    ptm_records[desc] = []
+                if desc not in seq_records:
+                    seq_records[desc] = []
+
+                #Get position and evidence codes
                 pos = feature.get("location", {}).get("start", {}).get("value", "N/A")
                 evidences = feature.get("evidences", [])
+                
+                # Experimental evidence codes from ECO
+                # ECO:0000269 (experimental evidence used in manual assertion)
+                # ECO:0000314 (direct assay evidence used in manual assertion)
+                # ECO:0007744 (combinatorial computational and experimental evidence used in manual assertion)
+                # ECO:0007829 (combinatorial computational and experimental evidence used in automatic assertion)
+                
+                valid_eco_codes = {"ECO:0000269", "ECO:0000314", "ECO:0007744", "ECO:0007829", \
+                                   "ECO:0000312", "ECO:0000313"}
+                
+                # Skip this PTM if no valid experimental evidence
+                if not any(ev.get("evidenceCode") in valid_eco_codes for ev in evidences):
+                    continue  
+
                 eco_code = ";".join(ev.get("evidenceCode") for ev in evidences) if evidences else "N/A"
 
-                # Get PubMed IDS and DOIs from evidences. For this, the evidences were turned into a dictionary
-                source_map = {}
+                # source_map = {}
+                source_pairs = []
                 
                 for ev in evidences:
-                    source = ev.get("source")
+                    source_id = ev.get("source")
                     id = ev.get("id")
-                    if source:
-                        if source not in source_map:
-                            source_map[source] = set()
-                        if id: 
-                            source_map[source].add(id)
+                    if source_id and id:
+                        source_pairs.append(f"{source_id}:{id}")
+                    elif source_id:
+                        source_pairs.append(source_id)
+                    
+
+                        # if source not in source_map:
+                        #     source_map[source] = set()
+                        # if id: 
+                        #     source_map[source].add(id)
                     # if ev.get("source") == "PubMed":
                     #     pubmed_ids.append(ev.get("id"))
-                    
-                    #Is this necessary? Technically, the evidence do not have the DOI info, only the pubmed.
-                    # if ev.get("source") == "DOI":
-                    #     dois.append(ev.get("id"))
-
-                    # citation = ref.get("citation", {})
-                    # doi_id = citation.get("doi")
-                    # if doi_id:
-                    #     dois.append(doi_id)
-                        # for ref_citation in entry.get("citation", {}).get("publication", []).get("journalCitation", []):
-                        #     if ref_citation.get("idType") == "DOI":
-                        #         dois.append(ref_citation.get("id", "N/A"))
-
                 
-                source = ";".join([k for k in source_map.keys() if k]) if source_map else "N/A"
-                source_ids = ";".join([id for ids_set in source_map.values() for id in ids_set if id]) if source_map else "N/A"
+                source= "; ".join(source_pairs) if source_pairs else "N/A"
+                # source = ";".join([k for k in source_map.keys() if k]) if source_map else "N/A"
+                # source_ids = ";".join([id for ids_set in source_map.values() for id in ids_set if id]) if source_map else "N/A"
                 
-                ptms.append({
+                ptm_entry = {
                         "accession": accession,
                         "ptm": desc,
                         "position": pos,
                         "evidence": eco_code,
                         "source": source,
-                        "ids": source_ids
-                    })
+                        "organism": organism
+                        # "ids": source_ids
+                    }
+                ptm_records[desc].append(ptm_entry)
 
-                    # Aggregate PTM info for this protein
-                records[accession]["ptms"].append(f"{desc}|{pos}|{eco_code}|{source}|{source_ids}")
+                record = SeqRecord(
+                    Seq(sequence),
+                    id=f"{accession}|{pos}|{len(sequence)}|UniProt|{desc}|{organism} [{eco_code}|{source}]",
+                    description = ""
+                )
+                
+                seq_records[desc].append(record)
+
+                #     # Aggregate PTM info for this protein
+                # records[accession]["ptms"].append(f"{desc}|{pos}|{eco_code}|{source}|{source_ids}")
 
         tally += len(data["results"])
         total = r.headers.get("x-total-results", "?")
@@ -159,104 +185,103 @@ def fetch_uniprot_ptm_sequences():
         if tally >= int(total):
             break
 
-    # Create SeqRecords with aggregated PTM info
-    seq_records = []
-    for accession, info in records.items():
+    # Collect and display all unique PTM descriptions with counts
+    print("\n List of unique PTMs found (with number of entries):")
+    ptm_summary = []
 
-        # Here a semicolon is better to separate multiple PTMs since it would contain similar amount of fields
-        ptm_info = ";".join(info["ptms"])  # Combine PTM info into a single string
-        record = SeqRecord(
-            Seq(info["sequence"]),
-            id=f"{accession}|UniProt",
-            description=f"{info['protein_name']}|{ptm_info}|{info['organism']}"
-        )
-        seq_records.append(record)
+    for ptm_name in sorted(ptm_records.keys()):
+        count = len(ptm_records[ptm_name])
+        ptm_summary.append((ptm_name, count))
+        print(f"- {ptm_name}: {count} entries")
 
-    return proteins, ptms, seq_records
+    # Save PTM names and counts to a file
+    with open("ptm_list.txt", "w") as f:
+        f.write("PTM\tCount\n")
+        for ptm_name, count in ptm_summary:
+            f.write(f"{ptm_name}\t{count}\n")
 
+    print(f"\nPTM list written to: ptm_list.txt")
+
+    # # Create SeqRecords with aggregated PTM info
+    # seq_records = []
+    # for accession, info in records.items():
+
+    #     # Here a semicolon is better to separate multiple PTMs since it would contain similar amount of fields
+    #     ptm_info = ";".join(info["ptms"])  # Combine PTM info into a single string
+    #     record = SeqRecord(
+    #         Seq(info["sequence"]),
+    #         id=f"{accession}|UniProt",
+    #         description=f"{info['protein_name']}|{ptm_info}|{info['organism']}"
+    #     )
+    #     seq_records.append(record)
+
+    return proteins, ptm_records, seq_records
 
 # ---- Main ----
 
-#Trying to make it more general
+# Trying to make it more general
+
 def main():
-    parser = argparse.ArgumentParser(description="Fetch UniProt protein sequences with all PTMs for FLAMS database.")
+    parser = argparse.ArgumentParser(description="Fetch UniProt protein sequences with PTMs for FLAMS database.")
     parser.add_argument("--out-dir", default="output", help="Output directory for FASTA and TSV files")
     args = parser.parse_args()
-
-    # Create output directory if it doesn't exist
+    # Create output directory
     os.makedirs(args.out_dir, exist_ok=True)
-
-    # Collect all PTM terms from PTM_KEYWORD_MAP
-    all_ptm_terms = [ptm for terms in PTM_KEYWORD_MAP.values() for ptm in terms]
-    
-    logging.info("Fetching sequences for all PTMs: %s", ", ".join(all_ptm_terms))
-    print(f"Fetching sequences for all PTMs: {', '.join(all_ptm_terms)}")
-    
+    logging.info("Fetching sequences for all PTMs")
+    print("Fetching sequences for all PTMs")
     try:
-        proteins, ptms, records = fetch_uniprot_ptm_sequences()
-        if not records:
+        proteins, ptm_records, seq_records = fetch_uniprot_ptm_sequences()
+        if not any(seq_records.values()):
             logging.warning("No records found for any PTMs")
             print("No records found for any PTMs")
             return
+        
+        # Write separate files for each PTM description
+        tsv_file = os.path.join(args.out_dir, "all_ptms_summary.tsv")
+        with open(tsv_file, "w") as f:
+            f.write("accession\tptm\tposition\tevidence\tsource\torganism\n")
+        
+            for ptm in sorted(ptm_records.keys()):
+                
+                # Clean PTM name for file naming
+                ptm_safe = ptm.replace(' ', '_').lower().replace("(", "").replace(")", "").replace("-", "_").replace("/", "_").replace(".","")
+                fasta_file = os.path.join(args.out_dir, f"{ptm_safe}.fasta")
 
-        # Define output file paths
-        fasta_file = os.path.join(args.out_dir, "uniprot_all_ptms.fasta")
-        ptm_file = os.path.join(args.out_dir, "uniprot_all_ptms.tsv")
-
-        # Write FASTA file
-        SeqIO.write(records, fasta_file, "fasta")
-        logging.info("FASTA file written: %s", fasta_file)
-        print(f"FASTA file written: {fasta_file}")
-
-        # Write PTM annotations to CSV
-        with open(ptm_file, "w") as f:
-                f.write("accession\tptm\tposition\tevidence\tsource\tids\n")            
-                for ptm_entry in ptms:
-                    f.write(f"{ptm_entry['accession']}\t{ptm_entry['ptm']}\t{ptm_entry['position']}\t{ptm_entry['evidence']}\t{ptm_entry['source']}\t{ptm_entry['ids']}\n")
-        logging.info("PTM annotation file written: %s", ptm_file)
-        print(f"PTM annotation file written: {ptm_file}")
-
+                # Write FASTA file for this PTM
+                if seq_records[ptm]:
+                    SeqIO.write(seq_records[ptm], fasta_file, "fasta")
+                    logging.info("Wrote %d sequences for %s: %s", len(seq_records[ptm]), ptm, fasta_file)
+                    print(f"Wrote {len(seq_records[ptm])} sequences for {ptm}: {fasta_file}")
+                else:
+                    logging.warning("No sequences found for PTM %s", ptm)
+                    print(f"No sequences found for PTM {ptm}")
+                
+                # Write TSV file for this PTM
+                if ptm_records[ptm]:
+                    for ptm_entry in ptm_records[ptm]:
+                        length = len(proteins.get(ptm_entry['accession'], {}).get("sequence", ""))
+                        f.write(f"{ptm_entry['accession']}\t{ptm_entry['ptm']}\t{ptm_entry['position']}\t{length}\t{ptm_entry['evidence']}\t{ptm_entry['source']}\t{ptm_entry['organism']}\n")
+                    
+                else:
+                    logging.warning("No PTM records found for %s", ptm)
+                    print(f"No PTM records found for {ptm}")
+        
+        logging.info("PTM annotation summary file written: %s", tsv_file)
+        print(f"PTM annotation summary file written: {tsv_file}")
+        
         # Print sample output
-        print("\nSample proteins:")
+        print("\nSample proteins (first 3):")
         for acc, info in list(proteins.items())[:3]:
             print(f"{acc}: {info}")
-        print("\nSample PTMs:")
-        for ptm_entry in ptms[:5]:
-            print(ptm_entry)
-
+        print("\nSample PTMs (first 5 per type):")
+        for ptm in sorted(ptm_records.keys()):
+            if ptm_records[ptm]:
+                print(f"\n{ptm}:")
+                for ptm_entry in ptm_records[ptm][:5]:
+                    print(ptm_entry)
     except Exception as e:
         logging.error("Error processing PTMs: %s", str(e))
         print(f"Error processing PTMs: {str(e)}")
 
 if __name__ == "__main__":
     main()
-
-# if __name__ == "__main__":
-#     ptm_input = input("Enter PTM keyword (e.g., phospho, N6-acetyllysine): ")
-#     ptm_terms = validate_ptm_keyword(ptm_input)
-#     if not ptm_terms:
-#         exit(1)
-
-#     # Optionally: fetch multiple PTMs in the term list
-#     for ptm in ptm_terms:
-#         logging.info("Fetching entries for PTM: %s", ptm)
-#         proteins, ptms, records = fetch_uniprot_ptm_sequences(ptm)
-#         fasta_file = f"uniprot_{ptm.replace(' ', '_').lower()}.fasta"
-#         SeqIO.write(records, fasta_file, "fasta")
-#         logging.info("✅ FASTA file written: %s", fasta_file)
-
-#         # Optionally: Write PTM annotations to a separate file for FLAMS
-#         ptm_file = f"uniprot_{ptm.replace(' ', '_').lower()}_ptms.csv"
-#         with open(ptm_file, "w") as f:
-#             f.write("accession,ptm,position,evidence\n")
-#             for ptm_entry in ptms:
-#                 f.write(f"{ptm_entry['accession']},{ptm_entry['ptm']},{ptm_entry['position']},{ptm_entry['evidence']}\n")
-#         logging.info("✅ PTM annotation file written: %s", ptm_file)
-        
-#         # Example: print first 3 proteins and PTMs
-#         print("\nSample proteins:")
-#         for acc, info in list(proteins.items())[:3]:
-#             print(acc, info)
-#         print("\nSample PTMs:")
-#         for ptm_entry in ptms[:5]:
-#             print(ptm_entry)
