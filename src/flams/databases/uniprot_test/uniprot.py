@@ -156,6 +156,7 @@ def get_fasta_rest(descriptor, location):
 
        # parse through results
         for entry in data.get("results", []):
+            #print(entry)
             accession = entry.get("primaryAccession")
             sequence = entry.get("sequence", {}).get("value", "")
             name = entry.get("proteinDescription", {}).get("recommendedName", {}).get("fullName", {}).get("value", "")
@@ -184,19 +185,38 @@ def get_fasta_rest(descriptor, location):
                 if descriptor == "ft_disulfid:*":
                     desc = "Disulfide bond"
                 pos = feature.get("location", {}).get("start", {}).get("value", "N/A")
-                evidences = [ev.get("evidenceCode") for ev in feature.get("evidences", [])]
-                eco_code = evidences[0] if evidences else "N/A"
+                # get evidence ECO|source|ids
+                ECOs = []
+                sources = []
+                ids = []
+                for ev in feature.get("evidences", []):
+                    eco = ev.get("evidenceCode", "")
+                    # skips if the evidnece is from similar protein
+                    if eco in ["ECO:0000250"]:
+                        continue
+                    source = ev.get("source", "")
+                    source_id = str(ev.get("id", ""))
+                    ECOs.append(eco)
+                    sources.append(source)
+                    ids.append(source_id)
+                ECO_str = ";".join(ECOs) 
+                # skips if there are no ECOs
+                if not ECOs:
+                    continue 
+                source_str = ";".join(sources) if sources else ""
+                ids_str = ";".join(ids) if ids else ""
 
                 #write the fasta record for each PTM site
                 protein_name = f"{name}".replace(" ","__")
                 organism_name = f"{organism}".replace(" ","__")
+                desc = f"{desc}".replace(" ","__")
                 seq = Seq(sequence)
                 length = len(seq)
                 id = f"{accession}|{pos}|{length}|UniProt"
                 rec = SeqRecord(
                     seq,
                     id=id,
-                    description=f"{protein_name}|{desc}|{organism_name} [UniProt|Swissprot|{eco_code}]",
+                    description=f"{protein_name}|{desc}|{organism_name} [{ECO_str}|{source_str}|{ids_str}]",
                 )
                 fasta_records.append(rec)
             
