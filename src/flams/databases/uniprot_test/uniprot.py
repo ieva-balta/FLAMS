@@ -143,7 +143,7 @@ def get_fasta_rest(descriptor, location):
     base_url = "https://rest.uniprot.org/uniprotkb/search"
     headers = {"Accept": "application/json"}
     #tried adding *, maybe * need to be added in the modification list?
-    url = f"{base_url}?query=reviewed:true AND {descriptor} AND existence:1&format=json"
+    url = f"{base_url}?query={descriptor} AND existence:1&format=json"
 
     tally = 0
     fasta_records = []
@@ -161,6 +161,7 @@ def get_fasta_rest(descriptor, location):
             sequence = entry.get("sequence", {}).get("value", "")
             name = entry.get("proteinDescription", {}).get("recommendedName", {}).get("fullName", {}).get("value", "")
             organism = entry.get("organism", {}).get("scientificName", "")
+            entry_type = entry.get("entryType", "")
 
             # find PTM site
             for feature in entry.get("features", []):
@@ -207,12 +208,13 @@ def get_fasta_rest(descriptor, location):
                 ids_str = ";".join(ids) if ids else ""
 
                 #write the fasta record for each PTM site
+                entry_type = entry_type.replace(" ", "__")
                 protein_name = f"{name}".replace(" ","__")
                 organism_name = f"{organism}".replace(" ","__")
                 desc = f"{desc}".replace(" ","__")
                 seq = Seq(sequence)
                 length = len(seq)
-                id = f"{accession}|{pos}|{length}|UniProt"
+                id = f"{accession}|{pos}|{length}|{entry_type}"
                 rec = SeqRecord(
                     seq,
                     id=id,
@@ -232,4 +234,4 @@ def get_fasta_rest(descriptor, location):
         SeqIO.write(fasta_records, out, "fasta")
 
     logging.info(f"Converted and stored UniProt {descriptor} Database entries as FASTA entries for the local {descriptor} BLAST database format.")
-    logging.info(f"Total of {len(fasta_records)} entries stored for descriptor {descriptor}.")
+    logging.info(f"Total of {len(fasta_records)} fasta records stored for descriptor {descriptor}.")
