@@ -137,7 +137,10 @@ def get_fasta_rest(descriptor, location):
     return the multi fasta file for the specified decriptor
     """
 
-    descriptor_text = descriptor.split(":")[1]
+    if ":" in descriptor:
+        descriptor_text = descriptor.split(":")[1]
+    else:
+        descriptor_text = descriptor
     logging.info(f"Downloading UniProt {descriptor_text} Database, please wait.")
 
     base_url = "https://rest.uniprot.org/uniprotkb/search"
@@ -172,7 +175,7 @@ def get_fasta_rest(descriptor, location):
                             "Glycosylation",
                             "Disulfide bond",
                             "Cross-link",
-                            "Chain",
+                            #"Chain",
                             "Initiator methionine"]:
                     continue
                 desc = feature.get("description", "N/A")
@@ -193,7 +196,8 @@ def get_fasta_rest(descriptor, location):
                 for ev in feature.get("evidences", []):
                     eco = ev.get("evidenceCode", "")
                     # skips if the evidnece is from similar protein
-                    if eco in ["ECO:0000250"]:
+                    if eco not in ["ECO:0000269", "ECO:0000314", "ECO:0007744", "ECO:0007829",
+                                   "ECO:0000312", "ECO:0000313"]:
                         continue
                     source = ev.get("source", "")
                     source_id = str(ev.get("id", ""))
