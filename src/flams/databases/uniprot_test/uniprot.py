@@ -8,118 +8,12 @@ based on scripts for cplm4 and dbptm
 # to run example on bash:
 # python -c "import uniprot; uniprot.get_fasta_rest('acetyl', '/data/leuven/368/vsc36826/flams/flams2/dbs/acetyl_rest.fasta')"
 
-from SPARQLWrapper import SPARQLWrapper, JSON
 import sys
 import json
 
 from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
-
-##################
-# SPARQL version
-##################
-
-
-def get_fasta_sparql(descriptor, location):
-    """
-    will download uniprot data for each descriptor (modification) seperately
-    and save it in a fasta format
-    return the multi fasta file for the specified decriptor
-    """
-    
-    with open(location, "a", encoding="UTF-8") as out:
-        SeqIO.write(_convert_uniprot_to_fasta_sparql(_fetch_uniprot_sparql(descriptor)), out, "fasta")
-
-
-### need to figure out what to do with different PTM names
-def _fetch_uniprot_sparql(descriptor):
-    """
-    will run the sparql query
-    putput is in json format
-
-    Parameters
-    ----------
-    descriptor: str
-        Description of a specific modification
-    """
-
-    endpoint = "https://sparql.uniprot.org/sparql"
-    sparql = SPARQLWrapper(endpoint) # UniProt SPARQL endpoint
-    sparql.setReturnFormat(JSON) # return in JSON format because it's easier to parse
-    sparql.setTimeout(300)
-
-
-    query = f"""
-    PREFIX up: <http://purl.uniprot.org/core/>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX taxon: <http://purl.uniprot.org/taxonomy/>
-    PREFIX faldo: <http://biohackathon.org/resource/faldo#>
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    
-    SELECT ?accession ?position ?ptm_note ?aaSequence
-    WHERE {{
-        ?protein a up:Protein . # select proteins
-        ?protein up:reviewed true . # only reviewed swiss-Prot entries
-        ?protein up:sequence ?sequence . # get the sequence
-        ?protein up:annotation ?ann . # get annotations
-        ?ann a up:Modified_Residue_Annotation . # filter for modified residues
-        ?ann rdfs:comment ?ptm_note . # get the PTM description
-        ?ann up:range ?range . # get the range of the modification
-        ?range faldo:begin ?loc . # get the start location
-        ?loc faldo:position ?position . # get the position
-        ?sequence rdf:value ?aaSequence . # get the amino acid sequence
-        BIND(REPLACE(STR(?protein), "^.*/", "") AS ?accession) # extract accession from URI
-        FILTER(CONTAINS(LCASE(?ptm_note), "{descriptor.lower()}")) # filter by PTM type
-  
-     }}
-    ORDER BY ?accession ?position
-  """
-
-    # Execute the query
-    try:
-        sparql.setQuery(query)
-        results = sparql.query().convert()
-        #logging.info(f"Downloading UniProt {descriptor} Database, please wait.") # not sure how to add the size
-    except Exception as e:
-        print(f"Query failed with exception: {e}")
-        return []
-
- 
-    # Extract and return results
-    ptm_sites = []
-    for row in results["results"]["bindings"]:
-        sequence = row["aaSequence"]["value"]
-        ptm_sites.append({
-        "accession": row["accession"]["value"],
-        "position": row["position"]["value"],
-        "ptm_note": row["ptm_note"]["value"],
-        "sequence": sequence
-       })
-
-    return ptm_sites
-
-def _convert_uniprot_to_fasta_sparql(uniprot):
-    """
-    will help convert the query output to a fasta format
-    returns sequence and records
-    """
-    fasta_records = []
-    for site in uniprot:
-        seq = Seq(site['sequence'])
-        length = len(seq)
-        id = f"{site['accession']}|{site['position']}|{length}|UniProt"
-        rec = SeqRecord(
-            seq, 
-            id=id,
-            description=f"{site['ptm_note']}")
-        fasta_records.append(rec)
-    return fasta_records
-
-
-##################
-# REST version
-##################
 
 #fuzzywuzzy to add to conda download?
 import requests
@@ -136,22 +30,26 @@ def get_fasta_rest(descriptor, location):
     and save it in a fasta format
     return the multi fasta file for the specified decriptor
     """
-
-    if ":" in descriptor:
-        descriptor_text = descriptor.split(":")[1]
+    
+    # split if multiple keywords used
+    # remove the feature type
+    if "OR" in descriptor:
+        descrip = descriptor.replace("(", "").replace(")", "")
+        descrip = descrip.split(" OR ")
+        descriptors = [keyword.split(":")[1].replace("*", "").replace("-", " ") for keyword in descrip]
     else:
-        descriptor_text = descriptor
+        descriptors = [descriptor.split(":")[1].replace("*", "").replace("-", " ")]
+
+    descriptor_text = ", ".join(descriptors)
     logging.info(f"Downloading UniProt {descriptor_text} Database, please wait.")
 
     base_url = "https://rest.uniprot.org/uniprotkb/search"
     headers = {"Accept": "application/json"}
-    #tried adding *, maybe * need to be added in the modification list?
     url = f"{base_url}?query={descriptor} AND existence:1&format=json"
 
     tally = 0
     fasta_records = []
 
-    
     while url:
         response = requests.get(url, headers=headers)
         response.raise_for_status()
@@ -159,36 +57,60 @@ def get_fasta_rest(descriptor, location):
 
        # parse through results
         for entry in data.get("results", []):
-            #print(entry)
             accession = entry.get("primaryAccession")
             sequence = entry.get("sequence", {}).get("value", "")
             name = entry.get("proteinDescription", {}).get("recommendedName", {}).get("fullName", {}).get("value", "")
             organism = entry.get("organism", {}).get("scientificName", "")
             entry_type = entry.get("entryType", "")
 
-            # find PTM site
+            # to check for duplication down the line
+            ptm_sites = []
+
+            # find PTM sites
             for feature in entry.get("features", []):
-                #some have other type names so commented out
                 if feature.get("type") not in ["Modified residue", 
                             "Modified residue (large scale data)", 
                             "Lipidation", 
                             "Glycosylation",
                             "Disulfide bond",
                             "Cross-link",
-                            #"Chain",
                             "Initiator methionine"]:
                     continue
-                desc = feature.get("description", "N/A")
+
+                desc = feature.get("description", "N/A") 
+                
+                # remove the notes from the description
+                if ";" in desc:
+                    desc = desc.split(";")[0].strip()
+
                 # special case - disulfide bonds
-                if descriptor == "ft_disulfid:*" and feature.get("type") != "Disulfide bond":
+                if descriptor == "ft_disulfid:*" and (feature.get("type") != "Disulfide bond" or "interchain" in desc.lower()):
                     continue
+
                 #try to match them ignoring the extra characthers like * and -
-                elif descriptor_text.lower().replace("*","").replace("-"," ") not in desc.lower().replace("-"," "):
+                # extra step to continue the for feature loop if there ar eno matches
+                skip_outer_for_loop = True # default True
+                if descriptor != "ft_disulfid:*":
+                    for d in descriptors:
+                        if d.lower() in desc.lower().replace("-"," "):
+                            skip_outer_for_loop = False # flip to False if there is a match
+                            break
+                if skip_outer_for_loop and descriptor != "ft_disulfid:*": # skip if no match
                     continue
+
                 # special case - disulfide bonds
                 if descriptor == "ft_disulfid:*":
                     desc = "Disulfide bond"
+
                 pos = feature.get("location", {}).get("start", {}).get("value", "N/A")
+                
+                #check duplicate ptm site entries
+                ptm_desc = f"{pos}|{desc}"
+                if ptm_desc in ptm_sites:
+                    continue
+
+                ptm_sites.append(ptm_desc)
+
                 # get evidence ECO|source|ids
                 ECOs = []
                 sources = []
@@ -224,6 +146,8 @@ def get_fasta_rest(descriptor, location):
                     id=id,
                     description=f"{protein_name}|{desc}|{organism_name} [{ECO_str}|{source_str}|{ids_str}]",
                 )
+
+                #append
                 fasta_records.append(rec)
             
         tally += len(data["results"])
