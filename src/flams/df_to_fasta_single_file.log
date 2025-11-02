@@ -1,0 +1,17 @@
+2025-11-02 15:10:42,079 - INFO - Processing 141101 PTM sites across 15 unique broad categories.
+2025-11-02 15:10:43,129 - INFO - Wrote 13154 sequences for category 'acetylation_group' to ptm_fasta_output_single_file/acetylation_group.fasta
+2025-11-02 15:10:43,159 - INFO - Wrote 165 sequences for category 'adp_ribosylation_group' to ptm_fasta_output_single_file/adp_ribosylation_group.fasta
+2025-11-02 15:10:43,166 - INFO - Wrote 28 sequences for category 'blocked_amino_end' to ptm_fasta_output_single_file/blocked_amino_end.fasta
+2025-11-02 15:10:43,285 - INFO - Wrote 1618 sequences for category 'carboxylation_group' to ptm_fasta_output_single_file/carboxylation_group.fasta
+2025-11-02 15:10:44,695 - INFO - Wrote 23859 sequences for category 'disulfide_bond' to ptm_fasta_output_single_file/disulfide_bond.fasta
+2025-11-02 15:10:44,723 - INFO - Wrote 97 sequences for category 'glycation' to ptm_fasta_output_single_file/glycation.fasta
+2025-11-02 15:10:45,299 - INFO - Wrote 9613 sequences for category 'glycosylation' to ptm_fasta_output_single_file/glycosylation.fasta
+2025-11-02 15:10:45,328 - INFO - Wrote 318 sequences for category 'hydroxylation' to ptm_fasta_output_single_file/hydroxylation.fasta
+2025-11-02 15:10:45,417 - INFO - Wrote 1024 sequences for category 'lipidation' to ptm_fasta_output_single_file/lipidation.fasta
+2025-11-02 15:10:45,704 - INFO - Wrote 4594 sequences for category 'methylation' to ptm_fasta_output_single_file/methylation.fasta
+2025-11-02 15:10:45,725 - INFO - Wrote 153 sequences for category 'nitration' to ptm_fasta_output_single_file/nitration.fasta
+2025-11-02 15:10:50,381 - INFO - Wrote 68254 sequences for category 'phosphorylation' to ptm_fasta_output_single_file/phosphorylation.fasta
+2025-11-02 15:10:50,496 - INFO - Wrote 268 sequences for category 'pyrido_mod' to ptm_fasta_output_single_file/pyrido_mod.fasta
+2025-11-02 15:10:50,986 - INFO - Wrote 7584 sequences for category 'ubl_conjugation' to ptm_fasta_output_single_file/ubl_conjugation.fasta
+2025-11-02 15:10:51,627 - INFO - Wrote 10372 sequences for category 'unmapped_ptm_type' to ptm_fasta_output_single_file/unmapped_ptm_type.fasta
+2025-11-02 15:10:51,627 - INFO - Finished. Total FASTA files written: 15

@@ -1,0 +1,1157 @@
+PTM	Count
+(2-aminosuccinimidyl)acetic acid (Asp-Gly)|1
+(3R)-3-hydroxyarginine|3
+(3R)-3-hydroxyasparagine|9
+(3R)-3-hydroxyaspartate|13
+(3R)-N4-methyl-3-hydroxy-D-asparagine|2
+(3R,4R)-3,4-dihydroxyproline|1
+(3R,4R)-4,5-dihydroxyisoleucine|1
+(3R,4S)-3,4-dihydroxyproline|34
+(3R,4S)-4-hydroxyisoleucine|1
+(3S)-3-hydroxyasparagine|29
+(3S)-3-hydroxyaspartate|1
+(3S)-3-hydroxyhistidine|4
+(3S)-3-hydroxylysine|3
+(3S)-3-methylglutamine|1
+(3S,4R)-3,4-dihydroxyisoleucine|1
+(4R)-4,5-dihydroxyleucine|1
+(4R)-5-hydroxyleucine|1
+(4R)-5-oxoleucine|1
+(E)-2,3-didehydrobutyrine|5
+(E)-2,3-didehydrotyrosine|3
+(Microbial infection) ADP-ribosylarginine|2
+(Microbial infection) ADP-ribosylasparagine|1
+(Microbial infection) ADP-ribosyldiphthamide|2
+(Microbial infection) ADP-ribosylthreonine|4
+(Microbial infection) ADP-riboxanated arginine|6
+(Microbial infection) Deamidated asparagine|4
+(Microbial infection) Deamidated glutamine|3
+(Microbial infection) Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in SUMO)|1
+(Microbial infection) Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in UFM1)|1
+(Microbial infection) Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in ubiquitin)|17
+(Microbial infection) N-beta-linked (GlcNAc) arginine|18
+(Microbial infection) N6-acetyllysine|1
+(Microbial infection) N6-palmitoyl lysine|2
+(Microbial infection) N6-stearoyl lysine|9
+(Microbial infection) O-(2-cholinephosphoryl)serine|2
+(Microbial infection) O-AMP-threonine|3
+(Microbial infection) O-AMP-tyrosine|4
+(Microbial infection) O-acetylserine|10
+(Microbial infection) O-acetylthreonine|13
+(Microbial infection) O-alpha-linked (GlcNAc) threonine|4
+(Microbial infection) O-linked (Glc) threonine|11
+(Microbial infection) O-linked (GlcNAc) tyrosine|3
+(Microbial infection) Phosphoserine|3
+(Microbial infection) Phosphothreonine|9
+(Microbial infection) S-methylcysteine|3
+(Z)-2,3-didehydroaspartate|3
+(Z)-2,3-didehydrobutyrine|19
+(Z)-2,3-didehydrotyrosine|2
+1'-histidyl-3'-tyrosine (His-Tyr)|3
+1-(tryptophan-3-yl)-tryptophan (Trp-Trp) (interchain with W-33)|1
+1-thioglycine|14
+2',4',5'-topaquinone|15
+2'-(S-cysteinyl)-histidine (Cys-His)|10
+2'-methylsulfonyltryptophan|1
+2,3-didehydroalanine (Cys)|3
+2,3-didehydroalanine (Ser)|36
+2,3-didehydrobutyrine|26
+2-(3-methylbutanoyl)-5-hydroxyoxazole-4-carbothionic acid (Leu-Cys)|1
+2-(S-cysteinyl)-methionine (Cys-Met)|1
+2-(S-cysteinyl)pyruvic acid O-phosphothioketal|1
+2-(cystein-S-ylcarbonyl)-3-methyl-4-(glutam-5-yloxy)methylindole (Glu-Cys)|1
+2-cysteinyl-D-allo-threonine (Cys-Thr)|1
+2-cysteinyl-D-phenylalanine (Cys-Phe)|1
+2-cysteinyl-L-phenylalanine (Cys-Phe)|1
+2-hydroxyproline|1
+2-iminomethyl-5-imidazolinone (Gln-Gly)|2
+2-iminomethyl-5-imidazolinone (Met-Gly)|2
+2-methylglutamine|2
+2-oxo-5,5-dimethylhexanoate|1
+2-oxobutanoic acid|3
+2-tetrahydro-2-pyridyl-5-imidazolinone (Lys-Gly)|1
+3',4'-dihydroxyphenylalanine|77
+3'-(S-cysteinyl)-tyrosine (Cys-Tyr)|4
+3'-(S-cysteinyl)-tyrosine (Tyr-Cys)|1
+3'-bromotyrosine|2
+3'-farnesyl-2',N2-cyclotryptophan|2
+3'-geranyl-2',N2-cyclotryptophan|2
+3'-nitrotyrosine|55
+3'-prenyl-2',N2-cyclotryptophan|6
+3,3-dimethylmethionine|1
+3,4-dihydroxyarginine|1
+3,4-dihydroxyproline|5
+3-(L-phenylalan-2'-yl)-L-valine (Phe-Val)|1
+3-(O4'-tyrosyl)-valine (Val-Tyr)|1
+3-(S-cysteinyl)-tyrosine (Cys-Tyr)|1
+3-cysteinyl-aspartic acid (Cys-Asp)|6
+3-hydroxy-D-valine|2
+3-hydroxyasparagine|3
+3-hydroxyproline|46
+3-hydroxypyridine-2,5-dicarboxylic acid (Ser-Cys) (with S-47)|1
+3-hydroxypyridine-2,5-dicarboxylic acid (Ser-Ser) (with C-46)|1
+3-hydroxytryptophan|6
+3-hydroxyvaline (Thr)|1
+3-hydroxyvaline (Val)|3
+3-methyl-D-valine|3
+3-methylisoleucine|1
+3-methylthioaspartic acid|4
+3-methylvaline|5
+3-oxoalanine (Cys)|14
+3-oxoalanine (Ser)|1
+3-phenyllactic acid|1
+4'-cysteinyl-tryptophylquinone (Cys-Trp)|2
+4,5,5'-trihydroxyleucine|1
+4,5-dihydroxylysine|4
+4-aspartylphosphate|41
+4-carboxyglutamate|425
+4-cysteinyl-glutamic acid (Cys-Glu)|2
+4-hydroxyarginine|1
+4-hydroxyglutamate|1
+4-hydroxylysine|3
+4-hydroxynonenal-conjugated cysteine|3
+4-hydroxynonenal-conjugated histidine|2
+4-hydroxynonenal-conjugated lysine|1
+4-hydroxyproline|1557
+5-glutamyl 2-aminoadipic acid|1
+5-glutamyl dopamine|5
+5-glutamyl glutamate|3
+5-glutamyl glycerylphosphorylethanolamine|10
+5-glutamyl glycine|5
+5-glutamyl histamine|2
+5-glutamyl polyglutamate|11
+5-glutamyl polyglycine|3
+5-glutamyl serotonin|6
+5-hydroxy-3-methylproline (Ile)|1
+5-hydroxylysine|136
+5-imidazolinone (Ala-Gly)|5
+5-imidazolinone (Ser-Gly)|1
+5-methylarginine|4
+5-methyloxazole-4-carboxylic acid (Cys-Thr)|2
+5-methyloxazole-4-carboxylic acid (Thr-Thr)|1
+5-methyloxazoline-4-carboxylic acid (Ser-Thr)|1
+6'-bromotryptophan|44
+6'-chlorotryptophan|1
+6-(S-cysteinyl)-8alpha-(pros-histidyl)-FAD (His-Cys)|9
+7'-hydroxytryptophan|90
+ADP-ribosyl aspartic acid|8
+ADP-ribosyl glutamic acid|28
+ADP-ribosylarginine|13
+ADP-ribosylcysteine|13
+ADP-ribosylglycine|4
+ADP-ribosylhistidine|3
+ADP-ribosylserine|48
+ADP-ribosyltyrosine|2
+Alanine amide|59
+Allysine|39
+Alternate|28
+Aminomalonic acid (Ser)|1
+Arginine amide|162
+Asparagine amide|143
+Aspartate methyl ester|4
+Aspartic acid 1-[(3-aminopropyl)(5'-adenosyl)phosphono]amide|1
+Aspartic acid 1-amide|7
+Aspartyl aldehyde|1
+Associated with receptor activation|8
+Asymmetric dimethylarginine|733
+Beta-decarboxylated aspartate|1
+Beta-methyllanthionine (Cys-Thr)|3
+Beta-methyllanthionine (Thr-Cys)|54
+Beta-methyllanthionine sulfoxide (Thr-Cys)|1
+Blocked amino end (Ala)|8
+Blocked amino end (Gln)|1
+Blocked amino end (Gly)|3
+Blocked amino end (Met)|7
+Blocked amino end (Pro)|1
+Blocked amino end (Ser)|6
+Blocked amino end (Thr)|1
+Blocked amino end (Val)|1
+Blocked carboxyl end (His)|1
+Bromohistidine|1
+By viral enzyme|1
+C-linked (GlcNAc) asparagine|5
+C-linked (GlcNAc) aspartate|1
+C-linked (GlcNAc) leucine|1
+C-linked (Man) hydroxytryptophan|90
+C-linked (Man) tryptophan|117
+Cholesterol glycine ester|2
+Cis-14-hydroxy-10,13-dioxo-7-heptadecenoic acid aspartate ester|1
+Citrulline|124
+Cyclopeptide (Ala-Arg)|1
+Cyclopeptide (Ala-Pro)|1
+Cyclopeptide (Arg-Cys) (interchain with C-73 in subunit A)|2
+Cyclopeptide (Arg-Cys) (interchain with C-9 in subunit A)|1
+Cyclopeptide (Asn-Gly)|1
+Cyclopeptide (Asp-Asn)|4
+Cyclopeptide (Cys-Arg) (interchain with R-1 in subunit A)|1
+Cyclopeptide (Cys-Arg) (interchain with R-65 in subunit A)|2
+Cyclopeptide (Cys-Ile)|1
+Cyclopeptide (Glu-Asn)|1
+Cyclopeptide (Gly-Asn)|72
+Cyclopeptide (Gly-Asp)|13
+Cyclopeptide (Ile-Lys)|1
+Cyclopeptide (Ile-Pro)|1
+Cyclopeptide (Leu-Leu)|1
+Cyclopeptide (Leu-Trp)|1
+Cyclopeptide (Lys-Asp)|2
+Cyclopeptide (Met-Pro)|2
+Cyclopeptide (Phe-Pro)|1
+Cyclopeptide (Ser-Asn)|3
+Cyclopeptide (Ser-Gly)|2
+Cyclopeptide (Trp-Pro)|3
+CysO-cysteine adduct|1
+Cysteine amide|155
+Cysteine methyl disulfide|2
+Cysteine methyl ester|43
+Cysteine persulfide|49
+Cysteine sulfenic acid (-SOH)|215
+Cysteine sulfinic acid (-SO2H)|111
+D-4-hydroxyvaline|2
+D-alanine (Ala)|16
+D-alanine (Ser)|3
+D-allo-isoleucine|6
+D-asparagine|8
+D-lactate|2
+D-leucine|7
+D-methionine|3
+D-phenylalanine|13
+D-serine (Cys)|1
+D-serine (Ser)|3
+D-threonine|2
+D-tryptophan|14
+D-valine|2
+Deamidated asparagine|58
+Deamidated glutamine|26
+Decarboxylated threonine|1
+Diiodotyrosine|9
+Dimethylated arginine|80
+Diphosphoserine|4
+Diphthamide|7
+Disulfide bond|23865
+Essential for catalytic activity|1
+Essential for enzymatic activity|2
+FMN phosphoryl serine|1
+FMN phosphoryl threonine|8
+GPI-anchor amidated alanine|2
+GPI-anchor amidated asparagine|8
+GPI-anchor amidated aspartate|5
+GPI-anchor amidated cysteine|2
+GPI-anchor amidated glycine|6
+GPI-anchor amidated serine|27
+GPI-like-anchor amidated asparagine|1
+GPI-like-anchor amidated serine|1
+Glutamate methyl ester (Gln)|8
+Glutamate methyl ester (Glu)|33
+Glutamic acid 1-amide|30
+Glutamine amide|58
+Glutamine derivative|1
+Glycine amide|139
+Glycine radical|4
+Glycyl adenylate|8
+Glycyl cysteine dithioester (Gly-Cys) (interchain with C-13 in Cap2)|1
+Glycyl cysteine dithioester (Gly-Cys) (interchain with C-493 in Cap2)|1
+Glycyl cysteine dithioester (Gly-Cys) (interchain with C-513 in Cap2)|1
+Glycyl cysteine thioester (Cys-Gly) (interchain with G-Cter in TtuB)|1
+Glycyl cysteine thioester (Cys-Gly) (interchain with G-Cter in ubiquitin)|12
+Glycyl cysteine thioester (Gly-Cys) (interchain with C-192 in TtuC)|1
+Glycyl lysine isopeptide (Gly-Lys) (interchain with K-130 in ATG5)|1
+Glycyl lysine isopeptide (Gly-Lys) (interchain with K-? in acceptor proteins)|7
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in /SUMO5)|1
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in ATG12)|2
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in ISG15)|21
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in NEDD8)|8
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in SAMP2)|4
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in SUMO)|209
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in SUMO1)|341
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in SUMO1, SUMO2 and SUMO3)|1
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in SUMO1P1/SUMO5)|5
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in SUMO2 and SUMO3)|2
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in SUMO2)|5161
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in SUMO3)|9
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in TtuB)|3
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in UFM1)|4
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in URM1)|26
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in host SUMO1 or SUMO2)|1
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in host SUMO1)|1
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in host protein DncV)|2
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in smo-1)|1
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in ubiquitin and interchain with MARCHF2)|1
+Glycyl lysine isopeptide (Lys-Gly) (interchain with G-Cter in ubiquitin)|1589
+Glyoxylic acid (Cys)|1
+Histidine amide|25
+Hydroxyarginine|2
+Hydroxyproline|278
+Hypusine|14
+In AusIA-globular form|2
+In AusIA-ribbon form|2
+In Imi-globular form|2
+In Imi-ribbon form|2
+In both disintegrin-like bothropasin and zinc metalloproteinase-disintegrin-like bothropasin|1
+In both disintegrin-like catrocollastatin-C and zinc metalloproteinase-disintegrin-like VAP2B|1
+In chain A|1
+In diamide-induced nuclear retained form|2
+In disintegrin-like catrocollastatin-C|8
+In disulfide HMGB1|1
+In form A|3
+In form A and B|3
+In form B|4
+In forms A and B|1
+In inhibited form|3
+In isoform 1|1
+In isoform Se-P1|2
+In monomer, partial|1
+In monomeric form|4
+In nuclear retained form|1
+In oxidase form|2
+In oxidized inactive NAD-MDH|2
+In peroxide stress-induced nuclear retained form|2
+In soluble form|2
+In the active soluble endolysin|1
+In the inactive membrane-associated endolysin|1
+In zinc metalloproteinase-disintegrin-like VAP2B|16
+In zinc metalloproteinase-disintegrin-like bothropasin|16
+In zinc metalloproteinase-disintegrin-like brevilysin H6|1
+Inhibitory under oxidizing conditions|2
+Interchain|506
+Interchain (between A and B chains)|13
+Interchain (between A1a and Bx chains)|1
+Interchain (between A2 and B1a chains)|1
+Interchain (between A3 and B4 chains)|1
+Interchain (between Abeta and B chains)|1
+Interchain (between B and A chains)|22
+Interchain (between F2 and F1 chains)|3
+Interchain (between GP1 and GP2 chains)|1
+Interchain (between HA1 and HA2 chains)|1
+Interchain (between Ric c 3 small and Ric c 3 large chains)|2
+Interchain (between SU and TM chains, or C-228 with C-401)|1
+Interchain (between VP2 and VP1 chains)|1
+Interchain (between acidic and basic chains)|2
+Interchain (between alpha and beta chains)|5
+Interchain (between alpha and beta chains, with C-222 in alpha chain)|1
+Interchain (between alpha and beta chains, with C-440 in beta chain)|1
+Interchain (between alpha and beta subunits)|3
+Interchain (between alpha and gamma chains)|2
+Interchain (between gamma and delta chains)|1
+Interchain (between heavy and light chains)|9
+Interchain (between large and small chains)|1
+Interchain (between light and heavy chains)|15
+Interchain (between non-catalytic and catalytic chains)|2
+Interchain (between small and large chains)|4
+Interchain (between small and large chains, with C-30 in small chain)|1
+Interchain (between small and large chains, with C-42 in small chain) (or C-90)|1
+Interchain (between small and large subunit)|2
+Interchain (with C-10 in M-MIITX-Mp2b)|1
+Interchain (with C-10 in cleaved protease cofactor pVI-C)|1
+Interchain (with C-100 in coagulation factor X-activating enzyme light chain LC1)|1
+Interchain (with C-100 in subunit B)|1
+Interchain (with C-100 in subunit beta of heterodimeric partner)|2
+Interchain (with C-100 in subunit beta-2)|1
+Interchain (with C-101)|1
+Interchain (with C-102 in subunit A of IX/X-bp or with C-79 in subunit A of IX-bp)|1
+Interchain (with C-102 in subunit alpha-1)|1
+Interchain (with C-102)|1
+Interchain (with C-103)|1
+Interchain (with C-104 in coagulation factor X-activating enzyme light chain LC2)|1
+Interchain (with C-104 in subunit A)|1
+Interchain (with C-104 in subunit alpha of heterodimeric partner)|2
+Interchain (with C-104)|4
+Interchain (with C-1041)|1
+Interchain (with C-105)|1
+Interchain (with C-106 in beta chain)|1
+Interchain (with C-1062)|1
+Interchain (with C-107)|1
+Interchain (with C-108)|1
+Interchain (with C-109)|1
+Interchain (with C-11 in EMF10B)|1
+Interchain (with C-11 in subunit A)|1
+Interchain (with C-110)|1
+Interchain (with C-113 in alpha chain)|1
+Interchain (with C-113)|1
+Interchain (with C-114 in SLC3A1)|1
+Interchain (with C-115 in TAPBP)|1
+Interchain (with C-115)|2
+Interchain (with C-116 in KLRC1/NGK2A)|1
+Interchain (with C-116 in venom peptide isomerase heavy chain)|1
+Interchain (with C-116)|1
+Interchain (with C-117)|2
+Interchain (with C-118)|2
+Interchain (with C-119 in IL12A)|1
+Interchain (with C-119 in alpha chain)|1
+Interchain (with C-119)|1
+Interchain (with C-12 in subunit B)|1
+Interchain (with C-120)|1
+Interchain (with C-1208 in KDR)|1
+Interchain (with C-1231)|1
+Interchain (with C-124)|1
+Interchain (with C-125)|2
+Interchain (with C-126)|1
+Interchain (with C-1268)|1
+Interchain (with C-127)|2
+Interchain (with C-1285)|1
+Interchain (with C-129)|1
+Interchain (with C-13 in EMF10A)|1
+Interchain (with C-13)|4
+Interchain (with C-130 in A0A7H0DN11)|1
+Interchain (with C-130)|1
+Interchain (with C-1305)|1
+Interchain (with C-1315)|1
+Interchain (with C-133 in AhpD)|1
+Interchain (with C-135 in subunit gamma of octameric partner)|1
+Interchain (with C-136 in beta chain)|1
+Interchain (with C-136)|1
+Interchain (with C-137 in subunit A1)|1
+Interchain (with C-137)|4
+Interchain (with C-138 in A0A0M3KL48)|1
+Interchain (with C-138)|1
+Interchain (with C-139)|1
+Interchain (with C-1394)|1
+Interchain (with C-14 in A8W893)|1
+Interchain (with C-14 in subunit A)|1
+Interchain (with C-14)|2
+Interchain (with C-142 in subunit B2)|1
+Interchain (with C-144 in SLC7A5)|1
+Interchain (with C-144)|1
+Interchain (with C-147 in GP1BB)|2
+Interchain (with C-147)|1
+Interchain (with C-15)|2
+Interchain (with C-151)|1
+Interchain (with C-155)|1
+Interchain (with C-156)|1
+Interchain (with C-1566)|1
+Interchain (with C-158 in coagulation factor X-activating enzyme light chain LC2)|1
+Interchain (with C-158 in subunit alpha of tetrameric partner)|2
+Interchain (with C-158)|3
+Interchain (with C-159)|1
+Interchain (with C-1590)|1
+Interchain (with C-16 in EMF10B)|1
+Interchain (with C-16)|1
+Interchain (with C-160)|1
+Interchain (with C-162)|1
+Interchain (with C-164 in SLC7A5|1
+Interchain (with C-165 in gamma chain)|1
+Interchain (with C-1652)|1
+Interchain (with C-166)|2
+Interchain (with C-167 in DUOXA2)|1
+Interchain (with C-167)|1
+Interchain (with C-169 in PRG2 proform)|1
+Interchain (with C-169)|2
+Interchain (with C-17 in M-MIITX-Mp2b)|1
+Interchain (with C-17)|5
+Interchain (with C-170)|3
+Interchain (with C-171)|1
+Interchain (with C-172 in FOSB)|1
+Interchain (with C-172)|1
+Interchain (with C-173)|4
+Interchain (with C-174)|2
+Interchain (with C-175)|1
+Interchain (with C-179 of IGHA2/constant region of IgA2 heavy chain)|1
+Interchain (with C-179)|1
+Interchain (with C-1791)|1
+Interchain (with C-18 in subunit B)|1
+Interchain (with C-18 in subunit B1)|1
+Interchain (with C-18)|3
+Interchain (with C-180)|2
+Interchain (with C-182 in PIGT)|1
+Interchain (with C-182)|4
+Interchain (with C-183)|1
+Interchain (with C-184 in alpha chain)|1
+Interchain (with C-187 in GP7)|1
+Interchain (with C-187)|1
+Interchain (with C-189 in SLC31A1)|1
+Interchain (with C-19 in A0A2D1W2A5)|1
+Interchain (with C-19 in U3RVK6)|1
+Interchain (with C-19 in subunit B2)|1
+Interchain (with C-19)|8
+Interchain (with C-190 in light chain)|1
+Interchain (with C-193)|2
+Interchain (with C-194 in C8-alpha chain)|1
+Interchain (with C-195)|1
+Interchain (with C-197)|1
+Interchain (with C-199 in IL12B)|1
+Interchain (with C-20 in A0A067Z050)|1
+Interchain (with C-20 in A8HWY8)|1
+Interchain (with C-20 in C5HMM2)|1
+Interchain (with C-20 in Q0A426)|1
+Interchain (with C-20 in Q1KHJ8)|1
+Interchain (with C-20 in Q5EP31)|2
+Interchain (with C-20 in Q6DQ33)|1
+Interchain (with C-20 in subunit B)|1
+Interchain (with C-20)|19
+Interchain (with C-201)|1
+Interchain (with C-202)|1
+Interchain (with C-204)|1
+Interchain (with C-208)|2
+Interchain (with C-21 in A0A059T4A1)|1
+Interchain (with C-21 in A0A1J0CXU0)|1
+Interchain (with C-21 in A0A5B9ZSV0)|1
+Interchain (with C-21 in A0A6M3Z334)|1
+Interchain (with C-21 in A7Y8A6)|1
+Interchain (with C-21 in A7Y8I1)|2
+Interchain (with C-21 in C3W5S1)|1
+Interchain (with C-21 in G0KTJ4)|1
+Interchain (with C-21)|19
+Interchain (with C-210 in SLC3A2)|3
+Interchain (with C-211)|1
+Interchain (with C-212 in P03420)|1
+Interchain (with C-212)|1
+Interchain (with C-215)|2
+Interchain (with C-219 in Q65ZC0)|1
+Interchain (with C-22 in A0A024CX39)|1
+Interchain (with C-22 in A0A024E3P0)|1
+Interchain (with C-22 in A0A0C4ZYE2)|1
+Interchain (with C-22 in A0A0R5TXT5)|1
+Interchain (with C-22 in A0A1S6R2B6)|1
+Interchain (with C-22 in A0A2I7YV81)|1
+Interchain (with C-22 in A0A2Z6G7U3)|1
+Interchain (with C-22 in Q6GYW3)|1
+Interchain (with C-22 in subunit A)|1
+Interchain (with C-22)|15
+Interchain (with C-222)|2
+Interchain (with C-223 in beta chain)|1
+Interchain (with C-223)|3
+Interchain (with C-225)|2
+Interchain (with C-23 in A0A2Z6G7U6)|1
+Interchain (with C-23 in heavy chain)|1
+Interchain (with C-23)|2
+Interchain (with C-230)|1
+Interchain (with C-232)|1
+Interchain (with C-233 in DUOXA2)|1
+Interchain (with C-233)|1
+Interchain (with C-236)|1
+Interchain (with C-239)|1
+Interchain (with C-24 in subunit A)|1
+Interchain (with C-24 in trimeric partner 2)|1
+Interchain (with C-24 in virB7)|1
+Interchain (with C-24)|1
+Interchain (with C-244)|1
+Interchain (with C-245)|1
+Interchain (with C-2462)|1
+Interchain (with C-248)|2
+Interchain (with C-25 in A0A7H0DN11)|1
+Interchain (with C-25)|3
+Interchain (with C-258)|1
+Interchain (with C-2581)|1
+Interchain (with C-26 in chain A)|1
+Interchain (with C-26 in subunit beta of tetrameric partner)|2
+Interchain (with C-26)|3
+Interchain (with C-262 in virB9)|1
+Interchain (with C-263)|1
+Interchain (with C-264)|1
+Interchain (with C-269)|1
+Interchain (with C-27)|1
+Interchain (with C-273)|1
+Interchain (with C-274)|1
+Interchain (with C-275)|1
+Interchain (with C-278)|1
+Interchain (with C-28 in subunit B)|1
+Interchain (with C-28)|4
+Interchain (with C-282)|2
+Interchain (with C-285 in JUND)|1
+Interchain (with C-287)|1
+Interchain (with C-29 in APOA2)|1
+Interchain (with C-29 in B chain)|1
+Interchain (with C-29)|1
+Interchain (with C-290)|2
+Interchain (with C-291)|1
+Interchain (with C-292)|1
+Interchain (with C-294)|1
+Interchain (with C-3 in Q5YFJ3)|1
+Interchain (with C-3)|3
+Interchain (with C-30 in A0A097PF39)|1
+Interchain (with C-30 in A0A0Y0S9M3)|1
+Interchain (with C-30 in A0A218KIQ1)|1
+Interchain (with C-30 in H9XM74)|1
+Interchain (with C-30 in I0AXC3)|1
+Interchain (with C-30 in Q91MA7)|1
+Interchain (with C-30 in TRX1)|1
+Interchain (with C-30)|11
+Interchain (with C-303)|2
+Interchain (with C-304)|1
+Interchain (with C-31 in TRX2)|1
+Interchain (with C-31 in light chain)|1
+Interchain (with C-31)|5
+Interchain (with C-318)|1
+Interchain (with C-32)|2
+Interchain (with C-327)|1
+Interchain (with C-33 in TGFB1)|2
+Interchain (with C-33)|1
+Interchain (with C-335)|1
+Interchain (with C-34)|4
+Interchain (with C-347 in XK)|1
+Interchain (with C-347)|1
+Interchain (with C-35)|3
+Interchain (with C-351)|2
+Interchain (with C-357)|1
+Interchain (with C-36 in HYR1)|1
+Interchain (with C-36)|1
+Interchain (with C-360)|1
+Interchain (with C-361)|1
+Interchain (with C-365)|1
+Interchain (with C-368)|2
+Interchain (with C-37 in E0WLS1)|1
+Interchain (with C-37 in P03420)|1
+Interchain (with C-37 or C-91 of JCHAIN)|1
+Interchain (with C-37)|1
+Interchain (with C-371)|1
+Interchain (with C-372 in trimeric partner 1)|1
+Interchain (with C-375)|1
+Interchain (with C-38)|2
+Interchain (with C-383)|1
+Interchain (with C-39)|1
+Interchain (with C-391 in coagulation factor X-activating enzyme heavy chain)|1
+Interchain (with C-394)|1
+Interchain (with C-4)|1
+Interchain (with C-40)|1
+Interchain (with C-407)|4
+Interchain (with C-41)|3
+Interchain (with C-410 in MICU2)|1
+Interchain (with C-412)|1
+Interchain (with C-413 in MICU2)|1
+Interchain (with C-414)|2
+Interchain (with C-426 in subunit beta)|1
+Interchain (with C-428)|1
+Interchain (with C-431 in subunit beta)|1
+Interchain (with C-431)|1
+Interchain (with C-436)|1
+Interchain (with C-439 in P03420)|1
+Interchain (with C-441 in A26)|1
+Interchain (with C-442 in A26)|1
+Interchain (with C-443)|1
+Interchain (with C-452 of IGHM)|2
+Interchain (with C-46)|2
+Interchain (with C-461 in PAPPA)|1
+Interchain (with C-463 in MICU1)|1
+Interchain (with C-465 in MICU1)|2
+Interchain (with C-466 in A8W891)|1
+Interchain (with C-468)|1
+Interchain (with C-469)|2
+Interchain (with C-47)|3
+Interchain (with C-474)|1
+Interchain (with C-475)|1
+Interchain (with C-476 in A0A024E2M1)|1
+Interchain (with C-476 in A0A097PHH8)|1
+Interchain (with C-476 in A0A0K1LUI9)|1
+Interchain (with C-476 in A0A218MY65)|1
+Interchain (with C-476 in Q701T7)|1
+Interchain (with C-476 in S4V1Z7)|1
+Interchain (with C-476)|7
+Interchain (with C-477 in A0A0B4UV34)|1
+Interchain (with C-477)|6
+Interchain (with C-478)|3
+Interchain (with C-479 in A2V851)|1
+Interchain (with C-479)|2
+Interchain (with C-48 in TSA1)|1
+Interchain (with C-48)|4
+Interchain (with C-480 in A0A2I7YV20)|1
+Interchain (with C-480 in A7UPX0)|1
+Interchain (with C-480 in F2NZB4)|1
+Interchain (with C-480)|8
+Interchain (with C-481 in A0A067YZ73)|1
+Interchain (with C-481 in A0A109YUH3)|1
+Interchain (with C-481 in A0A6J3XB93)|2
+Interchain (with C-481 in C5MVT7)|1
+Interchain (with C-481 in G0KTD9)|1
+Interchain (with C-481)|12
+Interchain (with C-482 in A0A0N9RDU4)|1
+Interchain (with C-482 in A0A2U5FPI7)|1
+Interchain (with C-482 in B8K0N5)|1
+Interchain (with C-482 in L0HR89)|1
+Interchain (with C-482 in Q91MA7)|1
+Interchain (with C-482 in R9XUW5)|1
+Interchain (with C-482)|12
+Interchain (with C-483 in C5MRF2)|1
+Interchain (with C-483 in Q1KHK7)|1
+Interchain (with C-483 in Q6DQ33)|1
+Interchain (with C-483 in Q6J0Q2)|1
+Interchain (with C-483 in Q6J8F6)|1
+Interchain (with C-483)|9
+Interchain (with C-484)|2
+Interchain (with C-486)|3
+Interchain (with C-49 in gamma chain)|1
+Interchain (with C-49)|2
+Interchain (with C-497 in A0A2D1W645)|1
+Interchain (with C-498)|1
+Interchain (with C-499 in C0LT38)|1
+Interchain (with C-499)|1
+Interchain (with C-5)|2
+Interchain (with C-50)|4
+Interchain (with C-500 or C-501 in GP1BA)|1
+Interchain (with C-51 in PRG2 proform)|1
+Interchain (with C-51)|2
+Interchain (with C-52 in Irditoxin subunit B)|1
+Interchain (with C-52)|4
+Interchain (with C-521)|1
+Interchain (with C-528)|1
+Interchain (with C-529)|1
+Interchain (with C-53)|1
+Interchain (with C-530)|2
+Interchain (with C-54 in alpha subunit)|1
+Interchain (with C-54)|1
+Interchain (with C-55 in alpha chain)|1
+Interchain (with C-555 in GP10)|1
+Interchain (with C-559)|1
+Interchain (with C-56)|1
+Interchain (with C-563 in SUN2)|1
+Interchain (with C-567)|1
+Interchain (with C-568 in DUXA2)|1
+Interchain (with C-57 in PDIA3)|1
+Interchain (with C-572)|1
+Interchain (with C-58 in alpha chain)|1
+Interchain (with C-58 in apo-SOD1)|1
+Interchain (with C-582 in DUXA2)|1
+Interchain (with C-59 in KLRD1)|1
+Interchain (with C-59 in alpha subunit)|1
+Interchain (with C-59)|2
+Interchain (with C-593)|1
+Interchain (with C-598 in YAP1)|1
+Interchain (with C-6 in subunit A)|1
+Interchain (with C-6)|2
+Interchain (with C-60 in C8-gamma chain)|1
+Interchain (with C-60 in multimeric partner 2)|1
+Interchain (with C-60)|7
+Interchain (with C-609)|1
+Interchain (with C-61 in AhpC)|1
+Interchain (with C-61)|3
+Interchain (with C-62 in multimeric partner 1)|1
+Interchain (with C-62)|2
+Interchain (with C-63)|5
+Interchain (with C-64 in M-MIITX-Mp2a)|1
+Interchain (with C-65)|3
+Interchain (with C-66 in subunit A)|2
+Interchain (with C-66 in subunit B)|3
+Interchain (with C-66)|2
+Interchain (with C-667)|1
+Interchain (with C-67)|3
+Interchain (with C-670)|2
+Interchain (with C-68 in alpha chain)|1
+Interchain (with C-68)|5
+Interchain (with C-6862 in SYNE2)|1
+Interchain (with C-69 in E0WLS1)|1
+Interchain (with C-69 in P03420)|1
+Interchain (with C-69)|2
+Interchain (with C-7 in subunit B)|1
+Interchain (with C-7)|1
+Interchain (with C-71 in M-MIITX-Mp2a)|1
+Interchain (with C-71 in alpha chain)|1
+Interchain (with C-71)|3
+Interchain (with C-711)|1
+Interchain (with C-72 in Kell)|1
+Interchain (with C-72)|3
+Interchain (with C-73)|2
+Interchain (with C-732 in PAPPA)|1
+Interchain (with C-736)|1
+Interchain (with C-74 in subunit delta of heterotetrameric partner)|1
+Interchain (with C-74)|2
+Interchain (with C-75 in subunit B)|1
+Interchain (with C-75)|2
+Interchain (with C-76 in Irditoxin subunit A)|1
+Interchain (with C-76)|3
+Interchain (with C-77)|2
+Interchain (with C-78 in ISG15)|1
+Interchain (with C-78 in subunit alpha)|1
+Interchain (with C-78)|1
+Interchain (with C-793)|1
+Interchain (with C-8 in EMF10A)|1
+Interchain (with C-8 in membrane protein)|1
+Interchain (with C-80 in subunit gamma of heterotetrameric partner)|1
+Interchain (with C-80)|2
+Interchain (with C-81 in subunit A)|1
+Interchain (with C-81)|2
+Interchain (with C-816)|1
+Interchain (with C-82)|2
+Interchain (with C-820)|1
+Interchain (with C-83)|1
+Interchain (with C-84 in SRX1)|1
+Interchain (with C-84)|1
+Interchain (with C-85)|1
+Interchain (with C-859)|1
+Interchain (with C-86)|1
+Interchain (with C-87 in UBE2N)|1
+Interchain (with C-876)|1
+Interchain (with C-88)|1
+Interchain (with C-9 in venom peptide isomerase light chain)|1
+Interchain (with C-9)|3
+Interchain (with C-90 in gN)|1
+Interchain (with C-90)|2
+Interchain (with C-915)|1
+Interchain (with C-92 in PIGK/GPI8)|1
+Interchain (with C-92)|1
+Interchain (with C-93)|1
+Interchain (with C-94 in TRAC)|1
+Interchain (with C-94)|2
+Interchain (with C-95 in beta chain)|1
+Interchain (with C-95)|1
+Interchain (with C-96 in IL12A and C-73 in IL23A)|1
+Interchain (with C-96)|1
+Interchain (with C-98 in beta chain)|1
+Interchain (with C-98 in subunit B)|3
+Interchain (with C-98 in subunit beta)|1
+Interchain (with C-99)|1
+Interchain (with C-? in LTBP1 TB3 domain)|1
+Interchain (with C-? in TGFB1)|2
+Interchain (with ERO1A)|1
+Interchain (with J chain)|1
+Interchain (with ROM1)|1
+Interchain (with a B chain)|1
+Interchain (with a heavy chain)|14
+Interchain (with a light chain)|4
+Interchain (with alpha chain)|4
+Interchain (with an A chain)|1
+Interchain (with beta chain)|4
+Interchain (with chain IIA)|1
+Interchain (with chain IIB)|1
+Interchain (with chain IIC)|1
+Interchain (with chain IID)|1
+Interchain (with gM)|2
+Interchain (with gamma chain)|3
+Interchain (with heavy chain of another subunit)|1
+Interchain (with heavy chain of another subunit) (or with C-503 of PIGR/the secretory component)|2
+Interchain (with heavy chain)|9
+Interchain (with heavy chain) (or with C-180)|1
+Interchain (with light chain)|5
+Interchain (with substrate)|1
+Interchain, redox-active|1
+Intrachain|1
+Involved in overall enzyme stability, but not essential for carbapenem-hydrolyzing activity|1
+Iodotyrosine|14
+Isoaspartyl glycine isopeptide (Asn-Gly)|1
+Isoaspartyl glycine isopeptide (Asp-Gly)|1
+Isoaspartyl glycine isopeptide (Gly-Asp)|4
+Isoaspartyl lysine isopeptide (Asn-Lys) (interchain with K-169)|1
+Isoaspartyl lysine isopeptide (Lys-Asn)|3
+Isoaspartyl lysine isopeptide (Lys-Asn) (interchain with N-356)|1
+Isoglutamyl cysteine thioester (Cys-Gln)|8
+Isoglutamyl glycine isopeptide (Gly-Glu)|2
+Isoglutamyl lysine isopeptide (Gln-Lys) (interchain with K-162)|1
+Isoglutamyl lysine isopeptide (Gln-Lys) (interchain with K-312)|2
+Isoglutamyl lysine isopeptide (Gln-Lys) (interchain with K-89)|2
+Isoglutamyl lysine isopeptide (Gln-Lys) (interchain with K-?)|5
+Isoglutamyl lysine isopeptide (Lys-Gln) (interchain with Q-154)|1
+Isoglutamyl lysine isopeptide (Lys-Gln) (interchain with Q-212)|1
+Isoglutamyl lysine isopeptide (Lys-Gln) (interchain with Q-213)|1
+Isoglutamyl lysine isopeptide (Lys-Gln) (interchain with Q-216)|1
+Isoglutamyl lysine isopeptide (Lys-Gln) (interchain with Q-31)|1
+Isoglutamyl lysine isopeptide (Lys-Gln) (interchain with Q-?)|8
+Isoglutamyl lysine isopeptide (Lys-Gln) (interchain with Q-Cter in protein Pup)|111
+Isoleucine amide|130
+L-allo-isoleucine|2
+Lanthionine (Cys-Ser)|1
+Lanthionine (Ser-Cys)|38
+Leucine amide|762
+Leucine methyl ester|8
+Lysine amide|100
+Lysine methyl ester|1
+Lysine tyrosylquinone (Lys-Tyr)|3
+Lysine tyrosylquinone (Tyr-Lys)|1
+Lysino-D-alanine (Lys)|1
+MIO|9
+Methionine (R)-sulfoxide|16
+Methionine amide|101
+Methionine sulfone|1
+Methionine sulfoxide|64
+Methylhistidine|13
+N(tele)-UMP-histidine|1
+N,N,N-trimethylalanine|16
+N,N,N-trimethylglycine|4
+N,N,N-trimethylmethionine|1
+N,N,N-trimethylserine|1
+N,N-(cysteine-1,S-diyl)serine (Cys-Ser)|1
+N,N-dimethylalanine|5
+N,N-dimethylglycine|1
+N,N-dimethylleucine|1
+N,N-dimethylproline|11
+N,N-dimethylserine|1
+N-(12-oxomyristoyl)cysteine|1
+N-D-glucuronoyl glycine|1
+N-[(12R)-12-hydroxymyristoyl]cysteine|1
+N-acetylalanine|1599
+N-acetylaspartate|6
+N-acetylcysteine|15
+N-acetylglutamate|7
+N-acetylglycine|111
+N-acetylmethionine|1240
+N-acetylproline|26
+N-acetylserine|1182
+N-acetylthreonine|243
+N-acetyltyrosine|2
+N-acetylvaline|53
+N-alpha-linked (Rha) arginine|5
+N-beta-linked (GlcNAc) arginine|13
+N-carbamoylalanine|1
+N-formylglycine|1
+N-formylmethionine|119
+N-linked (DATDGlc) asparagine|2
+N-linked (GalNAc) asparagine|2
+N-linked (GalNAc...) (glycosaminoglycan) asparagine|1
+N-linked (GalNAc...) asparagine|9
+N-linked (Glc) (glycation) isoleucine|1
+N-linked (Glc) (glycation) lysine|95
+N-linked (Glc) (glycation) valine|1
+N-linked (Glc...) arginine|2
+N-linked (Glc...) asparagine|12
+N-linked (GlcNAc) asparagine|59
+N-linked (GlcNAc...) (complex) asparagine|310
+N-linked (GlcNAc...) (high mannose) asparagine|135
+N-linked (GlcNAc...) (hybrid) asparagine|39
+N-linked (GlcNAc...) (keratan sulfate) asparagine|14
+N-linked (GlcNAc...) (paucimannose) asparagine|15
+N-linked (GlcNAc...) (polylactosaminoglycan) asparagine|14
+N-linked (GlcNAc...) asparagine|7938
+N-linked (Hex) asparagine|1
+N-linked (Hex...) asparagine|5
+N-linked (HexNAc...) asparagine|3
+N-linked (Man) tryptophan|3
+N-linked (Man...) asparagine|2
+N-methylalanine|11
+N-methylaspartate|10
+N-methylglycine|12
+N-methylhistidine|1
+N-methylisoleucine|19
+N-methylleucine|8
+N-methylmethionine|5
+N-methylphenylalanine|16
+N-methylproline|2
+N-methylserine|2
+N-methylthreonine|10
+N-methyltyrosine|1
+N-methylvaline|41
+N-myristoyl glycine|281
+N-palmitoyl cysteine|37
+N-palmitoyl glycine|1
+N2,N2-dimethylarginine|1
+N2-acetylarginine|8
+N2-succinyltryptophan|1
+N4-methyl-D-asparagine|6
+N4-methylasparagine|46
+N5-[4-(S-L-cysteinyl)-5-methyl-1H-imidazol-2-yl]-L-ornithine (Arg-Cys) (interchain with C-151 in KEAP1)|1
+N5-[4-(S-L-cysteinyl)-5-methyl-1H-imidazol-2-yl]-L-ornithine (Cys-Arg) (interchain with R-135 in KEAP1)|1
+N5-methylarginine|2
+N5-methylglutamine|51
+N6,N6,N6-trimethyl-5-hydroxylysine|5
+N6,N6,N6-trimethyllysine|298
+N6,N6-dimethyllysine|986
+N6-(2-hydroxyisobutyryl)lysine|668
+N6-(3,6-diaminohexanoyl)-5-hydroxylysine|2
+N6-(ADP-ribosyl)lysine|13
+N6-(beta-hydroxybutyryl)lysine|366
+N6-(pyridoxal phosphate)lysine|144
+N6-(pyridoxal phosphate)lysine (covalent)|124
+N6-(retinylidene)lysine|7
+N6-1-carboxyethyl lysine|1
+N6-acetyl-N6-methyllysine|6
+N6-acetyllysine|5325
+N6-benzoyllysine|1
+N6-biotinyllysine|11
+N6-butyryllysine|78
+N6-carboxylysine|127
+N6-crotonyllysine|345
+N6-decanoyllysine|3
+N6-formyllysine|3
+N6-glutaryllysine|220
+N6-lactoyllysine|315
+N6-lipoyllysine|20
+N6-malonyllysine|50
+N6-methylated lysine|18
+N6-methyllysine|497
+N6-murein peptidoglycan lysine|1
+N6-myristoyl lysine|12
+N6-palmitoyl lysine|8
+N6-poly(methylaminopropyl)lysine|12
+N6-propionyllysine|12
+N6-succinyllysine|1521
+Nitrated tyrosine|9
+O-(2-aminoethylphosphoryl)serine|1
+O-(2-cholinephosphoryl)serine|1
+O-(5'-phospho-DNA)-serine|3
+O-(5'-phospho-DNA)-tyrosine|2
+O-(5'-phospho-RNA)-serine|1
+O-(5'-phospho-RNA)-tyrosine|6
+O-(pantetheine 4'-phosphoryl)serine|47
+O-(phosphoribosyl dephospho-coenzyme A)serine|3
+O-(sn-1-glycerophosphoryl)serine|2
+O-AMP-threonine|5
+O-AMP-tyrosine|7
+O-UMP-serine|5
+O-UMP-threonine|3
+O-UMP-tyrosine|6
+O-acetylserine|6
+O-acetylthreonine|4
+O-alpha-linked (D-glycero-D-manno-heptose) serine|35
+O-decanoyl serine|5
+O-decanoyl threonine|1
+O-di-AMP-tyrosine|1
+O-hexanoyl serine|1
+O-linked (Ara...) hydroxyproline|3
+O-linked (DADDGlc) serine|1
+O-linked (Fuc) serine|2
+O-linked (Fuc) threonine|10
+O-linked (Fuc...) serine|19
+O-linked (Fuc...) threonine|47
+O-linked (FucNAc...) serine|1
+O-linked (Gal...) hydroxylysine|47
+O-linked (Gal...) hydroxyproline|3
+O-linked (Gal...) serine|2
+O-linked (GalNAc) serine|8
+O-linked (GalNAc) threonine|61
+O-linked (GalNAc...) serine|214
+O-linked (GalNAc...) threonine|535
+O-linked (Glc) serine|61
+O-linked (Glc) threonine|1
+O-linked (Glc...) serine|52
+O-linked (Glc...) tyrosine|11
+O-linked (GlcA) serine|2
+O-linked (GlcNAc) serine|113
+O-linked (GlcNAc) threonine|60
+O-linked (GlcNAc) tyrosine|4
+O-linked (GlcNAc...) asparagine|1
+O-linked (GlcNAc...) hydroxyproline|2
+O-linked (GlcNAc...) serine|1
+O-linked (GlcNAc...) threonine|12
+O-linked (GlcNAc6P) serine|2
+O-linked (Hex) serine|6
+O-linked (Hex) threonine|1
+O-linked (Hex...) serine|5
+O-linked (Hex...) threonine|9
+O-linked (HexNAc...) serine|10
+O-linked (HexNAc...) threonine|13
+O-linked (HexNAc...) tyrosine|1
+O-linked (Man) serine|54
+O-linked (Man) threonine|67
+O-linked (Man...) serine|62
+O-linked (Man...) threonine|95
+O-linked (Man1P...) serine|2
+O-linked (Man6P...) threonine|3
+O-linked (Xyl) serine|1
+O-linked (Xyl...) (chondroitin sulfate) serine|112
+O-linked (Xyl...) (glycosaminoglycan) serine|18
+O-linked (Xyl...) (heparan sulfate) serine|5
+O-linked (Xyl...) (keratan sulfate) threonine|3
+O-linked (Xyl...) serine|3
+O-methylthreonine|3
+O-octanoyl serine|6
+O-octanoyl threonine|1
+O-palmitoleoyl serine|5
+O-palmitoyl serine|1
+O-palmitoyl threonine|2
+O-tri-AMP-tyrosine|1
+O3-poly(beta-hydroxybutyryl)serine|2
+Omega-N-methylarginine|1313
+Omega-N-methylated arginine|4
+Or C-103 with C-152|1
+Or C-106 with C-132|1
+Or C-11 with C-41 (about 25%)|1
+Or C-123 with C-182|1
+Or C-14 with C-32|1
+Or C-16 with C-33|2
+Or C-1899 with C-1942|1
+Or C-22 with C-50|1
+Or C-37 with C-47|1
+Or C-39 with C-46|1
+Or C-39 with C-92|1
+Or C-45 with C-104|1
+Or C-49 with C-94|1
+Or C-51 with C-4 or C-9|1
+Or C-53 with C-79|1
+Or C-583 with C-612|1
+Or C-587 with C-600|1
+Or C-6 with C-31|1
+Or C-6 with C-32|2
+Or C-78 with C-138|1
+Or C-89 with C-137|1
+Or C-90 with C-133|1
+Or C-90 with C-150|1
+Oxazole-4-carboxylic acid (Cys-Ser)|1
+Oxazole-4-carboxylic acid (Gly-Ser)|3
+Oxazole-4-carboxylic acid (Ile-Ser)|1
+Oxazole-4-carboxylic acid (Ser-Ser)|3
+Partial|1
+Peptide (Met-Gly) (interchain with G-Cter in ubiquitin)|6
+Phenylalanine amide|720
+Phosphatidylethanolamine amidated glycine|8
+Phosphatidylserine amidated glycine|6
+Phosphoarginine|15
+Phosphocysteine|6
+Phosphohistidine|51
+Phosphoserine|55416
+Phosphothreonine|10003
+Phosphotyrosine|2644
+Phosphotyrosine (covalent)|12
+PolyADP-ribosyl aspartic acid|3
+PolyADP-ribosyl glutamic acid|21
+Proline amide|64
+Pros-8alpha-FAD histidine|5
+Pros-methylhistidine|26
+Pyrrolidone carboxylic acid|1021
+Pyrrolidone carboxylic acid (Glu)|13
+Pyruvic acid (Cys)|1
+Pyruvic acid (Ser)|20
+Redox active|1
+Redox modulation|1
+Redox-active|130
+Reversible|3
+S-(15-deoxy-Delta12,14-prostaglandin J2-9-yl)cysteine|2
+S-(2,3-dicarboxypropyl)cysteine|6
+S-(2-aminovinyl)-3-methyl-D-cysteine (Thr-Cys)|1
+S-(2-aminovinyl)-D-cysteine (Cys-Cys)|1
+S-(2-aminovinyl)-D-cysteine (Ser-Cys)|5
+S-(2-succinyl)cysteine|35
+S-(4-hydroxycinnamyl)cysteine|3
+S-(coelenterazin-3a-yl)cysteine|1
+S-(dipyrrolylmethanemethyl)cysteine|3
+S-12-hydroxyfarnesyl cysteine|3
+S-4a-FMN cysteine|1
+S-8alpha-FAD cysteine|3
+S-Lysyl-methionine sulfilimine (Lys-Met) (interchain with M-1533)|3
+S-Lysyl-methionine sulfilimine (Met-Lys) (interchain with K-1651)|3
+S-archaeol cysteine|1
+S-bacillithiol cysteine disulfide|5
+S-cGMP-cysteine|1
+S-carbamoylcysteine|1
+S-cyanocysteine|1
+S-cysteinyl cysteine|3
+S-diacylglycerol cysteine|32
+S-farnesyl cysteine|85
+S-geranylgeranyl cysteine|63
+S-glutathionyl cysteine|37
+S-linked (Gal...) cysteine|1
+S-linked (Glc) cysteine|1
+S-linked (Glc...) cysteine|1
+S-linked (GlcNAc) cysteine|1
+S-linked (Hex...) cysteine|1
+S-methylcysteine|14
+S-methylmethionine|1
+S-nitrosocysteine|89
+S-palmitoyl cysteine|442
+S-stearoyl cysteine|5
+Serine amide|74
+Sulfocysteine|1
+Sulfoserine|3
+Sulfothreonine|1
+Sulfotyrosine|198
+Symmetric dimethylarginine|72
+Tele-8alpha-FAD histidine|11
+Tele-8alpha-FMN histidine|2
+Tele-methylhistidine|32
+Tele-phosphohistidine|2
+Thiazole-4-carboxylic acid (Arg-Cys)|1
+Thiazole-4-carboxylic acid (Cys-Cys)|1
+Thiazole-4-carboxylic acid (Glu-Cys)|1
+Thiazole-4-carboxylic acid (Gly-Cys)|4
+Thiazole-4-carboxylic acid (Ser-Cys)|3
+Thiazole-4-carboxylic acid (Thr-Cys)|2
+Thiazolidine linkage|2
+Threonine amide|97
+Thyroxine|5
+Triiodothyronine|4
+Tryptophan amide|103
+Tryptophan derivative|1
+Tryptophan tryptophylquinone (Trp-Trp)|2
+Tryptophyl-tyrosyl-methioninium (Trp-Tyr) (with M-252)|1
+Tryptophyl-tyrosyl-methioninium (Trp-Tyr) (with M-255)|1
+Tryptophyl-tyrosyl-methioninium (Tyr-Met) (with W-107)|1
+Tryptophylquinone|4
+Tyrosine amide|72
+Valine amide|383
+by OPG088|6
+globular isomer|2
+ribbon isomer|2

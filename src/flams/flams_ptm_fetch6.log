@@ -1,0 +1,1075 @@
+2025-11-02 14:36:36,519 - INFO - Starting UniProt data acquisition and merging
+2025-11-02 14:36:37,694 - INFO - Retrieved 500 of 462461 total results
+2025-11-02 14:36:39,250 - INFO - Retrieved 1000 of 462461 total results
+2025-11-02 14:36:40,671 - INFO - Retrieved 1500 of 462461 total results
+2025-11-02 14:36:41,836 - INFO - Retrieved 2000 of 462461 total results
+2025-11-02 14:36:42,826 - INFO - Retrieved 2500 of 462461 total results
+2025-11-02 14:36:43,955 - INFO - Retrieved 3000 of 462461 total results
+2025-11-02 14:36:45,314 - INFO - Retrieved 3500 of 462461 total results
+2025-11-02 14:36:46,882 - INFO - Retrieved 4000 of 462461 total results
+2025-11-02 14:36:47,730 - INFO - Retrieved 4500 of 462461 total results
+2025-11-02 14:36:48,700 - INFO - Retrieved 5000 of 462461 total results
+2025-11-02 14:36:49,728 - INFO - Retrieved 5500 of 462461 total results
+2025-11-02 14:36:50,997 - INFO - Retrieved 6000 of 462461 total results
+2025-11-02 14:36:52,320 - INFO - Retrieved 6500 of 462461 total results
+2025-11-02 14:36:53,825 - INFO - Retrieved 7000 of 462461 total results
+2025-11-02 14:36:55,169 - INFO - Retrieved 7500 of 462461 total results
+2025-11-02 14:36:56,035 - INFO - Retrieved 8000 of 462461 total results
+2025-11-02 14:36:57,202 - INFO - Retrieved 8500 of 462461 total results
+2025-11-02 14:36:58,623 - INFO - Retrieved 9000 of 462461 total results
+2025-11-02 14:37:00,218 - INFO - Retrieved 9500 of 462461 total results
+2025-11-02 14:37:01,437 - INFO - Retrieved 10000 of 462461 total results
+2025-11-02 14:37:02,764 - INFO - Retrieved 10500 of 462461 total results
+2025-11-02 14:37:03,661 - INFO - Retrieved 11000 of 462461 total results
+2025-11-02 14:37:04,561 - INFO - Retrieved 11500 of 462461 total results
+2025-11-02 14:37:05,802 - INFO - Retrieved 12000 of 462461 total results
+2025-11-02 14:37:07,312 - INFO - Retrieved 12500 of 462461 total results
+2025-11-02 14:37:08,427 - INFO - Retrieved 13000 of 462461 total results
+2025-11-02 14:37:09,614 - INFO - Retrieved 13500 of 462461 total results
+2025-11-02 14:37:10,582 - INFO - Retrieved 14000 of 462461 total results
+2025-11-02 14:37:11,471 - INFO - Retrieved 14500 of 462461 total results
+2025-11-02 14:37:12,216 - INFO - Retrieved 15000 of 462461 total results
+2025-11-02 14:37:13,335 - INFO - Retrieved 15500 of 462461 total results
+2025-11-02 14:37:14,230 - INFO - Retrieved 16000 of 462461 total results
+2025-11-02 14:37:15,046 - INFO - Retrieved 16500 of 462461 total results
+2025-11-02 14:37:15,844 - INFO - Retrieved 17000 of 462461 total results
+2025-11-02 14:37:16,603 - INFO - Retrieved 17500 of 462461 total results
+2025-11-02 14:37:17,029 - INFO - Retrieved 18000 of 462461 total results
+2025-11-02 14:37:18,051 - INFO - Retrieved 18500 of 462461 total results
+2025-11-02 14:37:18,743 - INFO - Retrieved 19000 of 462461 total results
+2025-11-02 14:37:19,240 - INFO - Retrieved 19500 of 462461 total results
+2025-11-02 14:37:20,324 - INFO - Retrieved 20000 of 462461 total results
+2025-11-02 14:37:20,759 - INFO - Retrieved 20500 of 462461 total results
+2025-11-02 14:37:21,921 - INFO - Retrieved 21000 of 462461 total results
+2025-11-02 14:37:22,793 - INFO - Retrieved 21500 of 462461 total results
+2025-11-02 14:37:23,218 - INFO - Retrieved 22000 of 462461 total results
+2025-11-02 14:37:24,197 - INFO - Retrieved 22500 of 462461 total results
+2025-11-02 14:37:24,955 - INFO - Retrieved 23000 of 462461 total results
+2025-11-02 14:37:25,719 - INFO - Retrieved 23500 of 462461 total results
+2025-11-02 14:37:26,475 - INFO - Retrieved 24000 of 462461 total results
+2025-11-02 14:37:27,194 - INFO - Retrieved 24500 of 462461 total results
+2025-11-02 14:37:27,922 - INFO - Retrieved 25000 of 462461 total results
+2025-11-02 14:37:28,661 - INFO - Retrieved 25500 of 462461 total results
+2025-11-02 14:37:29,504 - INFO - Retrieved 26000 of 462461 total results
+2025-11-02 14:37:30,355 - INFO - Retrieved 26500 of 462461 total results
+2025-11-02 14:37:31,156 - INFO - Retrieved 27000 of 462461 total results
+2025-11-02 14:37:32,031 - INFO - Retrieved 27500 of 462461 total results
+2025-11-02 14:37:32,494 - INFO - Retrieved 28000 of 462461 total results
+2025-11-02 14:37:33,297 - INFO - Retrieved 28500 of 462461 total results
+2025-11-02 14:37:34,089 - INFO - Retrieved 29000 of 462461 total results
+2025-11-02 14:37:34,888 - INFO - Retrieved 29500 of 462461 total results
+2025-11-02 14:37:35,688 - INFO - Retrieved 30000 of 462461 total results
+2025-11-02 14:37:36,536 - INFO - Retrieved 30500 of 462461 total results
+2025-11-02 14:37:36,992 - INFO - Retrieved 31000 of 462461 total results
+2025-11-02 14:37:38,216 - INFO - Retrieved 31500 of 462461 total results
+2025-11-02 14:37:39,037 - INFO - Retrieved 32000 of 462461 total results
+2025-11-02 14:37:39,839 - INFO - Retrieved 32500 of 462461 total results
+2025-11-02 14:37:40,646 - INFO - Retrieved 33000 of 462461 total results
+2025-11-02 14:37:41,498 - INFO - Retrieved 33500 of 462461 total results
+2025-11-02 14:37:42,354 - INFO - Retrieved 34000 of 462461 total results
+2025-11-02 14:37:42,765 - INFO - Retrieved 34500 of 462461 total results
+2025-11-02 14:37:43,547 - INFO - Retrieved 35000 of 462461 total results
+2025-11-02 14:37:44,369 - INFO - Retrieved 35500 of 462461 total results
+2025-11-02 14:37:45,278 - INFO - Retrieved 36000 of 462461 total results
+2025-11-02 14:37:46,312 - INFO - Retrieved 36500 of 462461 total results
+2025-11-02 14:37:46,779 - INFO - Retrieved 37000 of 462461 total results
+2025-11-02 14:37:47,605 - INFO - Retrieved 37500 of 462461 total results
+2025-11-02 14:37:48,467 - INFO - Retrieved 38000 of 462461 total results
+2025-11-02 14:37:49,340 - INFO - Retrieved 38500 of 462461 total results
+2025-11-02 14:37:49,770 - INFO - Retrieved 39000 of 462461 total results
+2025-11-02 14:37:50,616 - INFO - Retrieved 39500 of 462461 total results
+2025-11-02 14:37:51,446 - INFO - Retrieved 40000 of 462461 total results
+2025-11-02 14:37:52,065 - INFO - Retrieved 40500 of 462461 total results
+2025-11-02 14:37:52,834 - INFO - Retrieved 41000 of 462461 total results
+2025-11-02 14:37:53,616 - INFO - Retrieved 41500 of 462461 total results
+2025-11-02 14:37:53,980 - INFO - Retrieved 42000 of 462461 total results
+2025-11-02 14:37:54,726 - INFO - Retrieved 42500 of 462461 total results
+2025-11-02 14:37:55,499 - INFO - Retrieved 43000 of 462461 total results
+2025-11-02 14:37:55,914 - INFO - Retrieved 43500 of 462461 total results
+2025-11-02 14:37:56,722 - INFO - Retrieved 44000 of 462461 total results
+2025-11-02 14:37:57,569 - INFO - Retrieved 44500 of 462461 total results
+2025-11-02 14:37:58,293 - INFO - Retrieved 45000 of 462461 total results
+2025-11-02 14:37:59,120 - INFO - Retrieved 45500 of 462461 total results
+2025-11-02 14:37:59,497 - INFO - Retrieved 46000 of 462461 total results
+2025-11-02 14:38:00,251 - INFO - Retrieved 46500 of 462461 total results
+2025-11-02 14:38:01,014 - INFO - Retrieved 47000 of 462461 total results
+2025-11-02 14:38:01,433 - INFO - Retrieved 47500 of 462461 total results
+2025-11-02 14:38:02,333 - INFO - Retrieved 48000 of 462461 total results
+2025-11-02 14:38:03,162 - INFO - Retrieved 48500 of 462461 total results
+2025-11-02 14:38:03,629 - INFO - Retrieved 49000 of 462461 total results
+2025-11-02 14:38:04,434 - INFO - Retrieved 49500 of 462461 total results
+2025-11-02 14:38:04,843 - INFO - Retrieved 50000 of 462461 total results
+2025-11-02 14:38:05,618 - INFO - Retrieved 50500 of 462461 total results
+2025-11-02 14:38:06,425 - INFO - Retrieved 51000 of 462461 total results
+2025-11-02 14:38:06,802 - INFO - Retrieved 51500 of 462461 total results
+2025-11-02 14:38:07,698 - INFO - Retrieved 52000 of 462461 total results
+2025-11-02 14:38:08,574 - INFO - Retrieved 52500 of 462461 total results
+2025-11-02 14:38:08,944 - INFO - Retrieved 53000 of 462461 total results
+2025-11-02 14:38:09,283 - INFO - Retrieved 53500 of 462461 total results
+2025-11-02 14:38:10,028 - INFO - Retrieved 54000 of 462461 total results
+2025-11-02 14:38:10,777 - INFO - Retrieved 54500 of 462461 total results
+2025-11-02 14:38:11,092 - INFO - Retrieved 55000 of 462461 total results
+2025-11-02 14:38:11,413 - INFO - Retrieved 55500 of 462461 total results
+2025-11-02 14:38:12,120 - INFO - Retrieved 56000 of 462461 total results
+2025-11-02 14:38:12,763 - INFO - Retrieved 56500 of 462461 total results
+2025-11-02 14:38:13,452 - INFO - Retrieved 57000 of 462461 total results
+2025-11-02 14:38:14,156 - INFO - Retrieved 57500 of 462461 total results
+2025-11-02 14:38:14,470 - INFO - Retrieved 58000 of 462461 total results
+2025-11-02 14:38:14,793 - INFO - Retrieved 58500 of 462461 total results
+2025-11-02 14:38:15,487 - INFO - Retrieved 59000 of 462461 total results
+2025-11-02 14:38:15,793 - INFO - Retrieved 59500 of 462461 total results
+2025-11-02 14:38:16,495 - INFO - Retrieved 60000 of 462461 total results
+2025-11-02 14:38:16,806 - INFO - Retrieved 60500 of 462461 total results
+2025-11-02 14:38:17,559 - INFO - Retrieved 61000 of 462461 total results
+2025-11-02 14:38:17,875 - INFO - Retrieved 61500 of 462461 total results
+2025-11-02 14:38:18,593 - INFO - Retrieved 62000 of 462461 total results
+2025-11-02 14:38:18,874 - INFO - Retrieved 62500 of 462461 total results
+2025-11-02 14:38:19,550 - INFO - Retrieved 63000 of 462461 total results
+2025-11-02 14:38:19,828 - INFO - Retrieved 63500 of 462461 total results
+2025-11-02 14:38:20,103 - INFO - Retrieved 64000 of 462461 total results
+2025-11-02 14:38:20,763 - INFO - Retrieved 64500 of 462461 total results
+2025-11-02 14:38:21,041 - INFO - Retrieved 65000 of 462461 total results
+2025-11-02 14:38:21,718 - INFO - Retrieved 65500 of 462461 total results
+2025-11-02 14:38:21,998 - INFO - Retrieved 66000 of 462461 total results
+2025-11-02 14:38:22,274 - INFO - Retrieved 66500 of 462461 total results
+2025-11-02 14:38:22,941 - INFO - Retrieved 67000 of 462461 total results
+2025-11-02 14:38:23,281 - INFO - Retrieved 67500 of 462461 total results
+2025-11-02 14:38:23,974 - INFO - Retrieved 68000 of 462461 total results
+2025-11-02 14:38:24,256 - INFO - Retrieved 68500 of 462461 total results
+2025-11-02 14:38:24,539 - INFO - Retrieved 69000 of 462461 total results
+2025-11-02 14:38:25,218 - INFO - Retrieved 69500 of 462461 total results
+2025-11-02 14:38:25,502 - INFO - Retrieved 70000 of 462461 total results
+2025-11-02 14:38:25,776 - INFO - Retrieved 70500 of 462461 total results
+2025-11-02 14:38:26,448 - INFO - Retrieved 71000 of 462461 total results
+2025-11-02 14:38:26,715 - INFO - Retrieved 71500 of 462461 total results
+2025-11-02 14:38:27,403 - INFO - Retrieved 72000 of 462461 total results
+2025-11-02 14:38:27,679 - INFO - Retrieved 72500 of 462461 total results
+2025-11-02 14:38:27,958 - INFO - Retrieved 73000 of 462461 total results
+2025-11-02 14:38:28,662 - INFO - Retrieved 73500 of 462461 total results
+2025-11-02 14:38:28,938 - INFO - Retrieved 74000 of 462461 total results
+2025-11-02 14:38:29,212 - INFO - Retrieved 74500 of 462461 total results
+2025-11-02 14:38:29,917 - INFO - Retrieved 75000 of 462461 total results
+2025-11-02 14:38:30,206 - INFO - Retrieved 75500 of 462461 total results
+2025-11-02 14:38:30,976 - INFO - Retrieved 76000 of 462461 total results
+2025-11-02 14:38:31,298 - INFO - Retrieved 76500 of 462461 total results
+2025-11-02 14:38:32,083 - INFO - Retrieved 77000 of 462461 total results
+2025-11-02 14:38:32,375 - INFO - Retrieved 77500 of 462461 total results
+2025-11-02 14:38:32,660 - INFO - Retrieved 78000 of 462461 total results
+2025-11-02 14:38:33,390 - INFO - Retrieved 78500 of 462461 total results
+2025-11-02 14:38:33,681 - INFO - Retrieved 79000 of 462461 total results
+2025-11-02 14:38:33,964 - INFO - Retrieved 79500 of 462461 total results
+2025-11-02 14:38:34,697 - INFO - Retrieved 80000 of 462461 total results
+2025-11-02 14:38:34,976 - INFO - Retrieved 80500 of 462461 total results
+2025-11-02 14:38:35,256 - INFO - Retrieved 81000 of 462461 total results
+2025-11-02 14:38:35,959 - INFO - Retrieved 81500 of 462461 total results
+2025-11-02 14:38:36,243 - INFO - Retrieved 82000 of 462461 total results
+2025-11-02 14:38:36,976 - INFO - Retrieved 82500 of 462461 total results
+2025-11-02 14:38:37,248 - INFO - Retrieved 83000 of 462461 total results
+2025-11-02 14:38:37,489 - INFO - Retrieved 83500 of 462461 total results
+2025-11-02 14:38:37,740 - INFO - Retrieved 84000 of 462461 total results
+2025-11-02 14:38:38,380 - INFO - Retrieved 84500 of 462461 total results
+2025-11-02 14:38:38,613 - INFO - Retrieved 85000 of 462461 total results
+2025-11-02 14:38:38,835 - INFO - Retrieved 85500 of 462461 total results
+2025-11-02 14:38:39,515 - INFO - Retrieved 86000 of 462461 total results
+2025-11-02 14:38:39,767 - INFO - Retrieved 86500 of 462461 total results
+2025-11-02 14:38:40,027 - INFO - Retrieved 87000 of 462461 total results
+2025-11-02 14:38:40,272 - INFO - Retrieved 87500 of 462461 total results
+2025-11-02 14:38:40,935 - INFO - Retrieved 88000 of 462461 total results
+2025-11-02 14:38:41,166 - INFO - Retrieved 88500 of 462461 total results
+2025-11-02 14:38:41,412 - INFO - Retrieved 89000 of 462461 total results
+2025-11-02 14:38:41,627 - INFO - Retrieved 89500 of 462461 total results
+2025-11-02 14:38:42,283 - INFO - Retrieved 90000 of 462461 total results
+2025-11-02 14:38:42,537 - INFO - Retrieved 90500 of 462461 total results
+2025-11-02 14:38:42,782 - INFO - Retrieved 91000 of 462461 total results
+2025-11-02 14:38:43,451 - INFO - Retrieved 91500 of 462461 total results
+2025-11-02 14:38:43,704 - INFO - Retrieved 92000 of 462461 total results
+2025-11-02 14:38:43,933 - INFO - Retrieved 92500 of 462461 total results
+2025-11-02 14:38:44,621 - INFO - Retrieved 93000 of 462461 total results
+2025-11-02 14:38:44,831 - INFO - Retrieved 93500 of 462461 total results
+2025-11-02 14:38:45,080 - INFO - Retrieved 94000 of 462461 total results
+2025-11-02 14:38:45,337 - INFO - Retrieved 94500 of 462461 total results
+2025-11-02 14:38:46,038 - INFO - Retrieved 95000 of 462461 total results
+2025-11-02 14:38:46,278 - INFO - Retrieved 95500 of 462461 total results
+2025-11-02 14:38:46,528 - INFO - Retrieved 96000 of 462461 total results
+2025-11-02 14:38:46,754 - INFO - Retrieved 96500 of 462461 total results
+2025-11-02 14:38:47,417 - INFO - Retrieved 97000 of 462461 total results
+2025-11-02 14:38:47,645 - INFO - Retrieved 97500 of 462461 total results
+2025-11-02 14:38:47,895 - INFO - Retrieved 98000 of 462461 total results
+2025-11-02 14:38:48,147 - INFO - Retrieved 98500 of 462461 total results
+2025-11-02 14:38:48,827 - INFO - Retrieved 99000 of 462461 total results
+2025-11-02 14:38:49,063 - INFO - Retrieved 99500 of 462461 total results
+2025-11-02 14:38:49,311 - INFO - Retrieved 100000 of 462461 total results
+2025-11-02 14:38:50,000 - INFO - Retrieved 100500 of 462461 total results
+2025-11-02 14:38:50,238 - INFO - Retrieved 101000 of 462461 total results
+2025-11-02 14:38:50,459 - INFO - Retrieved 101500 of 462461 total results
+2025-11-02 14:38:50,712 - INFO - Retrieved 102000 of 462461 total results
+2025-11-02 14:38:51,423 - INFO - Retrieved 102500 of 462461 total results
+2025-11-02 14:38:51,687 - INFO - Retrieved 103000 of 462461 total results
+2025-11-02 14:38:51,957 - INFO - Retrieved 103500 of 462461 total results
+2025-11-02 14:38:52,682 - INFO - Retrieved 104000 of 462461 total results
+2025-11-02 14:38:52,934 - INFO - Retrieved 104500 of 462461 total results
+2025-11-02 14:38:53,190 - INFO - Retrieved 105000 of 462461 total results
+2025-11-02 14:38:53,442 - INFO - Retrieved 105500 of 462461 total results
+2025-11-02 14:38:54,138 - INFO - Retrieved 106000 of 462461 total results
+2025-11-02 14:38:54,357 - INFO - Retrieved 106500 of 462461 total results
+2025-11-02 14:38:54,558 - INFO - Retrieved 107000 of 462461 total results
+2025-11-02 14:38:54,746 - INFO - Retrieved 107500 of 462461 total results
+2025-11-02 14:38:54,967 - INFO - Retrieved 108000 of 462461 total results
+2025-11-02 14:38:55,950 - INFO - Retrieved 108500 of 462461 total results
+2025-11-02 14:38:56,154 - INFO - Retrieved 109000 of 462461 total results
+2025-11-02 14:38:56,344 - INFO - Retrieved 109500 of 462461 total results
+2025-11-02 14:38:56,555 - INFO - Retrieved 110000 of 462461 total results
+2025-11-02 14:38:56,769 - INFO - Retrieved 110500 of 462461 total results
+2025-11-02 14:38:57,403 - INFO - Retrieved 111000 of 462461 total results
+2025-11-02 14:38:57,602 - INFO - Retrieved 111500 of 462461 total results
+2025-11-02 14:38:57,798 - INFO - Retrieved 112000 of 462461 total results
+2025-11-02 14:38:58,020 - INFO - Retrieved 112500 of 462461 total results
+2025-11-02 14:38:58,234 - INFO - Retrieved 113000 of 462461 total results
+2025-11-02 14:38:58,878 - INFO - Retrieved 113500 of 462461 total results
+2025-11-02 14:38:59,067 - INFO - Retrieved 114000 of 462461 total results
+2025-11-02 14:38:59,287 - INFO - Retrieved 114500 of 462461 total results
+2025-11-02 14:38:59,503 - INFO - Retrieved 115000 of 462461 total results
+2025-11-02 14:38:59,704 - INFO - Retrieved 115500 of 462461 total results
+2025-11-02 14:39:00,349 - INFO - Retrieved 116000 of 462461 total results
+2025-11-02 14:39:00,569 - INFO - Retrieved 116500 of 462461 total results
+2025-11-02 14:39:01,220 - INFO - Retrieved 117000 of 462461 total results
+2025-11-02 14:39:02,096 - INFO - Retrieved 117500 of 462461 total results
+2025-11-02 14:39:02,395 - INFO - Retrieved 118000 of 462461 total results
+2025-11-02 14:39:02,647 - INFO - Retrieved 118500 of 462461 total results
+2025-11-02 14:39:03,440 - INFO - Retrieved 119000 of 462461 total results
+2025-11-02 14:39:03,771 - INFO - Retrieved 119500 of 462461 total results
+2025-11-02 14:39:04,080 - INFO - Retrieved 120000 of 462461 total results
+2025-11-02 14:39:04,875 - INFO - Retrieved 120500 of 462461 total results
+2025-11-02 14:39:05,194 - INFO - Retrieved 121000 of 462461 total results
+2025-11-02 14:39:05,509 - INFO - Retrieved 121500 of 462461 total results
+2025-11-02 14:39:06,356 - INFO - Retrieved 122000 of 462461 total results
+2025-11-02 14:39:06,682 - INFO - Retrieved 122500 of 462461 total results
+2025-11-02 14:39:07,522 - INFO - Retrieved 123000 of 462461 total results
+2025-11-02 14:39:07,806 - INFO - Retrieved 123500 of 462461 total results
+2025-11-02 14:39:07,994 - INFO - Retrieved 124000 of 462461 total results
+2025-11-02 14:39:08,160 - INFO - Retrieved 124500 of 462461 total results
+2025-11-02 14:39:08,345 - INFO - Retrieved 125000 of 462461 total results
+2025-11-02 14:39:09,162 - INFO - Retrieved 125500 of 462461 total results
+2025-11-02 14:39:09,512 - INFO - Retrieved 126000 of 462461 total results
+2025-11-02 14:39:10,426 - INFO - Retrieved 126500 of 462461 total results
+2025-11-02 14:39:10,800 - INFO - Retrieved 127000 of 462461 total results
+2025-11-02 14:39:11,741 - INFO - Retrieved 127500 of 462461 total results
+2025-11-02 14:39:12,150 - INFO - Retrieved 128000 of 462461 total results
+2025-11-02 14:39:13,066 - INFO - Retrieved 128500 of 462461 total results
+2025-11-02 14:39:13,382 - INFO - Retrieved 129000 of 462461 total results
+2025-11-02 14:39:13,693 - INFO - Retrieved 129500 of 462461 total results
+2025-11-02 14:39:14,823 - INFO - Retrieved 130000 of 462461 total results
+2025-11-02 14:39:15,160 - INFO - Retrieved 130500 of 462461 total results
+2025-11-02 14:39:15,984 - INFO - Retrieved 131000 of 462461 total results
+2025-11-02 14:39:16,320 - INFO - Retrieved 131500 of 462461 total results
+2025-11-02 14:39:17,189 - INFO - Retrieved 132000 of 462461 total results
+2025-11-02 14:39:17,527 - INFO - Retrieved 132500 of 462461 total results
+2025-11-02 14:39:17,825 - INFO - Retrieved 133000 of 462461 total results
+2025-11-02 14:39:18,563 - INFO - Retrieved 133500 of 462461 total results
+2025-11-02 14:39:18,832 - INFO - Retrieved 134000 of 462461 total results
+2025-11-02 14:39:19,116 - INFO - Retrieved 134500 of 462461 total results
+2025-11-02 14:39:19,902 - INFO - Retrieved 135000 of 462461 total results
+2025-11-02 14:39:20,207 - INFO - Retrieved 135500 of 462461 total results
+2025-11-02 14:39:20,483 - INFO - Retrieved 136000 of 462461 total results
+2025-11-02 14:39:20,761 - INFO - Retrieved 136500 of 462461 total results
+2025-11-02 14:39:21,484 - INFO - Retrieved 137000 of 462461 total results
+2025-11-02 14:39:21,763 - INFO - Retrieved 137500 of 462461 total results
+2025-11-02 14:39:22,035 - INFO - Retrieved 138000 of 462461 total results
+2025-11-02 14:39:22,782 - INFO - Retrieved 138500 of 462461 total results
+2025-11-02 14:39:23,051 - INFO - Retrieved 139000 of 462461 total results
+2025-11-02 14:39:23,333 - INFO - Retrieved 139500 of 462461 total results
+2025-11-02 14:39:23,613 - INFO - Retrieved 140000 of 462461 total results
+2025-11-02 14:39:24,347 - INFO - Retrieved 140500 of 462461 total results
+2025-11-02 14:39:24,617 - INFO - Retrieved 141000 of 462461 total results
+2025-11-02 14:39:24,887 - INFO - Retrieved 141500 of 462461 total results
+2025-11-02 14:39:25,673 - INFO - Retrieved 142000 of 462461 total results
+2025-11-02 14:39:25,950 - INFO - Retrieved 142500 of 462461 total results
+2025-11-02 14:39:26,234 - INFO - Retrieved 143000 of 462461 total results
+2025-11-02 14:39:26,523 - INFO - Retrieved 143500 of 462461 total results
+2025-11-02 14:39:27,286 - INFO - Retrieved 144000 of 462461 total results
+2025-11-02 14:39:27,565 - INFO - Retrieved 144500 of 462461 total results
+2025-11-02 14:39:27,834 - INFO - Retrieved 145000 of 462461 total results
+2025-11-02 14:39:28,604 - INFO - Retrieved 145500 of 462461 total results
+2025-11-02 14:39:28,877 - INFO - Retrieved 146000 of 462461 total results
+2025-11-02 14:39:29,152 - INFO - Retrieved 146500 of 462461 total results
+2025-11-02 14:39:29,421 - INFO - Retrieved 147000 of 462461 total results
+2025-11-02 14:39:30,172 - INFO - Retrieved 147500 of 462461 total results
+2025-11-02 14:39:30,454 - INFO - Retrieved 148000 of 462461 total results
+2025-11-02 14:39:30,730 - INFO - Retrieved 148500 of 462461 total results
+2025-11-02 14:39:31,535 - INFO - Retrieved 149000 of 462461 total results
+2025-11-02 14:39:31,834 - INFO - Retrieved 149500 of 462461 total results
+2025-11-02 14:39:32,117 - INFO - Retrieved 150000 of 462461 total results
+2025-11-02 14:39:32,966 - INFO - Retrieved 150500 of 462461 total results
+2025-11-02 14:39:33,255 - INFO - Retrieved 151000 of 462461 total results
+2025-11-02 14:39:33,535 - INFO - Retrieved 151500 of 462461 total results
+2025-11-02 14:39:34,288 - INFO - Retrieved 152000 of 462461 total results
+2025-11-02 14:39:34,570 - INFO - Retrieved 152500 of 462461 total results
+2025-11-02 14:39:34,866 - INFO - Retrieved 153000 of 462461 total results
+2025-11-02 14:39:35,681 - INFO - Retrieved 153500 of 462461 total results
+2025-11-02 14:39:35,972 - INFO - Retrieved 154000 of 462461 total results
+2025-11-02 14:39:36,284 - INFO - Retrieved 154500 of 462461 total results
+2025-11-02 14:39:37,118 - INFO - Retrieved 155000 of 462461 total results
+2025-11-02 14:39:37,424 - INFO - Retrieved 155500 of 462461 total results
+2025-11-02 14:39:37,716 - INFO - Retrieved 156000 of 462461 total results
+2025-11-02 14:39:38,507 - INFO - Retrieved 156500 of 462461 total results
+2025-11-02 14:39:38,817 - INFO - Retrieved 157000 of 462461 total results
+2025-11-02 14:39:39,625 - INFO - Retrieved 157500 of 462461 total results
+2025-11-02 14:39:39,914 - INFO - Retrieved 158000 of 462461 total results
+2025-11-02 14:39:40,216 - INFO - Retrieved 158500 of 462461 total results
+2025-11-02 14:39:41,026 - INFO - Retrieved 159000 of 462461 total results
+2025-11-02 14:39:41,345 - INFO - Retrieved 159500 of 462461 total results
+2025-11-02 14:39:41,662 - INFO - Retrieved 160000 of 462461 total results
+2025-11-02 14:39:42,490 - INFO - Retrieved 160500 of 462461 total results
+2025-11-02 14:39:42,816 - INFO - Retrieved 161000 of 462461 total results
+2025-11-02 14:39:43,681 - INFO - Retrieved 161500 of 462461 total results
+2025-11-02 14:39:44,013 - INFO - Retrieved 162000 of 462461 total results
+2025-11-02 14:39:44,353 - INFO - Retrieved 162500 of 462461 total results
+2025-11-02 14:39:45,120 - INFO - Retrieved 163000 of 462461 total results
+2025-11-02 14:39:45,376 - INFO - Retrieved 163500 of 462461 total results
+2025-11-02 14:39:45,635 - INFO - Retrieved 164000 of 462461 total results
+2025-11-02 14:39:46,383 - INFO - Retrieved 164500 of 462461 total results
+2025-11-02 14:39:46,637 - INFO - Retrieved 165000 of 462461 total results
+2025-11-02 14:39:46,889 - INFO - Retrieved 165500 of 462461 total results
+2025-11-02 14:39:47,143 - INFO - Retrieved 166000 of 462461 total results
+2025-11-02 14:39:47,881 - INFO - Retrieved 166500 of 462461 total results
+2025-11-02 14:39:48,118 - INFO - Retrieved 167000 of 462461 total results
+2025-11-02 14:39:48,361 - INFO - Retrieved 167500 of 462461 total results
+2025-11-02 14:39:48,593 - INFO - Retrieved 168000 of 462461 total results
+2025-11-02 14:39:49,311 - INFO - Retrieved 168500 of 462461 total results
+2025-11-02 14:39:49,544 - INFO - Retrieved 169000 of 462461 total results
+2025-11-02 14:39:49,802 - INFO - Retrieved 169500 of 462461 total results
+2025-11-02 14:39:50,570 - INFO - Retrieved 170000 of 462461 total results
+2025-11-02 14:39:50,816 - INFO - Retrieved 170500 of 462461 total results
+2025-11-02 14:39:51,071 - INFO - Retrieved 171000 of 462461 total results
+2025-11-02 14:39:51,316 - INFO - Retrieved 171500 of 462461 total results
+2025-11-02 14:39:51,560 - INFO - Retrieved 172000 of 462461 total results
+2025-11-02 14:39:52,269 - INFO - Retrieved 172500 of 462461 total results
+2025-11-02 14:39:52,511 - INFO - Retrieved 173000 of 462461 total results
+2025-11-02 14:39:52,749 - INFO - Retrieved 173500 of 462461 total results
+2025-11-02 14:39:53,007 - INFO - Retrieved 174000 of 462461 total results
+2025-11-02 14:39:53,795 - INFO - Retrieved 174500 of 462461 total results
+2025-11-02 14:39:54,092 - INFO - Retrieved 175000 of 462461 total results
+2025-11-02 14:39:54,362 - INFO - Retrieved 175500 of 462461 total results
+2025-11-02 14:39:55,121 - INFO - Retrieved 176000 of 462461 total results
+2025-11-02 14:39:55,362 - INFO - Retrieved 176500 of 462461 total results
+2025-11-02 14:39:55,645 - INFO - Retrieved 177000 of 462461 total results
+2025-11-02 14:39:56,442 - INFO - Retrieved 177500 of 462461 total results
+2025-11-02 14:39:56,718 - INFO - Retrieved 178000 of 462461 total results
+2025-11-02 14:39:56,981 - INFO - Retrieved 178500 of 462461 total results
+2025-11-02 14:39:57,244 - INFO - Retrieved 179000 of 462461 total results
+2025-11-02 14:39:57,985 - INFO - Retrieved 179500 of 462461 total results
+2025-11-02 14:39:58,248 - INFO - Retrieved 180000 of 462461 total results
+2025-11-02 14:39:58,503 - INFO - Retrieved 180500 of 462461 total results
+2025-11-02 14:39:59,235 - INFO - Retrieved 181000 of 462461 total results
+2025-11-02 14:39:59,497 - INFO - Retrieved 181500 of 462461 total results
+2025-11-02 14:39:59,759 - INFO - Retrieved 182000 of 462461 total results
+2025-11-02 14:40:00,531 - INFO - Retrieved 182500 of 462461 total results
+2025-11-02 14:40:00,801 - INFO - Retrieved 183000 of 462461 total results
+2025-11-02 14:40:01,065 - INFO - Retrieved 183500 of 462461 total results
+2025-11-02 14:40:01,868 - INFO - Retrieved 184000 of 462461 total results
+2025-11-02 14:40:02,146 - INFO - Retrieved 184500 of 462461 total results
+2025-11-02 14:40:02,383 - INFO - Retrieved 185000 of 462461 total results
+2025-11-02 14:40:02,629 - INFO - Retrieved 185500 of 462461 total results
+2025-11-02 14:40:03,379 - INFO - Retrieved 186000 of 462461 total results
+2025-11-02 14:40:03,636 - INFO - Retrieved 186500 of 462461 total results
+2025-11-02 14:40:03,882 - INFO - Retrieved 187000 of 462461 total results
+2025-11-02 14:40:04,150 - INFO - Retrieved 187500 of 462461 total results
+2025-11-02 14:40:04,894 - INFO - Retrieved 188000 of 462461 total results
+2025-11-02 14:40:05,161 - INFO - Retrieved 188500 of 462461 total results
+2025-11-02 14:40:05,436 - INFO - Retrieved 189000 of 462461 total results
+2025-11-02 14:40:06,195 - INFO - Retrieved 189500 of 462461 total results
+2025-11-02 14:40:06,471 - INFO - Retrieved 190000 of 462461 total results
+2025-11-02 14:40:06,767 - INFO - Retrieved 190500 of 462461 total results
+2025-11-02 14:40:07,561 - INFO - Retrieved 191000 of 462461 total results
+2025-11-02 14:40:07,840 - INFO - Retrieved 191500 of 462461 total results
+2025-11-02 14:40:08,113 - INFO - Retrieved 192000 of 462461 total results
+2025-11-02 14:40:08,885 - INFO - Retrieved 192500 of 462461 total results
+2025-11-02 14:40:09,170 - INFO - Retrieved 193000 of 462461 total results
+2025-11-02 14:40:09,457 - INFO - Retrieved 193500 of 462461 total results
+2025-11-02 14:40:10,261 - INFO - Retrieved 194000 of 462461 total results
+2025-11-02 14:40:10,549 - INFO - Retrieved 194500 of 462461 total results
+2025-11-02 14:40:10,830 - INFO - Retrieved 195000 of 462461 total results
+2025-11-02 14:40:11,111 - INFO - Retrieved 195500 of 462461 total results
+2025-11-02 14:40:11,865 - INFO - Retrieved 196000 of 462461 total results
+2025-11-02 14:40:12,123 - INFO - Retrieved 196500 of 462461 total results
+2025-11-02 14:40:12,918 - INFO - Retrieved 197000 of 462461 total results
+2025-11-02 14:40:13,241 - INFO - Retrieved 197500 of 462461 total results
+2025-11-02 14:40:13,507 - INFO - Retrieved 198000 of 462461 total results
+2025-11-02 14:40:14,403 - INFO - Retrieved 198500 of 462461 total results
+2025-11-02 14:40:14,865 - INFO - Retrieved 199000 of 462461 total results
+2025-11-02 14:40:15,900 - INFO - Retrieved 199500 of 462461 total results
+2025-11-02 14:40:16,913 - INFO - Retrieved 200000 of 462461 total results
+2025-11-02 14:40:17,293 - INFO - Retrieved 200500 of 462461 total results
+2025-11-02 14:40:17,556 - INFO - Retrieved 201000 of 462461 total results
+2025-11-02 14:40:18,292 - INFO - Retrieved 201500 of 462461 total results
+2025-11-02 14:40:18,523 - INFO - Retrieved 202000 of 462461 total results
+2025-11-02 14:40:18,760 - INFO - Retrieved 202500 of 462461 total results
+2025-11-02 14:40:18,985 - INFO - Retrieved 203000 of 462461 total results
+2025-11-02 14:40:19,226 - INFO - Retrieved 203500 of 462461 total results
+2025-11-02 14:40:19,954 - INFO - Retrieved 204000 of 462461 total results
+2025-11-02 14:40:20,207 - INFO - Retrieved 204500 of 462461 total results
+2025-11-02 14:40:20,453 - INFO - Retrieved 205000 of 462461 total results
+2025-11-02 14:40:20,662 - INFO - Retrieved 205500 of 462461 total results
+2025-11-02 14:40:20,837 - INFO - Retrieved 206000 of 462461 total results
+2025-11-02 14:40:21,011 - INFO - Retrieved 206500 of 462461 total results
+2025-11-02 14:40:21,922 - INFO - Retrieved 207000 of 462461 total results
+2025-11-02 14:40:22,157 - INFO - Retrieved 207500 of 462461 total results
+2025-11-02 14:40:22,389 - INFO - Retrieved 208000 of 462461 total results
+2025-11-02 14:40:22,617 - INFO - Retrieved 208500 of 462461 total results
+2025-11-02 14:40:22,795 - INFO - Retrieved 209000 of 462461 total results
+2025-11-02 14:40:23,430 - INFO - Retrieved 209500 of 462461 total results
+2025-11-02 14:40:23,643 - INFO - Retrieved 210000 of 462461 total results
+2025-11-02 14:40:23,879 - INFO - Retrieved 210500 of 462461 total results
+2025-11-02 14:40:24,114 - INFO - Retrieved 211000 of 462461 total results
+2025-11-02 14:40:24,350 - INFO - Retrieved 211500 of 462461 total results
+2025-11-02 14:40:24,588 - INFO - Retrieved 212000 of 462461 total results
+2025-11-02 14:40:25,270 - INFO - Retrieved 212500 of 462461 total results
+2025-11-02 14:40:25,503 - INFO - Retrieved 213000 of 462461 total results
+2025-11-02 14:40:25,748 - INFO - Retrieved 213500 of 462461 total results
+2025-11-02 14:40:25,996 - INFO - Retrieved 214000 of 462461 total results
+2025-11-02 14:40:26,725 - INFO - Retrieved 214500 of 462461 total results
+2025-11-02 14:40:26,964 - INFO - Retrieved 215000 of 462461 total results
+2025-11-02 14:40:27,205 - INFO - Retrieved 215500 of 462461 total results
+2025-11-02 14:40:27,448 - INFO - Retrieved 216000 of 462461 total results
+2025-11-02 14:40:27,691 - INFO - Retrieved 216500 of 462461 total results
+2025-11-02 14:40:28,419 - INFO - Retrieved 217000 of 462461 total results
+2025-11-02 14:40:28,660 - INFO - Retrieved 217500 of 462461 total results
+2025-11-02 14:40:28,895 - INFO - Retrieved 218000 of 462461 total results
+2025-11-02 14:40:29,129 - INFO - Retrieved 218500 of 462461 total results
+2025-11-02 14:40:29,362 - INFO - Retrieved 219000 of 462461 total results
+2025-11-02 14:40:30,089 - INFO - Retrieved 219500 of 462461 total results
+2025-11-02 14:40:30,336 - INFO - Retrieved 220000 of 462461 total results
+2025-11-02 14:40:30,572 - INFO - Retrieved 220500 of 462461 total results
+2025-11-02 14:40:30,806 - INFO - Retrieved 221000 of 462461 total results
+2025-11-02 14:40:31,039 - INFO - Retrieved 221500 of 462461 total results
+2025-11-02 14:40:31,751 - INFO - Retrieved 222000 of 462461 total results
+2025-11-02 14:40:31,995 - INFO - Retrieved 222500 of 462461 total results
+2025-11-02 14:40:32,236 - INFO - Retrieved 223000 of 462461 total results
+2025-11-02 14:40:32,481 - INFO - Retrieved 223500 of 462461 total results
+2025-11-02 14:40:32,714 - INFO - Retrieved 224000 of 462461 total results
+2025-11-02 14:40:33,435 - INFO - Retrieved 224500 of 462461 total results
+2025-11-02 14:40:33,677 - INFO - Retrieved 225000 of 462461 total results
+2025-11-02 14:40:33,928 - INFO - Retrieved 225500 of 462461 total results
+2025-11-02 14:40:34,173 - INFO - Retrieved 226000 of 462461 total results
+2025-11-02 14:40:34,411 - INFO - Retrieved 226500 of 462461 total results
+2025-11-02 14:40:35,121 - INFO - Retrieved 227000 of 462461 total results
+2025-11-02 14:40:35,357 - INFO - Retrieved 227500 of 462461 total results
+2025-11-02 14:40:35,585 - INFO - Retrieved 228000 of 462461 total results
+2025-11-02 14:40:35,817 - INFO - Retrieved 228500 of 462461 total results
+2025-11-02 14:40:36,048 - INFO - Retrieved 229000 of 462461 total results
+2025-11-02 14:40:36,773 - INFO - Retrieved 229500 of 462461 total results
+2025-11-02 14:40:37,015 - INFO - Retrieved 230000 of 462461 total results
+2025-11-02 14:40:37,258 - INFO - Retrieved 230500 of 462461 total results
+2025-11-02 14:40:37,498 - INFO - Retrieved 231000 of 462461 total results
+2025-11-02 14:40:37,738 - INFO - Retrieved 231500 of 462461 total results
+2025-11-02 14:40:38,460 - INFO - Retrieved 232000 of 462461 total results
+2025-11-02 14:40:38,690 - INFO - Retrieved 232500 of 462461 total results
+2025-11-02 14:40:38,922 - INFO - Retrieved 233000 of 462461 total results
+2025-11-02 14:40:39,153 - INFO - Retrieved 233500 of 462461 total results
+2025-11-02 14:40:39,389 - INFO - Retrieved 234000 of 462461 total results
+2025-11-02 14:40:39,635 - INFO - Retrieved 234500 of 462461 total results
+2025-11-02 14:40:40,324 - INFO - Retrieved 235000 of 462461 total results
+2025-11-02 14:40:40,560 - INFO - Retrieved 235500 of 462461 total results
+2025-11-02 14:40:40,801 - INFO - Retrieved 236000 of 462461 total results
+2025-11-02 14:40:41,041 - INFO - Retrieved 236500 of 462461 total results
+2025-11-02 14:40:41,280 - INFO - Retrieved 237000 of 462461 total results
+2025-11-02 14:40:42,083 - INFO - Retrieved 237500 of 462461 total results
+2025-11-02 14:40:42,391 - INFO - Retrieved 238000 of 462461 total results
+2025-11-02 14:40:43,241 - INFO - Retrieved 238500 of 462461 total results
+2025-11-02 14:40:43,615 - INFO - Retrieved 239000 of 462461 total results
+2025-11-02 14:40:44,479 - INFO - Retrieved 239500 of 462461 total results
+2025-11-02 14:40:44,813 - INFO - Retrieved 240000 of 462461 total results
+2025-11-02 14:40:45,702 - INFO - Retrieved 240500 of 462461 total results
+2025-11-02 14:40:46,050 - INFO - Retrieved 241000 of 462461 total results
+2025-11-02 14:40:46,359 - INFO - Retrieved 241500 of 462461 total results
+2025-11-02 14:40:47,156 - INFO - Retrieved 242000 of 462461 total results
+2025-11-02 14:40:47,445 - INFO - Retrieved 242500 of 462461 total results
+2025-11-02 14:40:47,718 - INFO - Retrieved 243000 of 462461 total results
+2025-11-02 14:40:48,520 - INFO - Retrieved 243500 of 462461 total results
+2025-11-02 14:40:48,815 - INFO - Retrieved 244000 of 462461 total results
+2025-11-02 14:40:49,651 - INFO - Retrieved 244500 of 462461 total results
+2025-11-02 14:40:49,945 - INFO - Retrieved 245000 of 462461 total results
+2025-11-02 14:40:50,217 - INFO - Retrieved 245500 of 462461 total results
+2025-11-02 14:40:51,015 - INFO - Retrieved 246000 of 462461 total results
+2025-11-02 14:40:51,298 - INFO - Retrieved 246500 of 462461 total results
+2025-11-02 14:40:51,573 - INFO - Retrieved 247000 of 462461 total results
+2025-11-02 14:40:52,411 - INFO - Retrieved 247500 of 462461 total results
+2025-11-02 14:40:52,697 - INFO - Retrieved 248000 of 462461 total results
+2025-11-02 14:40:52,987 - INFO - Retrieved 248500 of 462461 total results
+2025-11-02 14:40:53,804 - INFO - Retrieved 249000 of 462461 total results
+2025-11-02 14:40:54,066 - INFO - Retrieved 249500 of 462461 total results
+2025-11-02 14:40:54,336 - INFO - Retrieved 250000 of 462461 total results
+2025-11-02 14:40:54,596 - INFO - Retrieved 250500 of 462461 total results
+2025-11-02 14:40:55,369 - INFO - Retrieved 251000 of 462461 total results
+2025-11-02 14:40:55,639 - INFO - Retrieved 251500 of 462461 total results
+2025-11-02 14:40:55,937 - INFO - Retrieved 252000 of 462461 total results
+2025-11-02 14:40:56,727 - INFO - Retrieved 252500 of 462461 total results
+2025-11-02 14:40:57,042 - INFO - Retrieved 253000 of 462461 total results
+2025-11-02 14:40:57,323 - INFO - Retrieved 253500 of 462461 total results
+2025-11-02 14:40:58,084 - INFO - Retrieved 254000 of 462461 total results
+2025-11-02 14:40:58,370 - INFO - Retrieved 254500 of 462461 total results
+2025-11-02 14:40:59,216 - INFO - Retrieved 255000 of 462461 total results
+2025-11-02 14:40:59,511 - INFO - Retrieved 255500 of 462461 total results
+2025-11-02 14:40:59,820 - INFO - Retrieved 256000 of 462461 total results
+2025-11-02 14:41:00,663 - INFO - Retrieved 256500 of 462461 total results
+2025-11-02 14:41:00,972 - INFO - Retrieved 257000 of 462461 total results
+2025-11-02 14:41:01,196 - INFO - Retrieved 257500 of 462461 total results
+2025-11-02 14:41:01,407 - INFO - Retrieved 258000 of 462461 total results
+2025-11-02 14:41:02,141 - INFO - Retrieved 258500 of 462461 total results
+2025-11-02 14:41:02,364 - INFO - Retrieved 259000 of 462461 total results
+2025-11-02 14:41:02,575 - INFO - Retrieved 259500 of 462461 total results
+2025-11-02 14:41:02,790 - INFO - Retrieved 260000 of 462461 total results
+2025-11-02 14:41:03,012 - INFO - Retrieved 260500 of 462461 total results
+2025-11-02 14:41:03,231 - INFO - Retrieved 261000 of 462461 total results
+2025-11-02 14:41:03,948 - INFO - Retrieved 261500 of 462461 total results
+2025-11-02 14:41:04,175 - INFO - Retrieved 262000 of 462461 total results
+2025-11-02 14:41:04,393 - INFO - Retrieved 262500 of 462461 total results
+2025-11-02 14:41:04,611 - INFO - Retrieved 263000 of 462461 total results
+2025-11-02 14:41:04,830 - INFO - Retrieved 263500 of 462461 total results
+2025-11-02 14:41:05,038 - INFO - Retrieved 264000 of 462461 total results
+2025-11-02 14:41:05,910 - INFO - Retrieved 264500 of 462461 total results
+2025-11-02 14:41:06,118 - INFO - Retrieved 265000 of 462461 total results
+2025-11-02 14:41:06,324 - INFO - Retrieved 265500 of 462461 total results
+2025-11-02 14:41:06,530 - INFO - Retrieved 266000 of 462461 total results
+2025-11-02 14:41:06,743 - INFO - Retrieved 266500 of 462461 total results
+2025-11-02 14:41:07,443 - INFO - Retrieved 267000 of 462461 total results
+2025-11-02 14:41:07,664 - INFO - Retrieved 267500 of 462461 total results
+2025-11-02 14:41:07,879 - INFO - Retrieved 268000 of 462461 total results
+2025-11-02 14:41:08,084 - INFO - Retrieved 268500 of 462461 total results
+2025-11-02 14:41:08,294 - INFO - Retrieved 269000 of 462461 total results
+2025-11-02 14:41:08,990 - INFO - Retrieved 269500 of 462461 total results
+2025-11-02 14:41:09,200 - INFO - Retrieved 270000 of 462461 total results
+2025-11-02 14:41:09,406 - INFO - Retrieved 270500 of 462461 total results
+2025-11-02 14:41:09,609 - INFO - Retrieved 271000 of 462461 total results
+2025-11-02 14:41:09,826 - INFO - Retrieved 271500 of 462461 total results
+2025-11-02 14:41:10,531 - INFO - Retrieved 272000 of 462461 total results
+2025-11-02 14:41:10,754 - INFO - Retrieved 272500 of 462461 total results
+2025-11-02 14:41:10,973 - INFO - Retrieved 273000 of 462461 total results
+2025-11-02 14:41:11,220 - INFO - Retrieved 273500 of 462461 total results
+2025-11-02 14:41:11,458 - INFO - Retrieved 274000 of 462461 total results
+2025-11-02 14:41:12,169 - INFO - Retrieved 274500 of 462461 total results
+2025-11-02 14:41:12,402 - INFO - Retrieved 275000 of 462461 total results
+2025-11-02 14:41:12,624 - INFO - Retrieved 275500 of 462461 total results
+2025-11-02 14:41:12,846 - INFO - Retrieved 276000 of 462461 total results
+2025-11-02 14:41:13,072 - INFO - Retrieved 276500 of 462461 total results
+2025-11-02 14:41:13,933 - INFO - Retrieved 277000 of 462461 total results
+2025-11-02 14:41:14,160 - INFO - Retrieved 277500 of 462461 total results
+2025-11-02 14:41:14,384 - INFO - Retrieved 278000 of 462461 total results
+2025-11-02 14:41:14,599 - INFO - Retrieved 278500 of 462461 total results
+2025-11-02 14:41:14,809 - INFO - Retrieved 279000 of 462461 total results
+2025-11-02 14:41:15,503 - INFO - Retrieved 279500 of 462461 total results
+2025-11-02 14:41:15,939 - INFO - Retrieved 280000 of 462461 total results
+2025-11-02 14:41:16,142 - INFO - Retrieved 280500 of 462461 total results
+2025-11-02 14:41:16,365 - INFO - Retrieved 281000 of 462461 total results
+2025-11-02 14:41:16,583 - INFO - Retrieved 281500 of 462461 total results
+2025-11-02 14:41:17,334 - INFO - Retrieved 282000 of 462461 total results
+2025-11-02 14:41:17,556 - INFO - Retrieved 282500 of 462461 total results
+2025-11-02 14:41:17,771 - INFO - Retrieved 283000 of 462461 total results
+2025-11-02 14:41:17,991 - INFO - Retrieved 283500 of 462461 total results
+2025-11-02 14:41:18,208 - INFO - Retrieved 284000 of 462461 total results
+2025-11-02 14:41:18,920 - INFO - Retrieved 284500 of 462461 total results
+2025-11-02 14:41:19,130 - INFO - Retrieved 285000 of 462461 total results
+2025-11-02 14:41:19,341 - INFO - Retrieved 285500 of 462461 total results
+2025-11-02 14:41:19,552 - INFO - Retrieved 286000 of 462461 total results
+2025-11-02 14:41:19,773 - INFO - Retrieved 286500 of 462461 total results
+2025-11-02 14:41:19,979 - INFO - Retrieved 287000 of 462461 total results
+2025-11-02 14:41:20,674 - INFO - Retrieved 287500 of 462461 total results
+2025-11-02 14:41:20,894 - INFO - Retrieved 288000 of 462461 total results
+2025-11-02 14:41:21,111 - INFO - Retrieved 288500 of 462461 total results
+2025-11-02 14:41:21,341 - INFO - Retrieved 289000 of 462461 total results
+2025-11-02 14:41:22,093 - INFO - Retrieved 289500 of 462461 total results
+2025-11-02 14:41:22,331 - INFO - Retrieved 290000 of 462461 total results
+2025-11-02 14:41:22,588 - INFO - Retrieved 290500 of 462461 total results
+2025-11-02 14:41:22,816 - INFO - Retrieved 291000 of 462461 total results
+2025-11-02 14:41:23,026 - INFO - Retrieved 291500 of 462461 total results
+2025-11-02 14:41:23,760 - INFO - Retrieved 292000 of 462461 total results
+2025-11-02 14:41:24,018 - INFO - Retrieved 292500 of 462461 total results
+2025-11-02 14:41:24,264 - INFO - Retrieved 293000 of 462461 total results
+2025-11-02 14:41:24,504 - INFO - Retrieved 293500 of 462461 total results
+2025-11-02 14:41:25,253 - INFO - Retrieved 294000 of 462461 total results
+2025-11-02 14:41:25,495 - INFO - Retrieved 294500 of 462461 total results
+2025-11-02 14:41:25,735 - INFO - Retrieved 295000 of 462461 total results
+2025-11-02 14:41:25,996 - INFO - Retrieved 295500 of 462461 total results
+2025-11-02 14:41:26,248 - INFO - Retrieved 296000 of 462461 total results
+2025-11-02 14:41:26,965 - INFO - Retrieved 296500 of 462461 total results
+2025-11-02 14:41:27,202 - INFO - Retrieved 297000 of 462461 total results
+2025-11-02 14:41:27,451 - INFO - Retrieved 297500 of 462461 total results
+2025-11-02 14:41:27,696 - INFO - Retrieved 298000 of 462461 total results
+2025-11-02 14:41:28,451 - INFO - Retrieved 298500 of 462461 total results
+2025-11-02 14:41:28,760 - INFO - Retrieved 299000 of 462461 total results
+2025-11-02 14:41:29,018 - INFO - Retrieved 299500 of 462461 total results
+2025-11-02 14:41:29,252 - INFO - Retrieved 300000 of 462461 total results
+2025-11-02 14:41:30,026 - INFO - Retrieved 300500 of 462461 total results
+2025-11-02 14:41:30,251 - INFO - Retrieved 301000 of 462461 total results
+2025-11-02 14:41:30,469 - INFO - Retrieved 301500 of 462461 total results
+2025-11-02 14:41:30,733 - INFO - Retrieved 302000 of 462461 total results
+2025-11-02 14:41:30,959 - INFO - Retrieved 302500 of 462461 total results
+2025-11-02 14:41:31,638 - INFO - Retrieved 303000 of 462461 total results
+2025-11-02 14:41:31,887 - INFO - Retrieved 303500 of 462461 total results
+2025-11-02 14:41:32,150 - INFO - Retrieved 304000 of 462461 total results
+2025-11-02 14:41:32,927 - INFO - Retrieved 304500 of 462461 total results
+2025-11-02 14:41:33,177 - INFO - Retrieved 305000 of 462461 total results
+2025-11-02 14:41:33,449 - INFO - Retrieved 305500 of 462461 total results
+2025-11-02 14:41:33,705 - INFO - Retrieved 306000 of 462461 total results
+2025-11-02 14:41:34,456 - INFO - Retrieved 306500 of 462461 total results
+2025-11-02 14:41:34,702 - INFO - Retrieved 307000 of 462461 total results
+2025-11-02 14:41:34,943 - INFO - Retrieved 307500 of 462461 total results
+2025-11-02 14:41:35,187 - INFO - Retrieved 308000 of 462461 total results
+2025-11-02 14:41:35,932 - INFO - Retrieved 308500 of 462461 total results
+2025-11-02 14:41:36,179 - INFO - Retrieved 309000 of 462461 total results
+2025-11-02 14:41:36,425 - INFO - Retrieved 309500 of 462461 total results
+2025-11-02 14:41:37,190 - INFO - Retrieved 310000 of 462461 total results
+2025-11-02 14:41:37,435 - INFO - Retrieved 310500 of 462461 total results
+2025-11-02 14:41:37,690 - INFO - Retrieved 311000 of 462461 total results
+2025-11-02 14:41:37,942 - INFO - Retrieved 311500 of 462461 total results
+2025-11-02 14:41:38,709 - INFO - Retrieved 312000 of 462461 total results
+2025-11-02 14:41:38,960 - INFO - Retrieved 312500 of 462461 total results
+2025-11-02 14:41:39,217 - INFO - Retrieved 313000 of 462461 total results
+2025-11-02 14:41:39,476 - INFO - Retrieved 313500 of 462461 total results
+2025-11-02 14:41:40,221 - INFO - Retrieved 314000 of 462461 total results
+2025-11-02 14:41:40,466 - INFO - Retrieved 314500 of 462461 total results
+2025-11-02 14:41:40,712 - INFO - Retrieved 315000 of 462461 total results
+2025-11-02 14:41:41,477 - INFO - Retrieved 315500 of 462461 total results
+2025-11-02 14:41:41,723 - INFO - Retrieved 316000 of 462461 total results
+2025-11-02 14:41:41,971 - INFO - Retrieved 316500 of 462461 total results
+2025-11-02 14:41:42,219 - INFO - Retrieved 317000 of 462461 total results
+2025-11-02 14:41:42,982 - INFO - Retrieved 317500 of 462461 total results
+2025-11-02 14:41:43,242 - INFO - Retrieved 318000 of 462461 total results
+2025-11-02 14:41:43,503 - INFO - Retrieved 318500 of 462461 total results
+2025-11-02 14:41:44,285 - INFO - Retrieved 319000 of 462461 total results
+2025-11-02 14:41:44,531 - INFO - Retrieved 319500 of 462461 total results
+2025-11-02 14:41:44,785 - INFO - Retrieved 320000 of 462461 total results
+2025-11-02 14:41:45,029 - INFO - Retrieved 320500 of 462461 total results
+2025-11-02 14:41:45,776 - INFO - Retrieved 321000 of 462461 total results
+2025-11-02 14:41:46,030 - INFO - Retrieved 321500 of 462461 total results
+2025-11-02 14:41:46,281 - INFO - Retrieved 322000 of 462461 total results
+2025-11-02 14:41:47,060 - INFO - Retrieved 322500 of 462461 total results
+2025-11-02 14:41:47,292 - INFO - Retrieved 323000 of 462461 total results
+2025-11-02 14:41:47,534 - INFO - Retrieved 323500 of 462461 total results
+2025-11-02 14:41:47,770 - INFO - Retrieved 324000 of 462461 total results
+2025-11-02 14:41:48,004 - INFO - Retrieved 324500 of 462461 total results
+2025-11-02 14:41:48,727 - INFO - Retrieved 325000 of 462461 total results
+2025-11-02 14:41:48,969 - INFO - Retrieved 325500 of 462461 total results
+2025-11-02 14:41:49,220 - INFO - Retrieved 326000 of 462461 total results
+2025-11-02 14:41:50,015 - INFO - Retrieved 326500 of 462461 total results
+2025-11-02 14:41:50,289 - INFO - Retrieved 327000 of 462461 total results
+2025-11-02 14:41:50,546 - INFO - Retrieved 327500 of 462461 total results
+2025-11-02 14:41:50,784 - INFO - Retrieved 328000 of 462461 total results
+2025-11-02 14:41:51,020 - INFO - Retrieved 328500 of 462461 total results
+2025-11-02 14:41:51,744 - INFO - Retrieved 329000 of 462461 total results
+2025-11-02 14:41:51,993 - INFO - Retrieved 329500 of 462461 total results
+2025-11-02 14:41:52,251 - INFO - Retrieved 330000 of 462461 total results
+2025-11-02 14:41:53,025 - INFO - Retrieved 330500 of 462461 total results
+2025-11-02 14:41:53,288 - INFO - Retrieved 331000 of 462461 total results
+2025-11-02 14:41:53,548 - INFO - Retrieved 331500 of 462461 total results
+2025-11-02 14:41:54,346 - INFO - Retrieved 332000 of 462461 total results
+2025-11-02 14:41:54,601 - INFO - Retrieved 332500 of 462461 total results
+2025-11-02 14:41:54,856 - INFO - Retrieved 333000 of 462461 total results
+2025-11-02 14:41:55,116 - INFO - Retrieved 333500 of 462461 total results
+2025-11-02 14:41:55,887 - INFO - Retrieved 334000 of 462461 total results
+2025-11-02 14:41:56,150 - INFO - Retrieved 334500 of 462461 total results
+2025-11-02 14:41:56,412 - INFO - Retrieved 335000 of 462461 total results
+2025-11-02 14:41:57,196 - INFO - Retrieved 335500 of 462461 total results
+2025-11-02 14:41:57,460 - INFO - Retrieved 336000 of 462461 total results
+2025-11-02 14:41:57,722 - INFO - Retrieved 336500 of 462461 total results
+2025-11-02 14:41:58,146 - INFO - Retrieved 337000 of 462461 total results
+2025-11-02 14:41:58,862 - INFO - Retrieved 337500 of 462461 total results
+2025-11-02 14:41:59,077 - INFO - Retrieved 338000 of 462461 total results
+2025-11-02 14:41:59,292 - INFO - Retrieved 338500 of 462461 total results
+2025-11-02 14:41:59,507 - INFO - Retrieved 339000 of 462461 total results
+2025-11-02 14:42:00,237 - INFO - Retrieved 339500 of 462461 total results
+2025-11-02 14:42:00,460 - INFO - Retrieved 340000 of 462461 total results
+2025-11-02 14:42:00,692 - INFO - Retrieved 340500 of 462461 total results
+2025-11-02 14:42:00,930 - INFO - Retrieved 341000 of 462461 total results
+2025-11-02 14:42:01,170 - INFO - Retrieved 341500 of 462461 total results
+2025-11-02 14:42:01,901 - INFO - Retrieved 342000 of 462461 total results
+2025-11-02 14:42:02,132 - INFO - Retrieved 342500 of 462461 total results
+2025-11-02 14:42:02,369 - INFO - Retrieved 343000 of 462461 total results
+2025-11-02 14:42:02,610 - INFO - Retrieved 343500 of 462461 total results
+2025-11-02 14:42:03,350 - INFO - Retrieved 344000 of 462461 total results
+2025-11-02 14:42:03,596 - INFO - Retrieved 344500 of 462461 total results
+2025-11-02 14:42:03,854 - INFO - Retrieved 345000 of 462461 total results
+2025-11-02 14:42:04,122 - INFO - Retrieved 345500 of 462461 total results
+2025-11-02 14:42:04,889 - INFO - Retrieved 346000 of 462461 total results
+2025-11-02 14:42:05,144 - INFO - Retrieved 346500 of 462461 total results
+2025-11-02 14:42:05,404 - INFO - Retrieved 347000 of 462461 total results
+2025-11-02 14:42:06,184 - INFO - Retrieved 347500 of 462461 total results
+2025-11-02 14:42:06,439 - INFO - Retrieved 348000 of 462461 total results
+2025-11-02 14:42:06,692 - INFO - Retrieved 348500 of 462461 total results
+2025-11-02 14:42:06,942 - INFO - Retrieved 349000 of 462461 total results
+2025-11-02 14:42:07,705 - INFO - Retrieved 349500 of 462461 total results
+2025-11-02 14:42:08,017 - INFO - Retrieved 350000 of 462461 total results
+2025-11-02 14:42:08,261 - INFO - Retrieved 350500 of 462461 total results
+2025-11-02 14:42:09,030 - INFO - Retrieved 351000 of 462461 total results
+2025-11-02 14:42:09,280 - INFO - Retrieved 351500 of 462461 total results
+2025-11-02 14:42:09,534 - INFO - Retrieved 352000 of 462461 total results
+2025-11-02 14:42:09,780 - INFO - Retrieved 352500 of 462461 total results
+2025-11-02 14:42:10,570 - INFO - Retrieved 353000 of 462461 total results
+2025-11-02 14:42:10,833 - INFO - Retrieved 353500 of 462461 total results
+2025-11-02 14:42:11,086 - INFO - Retrieved 354000 of 462461 total results
+2025-11-02 14:42:11,322 - INFO - Retrieved 354500 of 462461 total results
+2025-11-02 14:42:12,046 - INFO - Retrieved 355000 of 462461 total results
+2025-11-02 14:42:12,281 - INFO - Retrieved 355500 of 462461 total results
+2025-11-02 14:42:12,514 - INFO - Retrieved 356000 of 462461 total results
+2025-11-02 14:42:12,751 - INFO - Retrieved 356500 of 462461 total results
+2025-11-02 14:42:13,479 - INFO - Retrieved 357000 of 462461 total results
+2025-11-02 14:42:13,712 - INFO - Retrieved 357500 of 462461 total results
+2025-11-02 14:42:13,948 - INFO - Retrieved 358000 of 462461 total results
+2025-11-02 14:42:14,182 - INFO - Retrieved 358500 of 462461 total results
+2025-11-02 14:42:14,917 - INFO - Retrieved 359000 of 462461 total results
+2025-11-02 14:42:15,158 - INFO - Retrieved 359500 of 462461 total results
+2025-11-02 14:42:15,402 - INFO - Retrieved 360000 of 462461 total results
+2025-11-02 14:42:15,635 - INFO - Retrieved 360500 of 462461 total results
+2025-11-02 14:42:16,417 - INFO - Retrieved 361000 of 462461 total results
+2025-11-02 14:42:16,672 - INFO - Retrieved 361500 of 462461 total results
+2025-11-02 14:42:16,912 - INFO - Retrieved 362000 of 462461 total results
+2025-11-02 14:42:17,152 - INFO - Retrieved 362500 of 462461 total results
+2025-11-02 14:42:17,925 - INFO - Retrieved 363000 of 462461 total results
+2025-11-02 14:42:18,187 - INFO - Retrieved 363500 of 462461 total results
+2025-11-02 14:42:18,447 - INFO - Retrieved 364000 of 462461 total results
+2025-11-02 14:42:18,718 - INFO - Retrieved 364500 of 462461 total results
+2025-11-02 14:42:19,477 - INFO - Retrieved 365000 of 462461 total results
+2025-11-02 14:42:19,726 - INFO - Retrieved 365500 of 462461 total results
+2025-11-02 14:42:19,988 - INFO - Retrieved 366000 of 462461 total results
+2025-11-02 14:42:20,773 - INFO - Retrieved 366500 of 462461 total results
+2025-11-02 14:42:21,035 - INFO - Retrieved 367000 of 462461 total results
+2025-11-02 14:42:21,290 - INFO - Retrieved 367500 of 462461 total results
+2025-11-02 14:42:21,540 - INFO - Retrieved 368000 of 462461 total results
+2025-11-02 14:42:22,294 - INFO - Retrieved 368500 of 462461 total results
+2025-11-02 14:42:22,546 - INFO - Retrieved 369000 of 462461 total results
+2025-11-02 14:42:22,802 - INFO - Retrieved 369500 of 462461 total results
+2025-11-02 14:42:23,040 - INFO - Retrieved 370000 of 462461 total results
+2025-11-02 14:42:23,768 - INFO - Retrieved 370500 of 462461 total results
+2025-11-02 14:42:24,007 - INFO - Retrieved 371000 of 462461 total results
+2025-11-02 14:42:24,241 - INFO - Retrieved 371500 of 462461 total results
+2025-11-02 14:42:24,492 - INFO - Retrieved 372000 of 462461 total results
+2025-11-02 14:42:25,254 - INFO - Retrieved 372500 of 462461 total results
+2025-11-02 14:42:25,612 - INFO - Retrieved 373000 of 462461 total results
+2025-11-02 14:42:26,493 - INFO - Retrieved 373500 of 462461 total results
+2025-11-02 14:42:26,755 - INFO - Retrieved 374000 of 462461 total results
+2025-11-02 14:42:27,011 - INFO - Retrieved 374500 of 462461 total results
+2025-11-02 14:42:27,262 - INFO - Retrieved 375000 of 462461 total results
+2025-11-02 14:42:28,046 - INFO - Retrieved 375500 of 462461 total results
+2025-11-02 14:42:28,307 - INFO - Retrieved 376000 of 462461 total results
+2025-11-02 14:42:28,570 - INFO - Retrieved 376500 of 462461 total results
+2025-11-02 14:42:28,835 - INFO - Retrieved 377000 of 462461 total results
+2025-11-02 14:42:29,621 - INFO - Retrieved 377500 of 462461 total results
+2025-11-02 14:42:29,892 - INFO - Retrieved 378000 of 462461 total results
+2025-11-02 14:42:30,153 - INFO - Retrieved 378500 of 462461 total results
+2025-11-02 14:42:30,993 - INFO - Retrieved 379000 of 462461 total results
+2025-11-02 14:42:31,249 - INFO - Retrieved 379500 of 462461 total results
+2025-11-02 14:42:31,510 - INFO - Retrieved 380000 of 462461 total results
+2025-11-02 14:42:31,772 - INFO - Retrieved 380500 of 462461 total results
+2025-11-02 14:42:32,538 - INFO - Retrieved 381000 of 462461 total results
+2025-11-02 14:42:32,803 - INFO - Retrieved 381500 of 462461 total results
+2025-11-02 14:42:33,071 - INFO - Retrieved 382000 of 462461 total results
+2025-11-02 14:42:33,856 - INFO - Retrieved 382500 of 462461 total results
+2025-11-02 14:42:34,125 - INFO - Retrieved 383000 of 462461 total results
+2025-11-02 14:42:34,390 - INFO - Retrieved 383500 of 462461 total results
+2025-11-02 14:42:34,647 - INFO - Retrieved 384000 of 462461 total results
+2025-11-02 14:42:35,414 - INFO - Retrieved 384500 of 462461 total results
+2025-11-02 14:42:35,671 - INFO - Retrieved 385000 of 462461 total results
+2025-11-02 14:42:35,935 - INFO - Retrieved 385500 of 462461 total results
+2025-11-02 14:42:36,726 - INFO - Retrieved 386000 of 462461 total results
+2025-11-02 14:42:36,989 - INFO - Retrieved 386500 of 462461 total results
+2025-11-02 14:42:37,269 - INFO - Retrieved 387000 of 462461 total results
+2025-11-02 14:42:37,513 - INFO - Retrieved 387500 of 462461 total results
+2025-11-02 14:42:38,243 - INFO - Retrieved 388000 of 462461 total results
+2025-11-02 14:42:38,461 - INFO - Retrieved 388500 of 462461 total results
+2025-11-02 14:42:38,676 - INFO - Retrieved 389000 of 462461 total results
+2025-11-02 14:42:38,886 - INFO - Retrieved 389500 of 462461 total results
+2025-11-02 14:42:39,104 - INFO - Retrieved 390000 of 462461 total results
+2025-11-02 14:42:39,950 - INFO - Retrieved 390500 of 462461 total results
+2025-11-02 14:42:40,173 - INFO - Retrieved 391000 of 462461 total results
+2025-11-02 14:42:40,386 - INFO - Retrieved 391500 of 462461 total results
+2025-11-02 14:42:40,598 - INFO - Retrieved 392000 of 462461 total results
+2025-11-02 14:42:40,815 - INFO - Retrieved 392500 of 462461 total results
+2025-11-02 14:42:41,523 - INFO - Retrieved 393000 of 462461 total results
+2025-11-02 14:42:41,743 - INFO - Retrieved 393500 of 462461 total results
+2025-11-02 14:42:41,961 - INFO - Retrieved 394000 of 462461 total results
+2025-11-02 14:42:42,185 - INFO - Retrieved 394500 of 462461 total results
+2025-11-02 14:42:42,420 - INFO - Retrieved 395000 of 462461 total results
+2025-11-02 14:42:43,152 - INFO - Retrieved 395500 of 462461 total results
+2025-11-02 14:42:43,383 - INFO - Retrieved 396000 of 462461 total results
+2025-11-02 14:42:43,611 - INFO - Retrieved 396500 of 462461 total results
+2025-11-02 14:42:43,840 - INFO - Retrieved 397000 of 462461 total results
+2025-11-02 14:42:44,602 - INFO - Retrieved 397500 of 462461 total results
+2025-11-02 14:42:44,829 - INFO - Retrieved 398000 of 462461 total results
+2025-11-02 14:42:45,059 - INFO - Retrieved 398500 of 462461 total results
+2025-11-02 14:42:45,285 - INFO - Retrieved 399000 of 462461 total results
+2025-11-02 14:42:46,095 - INFO - Retrieved 399500 of 462461 total results
+2025-11-02 14:42:46,331 - INFO - Retrieved 400000 of 462461 total results
+2025-11-02 14:42:46,552 - INFO - Retrieved 400500 of 462461 total results
+2025-11-02 14:42:46,775 - INFO - Retrieved 401000 of 462461 total results
+2025-11-02 14:42:47,010 - INFO - Retrieved 401500 of 462461 total results
+2025-11-02 14:42:47,747 - INFO - Retrieved 402000 of 462461 total results
+2025-11-02 14:42:47,956 - INFO - Retrieved 402500 of 462461 total results
+2025-11-02 14:42:48,159 - INFO - Retrieved 403000 of 462461 total results
+2025-11-02 14:42:48,360 - INFO - Retrieved 403500 of 462461 total results
+2025-11-02 14:42:48,568 - INFO - Retrieved 404000 of 462461 total results
+2025-11-02 14:42:48,776 - INFO - Retrieved 404500 of 462461 total results
+2025-11-02 14:42:49,485 - INFO - Retrieved 405000 of 462461 total results
+2025-11-02 14:42:49,726 - INFO - Retrieved 405500 of 462461 total results
+2025-11-02 14:42:49,939 - INFO - Retrieved 406000 of 462461 total results
+2025-11-02 14:42:50,152 - INFO - Retrieved 406500 of 462461 total results
+2025-11-02 14:42:50,369 - INFO - Retrieved 407000 of 462461 total results
+2025-11-02 14:42:51,090 - INFO - Retrieved 407500 of 462461 total results
+2025-11-02 14:42:51,326 - INFO - Retrieved 408000 of 462461 total results
+2025-11-02 14:42:51,565 - INFO - Retrieved 408500 of 462461 total results
+2025-11-02 14:42:51,793 - INFO - Retrieved 409000 of 462461 total results
+2025-11-02 14:42:52,533 - INFO - Retrieved 409500 of 462461 total results
+2025-11-02 14:42:52,774 - INFO - Retrieved 410000 of 462461 total results
+2025-11-02 14:42:53,007 - INFO - Retrieved 410500 of 462461 total results
+2025-11-02 14:42:53,230 - INFO - Retrieved 411000 of 462461 total results
+2025-11-02 14:42:53,953 - INFO - Retrieved 411500 of 462461 total results
+2025-11-02 14:42:54,181 - INFO - Retrieved 412000 of 462461 total results
+2025-11-02 14:42:54,414 - INFO - Retrieved 412500 of 462461 total results
+2025-11-02 14:42:54,647 - INFO - Retrieved 413000 of 462461 total results
+2025-11-02 14:42:55,373 - INFO - Retrieved 413500 of 462461 total results
+2025-11-02 14:42:55,562 - INFO - Retrieved 414000 of 462461 total results
+2025-11-02 14:42:55,752 - INFO - Retrieved 414500 of 462461 total results
+2025-11-02 14:42:55,938 - INFO - Retrieved 415000 of 462461 total results
+2025-11-02 14:42:56,125 - INFO - Retrieved 415500 of 462461 total results
+2025-11-02 14:42:56,460 - INFO - Retrieved 416000 of 462461 total results
+2025-11-02 14:42:56,648 - INFO - Retrieved 416500 of 462461 total results
+2025-11-02 14:42:57,349 - INFO - Retrieved 417000 of 462461 total results
+2025-11-02 14:42:57,556 - INFO - Retrieved 417500 of 462461 total results
+2025-11-02 14:42:57,764 - INFO - Retrieved 418000 of 462461 total results
+2025-11-02 14:42:57,970 - INFO - Retrieved 418500 of 462461 total results
+2025-11-02 14:42:58,173 - INFO - Retrieved 419000 of 462461 total results
+2025-11-02 14:42:58,376 - INFO - Retrieved 419500 of 462461 total results
+2025-11-02 14:42:58,583 - INFO - Retrieved 420000 of 462461 total results
+2025-11-02 14:42:59,285 - INFO - Retrieved 420500 of 462461 total results
+2025-11-02 14:42:59,496 - INFO - Retrieved 421000 of 462461 total results
+2025-11-02 14:42:59,704 - INFO - Retrieved 421500 of 462461 total results
+2025-11-02 14:42:59,932 - INFO - Retrieved 422000 of 462461 total results
+2025-11-02 14:43:00,167 - INFO - Retrieved 422500 of 462461 total results
+2025-11-02 14:43:00,918 - INFO - Retrieved 423000 of 462461 total results
+2025-11-02 14:43:01,162 - INFO - Retrieved 423500 of 462461 total results
+2025-11-02 14:43:01,393 - INFO - Retrieved 424000 of 462461 total results
+2025-11-02 14:43:01,624 - INFO - Retrieved 424500 of 462461 total results
+2025-11-02 14:43:02,388 - INFO - Retrieved 425000 of 462461 total results
+2025-11-02 14:43:02,617 - INFO - Retrieved 425500 of 462461 total results
+2025-11-02 14:43:02,847 - INFO - Retrieved 426000 of 462461 total results
+2025-11-02 14:43:03,076 - INFO - Retrieved 426500 of 462461 total results
+2025-11-02 14:43:03,850 - INFO - Retrieved 427000 of 462461 total results
+2025-11-02 14:43:04,068 - INFO - Retrieved 427500 of 462461 total results
+2025-11-02 14:43:04,284 - INFO - Retrieved 428000 of 462461 total results
+2025-11-02 14:43:04,490 - INFO - Retrieved 428500 of 462461 total results
+2025-11-02 14:43:04,696 - INFO - Retrieved 429000 of 462461 total results
+2025-11-02 14:43:04,904 - INFO - Retrieved 429500 of 462461 total results
+2025-11-02 14:43:05,616 - INFO - Retrieved 430000 of 462461 total results
+2025-11-02 14:43:05,822 - INFO - Retrieved 430500 of 462461 total results
+2025-11-02 14:43:06,028 - INFO - Retrieved 431000 of 462461 total results
+2025-11-02 14:43:06,243 - INFO - Retrieved 431500 of 462461 total results
+2025-11-02 14:43:06,466 - INFO - Retrieved 432000 of 462461 total results
+2025-11-02 14:43:06,685 - INFO - Retrieved 432500 of 462461 total results
+2025-11-02 14:43:07,406 - INFO - Retrieved 433000 of 462461 total results
+2025-11-02 14:43:07,654 - INFO - Retrieved 433500 of 462461 total results
+2025-11-02 14:43:07,875 - INFO - Retrieved 434000 of 462461 total results
+2025-11-02 14:43:08,100 - INFO - Retrieved 434500 of 462461 total results
+2025-11-02 14:43:08,912 - INFO - Retrieved 435000 of 462461 total results
+2025-11-02 14:43:09,131 - INFO - Retrieved 435500 of 462461 total results
+2025-11-02 14:43:09,350 - INFO - Retrieved 436000 of 462461 total results
+2025-11-02 14:43:09,572 - INFO - Retrieved 436500 of 462461 total results
+2025-11-02 14:43:09,798 - INFO - Retrieved 437000 of 462461 total results
+2025-11-02 14:43:10,554 - INFO - Retrieved 437500 of 462461 total results
+2025-11-02 14:43:10,777 - INFO - Retrieved 438000 of 462461 total results
+2025-11-02 14:43:11,008 - INFO - Retrieved 438500 of 462461 total results
+2025-11-02 14:43:11,228 - INFO - Retrieved 439000 of 462461 total results
+2025-11-02 14:43:11,444 - INFO - Retrieved 439500 of 462461 total results
+2025-11-02 14:43:12,189 - INFO - Retrieved 440000 of 462461 total results
+2025-11-02 14:43:12,397 - INFO - Retrieved 440500 of 462461 total results
+2025-11-02 14:43:12,600 - INFO - Retrieved 441000 of 462461 total results
+2025-11-02 14:43:12,810 - INFO - Retrieved 441500 of 462461 total results
+2025-11-02 14:43:13,013 - INFO - Retrieved 442000 of 462461 total results
+2025-11-02 14:43:13,382 - INFO - Retrieved 442500 of 462461 total results
+2025-11-02 14:43:14,108 - INFO - Retrieved 443000 of 462461 total results
+2025-11-02 14:43:14,331 - INFO - Retrieved 443500 of 462461 total results
+2025-11-02 14:43:14,568 - INFO - Retrieved 444000 of 462461 total results
+2025-11-02 14:43:14,815 - INFO - Retrieved 444500 of 462461 total results
+2025-11-02 14:43:15,664 - INFO - Retrieved 445000 of 462461 total results
+2025-11-02 14:43:15,929 - INFO - Retrieved 445500 of 462461 total results
+2025-11-02 14:43:16,191 - INFO - Retrieved 446000 of 462461 total results
+2025-11-02 14:43:16,440 - INFO - Retrieved 446500 of 462461 total results
+2025-11-02 14:43:16,692 - INFO - Retrieved 447000 of 462461 total results
+2025-11-02 14:43:17,474 - INFO - Retrieved 447500 of 462461 total results
+2025-11-02 14:43:17,715 - INFO - Retrieved 448000 of 462461 total results
+2025-11-02 14:43:17,950 - INFO - Retrieved 448500 of 462461 total results
+2025-11-02 14:43:18,170 - INFO - Retrieved 449000 of 462461 total results
+2025-11-02 14:43:18,396 - INFO - Retrieved 449500 of 462461 total results
+2025-11-02 14:43:19,130 - INFO - Retrieved 450000 of 462461 total results
+2025-11-02 14:43:19,357 - INFO - Retrieved 450500 of 462461 total results
+2025-11-02 14:43:19,569 - INFO - Retrieved 451000 of 462461 total results
+2025-11-02 14:43:19,787 - INFO - Retrieved 451500 of 462461 total results
+2025-11-02 14:43:20,014 - INFO - Retrieved 452000 of 462461 total results
+2025-11-02 14:43:20,745 - INFO - Retrieved 452500 of 462461 total results
+2025-11-02 14:43:20,963 - INFO - Retrieved 453000 of 462461 total results
+2025-11-02 14:43:21,184 - INFO - Retrieved 453500 of 462461 total results
+2025-11-02 14:43:21,406 - INFO - Retrieved 454000 of 462461 total results
+2025-11-02 14:43:21,865 - INFO - Retrieved 454500 of 462461 total results
+2025-11-02 14:43:22,595 - INFO - Retrieved 455000 of 462461 total results
+2025-11-02 14:43:22,815 - INFO - Retrieved 455500 of 462461 total results
+2025-11-02 14:43:23,029 - INFO - Retrieved 456000 of 462461 total results
+2025-11-02 14:43:23,180 - INFO - Retrieved 456500 of 462461 total results
+2025-11-02 14:43:23,369 - INFO - Retrieved 457000 of 462461 total results
+2025-11-02 14:43:23,587 - INFO - Retrieved 457500 of 462461 total results
+2025-11-02 14:43:24,338 - INFO - Retrieved 458000 of 462461 total results
+2025-11-02 14:43:24,554 - INFO - Retrieved 458500 of 462461 total results
+2025-11-02 14:43:24,771 - INFO - Retrieved 459000 of 462461 total results
+2025-11-02 14:43:24,994 - INFO - Retrieved 459500 of 462461 total results
+2025-11-02 14:43:25,217 - INFO - Retrieved 460000 of 462461 total results
+2025-11-02 14:43:25,950 - INFO - Retrieved 460500 of 462461 total results
+2025-11-02 14:43:26,123 - INFO - Retrieved 461000 of 462461 total results
+2025-11-02 14:43:26,266 - INFO - Retrieved 461500 of 462461 total results
+2025-11-02 14:43:26,482 - INFO - Retrieved 462000 of 462461 total results
+2025-11-02 14:43:26,708 - INFO - Retrieved 462461 of 462461 total results
+2025-11-02 14:43:26,727 - INFO - Starting exhaustive file output for all defined categories
+2025-11-02 14:43:26,730 - INFO - Writing files for category 'acetylation' using regex pattern: (acetyl|butyryl|propionyl|crotonyl|malonyl|glutaryl|succinyl|benzoylation|lactoylation|lactylation|formylation|n-acyl|propionyl|butyryl|propionyl)
+2025-11-02 14:43:26,834 - INFO - Wrote 13154 total sequences to CONSOLIDATED FASTA file: output_pipeline6/acetylation.fasta
+2025-11-02 14:43:26,834 - INFO - Finished writing files for acetylation. Total merged PTM entries counted: 13154
+2025-11-02 14:43:26,835 - INFO - Writing files for category 'adp-ribosylation' using regex pattern: (adp-ribosyl|poly-adp-ribosyl|ribosyl|ampyl|umpyl)
+2025-11-02 14:43:27,089 - INFO - Wrote 168 total sequences to CONSOLIDATED FASTA file: output_pipeline6/adp-ribosylation.fasta
+2025-11-02 14:43:27,089 - INFO - Finished writing files for adp-ribosylation. Total merged PTM entries counted: 168
+2025-11-02 14:43:27,090 - INFO - Writing files for category 'amidation' using regex pattern: (amidation|phosphatidylethanolamine amidation)
+2025-11-02 14:43:27,092 - WARNING - No sequences found for category 'amidation'. FASTA file was not created.
+2025-11-02 14:43:27,092 - INFO - Finished writing files for amidation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,093 - INFO - Writing files for category 'benzoylation' using regex pattern: benzoylation
+2025-11-02 14:43:27,094 - WARNING - No sequences found for category 'benzoylation'. FASTA file was not created.
+2025-11-02 14:43:27,094 - INFO - Finished writing files for benzoylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,094 - INFO - Writing files for category 'beta-hydroxybutyrylation' using regex pattern: β-Hydroxybutyrylation|beta-hydroxybutyrylation
+2025-11-02 14:43:27,095 - WARNING - No sequences found for category 'beta-hydroxybutyrylation'. FASTA file was not created.
+2025-11-02 14:43:27,095 - INFO - Finished writing files for beta-hydroxybutyrylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,096 - INFO - Writing files for category 'butyrylation' using regex pattern: butyrylation
+2025-11-02 14:43:27,096 - WARNING - No sequences found for category 'butyrylation'. FASTA file was not created.
+2025-11-02 14:43:27,096 - INFO - Finished writing files for butyrylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,097 - INFO - Writing files for category 'crotonylation' using regex pattern: crotonylation
+2025-11-02 14:43:27,097 - WARNING - No sequences found for category 'crotonylation'. FASTA file was not created.
+2025-11-02 14:43:27,097 - INFO - Finished writing files for crotonylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,098 - INFO - Writing files for category 'lactoylation' using regex pattern: lactoylation|lactylation
+2025-11-02 14:43:27,099 - WARNING - No sequences found for category 'lactoylation'. FASTA file was not created.
+2025-11-02 14:43:27,099 - INFO - Finished writing files for lactoylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,100 - INFO - Writing files for category 'malonylation' using regex pattern: malonylation
+2025-11-02 14:43:27,101 - WARNING - No sequences found for category 'malonylation'. FASTA file was not created.
+2025-11-02 14:43:27,101 - INFO - Finished writing files for malonylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,101 - INFO - Writing files for category 'propionylation' using regex pattern: propionylation
+2025-11-02 14:43:27,102 - WARNING - No sequences found for category 'propionylation'. FASTA file was not created.
+2025-11-02 14:43:27,102 - INFO - Finished writing files for propionylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,103 - INFO - Writing files for category 'succinylation' using regex pattern: succinylation
+2025-11-02 14:43:27,104 - WARNING - No sequences found for category 'succinylation'. FASTA file was not created.
+2025-11-02 14:43:27,104 - INFO - Finished writing files for succinylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,104 - INFO - Writing files for category 'biotinylation' using regex pattern: biotinylation
+2025-11-02 14:43:27,106 - WARNING - No sequences found for category 'biotinylation'. FASTA file was not created.
+2025-11-02 14:43:27,106 - INFO - Finished writing files for biotinylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,106 - INFO - Writing files for category 'blocked_amino_end' using regex pattern: blocked amino end|n-carbamoylation|pyrrolidone carboxylic acid|pyruvate
+2025-11-02 14:43:27,113 - INFO - Wrote 1062 total sequences to CONSOLIDATED FASTA file: output_pipeline6/blocked_amino_end.fasta
+2025-11-02 14:43:27,113 - INFO - Finished writing files for blocked_amino_end. Total merged PTM entries counted: 1062
+2025-11-02 14:43:27,114 - INFO - Writing files for category 'pyrrolidone_carboxylic_acid' using regex pattern: pyrrolidone carboxylic acid
+2025-11-02 14:43:27,119 - INFO - Wrote 1034 total sequences to CONSOLIDATED FASTA file: output_pipeline6/pyrrolidone_carboxylic_acid.fasta
+2025-11-02 14:43:27,119 - INFO - Finished writing files for pyrrolidone_carboxylic_acid. Total merged PTM entries counted: 1034
+2025-11-02 14:43:27,119 - INFO - Writing files for category 'carboxylation' using regex pattern: carboxy|carbamid|carboxyethylation|gamma-carboxyglutamic acid|thiocarboxylation|n-carbamoylation|decarboxylation
+2025-11-02 14:43:27,129 - INFO - Wrote 1622 total sequences to CONSOLIDATED FASTA file: output_pipeline6/carboxylation.fasta
+2025-11-02 14:43:27,129 - INFO - Finished writing files for carboxylation. Total merged PTM entries counted: 1622
+2025-11-02 14:43:27,129 - INFO - Writing files for category 'lipid' using regex pattern: (palmitoyl|myristoyl|farnesyl|geranylgeranyl|gpi-anchor|lipoylation|s-acyl|cholesterol ester|hydroxyceramide ester|s-archaeol|s-diacylglycerol|octanoylation|decanoylation|stearoylation)
+2025-11-02 14:43:27,144 - INFO - Wrote 1024 total sequences to CONSOLIDATED FASTA file: output_pipeline6/lipid.fasta
+2025-11-02 14:43:27,144 - INFO - Finished writing files for lipid. Total merged PTM entries counted: 1024
+2025-11-02 14:43:27,145 - INFO - Writing files for category 'farnesylation' using regex pattern: farnesylation
+2025-11-02 14:43:27,146 - WARNING - No sequences found for category 'farnesylation'. FASTA file was not created.
+2025-11-02 14:43:27,146 - INFO - Finished writing files for farnesylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,146 - INFO - Writing files for category 'geranylgeranylation' using regex pattern: geranylgeranylation
+2025-11-02 14:43:27,147 - WARNING - No sequences found for category 'geranylgeranylation'. FASTA file was not created.
+2025-11-02 14:43:27,147 - INFO - Finished writing files for geranylgeranylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,147 - INFO - Writing files for category 'gpi-anchor' using regex pattern: gpi-anchor
+2025-11-02 14:43:27,150 - INFO - Wrote 50 total sequences to CONSOLIDATED FASTA file: output_pipeline6/gpi-anchor.fasta
+2025-11-02 14:43:27,150 - INFO - Finished writing files for gpi-anchor. Total merged PTM entries counted: 50
+2025-11-02 14:43:27,150 - INFO - Writing files for category 'myristoylation' using regex pattern: myristoylation
+2025-11-02 14:43:27,151 - WARNING - No sequences found for category 'myristoylation'. FASTA file was not created.
+2025-11-02 14:43:27,151 - INFO - Finished writing files for myristoylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,151 - INFO - Writing files for category 'o-palmitoleoylation' using regex pattern: o-palmitoleoylation
+2025-11-02 14:43:27,152 - WARNING - No sequences found for category 'o-palmitoleoylation'. FASTA file was not created.
+2025-11-02 14:43:27,152 - INFO - Finished writing files for o-palmitoleoylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,153 - INFO - Writing files for category 'o-palmitoylation' using regex pattern: o-palmitoylation|s-palmitoylation
+2025-11-02 14:43:27,154 - WARNING - No sequences found for category 'o-palmitoylation'. FASTA file was not created.
+2025-11-02 14:43:27,154 - INFO - Finished writing files for o-palmitoylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,154 - INFO - Writing files for category 'n-palmitoylation' using regex pattern: n-palmitoylation
+2025-11-02 14:43:27,155 - WARNING - No sequences found for category 'n-palmitoylation'. FASTA file was not created.
+2025-11-02 14:43:27,155 - INFO - Finished writing files for n-palmitoylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,156 - INFO - Writing files for category 's-palmitoylation' using regex pattern: s-palmitoylation
+2025-11-02 14:43:27,156 - WARNING - No sequences found for category 's-palmitoylation'. FASTA file was not created.
+2025-11-02 14:43:27,156 - INFO - Finished writing files for s-palmitoylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,157 - INFO - Writing files for category 'glycosyl' using regex pattern: (glyco|glucosyl|glcnac|galnac|linked glycosylation|glycosaminoglycan|d-glucuronoylation)
+2025-11-02 14:43:27,256 - INFO - Wrote 9613 total sequences to CONSOLIDATED FASTA file: output_pipeline6/glycosyl.fasta
+2025-11-02 14:43:27,256 - INFO - Finished writing files for glycosyl. Total merged PTM entries counted: 9613
+2025-11-02 14:43:27,256 - INFO - Writing files for category 'n-linked_glycosylation' using regex pattern: n-linked glycosylation
+2025-11-02 14:43:27,257 - WARNING - No sequences found for category 'n-linked_glycosylation'. FASTA file was not created.
+2025-11-02 14:43:27,257 - INFO - Finished writing files for n-linked_glycosylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,257 - INFO - Writing files for category 'o-linked_glycosylation' using regex pattern: o-linked glycosylation|o-linked
+2025-11-02 14:43:27,279 - INFO - Wrote 1759 total sequences to CONSOLIDATED FASTA file: output_pipeline6/o-linked_glycosylation.fasta
+2025-11-02 14:43:27,279 - INFO - Finished writing files for o-linked_glycosylation. Total merged PTM entries counted: 1759
+2025-11-02 14:43:27,279 - INFO - Writing files for category 'c-linked_glycosylation' using regex pattern: c-linked glycosylation
+2025-11-02 14:43:27,280 - WARNING - No sequences found for category 'c-linked_glycosylation'. FASTA file was not created.
+2025-11-02 14:43:27,280 - INFO - Finished writing files for c-linked_glycosylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,281 - INFO - Writing files for category 's-linked_glycosylation' using regex pattern: s-linked glycosylation
+2025-11-02 14:43:27,281 - WARNING - No sequences found for category 's-linked_glycosylation'. FASTA file was not created.
+2025-11-02 14:43:27,281 - INFO - Finished writing files for s-linked_glycosylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,282 - INFO - Writing files for category 'hydroxylation' using regex pattern: hydroxyl|dihydroxy
+2025-11-02 14:43:27,287 - INFO - Wrote 323 total sequences to CONSOLIDATED FASTA file: output_pipeline6/hydroxylation.fasta
+2025-11-02 14:43:27,287 - INFO - Finished writing files for hydroxylation. Total merged PTM entries counted: 323
+2025-11-02 14:43:27,287 - INFO - Writing files for category 'methylation' using regex pattern: methyl|n-methyl|di-methyl|tri-methyl|trimethyl
+2025-11-02 14:43:27,356 - INFO - Wrote 4600 total sequences to CONSOLIDATED FASTA file: output_pipeline6/methylation.fasta
+2025-11-02 14:43:27,356 - INFO - Finished writing files for methylation. Total merged PTM entries counted: 4600
+2025-11-02 14:43:27,357 - INFO - Writing files for category 'nitration' using regex pattern: nitr|nitro|nitrosyl|nitroso|iodination
+2025-11-02 14:43:27,363 - INFO - Wrote 153 total sequences to CONSOLIDATED FASTA file: output_pipeline6/nitration.fasta
+2025-11-02 14:43:27,363 - INFO - Finished writing files for nitration. Total merged PTM entries counted: 153
+2025-11-02 14:43:27,364 - INFO - Writing files for category 'oxidation' using regex pattern: oxidation|sulfoxidation|sulfhydr
+2025-11-02 14:43:27,366 - WARNING - No sequences found for category 'oxidation'. FASTA file was not created.
+2025-11-02 14:43:27,366 - INFO - Finished writing files for oxidation. Total merged PTM entries counted: 0
+2025-11-02 14:43:27,366 - INFO - Writing files for category 'phosphorylation' using regex pattern: phospho|o-phosphate|s-phosphate|n-phosphate|dephospho|phosphoglyceryl|dietylphosphorylation
+2025-11-02 14:43:28,100 - INFO - Wrote 68254 total sequences to CONSOLIDATED FASTA file: output_pipeline6/phosphorylation.fasta
+2025-11-02 14:43:28,100 - INFO - Finished writing files for phosphorylation. Total merged PTM entries counted: 68254
+2025-11-02 14:43:28,101 - INFO - Writing files for category 'dephosphorylation' using regex pattern: dephosphorylation
+2025-11-02 14:43:28,102 - WARNING - No sequences found for category 'dephosphorylation'. FASTA file was not created.
+2025-11-02 14:43:28,102 - INFO - Finished writing files for dephosphorylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:28,103 - INFO - Writing files for category 'ubiquitination' using regex pattern: (ubiquitin|isopeptide|neddylation|pupylation|glycyl lysine|sumoylation|sumo|sentrin)
+2025-11-02 14:43:28,182 - INFO - Wrote 7584 total sequences to CONSOLIDATED FASTA file: output_pipeline6/ubiquitination.fasta
+2025-11-02 14:43:28,182 - INFO - Finished writing files for ubiquitination. Total merged PTM entries counted: 7584
+2025-11-02 14:43:28,183 - INFO - Writing files for category 'sumoylation' using regex pattern: sumoylation
+2025-11-02 14:43:28,184 - WARNING - No sequences found for category 'sumoylation'. FASTA file was not created.
+2025-11-02 14:43:28,184 - INFO - Finished writing files for sumoylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:28,184 - INFO - Writing files for category 'neddylation' using regex pattern: neddylation
+2025-11-02 14:43:28,185 - WARNING - No sequences found for category 'neddylation'. FASTA file was not created.
+2025-11-02 14:43:28,185 - INFO - Finished writing files for neddylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:28,185 - INFO - Writing files for category 'citrullination' using regex pattern: citrullination
+2025-11-02 14:43:28,186 - WARNING - No sequences found for category 'citrullination'. FASTA file was not created.
+2025-11-02 14:43:28,186 - INFO - Finished writing files for citrullination. Total merged PTM entries counted: 0
+2025-11-02 14:43:28,186 - INFO - Writing files for category 'deamidation' using regex pattern: deamidation|deamination
+2025-11-02 14:43:28,187 - WARNING - No sequences found for category 'deamidation'. FASTA file was not created.
+2025-11-02 14:43:28,187 - INFO - Finished writing files for deamidation. Total merged PTM entries counted: 0
+2025-11-02 14:43:28,187 - INFO - Writing files for category 'glutathionylation' using regex pattern: glutathionylation
+2025-11-02 14:43:28,188 - WARNING - No sequences found for category 'glutathionylation'. FASTA file was not created.
+2025-11-02 14:43:28,188 - INFO - Finished writing files for glutathionylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:28,188 - INFO - Writing files for category 'glycation' using regex pattern: glycation
+2025-11-02 14:43:28,191 - INFO - Wrote 97 total sequences to CONSOLIDATED FASTA file: output_pipeline6/glycation.fasta
+2025-11-02 14:43:28,191 - INFO - Finished writing files for glycation. Total merged PTM entries counted: 97
+2025-11-02 14:43:28,191 - INFO - Writing files for category 'hmgylation' using regex pattern: hmgylation
+2025-11-02 14:43:28,192 - WARNING - No sequences found for category 'hmgylation'. FASTA file was not created.
+2025-11-02 14:43:28,192 - INFO - Finished writing files for hmgylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:28,192 - INFO - Writing files for category 'iodination' using regex pattern: iodination
+2025-11-02 14:43:28,193 - WARNING - No sequences found for category 'iodination'. FASTA file was not created.
+2025-11-02 14:43:28,193 - INFO - Finished writing files for iodination. Total merged PTM entries counted: 0
+2025-11-02 14:43:28,194 - INFO - Writing files for category 'mgcylation' using regex pattern: mgcylation|mgylation
+2025-11-02 14:43:28,194 - WARNING - No sequences found for category 'mgcylation'. FASTA file was not created.
+2025-11-02 14:43:28,194 - INFO - Finished writing files for mgcylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:28,195 - INFO - Writing files for category 'serotonylation' using regex pattern: serotonylation
+2025-11-02 14:43:28,195 - WARNING - No sequences found for category 'serotonylation'. FASTA file was not created.
+2025-11-02 14:43:28,195 - INFO - Finished writing files for serotonylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:28,196 - INFO - Writing files for category 'sulfation' using regex pattern: sulfation
+2025-11-02 14:43:28,196 - WARNING - No sequences found for category 'sulfation'. FASTA file was not created.
+2025-11-02 14:43:28,197 - INFO - Finished writing files for sulfation. Total merged PTM entries counted: 0
+2025-11-02 14:43:28,197 - INFO - Writing files for category 'disulfide_bond' using regex pattern: disulfide bond|cross-link|s-cyanation|s-cysteinylation|s-nitrosylation
+2025-11-02 14:43:28,360 - INFO - Wrote 23859 total sequences to CONSOLIDATED FASTA file: output_pipeline6/disulfide_bond.fasta
+2025-11-02 14:43:28,360 - INFO - Finished writing files for disulfide_bond. Total merged PTM entries counted: 23859
+2025-11-02 14:43:28,361 - INFO - Writing files for category '2-hydroxyisobutyrylation' using regex pattern: 2-hydroxyisobutyrylation
+2025-11-02 14:43:28,361 - WARNING - No sequences found for category '2-hydroxyisobutyrylation'. FASTA file was not created.
+2025-11-02 14:43:28,361 - INFO - Finished writing files for 2-hydroxyisobutyrylation. Total merged PTM entries counted: 0
+2025-11-02 14:43:28,362 - INFO - Run Completed. Total Merged PTM Entries: 134356

@@ -13,7 +13,7 @@ class ThreadSafeSPARQL:
         with self._lock:
             sparql = SPARQLWrapper(self.endpoint)
             sparql.setReturnFormat(JSON)
-            sparql.setMethod('POST')  # Use POST for large queries
+            sparql.setMethod('POST')
             sparql.setQuery(query_str)
             return sparql.query().convert()
 
@@ -100,6 +100,14 @@ def query_uniprot_ptm_single_query(ptm_type, taxon_id, limit=50, output_file="un
     except Exception as e:
         print(f"Query failed: {e}")
         return []
+
+    # Filter evidence codes
+    # valid_evidence_codes = {"ECO:0000269", "ECO:0000305", "ECO:0000313", "ECO:0000256", "ECO:0000244", "ECO:0000205"}
+    # for row in results["results"]["bindings"]:
+    #     eco = row.get("evidence_code", {}).get("value", "N/A")
+    #     if eco not in valid_evidence_codes:
+    #         row["evidence_code"] = {"value": "N/A"}
+    
     
     # Process results
     ptm_sites = []
