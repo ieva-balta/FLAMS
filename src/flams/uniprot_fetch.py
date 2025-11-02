@@ -4,7 +4,7 @@ import logging
 import sys
 from typing import Dict, List, Tuple, Any
 
-# --- Configuration ---
+# Configuration
 LOG_FILE = "ptm_fetch_df.log"
 logging.basicConfig(
     level=logging.INFO,
@@ -15,15 +15,13 @@ logging.basicConfig(
     ]
 )
 
-# Valid ECO codes for experimental evidence (high quality data)
-# NOTE: This uses the four codes from your previous working config.
+# Valid ECO codes
 VALID_ECO_CODES = {"ECO:0000269", "ECO:0000314", "ECO:0007744", "ECO:0007829"}
 
 PTM_FEATURE_TYPES = {
     "Modified residue", "Modified residue (large scale data)", 
     "Lipidation", "Glycosylation", "Cross-link", "Disulfide bond"
 }
-# ---------------------
 
 
 def fetch_uniprot_ptm_data_and_create_df(output_pickle_file: str) -> pd.DataFrame:
@@ -82,11 +80,11 @@ def fetch_uniprot_ptm_data_and_create_df(output_pickle_file: str) -> pd.DataFram
                 pos = feature.get("location", {}).get("start", {}).get("value", "N/A")
                 evidences = feature.get("evidences", [])
                 
-                # Filter 2: Experimental Evidence Code (ECO)
+                # Filter ECO codes
                 if not any(ev.get("evidenceCode") in VALID_ECO_CODES for ev in evidences):
                     continue
                     
-                # Merging Logic: Merge multiple features pointing to the same PTM site
+                # Merge multiple features pointing to the same PTM site
                 site_key = f"{desc}|{pos}"
                 
                 current_eco_codes = set(ev.get("evidenceCode") for ev in evidences if ev.get("evidenceCode"))
@@ -146,14 +144,13 @@ def fetch_uniprot_ptm_data_and_create_df(output_pickle_file: str) -> pd.DataFram
 
 if __name__ == "__main__":
     
-    # Ensure pandas is installed: pip install pandas
     try:
         import pandas as pd
     except ImportError:
         print("Error: pandas is not installed. Please run: pip install pandas")
         sys.exit(1)
 
-    # Output file name for the DataFrame (pickle format)
+    # Output file name for the DataFrame
     OUTPUT_FILE = "uniprot_ptm_data.pkl"
     
     # Run the fetch function
