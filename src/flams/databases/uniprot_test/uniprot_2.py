@@ -147,7 +147,7 @@ version = 2.0
 
 
 # # to not run the download all the time
-df = pd.read_csv("/data/leuven/368/vsc36826/flams/flams2/FLAMS/src/flams/databases/uniprot_test/records.csv", header=0)
+# df = pd.read_csv("/data/leuven/368/vsc36826/flams/flams2/FLAMS/src/flams/databases/uniprot_test/records.csv", header=0)
 
 def get_fasta(PTM_modification_dict, data_dir):
     """
@@ -156,8 +156,10 @@ def get_fasta(PTM_modification_dict, data_dir):
     """
 
     # switch when integrated
-    all_records = df
-    # all_records = get_uniprot_records()
+    # all_records = df
+    all_records = get_uniprot_records()
+
+    # classifies records into PTM types and stores fasta files per modification type
     classified = sort_uniprot_records(all_records, PTM_modification_dict, data_dir)
 
     # find unclassified
@@ -173,8 +175,7 @@ def get_fasta(PTM_modification_dict, data_dir):
     with open(f"{data_dir}/unclassified-{str(version)}.fasta", "w", encoding="UTF-8") as out:
         SeqIO.write(fasta_records_unclassified, out, "fasta")
 
-    logging.info(f"Fasta file for unclassified entries was created and stored at {data_dir}/unclassified-{str(version)}.fasta.")
-    logging.info(f"There are {len(unclassified)} unclassified entries.")
+    logging.info(f"Fasta file for {len(unclassified)} unclassified entries was created and stored at {data_dir}/unclassified-{str(version)}.fasta.")
 
 
 def sort_uniprot_records(uniprot_records, PTM_modification_dict, data_dir):
@@ -242,6 +243,7 @@ def df_to_fasta(PTM_type_df):
 
         #append
         fasta_records.append(rec)
+
     return fasta_records
     
 def get_uniprot_records():
@@ -272,7 +274,7 @@ def get_uniprot_records():
             organism = entry.get("organism", {}).get("scientificName", "")
             entry_type = entry.get("entryType", "")
 
-            # to check for duplicated entries down the line
+            # to check for duplicated entries at the same position down the line
             ptm_sites = []
 
             # find PTM sites
@@ -312,7 +314,6 @@ def get_uniprot_records():
                 ptm_desc = f"{pos}|{desc}"
                 if ptm_desc in ptm_sites:
                     continue
-
                 ptm_sites.append(ptm_desc)
 
                 # get evidence ECO|source|ids
