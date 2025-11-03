@@ -40,7 +40,6 @@ MODIFICATIONS = {
     "butyrylation": [r"[_\w-]*butyryl[_\w-]*"], # some entries overlap with beta-hydroxybutyrylation and 2-hydroxyisobutyrylation
     # "carbamidation": "",
     "carboxyethylation": [r"[_\w-]*carboxyethyl[_\w-]*"],
-    # carboxylation moved to broad
     "carboxylation": [r"[_\w-]*(?<!de)carboxy[_\w-]*"], # overlaps
     # "carboxymethylation": "",
     "cholesterol_ester": [r"[-\w_]*cholesterol(?:__glycine)?__ester"],
@@ -113,7 +112,6 @@ MODIFICATIONS = {
     "serotonylation" : [r"[_\w-]*seroton[_\w-]*"], # overlap
     "stearoylation" : [r"[_\w-]*stearoyl[_\w-]*"],
     "succinylation": [r"[_\w-]*succin[iy][_\w-]*"],
-    # sulfation moved to broad
     "sulfation" : [r"[_\w-]*sulfo[_\w-]*"],
     "sulfhydration" : [r"[_\w-]*cysteine__persulfide[_\w-]*"],
     "sulfilimine_crosslink" : [r"[_\w-]*sulfilimine[_\w-]*"], # new type
@@ -245,6 +243,34 @@ def df_to_fasta(PTM_type_df):
         fasta_records.append(rec)
 
     return fasta_records
+
+def deduplicate_records(uniprot_records):
+    """
+    takes dataframe of all uniprot PTM records
+    deduplicates based on uniprot accesion + PTM description + position
+    concatinates ECO codes and sources
+    """
+
+    # columns to group by
+    group_cols = ["Accession", "Position", "Description"]
+
+    collapsed = (
+        uniprot_records.groupby(group_cols, as_index=False)
+        .agg({
+          "Length": "first",
+          "Entry_type": "first",
+          "Protein": "first",
+          "Feature_type": "first",
+          "Organism": "first",
+          "Sequence": "first",
+          # combine these fields by joining unique non-null values
+          "ECO_codes": lambda x: ";".join(sorted(set(filter(None, x)))),
+          "Sources": lambda x: ";".join(sorted(set(filter(None, x)))),
+          "Source_ids": lambda x: ";".join(sorted(set(filter(None, x))))
+        })
+    )
+
+    return collapsed
     
 def get_uniprot_records():
     """
@@ -270,12 +296,19 @@ def get_uniprot_records():
         for entry in data.get("results", []):
             accession = entry.get("primaryAccession")
             sequence = entry.get("sequence", {}).get("value", "")
-            name = entry.get("proteinDescription", {}).get("recommendedName", {}).get("fullName", {}).get("value", "")
+            #switch to gene name instead of protein name
+            # name = entry.get("proteinDescription", {}).get("recommendedName", {}).get("fullName", {}).get("value", "")
+            name = entry.get("genes", {}).get("geneName", {}).get("value", "")
             organism = entry.get("organism", {}).get("scientificName", "")
-            entry_type = entry.get("entryType", "")
 
-            # to check for duplicated entries at the same position down the line
-            ptm_sites = []
+            entry_type = entry.get("entryType", "")
+            if "Swiss-Prot" in entry_type:
+                entry_type == "Swiss-Prot"
+            if "TrEMBL" in entry_type:
+                entry_type == "TrEMBL"
+
+            # # to check for duplicated entries at the same position down the line
+            # ptm_sites = []
 
             # find PTM sites
             for feature in entry.get("features", []):
@@ -310,11 +343,11 @@ def get_uniprot_records():
                 #get psoition
                 pos = feature.get("location", {}).get("start", {}).get("value", "N/A")
                 
-                #check duplicate ptm site entries
-                ptm_desc = f"{pos}|{desc}"
-                if ptm_desc in ptm_sites:
-                    continue
-                ptm_sites.append(ptm_desc)
+                # #check duplicate ptm site entries
+                # ptm_desc = f"{pos}|{desc}"
+                # if ptm_desc in ptm_sites:
+                #     continue
+                # ptm_sites.append(ptm_desc)
 
                 # get evidence ECO|source|ids
                 ECOs = []
@@ -322,7 +355,7 @@ def get_uniprot_records():
                 ids = []
                 for ev in feature.get("evidences", []):
                     eco = ev.get("evidenceCode", "")
-                    # skips if the evidnece is from similar protein
+                    # skips if the evidnece is from the valid eco codes
                     if eco not in valid_ECO_codes:
                         continue
                     source = ev.get("source", "")
@@ -362,12 +395,17 @@ def get_uniprot_records():
                                                     "Protein", "Feature_type", "Description", "Organism",
                                                     "ECO_codes", "Sources", "Source_ids", "Sequence"])
 
-    logging.info(f"Entry download is done. {len(dataframe)} records stored for further processing.")
+    logging.info(f"Entry download is done. {len(dataframe)} records stored for further deduplication.")
+
+    # deduplicates based on Accession + position + description and combines source info
+    collapsed = deduplicate_records(dataframe)
+
+    logging.info(f"Deduplication is done. {len(collapsed)} records stored for further processing.")
 
     #remove later
-    dataframe.to_csv("records.csv", index=False)
+    collapsed.to_csv("records.csv", index=False)
 
-    return dataframe
+    return collapsed
 
 # run the thing
 get_fasta(MODIFICATIONS, "/data/leuven/368/vsc36826/flams/flams2/dbs")
