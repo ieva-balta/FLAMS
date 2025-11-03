@@ -24,121 +24,129 @@ import re
 #might remove
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
+# REALLY THINK ABOUT THE ORDER FOR DEDUPLICATION PURPOSES
 # dictionary of PTM types and a list of RegEx's to find them
 MODIFICATIONS = {
-    "acetylation": [r"acetyl\w*"],
-    "adp-ribosylation": [r"ADP[-\s]?ribosyl[\w-]*"],
-    "adp-riboxanation": [r"ADP[-\s]?ribox[\w-]*"], # new type
-    "amidation": [r"amid[\w-]*"],
-    "ampylation" : [r"AMP[\w-]*"],
-    "benzoylation": [r"benzoyl[\w-]*"],
-    "beta-hydroxybutyrylation": [r"(?:β|beta)[-\s]?hydroxybutyryl[\w-]*"],
-    "biotinylation": [r"biotinyl[\w-]*"],
-    "blocked_amino_end": [r"blocked amino end"],
-    "bromination": [r"bromo[\w-]*"], # new type
+    "acetylation": [r"[-\w_]*acetyl[-\w_]*"],
+    "adp-ribosylation": [r"ADP[-_\s]*ribosyl[-\w_]*"],
+    "adp-riboxanation": [r"ADP[-_\s]*ribox[-\w_]*"], # new type
+    # amidation moved to broad
+    "ampylation" : [r"AMP[-\w_]*", r"[-\w_]*adenylate[-\w_]*"],
+    "benzoylation": [r"[-\w_]*benzoyl[-\w_]*"],
+    "beta-hydroxybutyrylation": [r"(?:β|beta)[-_\s]*hydroxybutyryl[-\w_]*"],
+    "biotinylation": [r"[-\w_]*biotinyl[-\w_]*"],
+    "blocked_amino_end": [r"blocked__amino__end"],
+    "bromination": [r"[-\w_]*bromo[-\w_]*"], # new type
     # butyrylation moved to the ends bc its more general
     # "carbamidation": "",
-    "carboxyethylation": [r"carboxyethyl[\w-]*"],
+    "carboxyethylation": [r"[_\w-]*carboxyethyl[_\w-]*"],
     # carboxylation moved to broad
     # "carboxymethylation": "",
-    "cholesterol_ester": [r"cholesterol(?: glycine)? ester"],
-    "citrullination": [r"citrulline"],
-    "crotonylation": [r"crotonyl[\w-]*"],
-    "cyclopeptide": [r"cyclopeptide"],
+    "cholesterol_ester": [r"[-\w_]*cholesterol(?:__glycine)?__ester"],
+    "citrullination": [r"[-\w_]*citrulline"],
+    "crotonylation": [r"[-\w_]*crotonyl[-\w_]*"],
+    "cyclopeptide": [r"cyclopeptide[-\w_]*"],
     # cysteinylation moved to broad terms
-    "c-linked_glycosylation": [r"\bc[-\s]?linked"],
-    "deamidation": [r"deamidat\w*"],
-    "deamination": [r"allysine"],
-    "decanoylation": [r"decanoyl[\w-]*"],
-    "decarboxylation": [r"decarboxylat\w*"],
-    "dehydration": [r"dehydro[\w-]*"], # new type
-    "dephosphorylation": [r"dephospho[\w-]*"],
+    "c-linked_glycosylation": [r"\bc[-_\s]*linked[-\w_]*"],
+    "deamidation": [r"[-\w_]*deamidat[-\w_]*"],
+    "deamination": [r"[-\w_]*allysine[-\w_]*"],
+    "decanoylation": [r"[-\w_]*decanoyl[-\w_]*"],
+    "decarboxylation": [r"[-\w_]*decarboxylat[-\w_]*"],
+    "dehydration": [r"[-\w_]*dehydro[-\w_]*"], # new type
+    "dephosphorylation": [r"[-\w_]*dephospho[-\w_]*"],
     # "dietylphosphorylation": "",
     # leaving this for later:
-    # "disulfide_bond": "ft_disulfid:*", # maybe ft_chain: disulfide bond as well? or smotheing liek it
+    "disulfide_bond": [r"[-\w_]*disulfide[-\w_]*"],
     # d-enantiomers moved
-    "d-glucuronoylation": [r"d[-\s]?glucuronoyl[\w-]*"],
-    "farnesylation": [r"farnesyl[\w-]*"],
+    "d-glucuronoylation": [r"d[-_\s]*glucuronoyl[-\w_]*"],
+    "FADylation" : [r"FAD[-\w_]*"], #new type
+    "farnesylation": [r"[-\w_]*farnesyl[-\w_]*"],
     # formation of an isopeptide moved to broad
-    "formylation": [r"formyl[\w-]*"],
-    "gamma-carboxyglutamic_acid": [r"(?:gamma|γ)-?carboxyglutamic acid"],
+    "formylation": [r"[-\w_]*formyl[-\w_]*"],
+    "gamma-carboxyglutamic_acid": [r"(?:gamma|γ)-?carboxyglutamic__acid[-\w_]*"],
     #genarylation moved to broad
-    "geranylgeranylation": [r"geranylgeranyl[\w-]*"], 
-    "glutamylation": [r"glutamyl[\w-]*"], # new type
-    "glutarylation": [r"glutaryl[\w-]*"],
-    "glutathionylation": [r"glutathionyl(?: cysteine)?"],
-    "glycation": [r"glycation"],
-    "gmpylation": [r"GMP[\w-]*"], # new type
-    "gpi-anchor": [r"gpi[-\s]?anchor"],
-    "histidylation": [r"histidyl[\w-]*"], # new type
+    "geranylgeranylation": [r"[-\w_]*geranylgeranyl[-\w_]*"], 
+    "glutamylation": [r"[-\w_]*glutamyl[-\w_]*"], # new type
+    "glutarylation": [r"[-\w_]*glutaryl[-\w_]*"],
+    "glutathionylation": [r"[-\w_]*glutathionyl(?:__cysteine)?[-\w_]*"],
+    "glycation": [r"[-\w_]*glycation[-\w_]*"],
+    "gmpylation": [r"[-\w_]*GMP[-\w_]*"], # new type
+    "gpi-anchor": [r"[-\w_]*gpi[-\s]?anchor[-\w_]*"],
+    "histidylation": [r"[-\w_]*histidyl[-\w_]*"], # new type
     # "hmgylation": "",
-    "hydroxyceramide_ester": [r"hydroxyceramide(?: glutamate)? ester"],
+    "hydroxyceramide_ester": [r"[-\w_]*hydroxyceramide(?:__glutamate)?__ester[-\w_]*"],
     # hydroxylation moved to broad
-    "hypusine": [r"hypusine"], # new type
-    "imidazolation": [r"imidazol[\w-]*"], # new type
-    "iodination": [r"iodo[\w-]*"],
-    "lactoylation": [r"lactoyl[\w-]*"],
+    "hypusine": [r"[-\w_]*hypusine[-\w_]*"], # new type
+    "imidazolation": [r"[-\w_]*imidazol[-\w_]*"], # new type
+    "iodination": [r"[-\w_]*iodo[_\w-]*", r"[_\w-]*thyroxine[_\w-]*"],
+    "lactoylation": [r"[_\w-]*lactoyl[_\w-]*"],
     # "lactylation": "",
-    "lipoylation": [r"lipoyl[\w-]*"],
-    "malonylation": [r"malonyl[\w-]*"],
+    "lipoylation": [r"[_\w-]*lipoyl[_\w-]*"],
+    "malonylation": [r"[_\w-]*malonyl[_\w-]*"],
     #methylation moved to broad
     # "mgcylation": "",
     # "mgylation": "",
-    "myristoylation": [r"myristoyl[\w-]*"],
-    "neddylation": [r"NEDD8"],
+    "myristoylation": [r"[_\w-]*myristoyl[_\w-]*"],
+    "neddylation": [r"[_\w-]*NEDD8[_\w-]*"],
     # nitration moved to broad 
-    "n-carbamoylation": [r"n[-\s]?carbamoyl[\w-]*"],
-    "n-linked_glycosylation": [r"n[\s-]?(?:alpha|beta|α|β)?[\s-]?linked"],
-    "n-palmitoylation": [r"n[\s-]?palmitoyl[\w-]*"],
-    "octanoylation": [r"octanoyl[\w-]*"],
+    "n-carbamoylation": [r"n[-_\s]*carbamoyl[_\w-]*"],
+    "n-linked_glycosylation": [r"n[-_\s]*(?:alpha|beta|α|β)?[\s-]?linked[_\w-]*"],
+    "n-palmitoylation": [r"n[-_\s]*palmitoyl[_\w-]*"],
+    "octanoylation": [r"[_\w-]*octanoyl[_\w-]*"],
     # oxidation moved to broad terms
-    "o-linked_glycosylation": [r"o[\s-]?(?:alpha|beta|α|β)?[\s-]?linked"],
-    "o-palmitoleoylation": [r"o[\s-]?palmitoleoyl[\w-]*"],
-    "o-palmitoylation": [r"o[\s-]?palmitoyl[\w-]*"], # overlap with palmitoylation
+    "o-linked_glycosylation": [r"o[-_\s]*(?:alpha|beta|α|β)?[\s-]?linked[_\w-]*"],
+    "o-palmitoleoylation": [r"o[-_\s]*palmitoleoyl[_\w-]*"],
+    "o-palmitoylation": [r"o[-_\s]*palmitoyl[_\w-]*"], # overlap with palmitoylation
     # palmitoylation moved to broad
-    "phosphatidylethanolamine_amidation": [r"phosphatidylethanolamine amidated"],
+    "phosphatidylethanolamine_amidation": [r"[_\w-]*phosphatidylethanolamine__amidated[_\w-]*"],
     # "phosphoglycerylation": "",
     #phosphorylation moved to broad
-    "propionylation": [r"propionyl[\w-]*"],
-    "pupylation": [r"Pup[\w-]*"],
-    "pyridoxal_phosphate_addition": [r"pyridoxal phosphate"],
-    "pyrrolidone_carboxylic_acid": [r"pyrrolidone carboxylic acid"],
-    "pyrrolylation": [r"pyrrolyl[\w-]*"],
-    "pyruvate": [r"pyruvic acid"],
-    "serotonylation" : [r"seroton[\w-]*"],
-    "stearoylation" : [r"stearoyl[\w-]*"],
-    "succinylation": [r"succiny[\w-]*"],
+    "prenylation" : [r"[_\w-]*prenyl[_\w-]*"],
+    "propionylation": [r"[_\w-]*propionyl[_\w-]*"],
+    "pupylation": [r"[_\w-]*Pup[_\w-]*"],
+    "pyridoxal_phosphate_addition": [r"[_\w-]*pyridoxal__phosphate[_\w-]*"],
+    "pyrrolidone_carboxylic_acid": [r"[_\w-]*pyrrolidone__carboxylic__acid[_\w-]*"],
+    "pyrrolylation": [r"[_\w-]*pyrrolyl[_\w-]*"],
+    "pyruvate": [r"[_\w-]*pyruvic__acid[_\w-]*"],
+    "quinones" : [r"[_\w-]*quinone[_\w-]*"],
+    "serotonylation" : [r"[_\w-]*seroton[_\w-]*"],
+    "stearoylation" : [r"[_\w-]*stearoyl[_\w-]*"],
+    "succinylation": [r"[_\w-]*succin[iy][_\w-]*"],
     # sulfation moved to broad
-    "sulfhydration" : [r"cysteine persulfide"],
-    "sulfoxidation" : [r"sulfoxide"],
-    "sumoylation": [r"SUMO"], # doesn't query "Modified residue (large scale data)" : "Sumoylated lysine"
-    "s-archaeol" : [r"s[\s-]?archaeol[\w-]*"],
-    "s-carbamoylation" : [r"s[\s-]?carbamoyl[\w-]*"],
-    "s-cyanation" : [r"s[\s-]?cyano[\w-]*"],
-    "s-cysteinylation" : [r"s[\s-]?cysteinyl[\w-]*"],
-    "s-diacylglycerol" : [r"s[\s-]?diacylglycerol[\w-]*"],
-    "s-linked_glycosylation": [r"s[\s-]?(?:alpha|beta|α|β)?[\s-]?linked"],
-    "s-nitrosylation" : [r"s[\s-]?nitro[\w-]*"], # overlaps with nitro*
-    "s-palmitoylation" : [r"s[\s-]?palmitoyl[\w-]*"],
-    "thiocarboxylation" : [r"thioglycine"],
-    "ubiquitination": [r"ubiquitin"], # same problem as sumoylation
-    "umpylation" : [r"UMP[\w-]*"],
-    "2-hydroxyisobutyrylation": [r"2[-\s]?hydroxyisobutyryl[\w-]*"], # overlap with butyryl*
+    "sulfhydration" : [r"[_\w-]*cysteine__persulfide[_\w-]*"],
+    "sulfilimine_crosslink" : [r"[_\w-]*sulfilimine[_\w-]*"], # new type
+    "sulfoxidation" : [r"[_\w-]*sulfoxide[_\w-]*"],
+    "sumoylation": [r"[_\w-]*SUMOv[_\w-]*"], # doesn't query "Modified residue (large scale data)" : "Sumoylated lysine"
+    "s-archaeol" : [r"s[_\s-]?archaeol[_\w-]*"],
+    "s-carbamoylation" : [r"s[-_\s]*carbamoyl[_\w-]*"],
+    "s-cyanation" : [r"s[-_\s]*cyano[_\w-]*"],
+    "s-cysteinylation" : [r"s[-_\s]*cysteinyl[_\w-]*"],
+    "s-diacylglycerol" : [r"s[-_\s]*diacylglycerol[_\w-]*"],
+    "s-linked_glycosylation": [r"s[-_\s]*(?:alpha|beta|α|β)?[\s-]?linked[_\w-]*"],
+    "s-nitrosylation" : [r"s[-_\s]*nitro[_\w-]*"], # overlaps with nitro*
+    "s-palmitoylation" : [r"s[-_\s]*palmitoyl[_\w-]*"],
+    "thiocarboxylation" : [r"[_\w-]*thioglycine[_\w-]*"],
+    "thioester_crosslink" : [r"[_\w-]*thioester[_\w-]*"],
+    "ubiquitination": [r"[_\w-]*ubiquitin[_\w-]*"], # same problem as sumoylation
+    "umpylation" : [r"UMP[_\w-]*"],
+    "2-hydroxyisobutyrylation": [r"2[-_\s]*hydroxyisobutyryl[_\w-]*"], # overlap with butyryl*
 
     # broader terms at the end:
-    "butyrylation": [r"butyryl[\w-]*"], # overlaps with beta-hydroxybutyrylation and 2-hydroxyisobutyrylation
-    "cysteinylation": [r"cysteinyl[\w-]*"], # new type, overlap with s-cysteinylation etc
-    "carboxylation": [r"carboxy[\w-]*"], #this might be a broad one, carboxylic acid and carboxylysine and carboxyglutamate
-    # "d-enantiomers": "ft_mod_res:d-", # new type, is applicable? (reported as modified residues on uniprot)
-    "formation_of_an_isopeptide_bond": [r"isopeptide"], # lots of overlap with the sumo, ubiq, nedd etc.
-    "geranylation": [r"geranyl[\w-]*"], # new type
-    "hydroxylation": [r"hydroxy[\w-]*"], # doesn't catch all dihydroxy
-    "methylation": [r"methyl[\w-]*"],
-    "oxidation": [r"oxo[\w-]*", r"sulfenic acid"], #Tryptophylquinone? Methionine sulfoxide? Cysteine sulfenic acid?
-    "palmitoylation": [r"palmitoyl[\w-]*"], # new type
-    "phosphorylation": [r"phospho[\w-]*"],
-    "nitration": [r"nitro[\w-]*"],
-    "sulfation" : [r"sulfo[\w-]*"],
+    "amidation": [r"[-\w_]*amid[-\w_]*"],
+    "butyrylation": [r"[_\w-]*butyryl[_\w-]*"], # overlaps with beta-hydroxybutyrylation and 2-hydroxyisobutyrylation
+    "cysteinylation": [r"[_\w-]*cysteinyl[_\w-]*"], # new type, overlap with s-cysteinylation etc
+    "carboxylation": [r"[_\w-]*carboxy[_\w-]*"], #this might be a broad one, carboxylic acid and carboxylysine and carboxyglutamate
+    
+    "formation_of_an_isopeptide_bond": [r"[_\w-]*isopeptide[_\w-]*"], # lots of overlap with the sumo, ubiq, nedd etc.
+    "geranylation": [r"[_\w-]*geranyl[_\w-]*"], # new type
+    "hydroxylation": [r"[_\w-]*hydroxy[_\w-]*"], # doesn't catch all dihydroxy
+    "methylation": [r"[_\w-]*methyl[_\w-]*"],
+    "oxidation": [r"[_\w-]*oxo[_\w-]*", r"[_\w-]*sulf[ei]nic__acid[_\w-]*"], #Tryptophylquinone? Methionine sulfoxide? Cysteine sulfenic acid?
+    "palmitoylation": [r"[_\w-]*palmitoyl[_\w-]*"], # new type
+    "phosphorylation": [r"[_\w-]*phospho[_\w-]*", r"[_\w-]*aspartylphosphate[_\w-]*"],
+    "nitration": [r"[_\w-]*nitro[_\w-]*", r"[_\w-]*nitrated[_\w-]*"],
+    "sulfation" : [r"[_\w-]*sulfo[_\w-]*"],
+    "d-enantiomers": [r"d-[_\w-]*"], # new type, is applicable? (reported as modified residues on uniprot)
     }
 
 #valid eco codes
@@ -153,7 +161,7 @@ valid_ECO_codes = [
 version = 2.0
 
 
-# to not run the download all the time
+# # to not run the download all the time
 df = pd.read_csv("/data/leuven/368/vsc36826/flams/flams2/FLAMS/src/flams/databases/uniprot_test/records.csv", header=0)
 
 def get_fasta(PTM_modification_dict, data_dir):
@@ -163,31 +171,11 @@ def get_fasta(PTM_modification_dict, data_dir):
     """
 
     # switch when integrated
-#    unclassified = sort_uniprot_records(get_uniprot_records(), PTM_modification_dict, data_dir)
+    # unclassified = sort_uniprot_records(get_uniprot_records(), PTM_modification_dict, data_dir)
     unclassified = sort_uniprot_records(df, PTM_modification_dict, data_dir)
 
-    #special case disulfide bonds: could move to the download bit before the dataframe is returned
-    disulfide_bonds = unclassified[
-        (unclassified["Feature_type"] == "Chain") &
-        (unclassified["Description"] == "nan")
-    ]
-    disulfide_bonds["Description"] = "Disulfide__bond"
-    fasta_records_disulfide_bonds = df_to_fasta(disulfide_bonds)
-    with open(f"{data_dir}/disulfide_bonds-{str(version)}.fasta", "w", encoding="UTF-8") as out:
-        SeqIO.write(fasta_records_disulfide_bonds, out, "fasta")
-    logging.info(f"Fasta file with {len(disulfide_bonds)} records for modifictation disulfide bonds created and stored at {data_dir}.")
-
-    # remove them from the original
-    unclassified = unclassified[~(
-        (unclassified["Feature_type"] == "Chain") &
-        (unclassified["Description"] == "nan")
-    )]
-
-    # remove the ones with removed and interchain description:
-    unclassified = unclassified[~(
-        (unclassified["Description"] == "Interchain") &
-        (unclassified["Description"] == "Removed")
-    )]
+    #remove later
+    unclassified.to_csv("unclassified.csv", index=False)
 
     fasta_records_unclassified = df_to_fasta(unclassified)
 
@@ -218,6 +206,9 @@ def sort_uniprot_records(uniprot_records, PTM_modification_dict, data_dir):
         remaining_records = remaining_records.drop(df_mod_type.index)
 
         fasta_records = df_to_fasta(df_mod_type)
+
+        #remove later
+        df_mod_type.to_csv(f"modification_csvs/{modification}.csv", index=False)
         
         with open(f"{data_dir}/{modification}-{str(version)}.fasta", "w", encoding="UTF-8") as out:
             SeqIO.write(fasta_records, out, "fasta")
@@ -232,11 +223,11 @@ def find_modification_type(uniprot_records, PTM_regex_list):
     returns dataframe with only records matching that PTM type
     """
     # Combine all regex patterns into one (using OR)
-    combined_pattern = "|".join(f"(?:{p})" for p in PTM_regex_list)
-    regex = re.compile(combined_pattern, flags=re.IGNORECASE)
+    combined_pattern = "|".join(f"(?:{p.lower()})" for p in PTM_regex_list)
 
     # Use vectorized str.contains() to filter rows
-    mask = uniprot_records["Description"].str.contains(regex, na=False)
+    description = uniprot_records["Description"].astype(str).str.lower()
+    mask = description.str.contains(combined_pattern, na=False, regex=True, flags=re.IGNORECASE)
     df_filtered = uniprot_records.loc[mask].copy()
 
     return df_filtered
@@ -299,15 +290,22 @@ def get_uniprot_records():
                             "Lipidation", 
                             "Glycosylation",
                             "Disulfide bond",
-                            "Cross-link",
-                            "Initiator methionine"]: #prob remove initiator methionine
+                            "Cross-link"]:
                     continue
 
-                desc = feature.get("description", "N/A") 
-                
+                desc = feature.get("description", "")
+
+                #special case disulfide bonds
+                if feature_type == "Chain" and (not desc or desc is None):
+                    desc = "Disulfide bond"
+
                 # remove the notes from the description
                 if ";" in desc:
                     desc = desc.split(";")[0].strip()
+
+                #special case "removed"
+                if desc.lower() == "removed":
+                    continue
 
                 #get psoition
                 pos = feature.get("location", {}).get("start", {}).get("value", "N/A")
