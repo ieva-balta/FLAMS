@@ -70,7 +70,7 @@ MODIFICATIONS = {
     "glutathionylation": [r"[-\w_]*glutathionyl(?:__cysteine)?[-\w_]*"],
     "glycation": [r"[-\w_]*glycation[-\w_]*"],
     "gmpylation": [r"[-\w_]*GMP[-\w_]*"], # new type
-    "gpi-anchor": [r"[-\w_]*gpi[-\s]?(?:like__)anchor[-\w_]*"], # adds mimick "gpi-like anchor"
+    "gpi-anchor": [r"[-\w_]*gpi[-\s]?(?:like-)?anchor[-\w_]*"], # adds mimick "gpi-like anchor"
     "histidylation": [r"[-\w_]*histidyl[-\w_]*"], # new type
     # "hmgylation": "",
     "hydroxyceramide_ester": [r"[-\w_]*hydroxyceramide(?:__glutamate)?__ester[-\w_]*"],
@@ -257,16 +257,19 @@ def deduplicate_records(uniprot_records):
     collapsed = (
         uniprot_records.groupby(group_cols, as_index=False)
         .agg({
-          "Length": "first",
-          "Entry_type": "first",
-          "Protein": "first",
-          "Feature_type": "first",
-          "Organism": "first",
-          "Sequence": "first",
-          # combine these fields by joining unique non-null values
-          "ECO_codes": lambda x: ";".join(sorted(set(filter(None, x)))),
-          "Sources": lambda x: ";".join(sorted(set(filter(None, x)))),
-          "Source_ids": lambda x: ";".join(sorted(set(filter(None, x))))
+            "Accession": "first",
+            "Position": "first",
+            "Length": "first",
+            "Entry_type": "first",
+            "Protein": "first",
+            "Feature_type": "first",
+            "Description": "first",
+            "Organism": "first",
+            # combine these fields by joining unique non-null values
+            "ECO_codes": lambda x: ";".join(sorted(set(filter(None, x)))),
+            "Sources": lambda x: ";".join(sorted(set(filter(None, x)))),
+            "Source_ids": lambda x: ";".join(sorted(set(filter(None, x)))),
+            "Sequence": "first"
         })
     )
 
@@ -298,14 +301,14 @@ def get_uniprot_records():
             sequence = entry.get("sequence", {}).get("value", "")
             #switch to gene name instead of protein name
             # name = entry.get("proteinDescription", {}).get("recommendedName", {}).get("fullName", {}).get("value", "")
-            name = entry.get("genes", {}).get("geneName", {}).get("value", "")
+            name = entry.get("genes", [{}])[0].get("geneName", {}).get("value", "")
             organism = entry.get("organism", {}).get("scientificName", "")
 
             entry_type = entry.get("entryType", "")
             if "Swiss-Prot" in entry_type:
-                entry_type == "Swiss-Prot"
+                entry_type = "Swiss-Prot"
             if "TrEMBL" in entry_type:
-                entry_type == "TrEMBL"
+                entry_type = "TrEMBL"
 
             # # to check for duplicated entries at the same position down the line
             # ptm_sites = []
@@ -397,13 +400,16 @@ def get_uniprot_records():
 
     logging.info(f"Entry download is done. {len(dataframe)} records stored for further deduplication.")
 
+    #remove later
+    dataframe.to_csv("all_records.csv", index=False)
+
     # deduplicates based on Accession + position + description and combines source info
     collapsed = deduplicate_records(dataframe)
 
     logging.info(f"Deduplication is done. {len(collapsed)} records stored for further processing.")
 
     #remove later
-    collapsed.to_csv("records.csv", index=False)
+    collapsed.to_csv("deduplicated_records.csv", index=False)
 
     return collapsed
 
