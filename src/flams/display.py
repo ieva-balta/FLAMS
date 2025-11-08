@@ -29,11 +29,11 @@ def create_output(output_filename, amino_acid_x, blast_records, len):
         Length of query protein (to calculate query coverage)
 
     """
-    # output_pre_dedupl = f"{output_filename}.tmp"
-    output_pre_dedupl = f"{output_filename}"
+    output_pre_dedupl = f"{output_filename}.tmp"
+    # output_pre_dedupl = f"{output_filename}"
     _display_result(output_pre_dedupl, amino_acid_x, blast_records, len)
-    # _deduplicate_output(amino_acid_x, output_pre_dedupl, output_filename)
-    # os.remove(output_pre_dedupl)
+    _deduplicate_output(amino_acid_x, output_pre_dedupl, output_filename)
+    os.remove(output_pre_dedupl)
 
 def _display_result(output_filename, amino_acid_x, blast_records, len):
     """
@@ -138,34 +138,39 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
                         ]
                     )
 
-# not using it in the uniprot version
-# def _deduplicate_output(amino_acid_x, output_pre_dedupl, output_filename):
-#     """
-#     This function creates a .tsv file containing all conserved modification sites, based on a specific FLAMS run, without duplicates.
-#     In this case, duplicates refer to identical hits, found once in CPLM and once in dbPTM.
-#     The created .tsv file merges the info from the two rows with the identical hits.
+#not using it in the uniprot version
+def _deduplicate_output(amino_acid_x, output_pre_dedupl, output_filename):
+    """
+    This function creates a .tsv file containing all conserved modification sites, based on a specific FLAMS run, without duplicates.
+    In this case, duplicates refer to identical hits, found once in CPLM and once in dbPTM.
+    The created .tsv file merges the info from the two rows with the identical hits.
 
-#     Parameters
-#     ----------
-#     amino_acid_x: str
-#         Amino acid containing the post-translational modification under investigation
-#     output_pre_dedupl: str
-#         Output file name of the file before deduplication
-#     output_filename: str
-#         Output file name
+    Parameters
+    ----------
+    amino_acid_x: str
+        Amino acid containing the post-translational modification under investigation
+    output_pre_dedupl: str
+        Output file name of the file before deduplication
+    output_filename: str
+        Output file name
 
-#     """
-#     df = pd.read_table(output_pre_dedupl, dtype = {"dbPTM evidence links": str, "CPLM evidence links": str })
-#     df["Protein name"] = df["Protein name"].fillna("not found")
-#     df2 = df.groupby(["Uniprot ID", "Modification", f"{amino_acid_x} location", f"{amino_acid_x} window", "Species",
-#                         "BLAST E-value", "BLAST identity", "BLAST coverage"]).agg({"Protein name" : "first",
-#                         "CPLM ID" : "first", "CPLM evidence code" : "first", "CPLM evidence links" : "first",
-#                         "dbPTM evidence code" : "first", "dbPTM evidence links" : "first"}).reset_index()
-#     df2 = df2.reindex(["Uniprot ID", "Protein name", "Modification", f"{amino_acid_x} location", f"{amino_acid_x} window", "Species",
-#     "BLAST E-value", "BLAST identity", "BLAST coverage",
-#     "CPLM ID", "CPLM evidence code", "CPLM evidence links",
-#     "dbPTM evidence code", "dbPTM evidence links"], axis = 1)
-#     df2.to_csv(output_filename, sep="\t", index = False)
+    """
+    df = pd.read_table(output_pre_dedupl, 
+            dtype = {"Source IDs": str }
+            )
+    df["Protein name"] = df["Protein name"].fillna("not found")
+    df2 = df.groupby(["Uniprot ID", "Modification", f"{amino_acid_x} location", f"{amino_acid_x} window", "Species",
+                        "BLAST E-value", "BLAST identity", "BLAST coverage"]).agg({"Protein name" : "first",
+                        # "CPLM ID" : "first", "CPLM evidence code" : "first", "CPLM evidence links" : "first",
+                        # "dbPTM evidence code" : "first", "dbPTM evidence links" : "first",
+                        "ECO codes" : "first", "Sources" : "first", "Source IDs": "first"
+                        }).reset_index()
+    df2 = df2.reindex(["Uniprot ID", "Protein name", "Modification", f"{amino_acid_x} location", f"{amino_acid_x} window", "Species",
+    "BLAST E-value", "BLAST identity", "BLAST coverage",
+    # "CPLM ID", "CPLM evidence code", "CPLM evidence links",
+    # "dbPTM evidence code", "dbPTM evidence links",
+    "ECO codes", "Sources", "Source IDs"], axis = 1)
+    df2.to_csv(output_filename, sep="\t", index = False)
 
 
 def _getSequenceWindow(hsp, x_location):
