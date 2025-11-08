@@ -17,7 +17,7 @@ from Bio import SeqIO
 
 from .databases import setup as db_setup
 
-""" setup
+""" input
 This script deals with parsing the input and checking the validity of all provided arguments.
 """
 
@@ -657,6 +657,20 @@ def retrieve_protein_from_uniprot(args,uniprot) -> Path:
 
 
 # Other Functions
+
+# COULD MAKE AUTOMATIC? READ THE AAS IN SETUP.MODIFICATIONS?
+def get_list_mod_containing_aa(amino_acid: str):
+    """
+    helper function to untamgle modifications automatically based on the MODIFICATION dictionary in seutup.py
+    """
+    mod_list = []
+    for modification, info in db_setup.MODIFICATIONS.items():
+        if amino_acid in info.aas:
+            mod_list.append(modification)
+
+    return mod_list
+
+
 def untangle_modifications(modifications):
     """
     This function transforms the amino-acid & CPLM aggregate modification options Ubs, Acylations, Others, and All to their respective collection of modifications.
@@ -667,140 +681,161 @@ def untangle_modifications(modifications):
         List of modifications provided by the user
 
     """
-    if (('CPLM-Ubs' in modifications) | ('CPLM-Acylations' in modifications) | ('CPLM-Others' in modifications) | ('CPLM-All' in modifications)
-        | ('A-All' in modifications) | ('C-All' in modifications) | ('D-All' in modifications) | ('E-All' in modifications) | ('F-All' in modifications)
+    if (
+        # ('CPLM-Ubs' in modifications) | ('CPLM-Acylations' in modifications) | ('CPLM-Others' in modifications) | ('CPLM-All' in modifications) |
+        ('A-All' in modifications) | ('C-All' in modifications) | ('D-All' in modifications) | ('E-All' in modifications) | ('F-All' in modifications)
         | ('G-All' in modifications) | ('H-All' in modifications) | ('I-All' in modifications) | ('K-All' in modifications) | ('L-All' in modifications)
         | ('M-All' in modifications) | ('N-All' in modifications) | ('P-All' in modifications) | ('Q-All' in modifications) | ('R-All' in modifications)
         | ('S-All' in modifications) | ('T-All' in modifications) | ('V-All' in modifications) | ('W-All' in modifications) | ('Y-All' in modifications)) :
-        if 'CPLM-Ubs' in modifications:
-            modifications.remove('CPLM-Ubs')
-            modifications.extend(['ubiquitination','sumoylation','pupylation','neddylation'])
-        if 'CPLM-Acylations' in modifications:
-            modifications.remove('CPLM-Acylations')
-            modifications.extend(['lactylation','acetylation','succinylation','crotonylation','malonylation',
-            'beta-hydroxybutyrylation','benzoylation','propionylation','2-hydroxyisobutyrylation','formylation',
-            'hmgylation','mgcylation','mgylation','glutarylation','butyrylation'])
-        if 'CPLM-Others' in modifications:
-            modifications.remove('CPLM-Others')
-            modifications.extend(['methylation','hydroxylation','phosphoglycerylation','biotinylation','lipoylation',
-            'dietylphosphorylation','glycation','carboxymethylation','carboxyethylation','carboxylation'])
-        if 'CPLM-All' in modifications:
-            modifications.remove('CPLM-All')
-            modifications.extend(['ubiquitination','sumoylation','pupylation','neddylation',
-            'lactylation','acetylation','succinylation','crotonylation','malonylation',
-            'beta-hydroxybutyrylation','benzoylation','propionylation','2-hydroxyisobutyrylation','formylation',
-            'hmgylation','mgcylation','mgylation','glutarylation','butyrylation',
-            'methylation','hydroxylation','phosphoglycerylation','biotinylation','lipoylation',
-            'dietylphosphorylation','glycation','carboxymethylation','carboxyethylation','carboxylation'])
+        # if 'CPLM-Ubs' in modifications:
+        #     modifications.remove('CPLM-Ubs')
+        #     modifications.extend(['ubiquitination','sumoylation','pupylation','neddylation'])
+        # if 'CPLM-Acylations' in modifications:
+        #     modifications.remove('CPLM-Acylations')
+        #     modifications.extend(['lactylation','acetylation','succinylation','crotonylation','malonylation',
+        #     'beta-hydroxybutyrylation','benzoylation','propionylation','2-hydroxyisobutyrylation','formylation',
+        #     'hmgylation','mgcylation','mgylation','glutarylation','butyrylation'])
+        # if 'CPLM-Others' in modifications:
+        #     modifications.remove('CPLM-Others')
+        #     modifications.extend(['methylation','hydroxylation','phosphoglycerylation','biotinylation','lipoylation',
+        #     'dietylphosphorylation','glycation','carboxymethylation','carboxyethylation','carboxylation'])
+        # if 'CPLM-All' in modifications:
+        #     modifications.remove('CPLM-All')
+        #     modifications.extend(['ubiquitination','sumoylation','pupylation','neddylation',
+        #     'lactylation','acetylation','succinylation','crotonylation','malonylation',
+        #     'beta-hydroxybutyrylation','benzoylation','propionylation','2-hydroxyisobutyrylation','formylation',
+        #     'hmgylation','mgcylation','mgylation','glutarylation','butyrylation',
+        #     'methylation','hydroxylation','phosphoglycerylation','biotinylation','lipoylation',
+        #     'dietylphosphorylation','glycation','carboxymethylation','carboxyethylation','carboxylation'])
         if 'A-All' in modifications:
             modifications.remove('A-All')
-            modifications.extend(['phosphorylation','acetylation','gpi-anchor','amidation','blocked_amino_end',
-            'methylation','n-carbamoylation'])
+            # modifications.extend(['phosphorylation','acetylation','gpi-anchor','amidation','blocked_amino_end',
+            # 'methylation','n-carbamoylation'])
+            modifications.extend(get_list_mod_containing_aa("A"))
         if 'C-All' in modifications:
             modifications.remove('C-All')
-            modifications.extend(['phosphorylation','acetylation','pyruvate','gpi-anchor',
-            'adp-ribosylation','amidation','hydroxylation','blocked_amino_end',
-            'oxidation','methylation','sulfation','ubiquitination','carbamidation',
-            'farnesylation','geranylgeranylation','glutathionylation','myristoylation',
-            'n-palmitoylation','pyrrolylation','s-archaeol','s-carbamoylation',
-            's-cyanation','s-cysteinylation','s-diacylglycerol','s-linked_glycosylation',
-            's-nitrosylation','s-palmitoylation','stearoylation',
-            'succinylation','sulfhydration','disulfide_bond'])
+            # modifications.extend(['phosphorylation','acetylation','pyruvate','gpi-anchor',
+            # 'adp-ribosylation','amidation','hydroxylation','blocked_amino_end',
+            # 'oxidation','methylation','sulfation','ubiquitination','carbamidation',
+            # 'farnesylation','geranylgeranylation','glutathionylation','myristoylation',
+            # 'n-palmitoylation','pyrrolylation','s-archaeol','s-carbamoylation',
+            # 's-cyanation','s-cysteinylation','s-diacylglycerol','s-linked_glycosylation',
+            # 's-nitrosylation','s-palmitoylation','stearoylation',
+            # 'succinylation','sulfhydration','disulfide_bond'])
+            modifications.extend(get_list_mod_containing_aa("C"))
         if 'D-All' in modifications:
             modifications.remove('D-All')
-            modifications.extend(['phosphorylation','acetylation','gpi-anchor',
-            'adp-ribosylation','amidation','hydroxylation','blocked_amino_end',
-            'methylation','n-linked_glycosylation','decarboxylation'])
+            # modifications.extend(['phosphorylation','acetylation','gpi-anchor',
+            # 'adp-ribosylation','amidation','hydroxylation','blocked_amino_end',
+            # 'methylation','n-linked_glycosylation','decarboxylation'])
+            modifications.extend(get_list_mod_containing_aa("D"))
         if 'E-All' in modifications:
             modifications.remove('E-All')
-            modifications.extend(['phosphorylation','acetylation','adp-ribosylation',
-            'amidation','hydroxylation','blocked_amino_end','methylation',
-            'formation_of_an_isopeptide_bond','gamma-carboxyglutamic_acid',
-            'pyrrolidone_carboxylic_acid'])
+            # modifications.extend(['phosphorylation','acetylation','adp-ribosylation',
+            # 'amidation','hydroxylation','blocked_amino_end','methylation',
+            # 'formation_of_an_isopeptide_bond','gamma-carboxyglutamic_acid',
+            # 'pyrrolidone_carboxylic_acid'])
+            modifications.extend(get_list_mod_containing_aa("E"))
         if 'F-All' in modifications:
             modifications.remove('F-All')
-            modifications.extend(['phosphorylation','amidation','hydroxylation',
-            'methylation'])
+            # modifications.extend(['phosphorylation','amidation','hydroxylation',
+            # 'methylation'])
+            modifications.extend(get_list_mod_containing_aa("F"))
         if 'G-All' in modifications:
             modifications.remove('G-All')
-            modifications.extend(['phosphorylation','d-glucuronoylation',
-            'cholesterol_ester','phosphatidylethanolamine_amidation',
-            'thiocarboxylation','blocked_amino_end','formylation',
-            'adp-ribosylation','gpi-anchor','myristoylation','n-palmitoylation',
-            'amidation','methylation','acetylation'])
+            # modifications.extend(['phosphorylation','d-glucuronoylation',
+            # 'cholesterol_ester','phosphatidylethanolamine_amidation',
+            # 'thiocarboxylation','blocked_amino_end','formylation',
+            # 'adp-ribosylation','gpi-anchor','myristoylation','n-palmitoylation',
+            # 'amidation','methylation','acetylation'])
+            modifications.extend(get_list_mod_containing_aa("G"))
         if 'H-All' in modifications:
             modifications.remove('H-All')
-            modifications.extend(['phosphorylation','blocked_amino_end',
-            'adp-ribosylation','amidation','hydroxylation','methylation'])
+            # modifications.extend(['phosphorylation','blocked_amino_end',
+            # 'adp-ribosylation','amidation','hydroxylation','methylation'])
+            modifications.extend(get_list_mod_containing_aa("H"))
         if 'I-All' in modifications:
             modifications.remove('I-All')
-            modifications.extend(['phosphorylation','blocked_amino_end',
-            'amidation','hydroxylation','methylation','n-linked_glycosylation'])
+            # modifications.extend(['phosphorylation','blocked_amino_end',
+            # 'amidation','hydroxylation','methylation','n-linked_glycosylation'])
+            modifications.extend(get_list_mod_containing_aa("I"))
         if 'K-All' in modifications:
             modifications.remove('K-All')
-            modifications.extend(['phosphorylation', 'deamination','formylation',
-            'ubiquitination','sumoylation','pupylation','adp-ribosylation','lactoylation',
-            'neddylation','lactylation','acetylation','succinylation','myristoylation',
-            'crotonylation','malonylation','beta-hydroxybutyrylation','benzoylation',
-            'propionylation','2-hydroxyisobutyrylation','formylation','n-palmitoylation',
-            'hmgylation','mgcylation','mgylation','glutarylation','butyrylation',
-            'methylation','hydroxylation','phosphoglycerylation','biotinylation',
-            'lipoylation','dietylphosphorylation','glycation','carboxymethylation',
-            'carboxyethylation','carboxylation','amidation','o-linked_glycosylation',
-            'n-linked_glycosylation'])
+            # modifications.extend(['phosphorylation', 'deamination','formylation',
+            # 'ubiquitination','sumoylation','pupylation','adp-ribosylation','lactoylation',
+            # 'neddylation','lactylation','acetylation','succinylation','myristoylation',
+            # 'crotonylation','malonylation','beta-hydroxybutyrylation','benzoylation',
+            # 'propionylation','2-hydroxyisobutyrylation','formylation','n-palmitoylation',
+            # 'hmgylation','mgcylation','mgylation','glutarylation','butyrylation',
+            # 'methylation','hydroxylation','phosphoglycerylation','biotinylation',
+            # 'lipoylation','dietylphosphorylation','glycation','carboxymethylation',
+            # 'carboxyethylation','carboxylation','amidation','o-linked_glycosylation',
+            # 'n-linked_glycosylation'])
+            modifications.extend(get_list_mod_containing_aa("K"))
         if 'L-All' in modifications:
             modifications.remove('L-All')
-            modifications.extend(['phosphorylation','blocked_amino_end','oxidation',
-            'amidation','hydroxylation','methylation'])
+            # modifications.extend(['phosphorylation','blocked_amino_end','oxidation',
+            # 'amidation','hydroxylation','methylation'])
+            modifications.extend(get_list_mod_containing_aa("L"))
         if 'M-All' in modifications:
             modifications.remove('M-All')
-            modifications.extend(['blocked_amino_end','formylation','oxidation',
-            'amidation','sulfoxidation','methylation','acetylation'])
+            # modifications.extend(['blocked_amino_end','formylation','oxidation',
+            # 'amidation','sulfoxidation','methylation','acetylation'])
+            modifications.extend(get_list_mod_containing_aa("M"))
         if 'N-All' in modifications:
             modifications.remove('N-All')
-            modifications.extend(['phosphorylation','blocked_amino_end',
-            'deamidation','adp-ribosylation','gpi-anchor','amidation',
-            'hydroxylation','methylation','n-linked_glycosylation'])
+            # modifications.extend(['phosphorylation','blocked_amino_end',
+            # 'deamidation','adp-ribosylation','gpi-anchor','amidation',
+            # 'hydroxylation','methylation','n-linked_glycosylation'])
+            modifications.extend(get_list_mod_containing_aa("N"))
         if 'P-All' in modifications:
             modifications.remove('P-All')
-            modifications.extend(['phosphorylation','blocked_amino_end','amidation',
-            'hydroxylation','o-linked_glycosylation','methylation','acetylation'])
+            # modifications.extend(['phosphorylation','blocked_amino_end','amidation',
+            # 'hydroxylation','o-linked_glycosylation','methylation','acetylation'])
+            modifications.extend(get_list_mod_containing_aa("P"))
         if 'Q-All' in modifications:
             modifications.remove('Q-All')
-            modifications.extend(['phosphorylation','hydroxyceramide_ester','serotonylation',
-            'blocked_amino_end','formation_of_an_isopeptide_bond','deamidation',
-            'pyrrolidone_carboxylic_acid','amidation','methylation'])
+            # modifications.extend(['phosphorylation','hydroxyceramide_ester','serotonylation',
+            # 'blocked_amino_end','formation_of_an_isopeptide_bond','deamidation',
+            # 'pyrrolidone_carboxylic_acid','amidation','methylation'])
+            modifications.extend(get_list_mod_containing_aa("Q"))
         if 'R-All' in modifications:
             modifications.remove('R-All')
-            modifications.extend(['phosphorylation','blocked_amino_end','citrullination',
-            'adp-ribosylation','amidation','hydroxylation','methylation',
-            'n-linked_glycosylation','acetylation','ubiquitination'])
+            # modifications.extend(['phosphorylation','blocked_amino_end','citrullination',
+            # 'adp-ribosylation','amidation','hydroxylation','methylation',
+            # 'n-linked_glycosylation','acetylation','ubiquitination'])
+            modifications.extend(get_list_mod_containing_aa("R"))
         if 'S-All' in modifications:
             modifications.remove('S-All')
-            modifications.extend(['phosphorylation','decanoylation','octanoylation',
-            'o-palmitoylation','umpylation','ampylation','blocked_amino_end',
-            'o-palmitoleoylation','adp-ribosylation','gpi-anchor','sulfation',
-            'oxidation','pyruvate','amidation','hydroxylation','o-linked_glycosylation',
-            'methylation','n-linked_glycosylation','acetylation','ubiquitination',
-            'dephosphorylation'])
+            # modifications.extend(['phosphorylation','decanoylation','octanoylation',
+            # 'o-palmitoylation','umpylation','ampylation','blocked_amino_end',
+            # 'o-palmitoleoylation','adp-ribosylation','gpi-anchor','sulfation',
+            # 'oxidation','pyruvate','amidation','hydroxylation','o-linked_glycosylation',
+            # 'methylation','n-linked_glycosylation','acetylation','ubiquitination',
+            # 'dephosphorylation'])
+            modifications.extend(get_list_mod_containing_aa("S"))
         if 'T-All' in modifications:
             modifications.remove('T-All')
-            modifications.extend(['phosphorylation','decarboxylation','decanoylation',
-            'octanoylation','o-palmitoylation','umpylation','ampylation',
-            'blocked_amino_end','gpi-anchor','sulfation',
-            'amidation','hydroxylation','o-linked_glycosylation',
-            'methylation','n-linked_glycosylation','acetylation', 'dephosphorylation'])
+            # modifications.extend(['phosphorylation','decarboxylation','decanoylation',
+            # 'octanoylation','o-palmitoylation','umpylation','ampylation',
+            # 'blocked_amino_end','gpi-anchor','sulfation',
+            # 'amidation','hydroxylation','o-linked_glycosylation',
+            # 'methylation','n-linked_glycosylation','acetylation', 'dephosphorylation'])
+            modifications.extend(get_list_mod_containing_aa("T"))
         if 'V-All' in modifications:
             modifications.remove('V-All')
-            modifications.extend(['phosphorylation','blocked_amino_end','amidation',
-            'hydroxylation','methylation','n-linked_glycosylation','acetylation'])
+            # modifications.extend(['phosphorylation','blocked_amino_end','amidation',
+            # 'hydroxylation','methylation','n-linked_glycosylation','acetylation'])
+            modifications.extend(get_list_mod_containing_aa("V"))
         if 'W-All' in modifications:
             modifications.remove('W-All')
-            modifications.extend(['phosphorylation','c-linked_glycosylation','oxidation',
-            'amidation','hydroxylation','succinylation','n-linked_glycosylation'])
+            # modifications.extend(['phosphorylation','c-linked_glycosylation','oxidation',
+            # 'amidation','hydroxylation','succinylation','n-linked_glycosylation'])
+            modifications.extend(get_list_mod_containing_aa("W"))
         if 'Y-All' in modifications:
             modifications.remove('Y-All')
-            modifications.extend(['phosphorylation','umpylation','iodination',
-            'ampylation','adp-ribosylation','sulfation','nitration','amidation',
-            'hydroxylation','o-linked_glycosylation','methylation','acetylation',
-            'dephosphorylation'])
+            # modifications.extend(['phosphorylation','umpylation','iodination',
+            # 'ampylation','adp-ribosylation','sulfation','nitration','amidation',
+            # 'hydroxylation','o-linked_glycosylation','methylation','acetylation',
+            # 'dephosphorylation'])
+            modifications.extend(get_list_mod_containing_aa("Y"))

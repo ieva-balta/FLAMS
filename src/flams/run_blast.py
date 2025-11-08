@@ -87,12 +87,12 @@ class ModificationHeader:
     uniprot_id: str
     position: int
     length: int
-    database: str
-    protein_name: str
     modification: str
+    protein_name: str
+    database: str
     species: str
-    db_id: str
-    evidence_code: str
+    eco_codes: str
+    sources: str
     evidence_link: str
 
     @staticmethod
@@ -102,8 +102,8 @@ class ModificationHeader:
             r"(?P<uniprot_id>\S+)\|"
             r"(?P<position>\d+)\|"
             r"(?P<length>\d+)\|"
-            r"(?P<database>\S+)"
-            r" (?P<protein_name>\S+)\|(?P<modification>\S+)\|(?P<species>\S+) \[(?P<db_id>\S+)\|(?P<evidence_code>\S+)\|(?P<evidence_link>.+)\]"
+            r"(?P<modification>\S+)"
+            r" (?P<protein_name>\S+)\|(?P<database>\S+)\|(?P<species>\S+) \[(?P<eco_codes>\S+)\|(?P<sources>\S+)\|(?P<evidence_link>.+)\]"
         )
         vars = re.match(regex, title).groupdict()
         vars["position"] = int(vars["position"])
