@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-@author: annkamsk, hannelorelongin, kasgel, MaartenLangen
+@author: annkamsk, hannelorelongin, kasgel, MaartenLangen, ieva-balta, majocava, naaattella
 """
 
 import argparse
@@ -658,10 +658,16 @@ def retrieve_protein_from_uniprot(args,uniprot) -> Path:
 
 # Other Functions
 
-# COULD MAKE AUTOMATIC? READ THE AAS IN SETUP.MODIFICATIONS?
 def get_list_mod_containing_aa(amino_acid: str):
     """
-    helper function to untamgle modifications automatically based on the MODIFICATION dictionary in seutup.py
+    This is a helper function for untangle_modifications to automatically get a list of modification 
+    based on the MODIFICATIONs dictionary in seutup.py.
+
+    Parameters
+    ----------
+    amino_acids: str
+        Amino acid letter
+
     """
     mod_list = []
     for modification, info in db_setup.MODIFICATIONS.items():
@@ -672,7 +678,7 @@ def get_list_mod_containing_aa(amino_acid: str):
 
 def untangle_modifications(modifications):
     """
-    This function transforms the amino-acid & CPLM aggregate modification options Ubs, Acylations, Others, and All to their respective collection of modifications.
+    This function transforms the amino-acid & aggregate modification options Ubs, Acylations, and All to their respective collection of modifications.
 
     Parameters
     ----------
@@ -680,6 +686,7 @@ def untangle_modifications(modifications):
         List of modifications provided by the user
 
     """
+    # modification groups not applicable for UniProt are commented out
     if (
         ('Ubs' in modifications) | ('Acylations' in modifications) | 
         # ('CPLM-Others' in modifications) | 
