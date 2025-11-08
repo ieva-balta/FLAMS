@@ -87,9 +87,9 @@ class ModificationHeader:
     uniprot_id: str
     position: int
     length: int
-    modification: str
-    protein_name: str
     database: str
+    protein_name: str
+    modification: str
     species: str
     eco_codes: str
     sources: str
@@ -99,13 +99,20 @@ class ModificationHeader:
     def parse(title: str) -> "ModificationHeader":
 
         regex = (
-            r"(?P<uniprot_id>\S+)\|"
+            r"(?P<uniprot_id>[A-Z0-9_]+)\|"
             r"(?P<position>\d+)\|"
             r"(?P<length>\d+)\|"
-            r"(?P<modification>\S+)"
-            r" (?P<protein_name>\S+)\|(?P<database>\S+)\|(?P<species>\S+) \[(?P<eco_codes>\S+)\|(?P<sources>\S+)\|(?P<evidence_link>.+)\]"
+            r"(?P<database>\S+)"
+            r" (?P<protein_name>\S+)\|(?P<modification>\S+)\|(?P<species>\S+) \[(?P<eco_codes>\S+)\|(?P<sources>\S+)\|(?P<evidence_link>.+)\]"
         )
-        vars = re.match(regex, title).groupdict()
+
+        match = re.match(regex, title)
+        if not match:
+            # This is where you'd see the *actual* bad header
+            raise ValueError(f"Could not parse modification header:\n{title}")
+        
+        vars = match.groupdict()
+        
         vars["position"] = int(vars["position"])
         vars["length"] = int(vars["length"])
         return ModificationHeader(**vars)

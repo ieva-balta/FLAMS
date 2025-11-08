@@ -670,7 +670,6 @@ def get_list_mod_containing_aa(amino_acid: str):
 
     return mod_list
 
-
 def untangle_modifications(modifications):
     """
     This function transforms the amino-acid & CPLM aggregate modification options Ubs, Acylations, Others, and All to their respective collection of modifications.
@@ -682,31 +681,34 @@ def untangle_modifications(modifications):
 
     """
     if (
-        # ('CPLM-Ubs' in modifications) | ('CPLM-Acylations' in modifications) | ('CPLM-Others' in modifications) | ('CPLM-All' in modifications) |
+        ('Ubs' in modifications) | ('Acylations' in modifications) | 
+        # ('CPLM-Others' in modifications) | 
+        ('All' in modifications) |
         ('A-All' in modifications) | ('C-All' in modifications) | ('D-All' in modifications) | ('E-All' in modifications) | ('F-All' in modifications)
         | ('G-All' in modifications) | ('H-All' in modifications) | ('I-All' in modifications) | ('K-All' in modifications) | ('L-All' in modifications)
         | ('M-All' in modifications) | ('N-All' in modifications) | ('P-All' in modifications) | ('Q-All' in modifications) | ('R-All' in modifications)
         | ('S-All' in modifications) | ('T-All' in modifications) | ('V-All' in modifications) | ('W-All' in modifications) | ('Y-All' in modifications)) :
-        # if 'CPLM-Ubs' in modifications:
-        #     modifications.remove('CPLM-Ubs')
-        #     modifications.extend(['ubiquitination','sumoylation','pupylation','neddylation'])
-        # if 'CPLM-Acylations' in modifications:
-        #     modifications.remove('CPLM-Acylations')
-        #     modifications.extend(['lactylation','acetylation','succinylation','crotonylation','malonylation',
-        #     'beta-hydroxybutyrylation','benzoylation','propionylation','2-hydroxyisobutyrylation','formylation',
-        #     'hmgylation','mgcylation','mgylation','glutarylation','butyrylation'])
+        if 'Ubs' in modifications:
+            modifications.remove('Ubs')
+            modifications.extend(['ubiquitination','sumoylation','pupylation','neddylation'])
+        if 'Acylations' in modifications:
+            modifications.remove('Acylations')
+            modifications.extend(['acetylation','succinylation','crotonylation','malonylation',
+            'beta-hydroxybutyrylation','benzoylation','propionylation','2-hydroxyisobutyrylation','formylation',
+            'glutarylation','butyrylation'])
         # if 'CPLM-Others' in modifications:
         #     modifications.remove('CPLM-Others')
         #     modifications.extend(['methylation','hydroxylation','phosphoglycerylation','biotinylation','lipoylation',
         #     'dietylphosphorylation','glycation','carboxymethylation','carboxyethylation','carboxylation'])
-        # if 'CPLM-All' in modifications:
-        #     modifications.remove('CPLM-All')
-        #     modifications.extend(['ubiquitination','sumoylation','pupylation','neddylation',
-        #     'lactylation','acetylation','succinylation','crotonylation','malonylation',
-        #     'beta-hydroxybutyrylation','benzoylation','propionylation','2-hydroxyisobutyrylation','formylation',
-        #     'hmgylation','mgcylation','mgylation','glutarylation','butyrylation',
-        #     'methylation','hydroxylation','phosphoglycerylation','biotinylation','lipoylation',
-        #     'dietylphosphorylation','glycation','carboxymethylation','carboxyethylation','carboxylation'])
+        if 'All' in modifications:
+            modifications.remove('All')
+            # modifications.extend(['ubiquitination','sumoylation','pupylation','neddylation',
+            # 'lactylation','acetylation','succinylation','crotonylation','malonylation',
+            # 'beta-hydroxybutyrylation','benzoylation','propionylation','2-hydroxyisobutyrylation','formylation',
+            # 'hmgylation','mgcylation','mgylation','glutarylation','butyrylation',
+            # 'methylation','hydroxylation','phosphoglycerylation','biotinylation','lipoylation',
+            # 'dietylphosphorylation','glycation','carboxymethylation','carboxyethylation','carboxylation'])
+            modifications.extend(db_setup.MODIFICATIONS.keys())
         if 'A-All' in modifications:
             modifications.remove('A-All')
             # modifications.extend(['phosphorylation','acetylation','gpi-anchor','amidation','blocked_amino_end',

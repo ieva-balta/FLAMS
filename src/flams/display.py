@@ -85,13 +85,14 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
                     dbDescr = headerSplitSpace[2]
                     # Split generalDescr1
                     uniprot_id = generalDescr1.split("|")[0]
+                    uniprot_id = uniprot_id.split("_")[0]
                     x_location = int(generalDescr1.split("|")[1])
                     protein_length = int(generalDescr1.split("|")[2])
                     # Split generalDescr2
                     protein_name = generalDescr2.split("|")[0].replace("__"," ")
-                    # modification_type = generalDescr2.split("|")[1].replace("__"," ")
+                    modification_type = generalDescr2.split("|")[1].replace("__"," ")
                     species = generalDescr2.split("|")[2].replace("__"," ")
-                    modification_type = generalDescr1.split("|")[3]
+                    # modification_type = generalDescr1.split("|")[3]
                     # # Split dbDescr
                     # if generalDescr1.split("|")[3] == "CPLM":
                     #     cplm_id = dbDescr.split("|")[0][1:]

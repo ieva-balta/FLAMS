@@ -147,7 +147,7 @@ valid_ECO_codes = [
 
 
 # # to not run the download all the time
-df = pd.read_csv("/data/leuven/368/vsc36826/flams/flams2/FLAMS/src/flams/databases/uniprot_test/deduplicated_records.csv", header=0)
+df = pd.read_csv("/data/leuven/368/vsc36826/flams/flams2/dbs/deduplicated_records-2.0.csv", header=0)
 
 def get_fasta(PTM_modification_dict, data_dir):
     """
@@ -157,7 +157,7 @@ def get_fasta(PTM_modification_dict, data_dir):
 
     # switch when integrated
     all_records = df
-    # all_records = get_uniprot_records()
+    # all_records = get_uniprot_records(data_dir)
 
     # classifies records into PTM types and stores fasta files per modification type
     classified = sort_uniprot_records(all_records, PTM_modification_dict, data_dir)
@@ -166,8 +166,8 @@ def get_fasta(PTM_modification_dict, data_dir):
     unclassified = pd.concat([all_records, classified]).drop_duplicates(keep=False)
 
     #remove later
-    # classified.to_csv("classified.csv", index=False)
-    # unclassified.to_csv("unclassified.csv", index=False)
+    classified.to_csv(f"{data_dir}/classified-{setup.version}.csv", index=False)
+    unclassified.to_csv(f"{data_dir}/unclassified-{setup.version}.csv", index=False)
 
     #output unclassified in fasta format
     fasta_records_unclassified = df_to_fasta(unclassified)
@@ -205,7 +205,7 @@ def sort_uniprot_records(uniprot_records, PTM_modification_dict, data_dir):
         fasta_records = df_to_fasta(df_mod_type)
 
         #remove later
-        # df_mod_type.to_csv(f"modification_csvs/{modification}.csv", index=False)
+        df_mod_type.to_csv(f"{data_dir}/{modification}-{m_type.version}.csv", index=False)
         
         with open(f"{data_dir}/{modification}-{m_type.version}.fasta", "w", encoding="UTF-8") as out:
             SeqIO.write(fasta_records, out, "fasta")
@@ -235,13 +235,16 @@ def df_to_fasta(PTM_type_df):
     """
     fasta_records = []
     for idx, row in PTM_type_df.iterrows():
+        protein = {row["Protein"]}
+        if not protein:
+            protein = "N/A"
         seq = Seq(row["Sequence"])
-        # switch the description and entry type around for blast db purposes
-        id = f'{row["Accession"]}|{str(row["Position"])}|{row["Length"]}|{row["Description"]}'
+        # add unique id instead of accession for BLAST purposes
+        id = f'{row["Unique_ID"]}|{str(row["Position"])}|{row["Length"]}|{row["Entry_type"]}'
         rec = SeqRecord(
                     seq,
                     id=id,
-                    description=f'{row["Protein"]}|{row["Entry_type"]}|{row["Organism"]} [{row["ECO_codes"]}|{row["Sources"]}|{row["Source_ids"]}]',
+                    description=f'{row["Protein"]}|{row["Description"]}|{row["Organism"]} [{row["ECO_codes"]}|{row["Sources"]}|{row["Source_ids"]}]',
                 )
 
         #append
@@ -262,6 +265,7 @@ def deduplicate_records(uniprot_records):
     collapsed = (
         uniprot_records.groupby(group_cols, as_index=False)
         .agg({
+            "Unique_ID": "first",
             "Accession": "first",
             "Position": "first",
             "Length": "first",
@@ -280,7 +284,7 @@ def deduplicate_records(uniprot_records):
 
     return collapsed
     
-def get_uniprot_records():
+def get_uniprot_records(data_dir):
     """
     fetches all uniprot ptm records
     outputs a dataframe of all records + info
@@ -294,6 +298,8 @@ def get_uniprot_records():
 
     tally = 0
     dataframe = []
+
+    tally_per_feature = 0
 
     while url:
         response = requests.get(url, headers=headers)
@@ -387,8 +393,12 @@ def get_uniprot_records():
                 desc = f"{desc}".replace(" ","__")
                 length = len(sequence)
 
+                #add ID to differentiate
+                unique_id = f"{accession}_{tally_per_feature}"
+                tally_per_feature += 1
+
                 #append to dataframe
-                dataframe.append([accession, pos, length, entry_type, 
+                dataframe.append([unique_id, accession, pos, length, entry_type, 
                                     protein_name, feature_type_name, desc, organism_name, 
                                     ECO_str, source_str, ids_str, sequence])
             
@@ -400,14 +410,14 @@ def get_uniprot_records():
         if tally >= int(total):
             break
 
-    dataframe = pd.DataFrame(dataframe, columns = ["Accession", "Position", "Length", "Entry_type",
+    dataframe = pd.DataFrame(dataframe, columns = ["Unique_ID", "Accession", "Position", "Length", "Entry_type",
                                                     "Protein", "Feature_type", "Description", "Organism",
                                                     "ECO_codes", "Sources", "Source_ids", "Sequence"])
 
     logging.info(f"Entry download is done. {len(dataframe)} records stored for further deduplication.")
 
     #remove later
-    # dataframe.to_csv("all_records.csv", index=False)
+    dataframe.to_csv(f"{data_dir}/all_records-{setup.version}.csv", index=False)
 
     # deduplicates based on Accession + position + description and combines source info
     collapsed = deduplicate_records(dataframe)
@@ -415,6 +425,6 @@ def get_uniprot_records():
     logging.info(f"Deduplication is done. {len(collapsed)} records stored for further processing.")
 
     #remove later
-    # collapsed.to_csv("deduplicated_records.csv", index=False)
+    collapsed.to_csv(f"{data_dir}/deduplicated_records-{setup.version}.csv", index=False)
 
     return collapsed
