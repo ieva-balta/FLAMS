@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-@author: annkamsk, hannelorelongin, kasgel, MaartenLangen
+@author: annkamsk, hannelorelongin, kasgel, MaartenLangen, ieva-balta, majocava, naaattella
 """
 
 import subprocess
@@ -36,7 +36,7 @@ class ModificationDatabase:
     module: Any
         Refers to database module, necessary to retrieve the fasta files on the modification described by Descriptor
     descriptor:
-        Label to identify the modification
+        List of RegEx expressions
 
     """
     module: Any
@@ -53,7 +53,7 @@ class ModificationType:
     type: str
         Label to identify modification
     version: float
-        Label to identify CPLM database version
+        Label to identify database version
     dbs: List[ModificationDatabase]
         List of modification database
 
@@ -73,14 +73,17 @@ class ModificationType:
 #     1.4: "https://zenodo.org/records/16737546/files/{0}-{1}.zip?download=1"
 #     }
 
-# version for uniprot download, starting with 2.0
+# version for UniProt download, starting with 2.0
 version = 2.0
 
 # Here we store a dict of modifications that can be queried for.
     # sorted alphabetically
-    # allows duplication
-    # for new types the amino acid list is taken from fasta files not based on literature
+    # allows duplication (same record can be associated with multiple modification types)
+    # new types are tagged with comment NEW TYPE
+    # for new types the amino acid list is taken from fasta files, it is NOT based on literature
     # for old types the amino acid list is left the same
+    # types not found in UniProt are commented out
+    # stores the RegEx list under descriptor
 MODIFICATIONS = {
     "acetylation": ModificationType(
         "acetylation", version,
@@ -877,6 +880,7 @@ def _generate_blastdb_if_not_up_to_date(modification: ModificationType):
 
 # FOR OWN DATABASE DOWNLOAD - on a fresh install:
 # Comment out try/except above (lines 516-521), uncomment the following line of code
+        # downloads uniprot database
         get_fasta_from_uniprot(data_dir)
 
     # Generate local BLASTDB from FASTA in fasta_location_mod
@@ -970,11 +974,15 @@ def get_blastdb_name_for_modification(modification: str, version=None):
 
 def get_fasta_from_uniprot(data_dir):
     """
-    downloads a fasta file per modification type from uniprot
+    This function downloads the UniProt databases for all modification types.
+    To update change the version in this .py file.
 
-    TO UPDATE CHANGE VERSION NUMBER IN UNIPROT MODULE
+    Parameters
+    ----------
+    data_dir: directory
+        Platform-specific directory that stores app data. The UniProt databases will be stored here.
+
     """
-
     uniprot.get_fasta(MODIFICATIONS, data_dir)
     
 
