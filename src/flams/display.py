@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-@author: annkamsk, hannelorelongin, Retro212
+@author: annkamsk, hannelorelongin, Retro212, ieva-balta, majocava, naaattella
 """
 
 import csv
@@ -30,7 +30,6 @@ def create_output(output_filename, amino_acid_x, blast_records, len):
 
     """
     output_pre_dedupl = f"{output_filename}.tmp"
-    # output_pre_dedupl = f"{output_filename}"
     _display_result(output_pre_dedupl, amino_acid_x, blast_records, len)
     _deduplicate_output(amino_acid_x, output_pre_dedupl, output_filename)
     os.remove(output_pre_dedupl)
@@ -78,13 +77,14 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
         for blast_record in blast_records:
             for alignment in blast_record.alignments:
                 for hsp in alignment.hsps:
-                    # Parsing header of format UniProtID|proteinName|xPosition|modificationType db|speciesNoSpaces [db_ID|evidenceCode|evidenceLink]
+                    # Parsing header of format UniProtID|xPosition|length|db proteinName|modificationType|speciesNoSpaces [eco_codes|sources|evidenceLink]
                     headerSplitSpace = (alignment.title).split()  # split up header into list, seperated by space
                     generalDescr1 = headerSplitSpace[0]
                     generalDescr2 = headerSplitSpace[1]
                     dbDescr = headerSplitSpace[2]
                     # Split generalDescr1
                     uniprot_id = generalDescr1.split("|")[0]
+                    # removes the tally number from the ID
                     uniprot_id = uniprot_id.split("_")[0]
                     x_location = int(generalDescr1.split("|")[1])
                     protein_length = int(generalDescr1.split("|")[2])
@@ -92,7 +92,6 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
                     protein_name = generalDescr2.split("|")[0].replace("__"," ")
                     modification_type = generalDescr2.split("|")[1].replace("__"," ")
                     species = generalDescr2.split("|")[2].replace("__"," ")
-                    # modification_type = generalDescr1.split("|")[3]
                     # # Split dbDescr
                     # if generalDescr1.split("|")[3] == "CPLM":
                     #     cplm_id = dbDescr.split("|")[0][1:]
@@ -107,6 +106,7 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
                     #     dbptm_evidenceCode = dbDescr.split("|")[1]
                     #     dbptm_evidenceLink = dbDescr.split("|")[2][:-1]
                     ecos, sources, s_ids = dbDescr.split("|")
+                    # removes the [] left from the header
                     ecos = ecos.replace("[", "")
                     s_ids = s_ids.replace("]", "")
 
@@ -138,11 +138,11 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
                         ]
                     )
 
-#not using it in the uniprot version
+
 def _deduplicate_output(amino_acid_x, output_pre_dedupl, output_filename):
     """
     This function creates a .tsv file containing all conserved modification sites, based on a specific FLAMS run, without duplicates.
-    In this case, duplicates refer to identical hits, found once in CPLM and once in dbPTM.
+    In this case, duplicates refer to identical hits, found in multiple modification types.
     The created .tsv file merges the info from the two rows with the identical hits.
 
     Parameters
