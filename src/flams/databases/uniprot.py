@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-""" uniprot
-will fetch all ptm records in one go and filter after
+"""
+@author: ieva-balta, majocava, naaattella
 """
 
 import sys
@@ -13,126 +12,18 @@ from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
-#fuzzywuzzy to add to conda download?
 import requests
-from fuzzywuzzy import process
 import logging
-
-# regular expression re
 import re
 
 from . import setup
 
-#might remove
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+""" uniprot
+This script downloads the different contents of the UniProt database, and transforms them into a fasta format.
+Script developed to work with UniProt database release 2025_04.
+"""
 
-# dictionary of PTM types and a list of RegEx's to find them
-# ALLOWS DUPLICATION
-# MODIFICATIONS = {
-#     "acetylation": [r"[-\w_]*acetyl[-\w_]*"],
-#     "adp-ribosylation": [r"ADP[-_\s]*ribosyl[-\w_]*"],
-#     "adp-riboxanation": [r"ADP[-_\s]*ribox[-\w_]*"], # new type
-#     "amidation": [r"[-\w_]*(?<!de)amid[-\w_]*"],
-#     "ampylation" : [r"(?<!S)AMP[-\w_]*", r"[-\w_]*adenylate[-\w_]*"],
-#     "benzoylation": [r"[-\w_]*benzoyl[-\w_]*"],
-#     "beta-hydroxybutyrylation": [r"(?:β|beta)[-_\s]*hydroxybutyryl[-\w_]*"], # overlaps with butyrylation and hydroxylation
-#     "biotinylation": [r"[-\w_]*biotinyl[-\w_]*"],
-#     "blocked_amino_end": [r"blocked__(?:amino|carboxyl)__end"],
-#     "bromination": [r"[-\w_]*bromo[-\w_]*"], # new type
-#     "butyrylation": [r"[_\w-]*butyryl[_\w-]*"], # some entries overlap with beta-hydroxybutyrylation and 2-hydroxyisobutyrylation
-#     # "carbamidation": "",
-#     "carboxyethylation": [r"[_\w-]*carboxyethyl[_\w-]*"],
-#     "carboxylation": [r"[_\w-]*(?<!de)carboxy[_\w-]*"], # overlaps
-#     # "carboxymethylation": "",
-#     "cholesterol_ester": [r"[-\w_]*cholesterol(?:__glycine)?__ester"],
-#     "citrullination": [r"[-\w_]*citrulline"],
-#     "crotonylation": [r"[-\w_]*crotonyl[-\w_]*"],
-#     "cyclopeptide": [r"[-\w_]*cyclo(?:peptide)?[-\w_]*"], # new
-#     "cysteinylation": [r"[_\w-]*cysteinyl[_\w-]*"], # overlap with s-cysteinylation etc
-#     "c-linked_glycosylation": [r"c[-_\s]*linked[-\w_]*"],
-#     "deamidation": [r"[-\w_]*deamidat[-\w_]*"],
-#     "deamination": [r"[-\w_]*allysine[-\w_]*"],
-#     "decanoylation": [r"[-\w_]*decanoyl[-\w_]*"],
-#     "decarboxylation": [r"[-\w_]*decarboxylat[-\w_]*"],
-#     "dehydration": [r"[-\w_]*dehydro[-\w_]*"], # new type
-#     "dephosphorylation": [r"[-\w_]*dephospho[-\w_]*"],
-#     # "dietylphosphorylation": "",
-#     "disulfide_bond": [r"[-\w_]*disulfide[-\w_]*"],
-#     "d-glucuronoylation": [r"d[-_\s]*glucuronoyl[-\w_]*"],
-#     "FADylation" : [r"FAD[-\w_]*"], #new type
-#     "farnesylation": [r"[-\w_]*farnesyl[-\w_]*"],
-#     "formation_of_an_isopeptide_bond": [r"[_\w-]*isopeptide[_\w-]*"], # lots of overlap with the sumo, ubiq, nedd etc.
-#     "formylation": [r"[-\w_]*formyl[-\w_]*"],
-#     "gamma-carboxyglutamic_acid": [r"(?:gamma|γ)-?carboxyglutamic__acid[-\w_]*"],
-#     #genarylation moved to broad
-#     "geranylation": [r"[_\w-]*geranyl[_\w-]*"], # new type, overlap with genarylgenarylation
-#     "geranylgeranylation": [r"[-\w_]*geranylgeranyl[-\w_]*"], 
-#     "glutamylation": [r"[-\w_]*glutamyl[-\w_]*"], # new type, some overlap with serotonin etc
-#     "glutarylation": [r"[-\w_]*glutaryl[-\w_]*"],
-#     "glutathionylation": [r"[-\w_]*glutathionyl(?:__cysteine)?[-\w_]*"],
-#     "glycation": [r"[-\w_]*glycation[-\w_]*"],
-#     "gmpylation": [r"[-\w_]*GMP[-\w_]*"], # new type
-#     "gpi-anchor": [r"[-\w_]*gpi[-\s]?(?:like-)?anchor[-\w_]*"], # adds mimick "gpi-like anchor"
-#     "histidylation": [r"[-\w_]*histidyl[-\w_]*"], # new type
-#     # "hmgylation": "",
-#     "hydroxyceramide_ester": [r"[-\w_]*hydroxyceramide(?:__glutamate)?__ester[-\w_]*"],
-#     "hydroxylation": [r"[_\w-]*(?<!de)hydroxy[_\w-]*"],
-#     "hypusine": [r"[-\w_]*hypusine[-\w_]*"], # new type
-#     "imidazolation": [r"[-\w_]*imidazol[-\w_]*"], # new type
-#     "iodination": [r"[-\w_]*iodo[_\w-]*", r"[_\w-]*thyroxine[_\w-]*"],
-#     "isomerization": [r"(?:^|-)[dl]-[_\w-]*"], # new type
-#     "lactoylation": [r"[_\w-]*lactoyl[_\w-]*"],
-#     # "lactylation": "",
-#     "lipoylation": [r"[_\w-]*lipoyl[_\w-]*"],
-#     "malonylation": [r"[_\w-]*malonyl[_\w-]*"],
-#     "methylation": [r"[_\w-]*methyl[_\w-]*"],
-#     # "mgcylation": "",
-#     # "mgylation": "",
-#     "myristoylation": [r"[_\w-]*myristoyl[_\w-]*"],
-#     "neddylation": [r"[_\w-]*NEDD8[_\w-]*"],
-#     "nitration": [r"[_\w-]*nitro[_\w-]*", r"[_\w-]*nitrated[_\w-]*"],
-#     "n-carbamoylation": [r"n[-_\s]*carbamoyl[_\w-]*"],
-#     "n-linked_glycosylation": [r"n[-_\s]*(?:alpha|beta|α|β)?[\s-]?linked[_\w-]*"],
-#     "n-palmitoylation": [r"n[-_\s]*palmitoyl[_\w-]*"],
-#     "octanoylation": [r"[_\w-]*octanoyl[_\w-]*"],
-#     "oxidation": [r"[_\w-]*oxo[_\w-]*", r"[_\w-]*sulf[ei]nic__acid[_\w-]*"], #Tryptophylquinone? Methionine sulfoxide? Cysteine sulfenic acid?
-#     "o-linked_glycosylation": [r"o[-_\s]*(?:alpha|beta|α|β)?[\s-]?linked[_\w-]*"],
-#     "o-palmitoleoylation": [r"o[-_\s]*palmitoleoyl[_\w-]*"],
-#     "o-palmitoylation": [r"o[-_\s]*palmitoyl[_\w-]*"], # overlap with palmitoylation
-#     "palmitoylation": [r"[_\w-]*palmitoyl[_\w-]*"], # new type
-#     "phosphatidylethanolamine_amidation": [r"[_\w-]*phosphatidylethanolamine__amidated[_\w-]*"],
-#     "phosphoglycerylation": [r"[_\w-]*glycerophospho[_\w-]*"], # overlaps
-#     "phosphorylation": [r"[_\w-]*(?<!de)phospho[_\w-]*", r"[_\w-]*aspartylphosphate[_\w-]*"],
-#     "prenylation" : [r"[_\w-]*prenyl[_\w-]*"], # new type
-#     "propionylation": [r"[_\w-]*propionyl[_\w-]*"],
-#     "pupylation": [r"[_\w-]*pup[_\w-]*"],
-#     "pyridoxal_phosphate_addition": [r"[_\w-]*pyridoxal__phosphate[_\w-]*"], # new type
-#     "pyrrolidone_carboxylic_acid": [r"[_\w-]*pyrrolidone__carboxylic__acid[_\w-]*"], # overlap
-#     "pyrrolylation": [r"[_\w-]*pyrrolyl[_\w-]*"],
-#     "pyruvate": [r"[_\w-]*pyruvic__acid[_\w-]*"], # overlap
-#     "quinones" : [r"[_\w-]*quinone[_\w-]*"],
-#     "serotonylation" : [r"[_\w-]*seroton[_\w-]*"], # overlap
-#     "stearoylation" : [r"[_\w-]*stearoyl[_\w-]*"],
-#     "succinylation": [r"[_\w-]*succin[iy][_\w-]*"],
-#     "sulfation" : [r"[_\w-]*sulfo[_\w-]*"],
-#     "sulfhydration" : [r"[_\w-]*cysteine__persulfide[_\w-]*"],
-#     "sulfilimine_crosslink" : [r"[_\w-]*sulfilimine[_\w-]*"], # new type
-#     "sulfoxidation" : [r"[_\w-]*sulfoxide[_\w-]*"],
-#     "sumoylation": [r"[_\w-]*SUMO[_\w-]*"], 
-#     "s-archaeol" : [r"s[_\s-]?archaeol[_\w-]*"],
-#     "s-carbamoylation" : [r"s[-_\s]*carbamoyl[_\w-]*"],
-#     "s-cyanation" : [r"s[-_\s]*cyano[_\w-]*"],
-#     "s-cysteinylation" : [r"s[-_\s]*cysteinyl[_\w-]*"],
-#     "s-diacylglycerol" : [r"s[-_\s]*diacylglycerol[_\w-]*"],
-#     "s-linked_glycosylation": [r"s[-_\s]*(?:alpha|beta|α|β)?[\s-]?linked[_\w-]*"],
-#     "s-nitrosylation" : [r"s[-_\s]*nitro[_\w-]*"], # overlaps with nitro*
-#     "s-palmitoylation" : [r"s[-_\s]*palmitoyl[_\w-]*"],
-#     "thiocarboxylation" : [r"[_\w-]*thioglycine[_\w-]*"],
-#     "thioester_crosslink" : [r"[_\w-]*thioester[_\w-]*"],
-#     "ubiquitination": [r"[_\w-]*ubiquitin[_\w-]*"],
-#     "umpylation" : [r"UMP[_\w-]*"],
-#     "2-hydroxyisobutyrylation": [r"2[-_\s]*hydroxyisobutyryl[_\w-]*"], # overlap with butyrylation and hydroxylation
-#     }
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 #valid eco codes
 valid_ECO_codes = [
@@ -142,36 +33,45 @@ valid_ECO_codes = [
     "ECO:0007829", #(combinatorial computational and experimental evidence used in automatic assertion)​
 ]
 
-# #database version
-# version = 2.0
-
-
-# # to not run the download all the time
-df = pd.read_csv("/data/leuven/368/vsc36826/flams/flams2/dbs/deduplicated_records-2.0.csv", header=0)
+### for development purposes
+#  to avoid running download all the time
+# df = pd.read_csv("/data/leuven/368/vsc36826/flams/flams2/dbs/deduplicated_records-2.0.csv", header=0)
 
 def get_fasta(PTM_modification_dict, data_dir):
     """
     make fasta files
     log unclassified records
+
+    This function downloads all entries of the UniProt database,
+    and sorts them based on regular expressions and saves them in fasta format in $data_dir.
+    Additionally, the function logs unclassified entries. 
+
+    Parameters
+    ----------
+    PTM_modification_dict: Dict[]
+        Dictionary of PTM types and info associated with it, such as, version, RegEx for sorting and list of amino acids.
+    data_dir: str
+        Location where output files will be stored
     """
 
-    # switch when integrated
-    all_records = df
-    # all_records = get_uniprot_records(data_dir)
+    ### for development purposes
+    # all_records = df
+    # downloads and deduplicates all records
+    all_records = get_uniprot_records(data_dir)
 
     # classifies records into PTM types and stores fasta files per modification type
     classified = sort_uniprot_records(all_records, PTM_modification_dict, data_dir)
 
-    # find unclassified
+    # finds unclassified records 
     unclassified = pd.concat([all_records, classified]).drop_duplicates(keep=False)
 
-    #remove later
+    ### for development purposes - can remove later
+    # stores a list of classified and unclassified records
     classified.to_csv(f"{data_dir}/classified-{setup.version}.csv", index=False)
     unclassified.to_csv(f"{data_dir}/unclassified-{setup.version}.csv", index=False)
 
-    #output unclassified in fasta format
+    # outputs unclassified records in a fasta format
     fasta_records_unclassified = df_to_fasta(unclassified)
-
     with open(f"{data_dir}/unclassified-{setup.version}.fasta", "w", encoding="UTF-8") as out:
         SeqIO.write(fasta_records_unclassified, out, "fasta")
 
@@ -180,66 +80,103 @@ def get_fasta(PTM_modification_dict, data_dir):
 
 def sort_uniprot_records(uniprot_records, PTM_modification_dict, data_dir):
     """
-    sort through uniprot records to group them by PTM type
-    outputs fasta per modification type
-    return unclassified records
+
+    This function groups uniprot records by PTM type, saves the entries in fasta format.
+    Additionally it returns all classified records as a dataframe.
+
+
+    Parameters
+    ----------
+    uniprot_records: pd.Dataframe
+        Pandas dataframe of uniprot records
+    PTM_modification_dict: Dict[]
+        Dictionary of PTM types and info associated with it, such as, version, RegEx for sorting and list of amino acids.
+    data_dir: str
+        Location where output files will be stored
+
     """
-    # copy input dataframe
+    # make new dataframe
     classified_records = pd.DataFrame(columns = ["Accession", "Position", "Length", "Entry_type",
                                                     "Protein", "Feature_type", "Description", "Organism",
                                                     "ECO_codes", "Sources", "Source_ids", "Sequence"])
 
+    # parses through modification dictionary
     for modification, m_type in PTM_modification_dict.items():
+        # gets the RegEx descriptors for the modification type
         m_db = m_type.dbs[0]
         regex = m_db.descriptor
+        # finds all records matching the specific RegEx
         df_mod_type = find_modification_type(uniprot_records, regex)
 
-        #skip empty mathces
+        #skip empty mathces - only useful when downloading a new version of uniprot or changing the modification type sin setup.MODIFICATIONS
         if df_mod_type.empty:
             logging.info(f"No entries for modification type {modification} were found.")
             continue
 
-        #records classified records
-        classified_records = pd.concat([classified_records, df_mod_type], ignore_index=True)
-
-        fasta_records = df_to_fasta(df_mod_type)
-
-        #remove later
+        ### for development purposes - can remove later
+        # stores records per modification type
         df_mod_type.to_csv(f"{data_dir}/{modification}-{m_type.version}.csv", index=False)
         
+        # adds the records of this modification to the dataframe of all classified records
+        classified_records = pd.concat([classified_records, df_mod_type], ignore_index=True)
+
+        # outputs a fasta file per modification type
+        fasta_records = df_to_fasta(df_mod_type)
         with open(f"{data_dir}/{modification}-{m_type.version}.fasta", "w", encoding="UTF-8") as out:
             SeqIO.write(fasta_records, out, "fasta")
         
-        logging.info(f"Fasta file with {len(df_mod_type)} records for modifictation {modification} created and stored at {data_dir}.")
+        logging.info(f"Fasta file with {len(df_mod_type)} records for modifictation '{modification}' created and stored at {data_dir}.")
     
     return classified_records
     
 
 def find_modification_type(uniprot_records, PTM_regex_list):
     """
-    returns dataframe with only records matching that PTM type
+
+    This function finds and returns all records where the PTM descriptions matches the specified regular expressions.
+
+    Parameters
+    ----------
+    uniprot_records: pd.Dataframe
+        Pandas dataframe of uniprot records
+    PTM_regex_list: List[str]
+        List of regular expressions that should be matched
+
     """
-    # Combine all regex patterns into one (using OR)
+    # combines all regex patterns into one (using OR)
     combined_pattern = "|".join(f"(?:{p.lower()})" for p in PTM_regex_list)
 
-    # Use vectorized str.contains() to filter rows
+    # matches RegEx's
     description = uniprot_records["Description"].astype(str).str.lower()
     mask = description.str.contains(combined_pattern, na=False, regex=True, flags=re.IGNORECASE)
+
+    # filters the input dataframe
     df_filtered = uniprot_records.loc[mask].copy()
 
     return df_filtered
 
 def df_to_fasta(PTM_type_df):
     """
-    formats dataframe into a fasta records dataframe
+
+    This function formats a pandas dataframe into a fasta records list.
+
+    Parameters
+    ----------
+    PTM_type_df: pd.Dataframe
+        Pandas dataframe of uniprot records
+
     """
     fasta_records = []
+
+    # parses through the dataframe
     for idx, row in PTM_type_df.iterrows():
+        # replaces the NoneType protein names with N/A (needed for run_blast.py)
         protein = {row["Protein"]}
         if not protein:
             protein = "N/A"
+        
         seq = Seq(row["Sequence"])
-        # add unique id instead of accession for BLAST purposes
+        # adds unique id instead of accession (needed for making BLAST databases)
         id = f'{row["Unique_ID"]}|{str(row["Position"])}|{row["Length"]}|{row["Entry_type"]}'
         rec = SeqRecord(
                     seq,
@@ -247,21 +184,28 @@ def df_to_fasta(PTM_type_df):
                     description=f'{row["Protein"]}|{row["Description"]}|{row["Organism"]} [{row["ECO_codes"]}|{row["Sources"]}|{row["Source_ids"]}]',
                 )
 
-        #append
         fasta_records.append(rec)
 
     return fasta_records
 
 def deduplicate_records(uniprot_records):
     """
-    takes dataframe of all uniprot PTM records
-    deduplicates based on uniprot accesion + PTM description + position
-    concatinates ECO codes and sources
+
+    This function takes a pandas dataframe of uniprot records and deduplicates it
+    based on the combination of Accession, PTM position, and PTM description.
+    Additionally, it concatinates the ECO codes and source information from the duplicated entries.
+
+    Parameters
+    ----------
+    uniprot_records: pd.Dataframes
+        Pandas dataframe of uniprot records
+
     """
 
     # columns to group by
     group_cols = ["Accession", "Position", "Description"]
 
+    # aggregated dataframes
     collapsed = (
         uniprot_records.groupby(group_cols, as_index=False)
         .agg({
@@ -288,17 +232,28 @@ def get_uniprot_records(data_dir):
     """
     fetches all uniprot ptm records
     outputs a dataframe of all records + info
-    """
 
+    This function fetches all relevant uniprot entries (existence:1 and valid_eco_codes) and stores them in a pandas dataframe.
+
+    Parameters
+    ----------
+    data_dir: str
+        Location for storing data
+
+    """
     logging.info(f"Fetching entries from UniProt, please wait.")
 
     base_url = "https://rest.uniprot.org/uniprotkb/search"
     headers = {"Accept": "application/json"}
     url = f"{base_url}?query=existence:1&format=json&size=500"
 
+    # for pagination purposes
     tally = 0
+
+    # to store data
     dataframe = []
 
+    # to keep track of modified residues all together
     tally_per_feature = 0
 
     while url:
@@ -310,22 +265,18 @@ def get_uniprot_records(data_dir):
         for entry in data.get("results", []):
             accession = entry.get("primaryAccession")
             sequence = entry.get("sequence", {}).get("value", "")
-            #switch to gene name instead of protein name
-            # name = entry.get("proteinDescription", {}).get("recommendedName", {}).get("fullName", {}).get("value", "")
-            #name is an issue
             name = entry.get("genes", [{}])[0].get("geneName", {}).get("value", "")
             organism = entry.get("organism", {}).get("scientificName", "")
 
+            # storing database
             entry_type = entry.get("entryType", "")
             if "Swiss-Prot" in entry_type:
                 entry_type = "Swiss-Prot"
             if "TrEMBL" in entry_type:
                 entry_type = "TrEMBL"
 
-            # # to check for duplicated entries at the same position down the line
-            # ptm_sites = []
-
-            # find PTM sites
+            # finds PTM sites
+            # finds relevant feature types
             for feature in entry.get("features", []):
                 feature_type = feature.get("type")
                 if feature.get("type") not in ["Modified residue",
@@ -337,9 +288,10 @@ def get_uniprot_records(data_dir):
                             "Cross-link"]:
                     continue
 
+                # PTM description
                 desc = feature.get("description", "")
 
-                #special case disulfide bonds
+                #special case  - disulfide bonds
                 if feature_type == "Disulfide bond":
                     desc = "Disulfide bond"
 
@@ -347,7 +299,7 @@ def get_uniprot_records(data_dir):
                 if ";" in desc:
                     desc = desc.split(";")[0].strip()
 
-                #special case "removed"
+                #special case - "removed"
                 if desc.lower() == "removed":
                     continue
 
@@ -355,16 +307,11 @@ def get_uniprot_records(data_dir):
                 if "microbial infection" in desc.lower():
                     desc = desc.replace("(Microbial infection) ", "")
 
-                #get psoition
-                pos = feature.get("location", {}).get("start", {}).get("value", "N/A")
-                
-                # #check duplicate ptm site entries
-                # ptm_desc = f"{pos}|{desc}"
-                # if ptm_desc in ptm_sites:
-                #     continue
-                # ptm_sites.append(ptm_desc)
+                # gets positions for start and end (matters for crosslinks, bond formation, to record both amino acids)
+                pos_start = feature.get("location", {}).get("start", {}).get("value", "N/A")
+                pos_end = feature.get("location", {}).get("end", {}).get("value", "N/A")
 
-                # get evidence ECO|source|ids
+                # gets evidence ECO|source|ids
                 ECOs = []
                 sources = []
                 ids = []
@@ -385,7 +332,7 @@ def get_uniprot_records(data_dir):
                 source_str = ";".join(sources) if sources else ""
                 ids_str = ";".join(ids) if ids else ""
 
-                #remove white space
+                # removes white space
                 entry_type = entry_type.replace(" ", "__")
                 protein_name = f"{name}".replace(" ","__")
                 organism_name = f"{organism}".replace(" ","__")
@@ -393,12 +340,22 @@ def get_uniprot_records(data_dir):
                 desc = f"{desc}".replace(" ","__")
                 length = len(sequence)
 
-                #add ID to differentiate
+                # adds ID to differentiate
                 unique_id = f"{accession}_{tally_per_feature}"
                 tally_per_feature += 1
 
-                #append to dataframe
-                dataframe.append([unique_id, accession, pos, length, entry_type, 
+                # appends to dataframe
+                # add with start position
+                dataframe.append([unique_id, accession, pos_start, length, entry_type, 
+                                    protein_name, feature_type_name, desc, organism_name, 
+                                    ECO_str, source_str, ids_str, sequence])
+
+                # adds ID to differentiate
+                unique_id = f"{accession}_{tally_per_feature}"
+                tally_per_feature += 1
+                
+                # adds the end position
+                dataframe.append([unique_id, accession, pos_end, length, entry_type, 
                                     protein_name, feature_type_name, desc, organism_name, 
                                     ECO_str, source_str, ids_str, sequence])
             
@@ -410,13 +367,15 @@ def get_uniprot_records(data_dir):
         if tally >= int(total):
             break
 
+    # adds headers to dataframe
     dataframe = pd.DataFrame(dataframe, columns = ["Unique_ID", "Accession", "Position", "Length", "Entry_type",
                                                     "Protein", "Feature_type", "Description", "Organism",
                                                     "ECO_codes", "Sources", "Source_ids", "Sequence"])
 
     logging.info(f"Entry download is done. {len(dataframe)} records stored for further deduplication.")
 
-    #remove later
+    ### for development purposes - can remove later
+    # stores all records
     dataframe.to_csv(f"{data_dir}/all_records-{setup.version}.csv", index=False)
 
     # deduplicates based on Accession + position + description and combines source info
@@ -424,7 +383,8 @@ def get_uniprot_records(data_dir):
 
     logging.info(f"Deduplication is done. {len(collapsed)} records stored for further processing.")
 
-    #remove later
+    ### for development purposes - can remove later
+    # stores deduplicated records
     collapsed.to_csv(f"{data_dir}/deduplicated_records-{setup.version}.csv", index=False)
 
     return collapsed
