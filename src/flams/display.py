@@ -68,7 +68,8 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
                 # "CPLM evidence code",
                 # "CPLM evidence links",
                 # "dbPTM evidence code",
-                # "dbPTM evidence links"
+                # "dbPTM evidence links",
+                "Database",
                 "ECO codes",
                 "Sources",
                 "Source IDs"
@@ -88,6 +89,8 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
                     uniprot_id = uniprot_id.split("_")[0]
                     x_location = int(generalDescr1.split("|")[1])
                     protein_length = int(generalDescr1.split("|")[2])
+                    # adding databse - Swiss-prot or trEMBL
+                    db = generalDescr1.split("|")[3]
                     # Split generalDescr2
                     protein_name = generalDescr2.split("|")[0].replace("__"," ")
                     modification_type = generalDescr2.split("|")[1].replace("__"," ")
@@ -132,6 +135,7 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
                             # cplm_evidenceLink,
                             # dbptm_evidenceCode,
                             # dbptm_evidenceLink
+                            db,
                             ecos, 
                             sources, 
                             s_ids
@@ -163,13 +167,14 @@ def _deduplicate_output(amino_acid_x, output_pre_dedupl, output_filename):
                         "BLAST E-value", "BLAST identity", "BLAST coverage"]).agg({"Protein name" : "first",
                         # "CPLM ID" : "first", "CPLM evidence code" : "first", "CPLM evidence links" : "first",
                         # "dbPTM evidence code" : "first", "dbPTM evidence links" : "first",
+                        "Database": "first",
                         "ECO codes" : "first", "Sources" : "first", "Source IDs": "first"
                         }).reset_index()
     df2 = df2.reindex(["Uniprot ID", "Protein name", "Modification", f"{amino_acid_x} location", f"{amino_acid_x} window", "Species",
     "BLAST E-value", "BLAST identity", "BLAST coverage",
     # "CPLM ID", "CPLM evidence code", "CPLM evidence links",
     # "dbPTM evidence code", "dbPTM evidence links",
-    "ECO codes", "Sources", "Source IDs"], axis = 1)
+    "Database", "ECO codes", "Sources", "Source IDs"], axis = 1)
     df2.to_csv(output_filename, sep="\t", index = False)
 
 
