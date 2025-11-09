@@ -1,8 +1,8 @@
 # Course Project Notice
 
-This repository is a **modified fork** of [FLAMS](https://github.com/hannelorelongin/FLAMS), created for coursework as part of the **[Integrated Bioinformatics Project I0U20a]** at **[KU Leuven]**.
+This repository is a **modified fork** of [FLAMS](https://github.com/hannelorelongin/FLAMS), created for coursework as part of the course **Integrated Bioinformatics Project I0U20a** of the **Master of Bioinformatics** programme at **KU Leuven**.
 
-The goal of the project was to adapt FLAMS to function with **[UniProt](https://www.uniprot.org/) as primary PTM information source**. We have coined this as the version 1.2.0 of FLAMS since the position-based search logic was left the same, only switching the database. This project was done by Ieva Baltā (ieva-balta), Maria Jose Caceres Valdiviezo (majocava), and Natasya Limanta (naaattella), under the supervision of Hannelore Login (hannelorelongin).
+The goal of the project was to adapt FLAMS to function with **[UniProt](https://www.uniprot.org/) as primary PTM information source**. We label this fork as FLAMS v1.2.0, since the position-based search logic remains unchanged and only the database source was modified. This project was done by *Ieva Baltā* (ieva-balta), *Maria Jose Caceres Valdiviezo* (majocava), and *Natasya Limanta* (naaattella), under the supervision of *Hannelore Login* (hannelorelongin).
 
 To acknowledge contributions clearly, any scripts or modules we modified include our names as additional authors alongside the original author(s).
 
