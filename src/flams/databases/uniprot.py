@@ -171,7 +171,7 @@ def df_to_fasta(PTM_type_df):
     # parses through the dataframe
     for idx, row in PTM_type_df.iterrows():
         # replaces the NoneType protein names with N/A (needed for run_blast.py)
-        protein = {row["Protein"]}
+        protein = row["Protein"]
         if not protein:
             protein = "N/A"
         
@@ -181,7 +181,7 @@ def df_to_fasta(PTM_type_df):
         rec = SeqRecord(
                     seq,
                     id=id,
-                    description=f'{row["Protein"]}|{row["Description"]}|{row["Organism"]} [{row["ECO_codes"]}|{row["Sources"]}|{row["Source_ids"]}]',
+                    description=f'{protein}|{row["Description"]}|{row["Organism"]} [{row["ECO_codes"]}|{row["Sources"]}|{row["Source_ids"]}]',
                 )
 
         fasta_records.append(rec)
