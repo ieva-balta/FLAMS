@@ -1,6 +1,14 @@
+# Course Project Notice
+
+This repository is a **modified fork** of [FLAMS](https://github.com/hannelorelongin/FLAMS), created for coursework as part of the **[Integrated Bioinformatics Project I0U20a]** at **[KU Leuven]**.
+
+The goal of the project was to adapt FLAMS to function with **[UniProt](https://www.uniprot.org/) as primary PTM information source**. We have coined this as the version 1.2.0 of FLAMS since the position-based search logic was left the same, only switching the database. This project was done by Ieva Baltā (ieva-balta), Maria Jose Caceres Valdiviezo (majocava), and Natasya Limanta (naaattella), under the supervision of Hannelore Login (hannelorelongin).
+
+To acknowledge contributions clearly, any scripts or modules we modified include our names as additional authors alongside the original author(s).
+
 # FLAMS: Find Lysine Acylations & other Modification Sites
 
-A bioinformatics tool to analyze the conservation of post-translational modifications (PTMs), by means of a position-based search against the Compendium of Protein Lysine Modifications (CPLM database) v.4 and the experimental PTM sites in dbPTM. FLAMS is available as command-line tool and as a [web service](https://www.biw.kuleuven.be/m2s/cmpg/research/CSB/tools/flams/).
+A bioinformatics tool to analyze the conservation of post-translational modifications (PTMs), by means of a position-based search against UniProt entries that contain PTM information and are a part of [entries with experimental evidence at protein level](https://www.uniprot.org/help/protein_existence) and where the feature [Evidence Code Ontology (ECO) identifiers](https://www.uniprot.org/help/evidences) are 0000269, 0000314, 0007744, or 0007829.
 
 # Table of contents
 
@@ -22,17 +30,17 @@ A bioinformatics tool to analyze the conservation of post-translational modifica
 
 ## Introduction
 
-FLAMS is a bioinformatics tool to analyze the conservation of post-translational modifications, by means of a position-based search against the CPLM database v.4 (Zhang, W. *et al.* Nucleic Acids Research. 2021, 44(5):243–250.) and the part of the dbPTM database with experimental support (Chung, C.-R. *et al.* Nucleic Acids Research. 2025, 53(D1):D377–D386.). FLAMS can be used (i) to quickly verify whether modifications in a specific protein have been reported before, (ii) to assess whether findings in one species might translate to other species, and (iii) to systematically assess the novelty and conservation of reported  modification sites.
+FLAMS is a bioinformatics tool to analyze the conservation of post-translational modifications, by means of a position-based search against the UniProt database(The UniProt Consortium , UniProt: the Universal Protein Knowledgebase in 2025, Nucleic Acids Research, Volume 53, Issue D1, 6 January 2025, Pages D609–D617). FLAMS can be used (i) to quickly verify whether modifications in a specific protein have been reported before, (ii) to assess whether findings in one species might translate to other species, and (iii) to systematically assess the novelty and conservation of reported  modification sites.
 
 The tool takes as input a protein (identifier or sequence) and the position of an amino acid. This repository contains the command-line tool `FLAMS`, which obtains an overview of the previously reported post-translational modifications matching your query, by using the following scripts:
 
 * *input.py*: processing the user-provided input
-* *cplmv4.py*, *dbptm.py* and *setup.py*: downloading and preparing the modification-specific databases
+* *uniprot.py* and *setup.py*: downloading and preparing the modification-specific databases
 * *run_blast.py*: searching your query against the databases of proteins with post-translational modifications
 * *display.py*: formatting the list of conserved post-translational modifications to a tab delimited output file
 * *utils.py*: dealing with OS-dependent directory systems
 
-FLAMS is also available as a web service at https://www.biw.kuleuven.be/m2s/cmpg/research/CSB/tools/flams/ .
+FLAMS is also available as a web service at https://www.biw.kuleuven.be/m2s/cmpg/research/CSB/tools/flams/ . (not updated with the UniProt database)
 
 ## System requirements
 
@@ -48,15 +56,9 @@ Linux 64-bit, Windows and Mac OS supported.
 
 ## Installation
 
-The recommended installation for Mac OS and Linux is through conda:
+The UniProt version is not integrated into conda or pip. To install clone this repository. 
 
-`conda install -c conda-forge -c bioconda flams`
-
-It is also possible to install FLAMS through pip (recommended installation for Windows):
-
-`pip install flams`
-
-Please note that the pip install requires users to have BLAST+ installed locally and available in PATH. For more information on how to install BLAST+ on Windows, click [here](https://www.ncbi.nlm.nih.gov/books/NBK52637/) .
+Make sure to have BLAST+ installed locally and available in PATH. For more information on how to install BLAST+ on Windows, click [here](https://www.ncbi.nlm.nih.gov/books/NBK52637/) .
 
 ## Usage
 
@@ -88,11 +90,15 @@ We provide two example use cases for FLAMS:
 
 With the following command, you search whether the TatA (UniProt ID: A0A916NWA0) acetylation on K66 in *Dehalococcoide mccartyi* strain CBDB1, as described by [Greiner-Haas (2021)](https://doi.org/10.3390/microorganisms9020365), had been previously detected.
 
-`FLAMS --in A0A916NWA0.fa -p 66 -m acetylation -o tatA.tsv`
+`python -m flams.flams --in A0A916NWA0.fa -p 66 -m acetylation -o tatA.tsv`
 
 With the following command, you search whether the *Mycobabcterium smegmatis*' FadD2 (UniProt ID: A0QQ22) K537 is known to carry any modifications of the 'acylations' category, similar to what was reported by [Xu (2020)](https://doi.org/10.1128/mSystems.00424-19).
 
-`FLAMS --id A0QQ22 -p 537 -m CPLM-Acylations -o FadD2.tsv`
+`python -m flams.flams --id A0QQ22 -p 537 -m Acylations -o FadD2.tsv`
+
+With the following commands, you search what modification could the Q at the 6th position of the *Homo sapiens* Histone H3.1 (UniProt ID: P68431). 
+
+`python -m flams.flams --id P68431 -p 6 -m Q-All -o Q-All_P68431.tsv`
 
 You can find the example input and output data in the folder `test_data`. The output data is organized in folders reflecting the FLAMS version used to generate it, as the output can vary depending on the exact FLAMS version (due to FLAMS database updates).
 
@@ -102,7 +108,7 @@ For more example use cases, see the Supplementary information of the paper.
 
 The output file is a .tsv containing one row per modification that matched the query, i.e., a modification aligning (within the user-specified range) to the query position, in a protein similar to the query protein. In case of batch jobs (ran with --batch), one output file per query (= a single line in the batch job file) will be generated.
 
-The output file contains 14 columns:
+The output file contains 13 columns:
 
 * UniProt ID: UniProt identifier of the matched protein
 * Protein name: protein name of the matched protein
@@ -113,13 +119,13 @@ The output file contains 14 columns:
 * BLAST E Value: E value of BLASTp search of the matched protein against your query protein
 * BLAST identity: % identity of BLASTp search of the matched protein against your query protein
 * BLAST coverage: % coverage of BLASTp search of the matched protein against your query protein
-* CPLM ID: CPLM ID of matched protein modification (if found in CPLM, otherwise empty)
-* CPLM evidence code: CPLM evidence code of matched protein modification. Can be Exp(erimental), Dat(abase) or both. (if found in CPLM, otherwise empty)
-* CPLM evidence links: CPLM evidence link of matched protein modification. Can be PubMed ID (for Exp.), or a database identified (for Dat) or both. (if found in CPLM, otherwise empty)
-* dbPTM evidence code: dbPTM evidence code of matched protein modification (if found in dbPTM, otherwise empty)
-* dbPTM evidence links: dbPTM evidence link of matched protein modification. Refers to PubMed IDs. (if found in dbPTM, otherwise empty)
+* Database: UniProt subdatabase (Swiss-Prot or TrEMBL)
+* ECO codes: evidence codes of matched protein modification°°
+* Sources: source type of matched protein modification°°
+* Source IDs: evidence links of matched protein modification°°
 
 °: window can be smaller than the [-5;+5] window if the sequence alignment ends sooner, which can happen for modified sites near the start/end of the protein
+°°: These three columns are parallel lists separated by semicolons — the n-th entry in ECO codes corresponds to the n-th entry in both Sources and Source IDs.
 
 ## Supported PTMs
 
