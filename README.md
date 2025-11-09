@@ -135,11 +135,14 @@ FLAMS updates its search databases regularly. To get an overview of the supporte
 
 |FLAMS version|CPLM version|dbPTM version|database available for download|UniProt release|
 |:----|:----|:----|:----|:----|
+|v1.2.0| | |no|2025_04|
 |v1.1.6|v4 (Feb '25 update)|2025_July|[yes](https://doi.org/10.5281/zenodo.16737546)|2025_03|
 |v1.1.5|v4|2025_January|[yes](https://doi.org/10.5281/zenodo.14616210)|2024_06|
 |v1.1.4|v4|2024_April|[yes](https://doi.org/10.5281/zenodo.10958721)|2024_02|
 |v1.1.0-3|v4|2023_November|[yes](https://doi.org/10.5281/zenodo.10171879)|2023_05|
 |v1.0|v4| |[yes](https://cplm.biocuckoo.cn/Download.php)|NA|
+
+Please note that the software doesn't store all UniProt entries. Only the entries with [experimental evidence at protein level](https://www.uniprot.org/help/protein_existence) (existence:1) and features with [Evidence Code Ontology (ECO) identifiers](https://www.uniprot.org/help/evidences) are 0000269, 0000314, 0007744, or 0007829 are stored. If you wish to use other filters, you can modify the *uniprot.py* script. If you want to download a new version, change the version number in *setup.py*.
 
 Please note that only part of dbPTM is integrated into FLAMS, namely the PTM sites with experimental evidence, as found [here](https://biomics.lab.nycu.edu.tw/dbPTM/download.php). As dbPTM does not store complete protein sequences, these are fetched during database creation based on UniProt identifiers reported in dbPTM and the UniProt release available at the time of database creation. As a consequence, FLAMS database updates can change the content of the PTM databases, beyond the simple addition of new dbPTM and/or CPLM entries, reflecting changes in UniProt. The most common UniProt changes affecting FLAMS databases are removed UniProt entries (leading to the removal of PTM entries on the affected protein in our database) and sequence updates. We are aware of this issue, impacting the completeness and interpretation of FLAMS' results, and will consider solutions in future FLAMS releases.
 
