@@ -690,7 +690,7 @@ def untangle_modifications(modifications):
     if (
         ('Ubs' in modifications) | ('Acylations' in modifications) | 
         # ('CPLM-Others' in modifications) | 
-        ('All' in modifications) |
+        # ('All' in modifications) |
         ('A-All' in modifications) | ('C-All' in modifications) | ('D-All' in modifications) | ('E-All' in modifications) | ('F-All' in modifications)
         | ('G-All' in modifications) | ('H-All' in modifications) | ('I-All' in modifications) | ('K-All' in modifications) | ('L-All' in modifications)
         | ('M-All' in modifications) | ('N-All' in modifications) | ('P-All' in modifications) | ('Q-All' in modifications) | ('R-All' in modifications)
@@ -707,15 +707,15 @@ def untangle_modifications(modifications):
         #     modifications.remove('CPLM-Others')
         #     modifications.extend(['methylation','hydroxylation','phosphoglycerylation','biotinylation','lipoylation',
         #     'dietylphosphorylation','glycation','carboxymethylation','carboxyethylation','carboxylation'])
-        if 'All' in modifications:
-            modifications.remove('All')
-            # modifications.extend(['ubiquitination','sumoylation','pupylation','neddylation',
-            # 'lactylation','acetylation','succinylation','crotonylation','malonylation',
-            # 'beta-hydroxybutyrylation','benzoylation','propionylation','2-hydroxyisobutyrylation','formylation',
-            # 'hmgylation','mgcylation','mgylation','glutarylation','butyrylation',
-            # 'methylation','hydroxylation','phosphoglycerylation','biotinylation','lipoylation',
-            # 'dietylphosphorylation','glycation','carboxymethylation','carboxyethylation','carboxylation'])
-            modifications.extend(db_setup.MODIFICATIONS.keys())
+        # if 'All' in modifications:
+        #     modifications.remove('All')
+        #     # modifications.extend(['ubiquitination','sumoylation','pupylation','neddylation',
+        #     # 'lactylation','acetylation','succinylation','crotonylation','malonylation',
+        #     # 'beta-hydroxybutyrylation','benzoylation','propionylation','2-hydroxyisobutyrylation','formylation',
+        #     # 'hmgylation','mgcylation','mgylation','glutarylation','butyrylation',
+        #     # 'methylation','hydroxylation','phosphoglycerylation','biotinylation','lipoylation',
+        #     # 'dietylphosphorylation','glycation','carboxymethylation','carboxyethylation','carboxylation'])
+        #     modifications.extend(db_setup.MODIFICATIONS.keys())
         if 'A-All' in modifications:
             modifications.remove('A-All')
             # modifications.extend(['phosphorylation','acetylation','gpi-anchor','amidation','blocked_amino_end',
