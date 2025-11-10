@@ -23,7 +23,6 @@ A bioinformatics tool to analyze the conservation of post-translational modifica
 6.  [Supported PTMs](#supported-ptms)
     1. [Supported PTM databases](#supported-ptm-databases)
     2. [Supported PTM types](#supported-ptm-types)
-    3. [Local CPLM and dbPTM install](#local-cplm-and-dbptm-install)
 7.  [Contact](#contact)
 8.  [References](#references)
 9.  [License](#license)
@@ -40,7 +39,7 @@ The tool takes as input a protein (identifier or sequence) and the position of a
 * *display.py*: formatting the list of conserved post-translational modifications to a tab delimited output file
 * *utils.py*: dealing with OS-dependent directory systems
 
-FLAMS is also available as a web service at https://www.biw.kuleuven.be/m2s/cmpg/research/CSB/tools/flams/ . (not updated with the UniProt database)
+FLAMS is also available as a web service at https://www.biw.kuleuven.be/m2s/cmpg/research/CSB/tools/flams/ (not updated with the UniProt database).
 
 ## System requirements
 
@@ -56,7 +55,7 @@ Linux 64-bit, Windows and Mac OS supported.
 
 ## Installation
 
-The UniProt version is not integrated into conda or pip. To install clone this repository. 
+The UniProt version is not integrated into conda or pip. To install clone this repository, create a conda environment with all the dependencies (can use the conda environment of the original FLAMS) and run `python -m pip install ./PathToLocalFLAMS`.
 
 Make sure to have BLAST+ installed locally and available in PATH. For more information on how to install BLAST+ on Windows, click [here](https://www.ncbi.nlm.nih.gov/books/NBK52637/) .
 
@@ -90,15 +89,15 @@ We provide two example use cases for FLAMS:
 
 With the following command, you search whether the TatA (UniProt ID: A0A916NWA0) acetylation on K66 in *Dehalococcoide mccartyi* strain CBDB1, as described by [Greiner-Haas (2021)](https://doi.org/10.3390/microorganisms9020365), had been previously detected.
 
-`python -m flams.flams --in A0A916NWA0.fa -p 66 -m acetylation -o tatA.tsv`
+`FLAMS --in A0A916NWA0.fa -p 66 -m acetylation -o tatA.tsv`
 
 With the following command, you search whether the *Mycobabcterium smegmatis*' FadD2 (UniProt ID: A0QQ22) K537 is known to carry any modifications of the 'acylations' category, similar to what was reported by [Xu (2020)](https://doi.org/10.1128/mSystems.00424-19).
 
-`python -m flams.flams --id A0QQ22 -p 537 -m Acylations -o FadD2.tsv`
+`FLAMS --id A0QQ22 -p 537 -m Acylations -o FadD2.tsv`
 
 With the following commands, you search what modification could the Q at the 6th position of the *Homo sapiens* Histone H3.1 (UniProt ID: P68431). 
 
-`python -m flams.flams --id P68431 -p 6 -m Q-All -o Q-All_P68431.tsv`
+`FLAMS --id P68431 -p 6 -m Q-All -o Q-All_P68431.tsv`
 
 You can find the example input and output data in the folder `test_data`. The output data is organized in folders reflecting the FLAMS version used to generate it, as the output can vary depending on the exact FLAMS version (due to FLAMS database updates).
 
@@ -142,15 +141,14 @@ FLAMS updates its search databases regularly. To get an overview of the supporte
 |v1.1.0-3|v4|2023_November|[yes](https://doi.org/10.5281/zenodo.10171879)|2023_05|
 |v1.0|v4| |[yes](https://cplm.biocuckoo.cn/Download.php)|NA|
 
-Please note that the software doesn't store all UniProt entries. Only the entries with [experimental evidence at protein level](https://www.uniprot.org/help/protein_existence) (existence:1) and features with [Evidence Code Ontology (ECO) identifiers](https://www.uniprot.org/help/evidences) 0000269, 0000314, 0007744, or 0007829 are stored. If you wish to use other filters, you can modify the *uniprot.py* script. If you want to download a new version, change the version number in *setup.py*.
+Please note that the software doesn't store all UniProt entries. Only the entries with [experimental evidence at protein level](https://www.uniprot.org/help/protein_existence) (existence:1) and features with [Evidence Code Ontology (ECO) identifiers](https://www.uniprot.org/help/evidences) 0000269, 0000314, 0007744, or 0007829 are stored. 
 
-Please note that only part of dbPTM is integrated into FLAMS, namely the PTM sites with experimental evidence, as found [here](https://biomics.lab.nycu.edu.tw/dbPTM/download.php). As dbPTM does not store complete protein sequences, these are fetched during database creation based on UniProt identifiers reported in dbPTM and the UniProt release available at the time of database creation. As a consequence, FLAMS database updates can change the content of the PTM databases, beyond the simple addition of new dbPTM and/or CPLM entries, reflecting changes in UniProt. The most common UniProt changes affecting FLAMS databases are removed UniProt entries (leading to the removal of PTM entries on the affected protein in our database) and sequence updates. We are aware of this issue, impacting the completeness and interpretation of FLAMS' results, and will consider solutions in future FLAMS releases.
-
-Instructions on how to download the CPLM and dbPTM database yourself are in [section 'Local CPLM and dbPTM install'](#local-cplm-and-dbptm-install). This is not recommended, as it takes multiple hours to generate some databases.
+**Modification of database:**
+If you wish to use other filters, you can modify the *uniprot.py* script (valid_ECO_codes for the ECO code filter and/or the url in get_uniprot_records() for existence code). You can make changes in the MODIFICATION dictionary in *setup.py* to add/remove modification types, edit amino acid lists, or the regular expressions used to group entries. All changes should be paired with a change of the version number in *setup.py* to download a new version of the database.
 
 ### Supported PTM types
 
-FLAMS allows searches for all PTM types included in CPLM, and for those with experimental evidence in dbPTM. An overview of the PTM types, how to call them in FLAMS, how they are called in CPLM and/or dbPTM, and on which amino acid they can be found is given in the table below. This table can also be found as a tab seperated file named FLAMS_supported_ptms_v11.txt .
+An overview of the PTM types, how to call them in FLAMS, and on which amino acid they can be found is given in the table below. This table can also be found as a tab seperated file named FLAMS_supported_ptms_v20.txt .
 
 |FLAMS PTM name|CPLM name|dbPTM name|A (Ala)|C (Cys)|D (Asp)|E (Glu)|F (Phe)|G (Gly)|H (His)|I (Ile)|K (Lys)|L (Leu)|M (Met)|N (Asn)|P (Pro)|Q (Gln)|R (Arg)|S (Ser)|T (Thr)|V (Val)|W (Trp)|Y (Tyr)|CPLM-Acylations|CPLM-Ubs|CPLM-Others|CPLM-All|
 |:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|
@@ -238,48 +236,6 @@ FLAMS allows searches for all PTM types included in CPLM, and for those with exp
 |umpylation| |UMPylation| | | | | | | | | | | | | | | |X|X| | |X| | | | |
 |2-hydroxyisobutyrylation|2-Hydroxyisobutyrylation| | | | | | | | | |X| | | | | | | | | | | |X| | |X|
 
-### Local CPLM and dbPTM install
-
-It is possible to install the CPLM and dbPTM databases directly, instead of using the pre-generated databases that are hosted on Zenodo. This is however **not** recommended as the download takes several hours for larger databases, such as phosphorylation, ubiquitination and acetylation.
-
-However, if desired, follow these instructions to modify the scripts:
-
-0. Make sure you are working in an environment with the correct dependencies:
-
-  * on Linux/MacOS: create a FLAMS conda environment, get all dependencies by installing FLAMS as specified for Linux/MacOS.
-  * on Windows: create a FLAMS conda environment, get all dependencies by installing FLAMS as specified for Windows. Make sure BLAST+ is correctly installed.
-
-1. Download the latest FLAMS version from GitHub.
-
-2. Adapt the scripts:
-
-  * on a fresh install (= never ran FLAMS before, so no FLAMS databases yet):
-    - go to `src/flams/databases/setup.py`
-    - comment out lines 516-521 (function `_generate_blastdb_if_not_up_to_date` - the try/except _get_fasta_from_zenodo)
-    - uncomment line 525 (function `_generate_blastdb_if_not_up_to_date` - the _get_fasta_for_blast)
-
-  * on a FLAMS version with previously generated BLAST databases:
-    - go to `src/flams/databases/setup.py`
-    - change the version numbers of the databases you wish to update on lines 77-473.  E.g.:
-
-    `"2-hydroxyisobutyrylation": ModificationType(
-        "2-hydroxyisobutyrylation", 1.0, [ModificationDatabase(cplmv4, "2-Hydroxyisobutyrylation")],
-        ["K"]
-      ),`
-
-    becomes
-
-    `"2-hydroxyisobutyrylation": ModificationType(
-        "2-hydroxyisobutyrylation", 2.0, [ModificationDatabase(cplmv4, "2-Hydroxyisobutyrylation")],
-        ["K"]
-      ),`
-
-    - comment out lines 515-520 (function `_generate_blastdb_if_not_up_to_date` - the try/except _get_fasta_from_zenodo)
-    - uncomment line 524 (function `_generate_blastdb_if_not_up_to_date` - the _get_fasta_for_blast)
-
-3. Install your adapted FLAMS version locally:
-
-    `python -m pip install ./PathToLocalFLAMS`
 
 ## Contact
 
@@ -295,9 +251,7 @@ In addition, FLAMS relies on third-party software & databases:
 
 Altschul, S.F. *et al* (1990) "Basic local alignment search tool." J. Mol. Biol. 215:403-410.
 
-Chung, C.-R. *et al* (2025) "dbPTM 2025 update: comprehensive integration of PTMs and proteomic data for advanced insights into cancer research." Nucleic Acids Research. 53(D1):D377–D386.
-
-Zhang, W. *et al* (2021) "CPLM 4.0: an updated database with rich annotations for protein lysine modifications." Nucleic Acids Research. 44(5):243–250.
+The UniProt Consortium , UniProt: the Universal Protein Knowledgebase in 2025, Nucleic Acids Research, Volume 53, Issue D1, 6 January 2025, Pages D609–D617
 
 ## License
 
