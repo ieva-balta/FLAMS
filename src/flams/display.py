@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-@author: annkamsk, hannelorelongin, Retro212
+@author: annkamsk, hannelorelongin, Retro212, ieva-balta, majocava, naaattella
 """
 
 import csv
@@ -64,42 +64,54 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
                 "BLAST E-value",
                 "BLAST identity",
                 "BLAST coverage",
-                "CPLM ID",
-                "CPLM evidence code",
-                "CPLM evidence links",
-                "dbPTM evidence code",
-                "dbPTM evidence links"
+                # "CPLM ID",
+                # "CPLM evidence code",
+                # "CPLM evidence links",
+                # "dbPTM evidence code",
+                # "dbPTM evidence links",
+                "Database",
+                "ECO codes",
+                "Sources",
+                "Source IDs"
             ]
         )
         for blast_record in blast_records:
             for alignment in blast_record.alignments:
                 for hsp in alignment.hsps:
-                    # Parsing header of format UniProtID|proteinName|xPosition|db modificationType|speciesNoSpaces [db_ID|evidenceCode|evidenceLink]
+                    # Parsing header of format UniProtID|xPosition|length|db proteinName|modificationType|speciesNoSpaces [eco_codes|sources|evidenceLink]
                     headerSplitSpace = (alignment.title).split()  # split up header into list, seperated by space
                     generalDescr1 = headerSplitSpace[0]
                     generalDescr2 = headerSplitSpace[1]
                     dbDescr = headerSplitSpace[2]
                     # Split generalDescr1
                     uniprot_id = generalDescr1.split("|")[0]
+                    # removes the tally number from the ID
+                    uniprot_id = uniprot_id.split("_")[0]
                     x_location = int(generalDescr1.split("|")[1])
                     protein_length = int(generalDescr1.split("|")[2])
+                    # adding databse - Swiss-prot or trEMBL
+                    db = generalDescr1.split("|")[3]
                     # Split generalDescr2
                     protein_name = generalDescr2.split("|")[0].replace("__"," ")
                     modification_type = generalDescr2.split("|")[1].replace("__"," ")
                     species = generalDescr2.split("|")[2].replace("__"," ")
-                    # Split dbDescr
-                    if generalDescr1.split("|")[3] == "CPLM":
-                        cplm_id = dbDescr.split("|")[0][1:]
-                        cplm_evidenceCode = dbDescr.split("|")[1]
-                        cplm_evidenceLink = dbDescr.split("|")[2][:-1]
-                        dbptm_evidenceCode = "NA"
-                        dbptm_evidenceLink = "NA"
-                    if generalDescr1.split("|")[3] == "dbPTM":
-                        cplm_id = "NA"
-                        cplm_evidenceCode = "NA"
-                        cplm_evidenceLink = "NA"
-                        dbptm_evidenceCode = dbDescr.split("|")[1]
-                        dbptm_evidenceLink = dbDescr.split("|")[2][:-1]
+                    # # Split dbDescr
+                    # if generalDescr1.split("|")[3] == "CPLM":
+                    #     cplm_id = dbDescr.split("|")[0][1:]
+                    #     cplm_evidenceCode = dbDescr.split("|")[1]
+                    #     cplm_evidenceLink = dbDescr.split("|")[2][:-1]
+                    #     dbptm_evidenceCode = "NA"
+                    #     dbptm_evidenceLink = "NA"
+                    # if generalDescr1.split("|")[3] == "dbPTM":
+                    #     cplm_id = "NA"
+                    #     cplm_evidenceCode = "NA"
+                    #     cplm_evidenceLink = "NA"
+                    #     dbptm_evidenceCode = dbDescr.split("|")[1]
+                    #     dbptm_evidenceLink = dbDescr.split("|")[2][:-1]
+                    ecos, sources, s_ids = dbDescr.split("|")
+                    # removes the [] left from the header
+                    ecos = ecos.replace("[", "")
+                    s_ids = s_ids.replace("]", "")
 
                     # BLAST properties
                     eval = hsp.expect
@@ -118,11 +130,15 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
                             eval,
                             percentageIdentity,
                             percentageCoverage,
-                            cplm_id,
-                            cplm_evidenceCode,
-                            cplm_evidenceLink,
-                            dbptm_evidenceCode,
-                            dbptm_evidenceLink
+                            # cplm_id,
+                            # cplm_evidenceCode,
+                            # cplm_evidenceLink,
+                            # dbptm_evidenceCode,
+                            # dbptm_evidenceLink
+                            db,
+                            ecos, 
+                            sources, 
+                            s_ids
                         ]
                     )
 
@@ -130,7 +146,7 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
 def _deduplicate_output(amino_acid_x, output_pre_dedupl, output_filename):
     """
     This function creates a .tsv file containing all conserved modification sites, based on a specific FLAMS run, without duplicates.
-    In this case, duplicates refer to identical hits, found once in CPLM and once in dbPTM.
+    In this case, duplicates refer to identical hits, found in multiple modification types.
     The created .tsv file merges the info from the two rows with the identical hits.
 
     Parameters
@@ -143,16 +159,22 @@ def _deduplicate_output(amino_acid_x, output_pre_dedupl, output_filename):
         Output file name
 
     """
-    df = pd.read_table(output_pre_dedupl, dtype = {"dbPTM evidence links": str, "CPLM evidence links": str })
+    df = pd.read_table(output_pre_dedupl, 
+            dtype = {"Source IDs": str }
+            )
     df["Protein name"] = df["Protein name"].fillna("not found")
     df2 = df.groupby(["Uniprot ID", "Modification", f"{amino_acid_x} location", f"{amino_acid_x} window", "Species",
                         "BLAST E-value", "BLAST identity", "BLAST coverage"]).agg({"Protein name" : "first",
-                        "CPLM ID" : "first", "CPLM evidence code" : "first", "CPLM evidence links" : "first",
-                        "dbPTM evidence code" : "first", "dbPTM evidence links" : "first"}).reset_index()
+                        # "CPLM ID" : "first", "CPLM evidence code" : "first", "CPLM evidence links" : "first",
+                        # "dbPTM evidence code" : "first", "dbPTM evidence links" : "first",
+                        "Database": "first",
+                        "ECO codes" : "first", "Sources" : "first", "Source IDs": "first"
+                        }).reset_index()
     df2 = df2.reindex(["Uniprot ID", "Protein name", "Modification", f"{amino_acid_x} location", f"{amino_acid_x} window", "Species",
     "BLAST E-value", "BLAST identity", "BLAST coverage",
-    "CPLM ID", "CPLM evidence code", "CPLM evidence links",
-    "dbPTM evidence code", "dbPTM evidence links"], axis = 1)
+    # "CPLM ID", "CPLM evidence code", "CPLM evidence links",
+    # "dbPTM evidence code", "dbPTM evidence links",
+    "Database", "ECO codes", "Sources", "Source IDs"], axis = 1)
     df2.to_csv(output_filename, sep="\t", index = False)
 
 

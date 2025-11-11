@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-@author: annkamsk, hannelorelongin, kasgel, MaartenLangen
+@author: annkamsk, hannelorelongin, kasgel, MaartenLangen, ieva-balta, majocava, naaattella
 """
 
 import logging
@@ -73,15 +73,15 @@ class ModificationHeader:
     modification: str
         Post-translational modification found at $position in protein with $uniprot_id
     database: str
-        Indicator of database from which PTM was fetched (either CPLM or dbPTM)
+        Indicator of UniProt subdatabase from which PTM was fetched (either Swiss-Prot or trEMBL)
     species: str
         Species that encodes the protein containing the modification
-    db_id: str
-        If database is CPLM: CPLM ID for each modification. If database is dbPTM, this just states 'dbPTM'.
-    evidence_code: str
-        Evidence code for each modification (either Exp., Dat. or a combination thereof)
+    eco_codes: str
+        Evidence code for each modification
+    sources: str
+        Evidence sources for each modification
     evidence_link: str
-        Evidence link for each modification (PubMed ID for Exp., database code for Dat.)
+        Evidence links for each modification (PubMed, PDB etc.)
 
     """
     uniprot_id: str
@@ -91,21 +91,28 @@ class ModificationHeader:
     protein_name: str
     modification: str
     species: str
-    db_id: str
-    evidence_code: str
+    eco_codes: str
+    sources: str
     evidence_link: str
 
     @staticmethod
     def parse(title: str) -> "ModificationHeader":
 
         regex = (
-            r"(?P<uniprot_id>\S+)\|"
+            r"(?P<uniprot_id>[A-Z0-9_]+)\|"
             r"(?P<position>\d+)\|"
             r"(?P<length>\d+)\|"
             r"(?P<database>\S+)"
-            r" (?P<protein_name>\S+)\|(?P<modification>\S+)\|(?P<species>\S+) \[(?P<db_id>\S+)\|(?P<evidence_code>\S+)\|(?P<evidence_link>.+)\]"
+            r" (?P<protein_name>\S+)\|(?P<modification>\S+)\|(?P<species>\S+) \[(?P<eco_codes>\S+)\|(?P<sources>\S+)\|(?P<evidence_link>.+)\]"
         )
-        vars = re.match(regex, title).groupdict()
+
+        match = re.match(regex, title)
+        if not match:
+            # to catch errors in header parsing
+            raise ValueError(f"Could not parse modification header:\n{title}")
+        
+        vars = match.groupdict()
+        
         vars["position"] = int(vars["position"])
         vars["length"] = int(vars["length"])
         return ModificationHeader(**vars)
