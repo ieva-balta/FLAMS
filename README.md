@@ -1,6 +1,14 @@
+# Course Project Notice
+
+This repository is a **modified fork** of [FLAMS](https://github.com/hannelorelongin/FLAMS), created for coursework as part of the course **Integrated Bioinformatics Project I0U20a** of the **Master of Bioinformatics** programme at **KU Leuven**.
+
+The goal of the project was to adapt FLAMS to function with **[UniProt](https://www.uniprot.org/) as primary PTM information source**. We label this fork as FLAMS v1.2.0, since the position-based search logic remains unchanged and only the database source was modified. This project was done by *Ieva Baltā* (ieva-balta), *Maria Jose Caceres Valdiviezo* (majocava), and *Natasya Limanta* (naaattella), under the supervision of *Hannelore Login* (hannelorelongin).
+
+To acknowledge contributions clearly, any scripts or modules we modified include our names as additional authors alongside the original authors.
+
 # FLAMS: Find Lysine Acylations & other Modification Sites
 
-A bioinformatics tool to analyze the conservation of post-translational modifications (PTMs), by means of a position-based search against the Compendium of Protein Lysine Modifications (CPLM database) v.4 and the experimental PTM sites in dbPTM. FLAMS is available as command-line tool and as a [web service](https://www.biw.kuleuven.be/m2s/cmpg/research/CSB/tools/flams/).
+A bioinformatics tool to analyze the conservation of post-translational modifications (PTMs), by means of a position-based search against UniProt entries that contain PTM information and are a part of [entries with experimental evidence at protein level](https://www.uniprot.org/help/protein_existence) and where the feature [Evidence Code Ontology (ECO) identifiers](https://www.uniprot.org/help/evidences) are 0000269, 0000314, 0007744, or 0007829.
 
 # Table of contents
 
@@ -15,24 +23,23 @@ A bioinformatics tool to analyze the conservation of post-translational modifica
 6.  [Supported PTMs](#supported-ptms)
     1. [Supported PTM databases](#supported-ptm-databases)
     2. [Supported PTM types](#supported-ptm-types)
-    3. [Local CPLM and dbPTM install](#local-cplm-and-dbptm-install)
 7.  [Contact](#contact)
 8.  [References](#references)
 9.  [License](#license)
 
 ## Introduction
 
-FLAMS is a bioinformatics tool to analyze the conservation of post-translational modifications, by means of a position-based search against the CPLM database v.4 (Zhang, W. *et al.* Nucleic Acids Research. 2021, 44(5):243–250.) and the part of the dbPTM database with experimental support (Chung, C.-R. *et al.* Nucleic Acids Research. 2025, 53(D1):D377–D386.). FLAMS can be used (i) to quickly verify whether modifications in a specific protein have been reported before, (ii) to assess whether findings in one species might translate to other species, and (iii) to systematically assess the novelty and conservation of reported  modification sites.
+FLAMS is a bioinformatics tool to analyze the conservation of post-translational modifications, by means of a position-based search against the UniProt database(The UniProt Consortium , UniProt: the Universal Protein Knowledgebase in 2025, Nucleic Acids Research, Volume 53, Issue D1, 6 January 2025, Pages D609–D617). FLAMS can be used (i) to quickly verify whether modifications in a specific protein have been reported before, (ii) to assess whether findings in one species might translate to other species, and (iii) to systematically assess the novelty and conservation of reported  modification sites.
 
 The tool takes as input a protein (identifier or sequence) and the position of an amino acid. This repository contains the command-line tool `FLAMS`, which obtains an overview of the previously reported post-translational modifications matching your query, by using the following scripts:
 
 * *input.py*: processing the user-provided input
-* *cplmv4.py*, *dbptm.py* and *setup.py*: downloading and preparing the modification-specific databases
+* *uniprot.py* and *setup.py*: downloading and preparing the modification-specific databases
 * *run_blast.py*: searching your query against the databases of proteins with post-translational modifications
 * *display.py*: formatting the list of conserved post-translational modifications to a tab delimited output file
 * *utils.py*: dealing with OS-dependent directory systems
 
-FLAMS is also available as a web service at https://www.biw.kuleuven.be/m2s/cmpg/research/CSB/tools/flams/ .
+FLAMS is also available as a web service at https://www.biw.kuleuven.be/m2s/cmpg/research/CSB/tools/flams/ (not updated with the UniProt database).
 
 ## System requirements
 
@@ -48,15 +55,9 @@ Linux 64-bit, Windows and Mac OS supported.
 
 ## Installation
 
-The recommended installation for Mac OS and Linux is through conda:
+The UniProt version is not integrated into conda or pip. To install clone this repository, create a conda environment with all the dependencies (can use the conda environment of the original FLAMS) and run `python -m pip install ./PathToLocalFLAMS`.
 
-`conda install -c conda-forge -c bioconda flams`
-
-It is also possible to install FLAMS through pip (recommended installation for Windows):
-
-`pip install flams`
-
-Please note that the pip install requires users to have BLAST+ installed locally and available in PATH. For more information on how to install BLAST+ on Windows, click [here](https://www.ncbi.nlm.nih.gov/books/NBK52637/) .
+Make sure to have BLAST+ installed locally and available in PATH. For more information on how to install BLAST+ on Windows, click [here](https://www.ncbi.nlm.nih.gov/books/NBK52637/) .
 
 ## Usage
 
@@ -80,7 +81,7 @@ Optional arguments:
 * `dataDir` is the path to the directory where intermediate files (the UniProt sequence files) are stored. [default: $PWD/data]
 * `threadsBLAST` is a BLAST parameter, allows you to speed up the search by multithreading. [default: 1]
 * `evalueBLAST` is a BLAST parameter, allows you to filter out low quality BLAST hits. [default: 0.01]
-* `modification` is a space-separated list of modifications (all lower case) to search for at the given position. Possible values are any (combinations) of the CPLM and dbPTM modifications. We also provide aggregated combinations for each amino acid ($AA-All), and the CPLM combinations. For a full list of all supported PTMs, and how they are named, see the [Supported PTM types](#supported-ptm-types) section of the README. In general, PTMs are written all lowercase, and spaces within a PTM name are replaced by underscores. [default: K-All]
+* `modification` is a space-separated list of modifications (all lower case) to search for at the given position. We also provide aggregated combinations for each amino acid ($AA-All), and Acylations and Ubs. For a full list of all supported PTMs, and how they are named, see the [Supported PTM types](#supported-ptm-types) section of the README. In general, PTMs are written all lowercase, and spaces within a PTM name are replaced by underscores. [default: K-All]
 
 ### Example use case
 
@@ -92,7 +93,11 @@ With the following command, you search whether the TatA (UniProt ID: A0A916NWA0)
 
 With the following command, you search whether the *Mycobabcterium smegmatis*' FadD2 (UniProt ID: A0QQ22) K537 is known to carry any modifications of the 'acylations' category, similar to what was reported by [Xu (2020)](https://doi.org/10.1128/mSystems.00424-19).
 
-`FLAMS --id A0QQ22 -p 537 -m CPLM-Acylations -o FadD2.tsv`
+`FLAMS --id A0QQ22 -p 537 -m Acylations -o FadD2.tsv`
+
+With the following commands, you search what modification could the Q at the 6th position of the *Homo sapiens* Histone H3.1 (UniProt ID: P68431) have. 
+
+`FLAMS --id P68431 -p 6 -m Q-All -o Q-All_P68431.tsv`
 
 You can find the example input and output data in the folder `test_data`. The output data is organized in folders reflecting the FLAMS version used to generate it, as the output can vary depending on the exact FLAMS version (due to FLAMS database updates).
 
@@ -102,7 +107,7 @@ For more example use cases, see the Supplementary information of the paper.
 
 The output file is a .tsv containing one row per modification that matched the query, i.e., a modification aligning (within the user-specified range) to the query position, in a protein similar to the query protein. In case of batch jobs (ran with --batch), one output file per query (= a single line in the batch job file) will be generated.
 
-The output file contains 14 columns:
+The output file contains 13 columns:
 
 * UniProt ID: UniProt identifier of the matched protein
 * Protein name: protein name of the matched protein
@@ -113,13 +118,14 @@ The output file contains 14 columns:
 * BLAST E Value: E value of BLASTp search of the matched protein against your query protein
 * BLAST identity: % identity of BLASTp search of the matched protein against your query protein
 * BLAST coverage: % coverage of BLASTp search of the matched protein against your query protein
-* CPLM ID: CPLM ID of matched protein modification (if found in CPLM, otherwise empty)
-* CPLM evidence code: CPLM evidence code of matched protein modification. Can be Exp(erimental), Dat(abase) or both. (if found in CPLM, otherwise empty)
-* CPLM evidence links: CPLM evidence link of matched protein modification. Can be PubMed ID (for Exp.), or a database identified (for Dat) or both. (if found in CPLM, otherwise empty)
-* dbPTM evidence code: dbPTM evidence code of matched protein modification (if found in dbPTM, otherwise empty)
-* dbPTM evidence links: dbPTM evidence link of matched protein modification. Refers to PubMed IDs. (if found in dbPTM, otherwise empty)
+* Database: UniProt subdatabase (Swiss-Prot or TrEMBL)
+* ECO codes: evidence codes of matched protein modification°°
+* Sources: source type of matched protein modification°°
+* Source IDs: evidence links of matched protein modification°°
 
-°: window can be smaller than the [-5;+5] window if the sequence alignment ends sooner, which can happen for modified sites near the start/end of the protein
+°: window can be smaller than the [-5;+5] window if the sequence alignment ends sooner, which can happen for modified sites near the start/end of the protein.
+
+°°: These three columns are parallel lists separated by semicolons — the n-th entry in ECO codes corresponds to the n-th entry in both Sources and Source IDs.
 
 ## Supported PTMs
 
@@ -129,148 +135,119 @@ FLAMS updates its search databases regularly. To get an overview of the supporte
 
 |FLAMS version|CPLM version|dbPTM version|database available for download|UniProt release|
 |:----|:----|:----|:----|:----|
+|v1.2.0| | |no|2025_04|
 |v1.1.6|v4 (Feb '25 update)|2025_July|[yes](https://doi.org/10.5281/zenodo.16737546)|2025_03|
 |v1.1.5|v4|2025_January|[yes](https://doi.org/10.5281/zenodo.14616210)|2024_06|
 |v1.1.4|v4|2024_April|[yes](https://doi.org/10.5281/zenodo.10958721)|2024_02|
 |v1.1.0-3|v4|2023_November|[yes](https://doi.org/10.5281/zenodo.10171879)|2023_05|
 |v1.0|v4| |[yes](https://cplm.biocuckoo.cn/Download.php)|NA|
 
-Please note that only part of dbPTM is integrated into FLAMS, namely the PTM sites with experimental evidence, as found [here](https://biomics.lab.nycu.edu.tw/dbPTM/download.php). As dbPTM does not store complete protein sequences, these are fetched during database creation based on UniProt identifiers reported in dbPTM and the UniProt release available at the time of database creation. As a consequence, FLAMS database updates can change the content of the PTM databases, beyond the simple addition of new dbPTM and/or CPLM entries, reflecting changes in UniProt. The most common UniProt changes affecting FLAMS databases are removed UniProt entries (leading to the removal of PTM entries on the affected protein in our database) and sequence updates. We are aware of this issue, impacting the completeness and interpretation of FLAMS' results, and will consider solutions in future FLAMS releases.
+Please note that the software doesn't store all UniProt entries. Only the entries with [experimental evidence at protein level](https://www.uniprot.org/help/protein_existence) (existence:1) and features with [Evidence Code Ontology (ECO) identifiers](https://www.uniprot.org/help/evidences) 0000269, 0000314, 0007744, or 0007829 are stored. 
 
-Instructions on how to download the CPLM and dbPTM database yourself are in [section 'Local CPLM and dbPTM install'](#local-cplm-and-dbptm-install). This is not recommended, as it takes multiple hours to generate some databases.
+**Modification of database:**
+If you wish to use other filters, you can modify the *uniprot.py* script (valid_ECO_codes for the ECO code filter and/or the url in get_uniprot_records() for existence code). You can make changes in the MODIFICATION dictionary in *setup.py* to add/remove modification types, edit amino acid lists, or the regular expressions used to group entries. All changes should be paired with a change of the version number in *setup.py* to download a new version of the database.
 
 ### Supported PTM types
 
-FLAMS allows searches for all PTM types included in CPLM, and for those with experimental evidence in dbPTM. An overview of the PTM types, how to call them in FLAMS, how they are called in CPLM and/or dbPTM, and on which amino acid they can be found is given in the table below. This table can also be found as a tab seperated file named FLAMS_supported_ptms_v11.txt .
+An overview of the PTM types, how to call them in FLAMS, and on which amino acid they can be found° is given in the table below. This table can also be found as a tab seperated file named FLAMS_supported_ptms_v20.txt .
 
-|FLAMS PTM name|CPLM name|dbPTM name|A (Ala)|C (Cys)|D (Asp)|E (Glu)|F (Phe)|G (Gly)|H (His)|I (Ile)|K (Lys)|L (Leu)|M (Met)|N (Asn)|P (Pro)|Q (Gln)|R (Arg)|S (Ser)|T (Thr)|V (Val)|W (Trp)|Y (Tyr)|CPLM-Acylations|CPLM-Ubs|CPLM-Others|CPLM-All|
-|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|
-|acetylation|Acetylation|Acetylation|X|X|X|X| |X| | |X| |X| |X| |X|X|X|X| |X|X| | |X|
-|adp-ribosylation| |ADP-ribosylation| |X|X|X| |X|X| |X| | |X| | |X|X| | | |X| | | | |
-|amidation| |Amidation|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | | | |
-|ampylation| |AMPylation| | | | | | | | | | | | | | | |X|X| | |X| | | | |
-|benzoylation|Benzoylation| | | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|beta-hydroxybutyrylation|β-Hydroxybutyrylation| | | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|biotinylation|Biotinylation|Biotinylation| | | | | | | | |X| | | | | | | | | | | | | |X|X|
-|blocked_amino_end| |Blocked amino end|X|X|X|X| |X|X|X| |X|X|X|X|X|X|X|X|X| | | | | | |
-|butyrylation|Butyrylation|Butyrylation| | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|carbamidation| |Carbamidation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|carboxyethylation|Carboxyethylation|Carboxyethylation| | | | | | | | |X| | | | | | | | | | | | | |X|X|
-|carboxylation|Carboxylation|Carboxylation| | | | | | | | |X| | | | | | | | | | | | | |X|X|
-|carboxymethylation|Carboxymethylation| | | | | | | | | |X| | | | | | | | | | | | | |X|X|
-|cholesterol_ester| |Cholesterol ester|  | | | | |X| | | | | | | | | | | | | | | | | | |
-|citrullination| |Citrullination| | | | | | | |  | | | | | | |X| | | | | | | | | |
-|crotonylation|Crotonylation|Crotonylation| | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|c-linked_glycosylation| |C-linked Glycosylation| | | | | | | | | | | | | | | | | | |X| | | | | |
-|deamidation| |Deamidation| | | | | | | | | | | |X| |X| | | | | | | | | | |
-|deamination| |Deamination| | | | | | | | |X| | | | | | | | | | | | | | | |
-|decanoylation| |Decanoylation| | | | | | | | | | | | | | | |X|X| | | | | | | |
-|decarboxylation| |Decarboxylation| | |X| | | | | | | | | | | | | |X| | | | | | | |
-|dephosphorylation| |Dephosphorylation| | | | | | | | | | | | | | | |X|X| | |X| | | | |
-|dietylphosphorylation|Dietylphosphorylation| | | | | | | | | |X| | | | | | | | | | | | | |X|X|
-|disulfide_bond| |Disulfide bond| |X| | | | | | | | | | | | | | | | | | | | | | |
-|d-glucuronylation| |D-glucuronoylation| | | | | |X| | | | | | | | | | | | | | | | | | |
-|farnesylation| |Farnesylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|formation_of_an_isopeptide_bond| |Formation of an isopeptide bond| | | |X| | | | | | | | | |X| | | | | | | | | | |
-|formylation|Formylation|Formylation| | | | | |X| | |X| |X| | | | | | | | | |X| | |X|
-|gamma-carboxyglutamic_acid| |Gamma-carboxyglutamic acid| | | |X| | | | | | | | | | | | | | | | | | | | |
-|geranylgeranylation| |Geranylgeranylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|glutarylation|Glutarylation|Glutarylation| | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|glutathionylation| |Glutathionylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|glycation|Glycation| | | | | | | | | |X| | | | | | | | | | | | | |X|X|
-|gpi-anchor| |GPI-anchor|X|X|X| | |X| | | | | |X| | | |X|X| | | | | | | |
-|hmgylation|HMGylation| | | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|hydroxyceramide_ester| |Hydroxyceramide ester| | | | | | | | | | | | | |X| | | | | | | | | | |
-|hydroxylation|Hydroxylation|Hydroxylation| |X|X|X|X| |X|X|X|X| |X|X| |X|X|X|X|X|X| | |X|X|
-|iodination| |Iodination| | | | | | | | | | | | | | | | | | | |X| | | | |
-|lactoylation| |Lactoylation| | | | | | | | |X| | | | | | | | | | | | | | | |
-|lactylation|Lactylation|Lactylation| | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|lipoylation|Lipoylation|Lipoylation| | | | | | | | |X| | | | | | | | | | | | | |X|X|
-|malonylation|Malonylation|Malonylation| | | | | | | | |X| |  | | | | | | | | | |X| | |X|
-|methylation|Methylation|Methylation| X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| |X| | |X|X|
-|mgcylation|MGcylation| | | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|mgylation|MGylation| | | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|myristoylation| |Myristoylation| |X| | | |X| | |X| | | | | | | | | | | | | | | |
-|neddylation|Neddylation|Neddylation| | | | | | | | |X| | | | | | | | | | | | |X| |X|
-|nitration| |Nitration| | | | | | | | | | | | | | | | | | | |X| | | | |
-|n-carbamoylation| |N-carbamoylation|X| | | | | | | | | | | | | | | | | | |  | | | | |
-|n-linked_glycosylation| |N-linked Glycosylation| | |X| | | | |X|X| | |X| | |X|X|X|X|X| | | | | |
-|n-palmitoylation| |N-palmitoylation| |X| | | |X| | |X| | | | | | | | | | | | | | | |
-|octanoylation| |Octanoylation| | | | | | | | | | | | | | | |X|X| | | | | | | |
-|oxidation| |Oxidation| |X| | | | | | | |X|X| | | | |X| | |X| | | | | |
-|o-linked_glycosylation| |O-linked Glycosylation| | | | | | | | |X| | | |X| | |X|X| | |X| | | | |
-|o-palmitoleoylation| |O-palmitoleoylation| | | | | | | | | | | | | | | |X| | | | | | | | |
-|o-palmitoylation| |O-palmitoylation| | | | | | | | | | | | | | | |X|X| | | | | | | |
-|phosphatidylethanolamine_amidation| |Phosphatidylethanolamine amidation| | | | | |X| | | | | | | | | | | | | | | | | | |
-|phosphoglycerylation|Phosphoglycerylation| |  | | | | | | | |X| | |  | | | | | | | | | | |X|X|
-|phosphorylation| |Phosphorylation|X|X|X|X|X|X|X|X|X|X| |X|X|X|X|X|X|X|X|X| | | | |
-|propionylation|Propionylation|Propionylation| | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|pupylation|Pupylation| | | | | | | | | |X| | | | | | | | | | | | |X| |X|
-|pyrrolidone_carboxylic_acid| |Pyrrolidone carboxylic acid| | | |X| | | | | | | | | |X| | | | | | | | | | |
-|pyrrolylation| |Pyrrolylation| |X| | | | | | |  | | | | | | | | | | | | | | | |
-|pyruvate| |Pyruvate| |X| | | | | | | | | | | | | |X| | | | | | | | |
-|serotonylation| |Serotonylation| | | |  | | | | | | | | | |X| | | | | | | | | | |
-|stearoylation| |Stearoylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|succinylation|Succinylation|Succinylation| |X| | | | | | |X| | | | | | | | | |X| |X| | |X|
-|sulfation| |Sulfation| |X| | | | | | | | | | | | | |X|X| |  |X| | | | |
-|sulfhydration| |Sulfhydration|  |X| | | | | | | | | | | | | | | | | | | | | | |
-|sulfoxidation| |Sulfoxidation| | | | | | | | | | |X| | | | | | | | | | | | | |
-|sumoylation|Sumoylation|Sumoylation| | | | | | | | |X| | | | | | | | | | | | |X| |X|
-|s-archaeol| |S-archaeol| |X| | | | | | | | | | | | | | | | | | | | | | |
-|s-carbamoylation| |S-carbamoylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|s-cyanation| |S-Cyanation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|s-cysteinylation| |S-cysteinylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|s-diacylglycerol| |S-diacylglycerol| |X| | | | | | | | | | | | | | | | | | | | | | |
-|s-linked_glycosylation| |S-linked Glycosylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|s-nitrosylation| |S-nitrosylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|s-palmitoylation| |S-palmitoylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|thiocarboxylation| |Thiocarboxylation| | | | | |X| | | | | | | | | | | | | | | | | | |
-|ubiquitination|Ubiquitination|Ubiquitination| |X| | | | | | |X| | | | | |X|X| | | | | |X| |X|
-|umpylation| |UMPylation| | | | | | | | | | | | | | | |X|X| | |X| | | | |
-|2-hydroxyisobutyrylation|2-Hydroxyisobutyrylation| | | | | | | | | |X| | | | | | | | | | | |X| | |X|
+|FLAMS PTM name|A (Ala)|C (Cys)|D (Asp)|E (Glu)|F (Phe)|G (Gly)|H (His)|I (Ile)|K (Lys)|L (Leu)|M (Met)|N (Asn)|P (Pro)|Q (Gln)|R (Arg)|S (Ser)|T (Thr)|V (Val)|W (Trp)|Y (Tyr)|Acylations|Ubs|
+|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|
+|acetylation|X|X|X|X| |X| | |X| |X| |X| |X|X|X|X| |X|X| |
+|adp-ribosylation| |X|X|X| |X|X| |X| | |X| | |X|X| | | |X| | |
+|adp-riboxanation| | |X| | | |X| | | | |X| |X|X|X| | | | | | |
+|amidation|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | |
+|ampylation| | | | | | | | | | | | | | | |X|X| | |X| | |
+|benzoylation| | | | | | | | |X| | | | | | | | | | | |X| |
+|beta-hydroxybutyrylation| | | | | | | | |X| | | | | | | | | | | |X| |
+|biotinylation| | | | | | | | |X| | | | | | | | | | | | | |
+|blocked_amino_end|X|X|X|X| |X|X|X| |X|X|X|X|X|X|X|X|X| | | | |
+|bromination|X|X|X| |X|X|X|X|X|X| | |X|X|X| | |X|X|X| | |
+|butyrylation| | | | | | | | |X| | | | | | | | | | | |X| |
+|carboxyethylation| | | | | | | | |X| | | | | | | | | | | | | |
+|carboxylation| | | | | | | | |X| | | | | | | | | | | | | |
+|cholesterol_ester| | | | | |X| | | | | | | | | | | | | | | | |
+|citrullination| | | | | | | | | | | | | | |X| | | | | | | |
+|crotonylation| | | | | | | | |X| | | | | | | | | | | |X| |
+|cyclopeptide|X|X|X|X|X|X| |X|X|X|X|X|X|X|X|X| | |X|X| | |
+|cysteinylation|X|X| |X| |X|X|X|X|X| |X|X|X|X|X|X|X|X|X| | |
+|c-linked_glycosylation| | | | | | | | | | | | | | | | | | |X| | | |
+|deamidation| | | | | | | | | | | |X| |X| | | | | | | | |
+|deamination| | | | | | | | |X| | | | | | | | | | | | | |
+|decanoylation| | | | | | | | | | | | | | | |X|X| | | | | |
+|decarboxylation| | |X| | | | | | | | | | | | | |X| | | | | |
+|dehydration|X|X|X| | |X|X| |X|X| |X| | |X|X|X|X| |X| | |
+|dephosphorylation| | | | | | | | | | | | | | | |X|X| | |X| | |
+|disulfide_bond| |X| | | | | | | | | | | | | | | | | | | | |
+|d-glucuronoylation| | | | | |X| | | | | | | | | | | | | | | | |
+|fadylation|X|X| | | |X|X|X|X|X| |X| | |X|X|X|X| |X| | |
+|farnesylation| |X| | | | | | | | | | | | | | | | | | | | |
+|formation_of_an_isopeptide_bond| | | |X| | | | | | | | | |X| | | | | | | | |
+|formylation| | | | | |X| | |X| |X| | | | | | | | | |X| |
+|genarylation| |X| | | |X| |X| |X| |X| |X|X| | | |X|X| | |
+|geranylgeranylation| |X| | | | | | | | | | | | | | | | | | | | |
+|glutamylation|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | |
+|glutarylation| | | | | | | | |X| | | | | | | | | | | |X| |
+|glutathionylation| |X| | | | | | | | | | | | | | | | | | | | |
+|glycation| | | | | | | | |X| | | | | | | | | | | | | |
+|gmpylation| |X| | | | | | | | | | | | | | | | | | | | |
+|gpi-anchor|X|X|X| | |X| | | | | |X| | | |X|X| | | | | |
+|histidylation|X| | | | |X|X|X|X|X| |X| | | |X| |X| | | | |
+|hydroxylation| |X|X|X|X| |X|X|X|X| |X|X| |X|X|X|X|X|X| | |
+|hypusine| | |X|X| | | | |X| | |X| | | |X| | | | | | |
+|imidazolation|X|X| | | | |X| |X|X|X|X| |X|X|X|X|X| | | | |
+|iodination| | | | | | | | | | | | | | | | | | | |X| | |
+|isomerization|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | |
+|lactoylation| | | | | | | | |X| | | | | | | | | | | | | |
+|lipoylation| | | | | | | | |X| | | | | | | | | | | | | |
+|malonylation| | | | | | | | |X| | | | | | | | | | | |X| |
+|methylation|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| |X| | |
+|myristoylation| |X| | | |X| | |X| | | | | | | | | | | | | |
+|neddylation| | | | | | | | |X| | | | | | | | | | | | |X|
+|nitration| | | | | | | | | | | | | | | | | | | |X| | |
+|n-carbamoylation|X| | | | | | | | | | | | | | | | | | | | | |
+|n-linked_glycosylation| | |X| | | | |X|X| | |X| | |X|X|X|X|X| | | |
+|n-palmitoylation| |X| | | |X| | |X| | | | | | | | | | | | | |
+|octanoylation| | | | | | | | | | | | | | | |X|X| | | | | |
+|oxidation| |X| | | | | | | |X|X| | | | |X| | |X| | | |
+|o-linked_glycosylation| | | | | | | | |X| | | |X| | |X|X| | |X| | |
+|o-palmitoleoylation| | | | | | | | | | | | | | | |X| | | | | | |
+|o-palmitoylation| | | | | | | | | | | | | | | |X|X| | | | | |
+|palmitoylation|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | |
+|phosphatidylethanolamine_amidation| | | | | |X| | | | | | | | | | | | | | | | |
+|phosphoglycerylation| | | | | | | | |X| | | | | | | | | | | | | |
+|phosphorylation|X|X|X|X|X|X|X|X|X|X| |X|X|X|X|X|X|X|X|X| | |
+|prenylation| | | |X| | | | | | | | | | | | | | |X| | | |
+|propionylation| | | | | | | | |X| | | | | | | | | | | |X| |
+|pupylation| | | | | | | | |X| | | | | | | | | | | | |X|
+|pyridoxal_phosphate_addition|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | |
+|pyrrolidone_carboxylic_acid| | | |X| | | | | | | | | |X| | | | | | | | |
+|pyrrolylation| |X| | | | | | | | | | | | | | | | | | | | |
+|pyruvate| |X| | | | | | | | | | | | | |X| | | | | | |
+|quinone| | | | | | | | | | | | | | | | | | | | | | |
+|serotonylation| | | | | | | | | | | | | |X| | | | | | | | |
+|stearoylation| |X| | | | | | | | | | | | | | | | | | | | |
+|succinylation| |X| | | | | | |X| | | | | | | | | |X| |X| |
+|sulfation| |X| | | | | | | | | | | | | |X|X| | |X| | |
+|sulfhydration| |X| | | | | | | | | | | | | | | | | | | | |
+|sulfilimine_crosslink| | | | | | | | |X| |X| | | | | |X| | | | | |
+|sulfoxidation| | | | | | | | | | |X| | | | | | | | | | | |
+|sumoylation| | | | | | | | |X| | | | | | | | | | | | |X|
+|s-archaeol| |X| | | | | | | | | | | | | | | | | | | | |
+|s-carbamoylation| |X| | | | | | | | | | | | | | | | | | | | |
+|s-cyanation| |X| | | | | | | | | | | | | | | | | | | | |
+|s-cysteinylation| |X| | | | | | | | | | | | | | | | | | | | |
+|s-diacylglycerol| |X| | | | | | | | | | | | | | | | | | | | |
+|s-linked_glycosylation| |X| | | | | | | | | | | | | | | | | | | | |
+|s-nitrosylation| |X| | | | | | | | | | | | | | | | | | | | |
+|s-palmitoylation| |X| | | | | | | | | | | | | | | | | | | | |
+|thiocarboxylation| | | | | |X| | | | | | | | | | | | | | | | |
+|thioester_crosslink| | | | | | | | | | | | | | | | | | | | | | |
+|ubiquitination| |X| | | | | | |X| | | | | |X|X| | | | | |X|
+|umpylation| | | | | | | | | | | | | | | |X|X| | |X| | |
+|2-hydroxyisobutyrylation| | | | | | | | |X| | | | | | | | | | | |X| |
 
-### Local CPLM and dbPTM install
-
-It is possible to install the CPLM and dbPTM databases directly, instead of using the pre-generated databases that are hosted on Zenodo. This is however **not** recommended as the download takes several hours for larger databases, such as phosphorylation, ubiquitination and acetylation.
-
-However, if desired, follow these instructions to modify the scripts:
-
-0. Make sure you are working in an environment with the correct dependencies:
-
-  * on Linux/MacOS: create a FLAMS conda environment, get all dependencies by installing FLAMS as specified for Linux/MacOS.
-  * on Windows: create a FLAMS conda environment, get all dependencies by installing FLAMS as specified for Windows. Make sure BLAST+ is correctly installed.
-
-1. Download the latest FLAMS version from GitHub.
-
-2. Adapt the scripts:
-
-  * on a fresh install (= never ran FLAMS before, so no FLAMS databases yet):
-    - go to `src/flams/databases/setup.py`
-    - comment out lines 516-521 (function `_generate_blastdb_if_not_up_to_date` - the try/except _get_fasta_from_zenodo)
-    - uncomment line 525 (function `_generate_blastdb_if_not_up_to_date` - the _get_fasta_for_blast)
-
-  * on a FLAMS version with previously generated BLAST databases:
-    - go to `src/flams/databases/setup.py`
-    - change the version numbers of the databases you wish to update on lines 77-473.  E.g.:
-
-    `"2-hydroxyisobutyrylation": ModificationType(
-        "2-hydroxyisobutyrylation", 1.0, [ModificationDatabase(cplmv4, "2-Hydroxyisobutyrylation")],
-        ["K"]
-      ),`
-
-    becomes
-
-    `"2-hydroxyisobutyrylation": ModificationType(
-        "2-hydroxyisobutyrylation", 2.0, [ModificationDatabase(cplmv4, "2-Hydroxyisobutyrylation")],
-        ["K"]
-      ),`
-
-    - comment out lines 515-520 (function `_generate_blastdb_if_not_up_to_date` - the try/except _get_fasta_from_zenodo)
-    - uncomment line 524 (function `_generate_blastdb_if_not_up_to_date` - the _get_fasta_for_blast)
-
-3. Install your adapted FLAMS version locally:
-
-    `python -m pip install ./PathToLocalFLAMS`
+°: for PTM types that exist in the CPLM/dbPTM version of FLAMS the list of amino acids that could carry the modification type was left the same, however, for the newly added types the list was inferred from the downloaded entries that were sorted into that type and might not be biologically relevant. You can update the list in MODIFICATIONS in *setup.py*.
 
 ## Contact
 
@@ -286,9 +263,7 @@ In addition, FLAMS relies on third-party software & databases:
 
 Altschul, S.F. *et al* (1990) "Basic local alignment search tool." J. Mol. Biol. 215:403-410.
 
-Chung, C.-R. *et al* (2025) "dbPTM 2025 update: comprehensive integration of PTMs and proteomic data for advanced insights into cancer research." Nucleic Acids Research. 53(D1):D377–D386.
-
-Zhang, W. *et al* (2021) "CPLM 4.0: an updated database with rich annotations for protein lysine modifications." Nucleic Acids Research. 44(5):243–250.
+The UniProt Consortium , UniProt: the Universal Protein Knowledgebase in 2025, Nucleic Acids Research, Volume 53, Issue D1, 6 January 2025, Pages D609–D617
 
 ## License
 
