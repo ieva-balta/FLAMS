@@ -1,0 +1,18 @@
+Uniprot ID	Protein name	Modification	Q location	Q window	Species	BLAST E-value	BLAST identity	BLAST coverage	Database	ECO codes	Sources	Source IDs
+P68431	H3C1	5-glutamyl dopamine	6	1-MARTKQTARKS-11	Homo sapiens	2.14866e-99	100.00%	100.00%	Swiss-Prot	ECO:0000269	PubMed	32273471
+P68431	H3C1	5-glutamyl serotonin	6	1-MARTKQTARKS-11	Homo sapiens	1.89838e-101	100.00%	100.00%	Swiss-Prot	ECO:0000269	PubMed	30867594
+P68431	H3C1	5-glutamyl serotonin	6	1-MARTKQTARKS-11	Homo sapiens	2.14866e-99	100.00%	100.00%	Swiss-Prot	ECO:0000269	PubMed	30867594
+P68433	H3c1	5-glutamyl serotonin	6	1-MARTKQTARKS-11	Mus musculus	1.89838e-101	100.00%	100.00%	Swiss-Prot	ECO:0000269	PubMed	30867594
+P68433	H3c1	5-glutamyl serotonin	6	1-MARTKQTARKS-11	Mus musculus	2.14866e-99	100.00%	100.00%	Swiss-Prot	ECO:0000269	PubMed	30867594
+P84228	H3c2	5-glutamyl serotonin	6	1-MARTKQTARKS-11	Mus musculus	3.75836e-100	99.26%	100.00%	Swiss-Prot	ECO:0000269	PubMed	30867594
+P84228	H3c2	5-glutamyl serotonin	6	1-MARTKQTARKS-11	Mus musculus	4.25386e-98	99.26%	100.00%	Swiss-Prot	ECO:0000269	PubMed	30867594
+P84243	H3-3A	5-glutamyl dopamine	6	1-MARTKQTARKS-11	Homo sapiens	1.81974e-95	96.32%	100.00%	Swiss-Prot	ECO:0000269	PubMed	32273471
+P84243	H3-3A	5-glutamyl serotonin	6	1-MARTKQTARKS-11	Homo sapiens	1.60777e-97	96.32%	100.00%	Swiss-Prot	ECO:0000269	PubMed	30867594
+P84243	H3-3A	5-glutamyl serotonin	6	1-MARTKQTARKS-11	Homo sapiens	1.81974e-95	96.32%	100.00%	Swiss-Prot	ECO:0000269	PubMed	30867594
+P84244	H3-3a	5-glutamyl serotonin	6	1-MARTKQTARKS-11	Mus musculus	1.60777e-97	96.32%	100.00%	Swiss-Prot	ECO:0000269	PubMed	30867594
+P84244	H3-3a	5-glutamyl serotonin	6	1-MARTKQTARKS-11	Mus musculus	1.81974e-95	96.32%	100.00%	Swiss-Prot	ECO:0000269	PubMed	30867594
+P84245	H3-3b	5-glutamyl dopamine	6	1-MARTKQTARKS-11	Rattus norvegicus	1.81974e-95	96.32%	100.00%	Swiss-Prot	ECO:0000269	PubMed	32273471
+Q6LED0	not found	5-glutamyl dopamine	6	1-MARTKQTARKS-11	Rattus norvegicus	2.14866e-99	100.00%	100.00%	Swiss-Prot	ECO:0000269	PubMed	32273471
+Q71DI3	H3C15	5-glutamyl dopamine	6	1-MARTKQTARKS-11	Homo sapiens	4.25386e-98	99.26%	100.00%	Swiss-Prot	ECO:0000269	PubMed	32273471
+Q71DI3	H3C15	5-glutamyl serotonin	6	1-MARTKQTARKS-11	Homo sapiens	3.75836e-100	99.26%	100.00%	Swiss-Prot	ECO:0000269	PubMed	30867594
+Q71DI3	H3C15	5-glutamyl serotonin	6	1-MARTKQTARKS-11	Homo sapiens	4.25386e-98	99.26%	100.00%	Swiss-Prot	ECO:0000269	PubMed	30867594
