@@ -149,7 +149,7 @@ If you wish to use other filters, you can modify the *uniprot.py* script (valid_
 
 ### Supported PTM types
 
-An overview of the PTM types, how to call them in FLAMS, and on which amino acid they can be found is given in the table below. This table can also be found as a tab seperated file named FLAMS_supported_ptms_v20.txt .
+An overview of the PTM types, how to call them in FLAMS, and on which amino acid they can be found° is given in the table below. This table can also be found as a tab seperated file named FLAMS_supported_ptms_v20.txt .
 
 |FLAMS PTM name|A (Ala)|C (Cys)|D (Asp)|E (Glu)|F (Phe)|G (Gly)|H (His)|I (Ile)|K (Lys)|L (Leu)|M (Met)|N (Asn)|P (Pro)|Q (Gln)|R (Arg)|S (Ser)|T (Thr)|V (Val)|W (Trp)|Y (Tyr)|Acylations|Ubs|
 |:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|
@@ -247,94 +247,7 @@ An overview of the PTM types, how to call them in FLAMS, and on which amino acid
 |umpylation| | | | | | | | | | | | | | | |X|X| | |X| | |
 |2-hydroxyisobutyrylation| | | | | | | | |X| | | | | | | | | | | |X| |
 
-
-
-|FLAMS PTM name|CPLM name|dbPTM name|A (Ala)|C (Cys)|D (Asp)|E (Glu)|F (Phe)|G (Gly)|H (His)|I (Ile)|K (Lys)|L (Leu)|M (Met)|N (Asn)|P (Pro)|Q (Gln)|R (Arg)|S (Ser)|T (Thr)|V (Val)|W (Trp)|Y (Tyr)|CPLM-Acylations|CPLM-Ubs|CPLM-Others|CPLM-All|
-|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|
-|acetylation|Acetylation|Acetylation|X|X|X|X| |X| | |X| |X| |X| |X|X|X|X| |X|X| | |X|
-|adp-ribosylation| |ADP-ribosylation| |X|X|X| |X|X| |X| | |X| | |X|X| | | |X| | | | |
-|amidation| |Amidation|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | | | |
-|ampylation| |AMPylation| | | | | | | | | | | | | | | |X|X| | |X| | | | |
-|benzoylation|Benzoylation| | | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|beta-hydroxybutyrylation|β-Hydroxybutyrylation| | | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|biotinylation|Biotinylation|Biotinylation| | | | | | | | |X| | | | | | | | | | | | | |X|X|
-|blocked_amino_end| |Blocked amino end|X|X|X|X| |X|X|X| |X|X|X|X|X|X|X|X|X| | | | | | |
-|butyrylation|Butyrylation|Butyrylation| | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|carbamidation| |Carbamidation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|carboxyethylation|Carboxyethylation|Carboxyethylation| | | | | | | | |X| | | | | | | | | | | | | |X|X|
-|carboxylation|Carboxylation|Carboxylation| | | | | | | | |X| | | | | | | | | | | | | |X|X|
-|carboxymethylation|Carboxymethylation| | | | | | | | | |X| | | | | | | | | | | | | |X|X|
-|cholesterol_ester| |Cholesterol ester|  | | | | |X| | | | | | | | | | | | | | | | | | |
-|citrullination| |Citrullination| | | | | | | |  | | | | | | |X| | | | | | | | | |
-|crotonylation|Crotonylation|Crotonylation| | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|c-linked_glycosylation| |C-linked Glycosylation| | | | | | | | | | | | | | | | | | |X| | | | | |
-|deamidation| |Deamidation| | | | | | | | | | | |X| |X| | | | | | | | | | |
-|deamination| |Deamination| | | | | | | | |X| | | | | | | | | | | | | | | |
-|decanoylation| |Decanoylation| | | | | | | | | | | | | | | |X|X| | | | | | | |
-|decarboxylation| |Decarboxylation| | |X| | | | | | | | | | | | | |X| | | | | | | |
-|dephosphorylation| |Dephosphorylation| | | | | | | | | | | | | | | |X|X| | |X| | | | |
-|dietylphosphorylation|Dietylphosphorylation| | | | | | | | | |X| | | | | | | | | | | | | |X|X|
-|disulfide_bond| |Disulfide bond| |X| | | | | | | | | | | | | | | | | | | | | | |
-|d-glucuronylation| |D-glucuronoylation| | | | | |X| | | | | | | | | | | | | | | | | | |
-|farnesylation| |Farnesylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|formation_of_an_isopeptide_bond| |Formation of an isopeptide bond| | | |X| | | | | | | | | |X| | | | | | | | | | |
-|formylation|Formylation|Formylation| | | | | |X| | |X| |X| | | | | | | | | |X| | |X|
-|gamma-carboxyglutamic_acid| |Gamma-carboxyglutamic acid| | | |X| | | | | | | | | | | | | | | | | | | | |
-|geranylgeranylation| |Geranylgeranylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|glutarylation|Glutarylation|Glutarylation| | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|glutathionylation| |Glutathionylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|glycation|Glycation| | | | | | | | | |X| | | | | | | | | | | | | |X|X|
-|gpi-anchor| |GPI-anchor|X|X|X| | |X| | | | | |X| | | |X|X| | | | | | | |
-|hmgylation|HMGylation| | | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|hydroxyceramide_ester| |Hydroxyceramide ester| | | | | | | | | | | | | |X| | | | | | | | | | |
-|hydroxylation|Hydroxylation|Hydroxylation| |X|X|X|X| |X|X|X|X| |X|X| |X|X|X|X|X|X| | |X|X|
-|iodination| |Iodination| | | | | | | | | | | | | | | | | | | |X| | | | |
-|lactoylation| |Lactoylation| | | | | | | | |X| | | | | | | | | | | | | | | |
-|lactylation|Lactylation|Lactylation| | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|lipoylation|Lipoylation|Lipoylation| | | | | | | | |X| | | | | | | | | | | | | |X|X|
-|malonylation|Malonylation|Malonylation| | | | | | | | |X| |  | | | | | | | | | |X| | |X|
-|methylation|Methylation|Methylation| X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| |X| | |X|X|
-|mgcylation|MGcylation| | | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|mgylation|MGylation| | | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|myristoylation| |Myristoylation| |X| | | |X| | |X| | | | | | | | | | | | | | | |
-|neddylation|Neddylation|Neddylation| | | | | | | | |X| | | | | | | | | | | | |X| |X|
-|nitration| |Nitration| | | | | | | | | | | | | | | | | | | |X| | | | |
-|n-carbamoylation| |N-carbamoylation|X| | | | | | | | | | | | | | | | | | |  | | | | |
-|n-linked_glycosylation| |N-linked Glycosylation| | |X| | | | |X|X| | |X| | |X|X|X|X|X| | | | | |
-|n-palmitoylation| |N-palmitoylation| |X| | | |X| | |X| | | | | | | | | | | | | | | |
-|octanoylation| |Octanoylation| | | | | | | | | | | | | | | |X|X| | | | | | | |
-|oxidation| |Oxidation| |X| | | | | | | |X|X| | | | |X| | |X| | | | | |
-|o-linked_glycosylation| |O-linked Glycosylation| | | | | | | | |X| | | |X| | |X|X| | |X| | | | |
-|o-palmitoleoylation| |O-palmitoleoylation| | | | | | | | | | | | | | | |X| | | | | | | | |
-|o-palmitoylation| |O-palmitoylation| | | | | | | | | | | | | | | |X|X| | | | | | | |
-|phosphatidylethanolamine_amidation| |Phosphatidylethanolamine amidation| | | | | |X| | | | | | | | | | | | | | | | | | |
-|phosphoglycerylation|Phosphoglycerylation| |  | | | | | | | |X| | |  | | | | | | | | | | |X|X|
-|phosphorylation| |Phosphorylation|X|X|X|X|X|X|X|X|X|X| |X|X|X|X|X|X|X|X|X| | | | |
-|propionylation|Propionylation|Propionylation| | | | | | | | |X| | | | | | | | | | | |X| | |X|
-|pupylation|Pupylation| | | | | | | | | |X| | | | | | | | | | | | |X| |X|
-|pyrrolidone_carboxylic_acid| |Pyrrolidone carboxylic acid| | | |X| | | | | | | | | |X| | | | | | | | | | |
-|pyrrolylation| |Pyrrolylation| |X| | | | | | |  | | | | | | | | | | | | | | | |
-|pyruvate| |Pyruvate| |X| | | | | | | | | | | | | |X| | | | | | | | |
-|serotonylation| |Serotonylation| | | |  | | | | | | | | | |X| | | | | | | | | | |
-|stearoylation| |Stearoylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|succinylation|Succinylation|Succinylation| |X| | | | | | |X| | | | | | | | | |X| |X| | |X|
-|sulfation| |Sulfation| |X| | | | | | | | | | | | | |X|X| |  |X| | | | |
-|sulfhydration| |Sulfhydration|  |X| | | | | | | | | | | | | | | | | | | | | | |
-|sulfoxidation| |Sulfoxidation| | | | | | | | | | |X| | | | | | | | | | | | | |
-|sumoylation|Sumoylation|Sumoylation| | | | | | | | |X| | | | | | | | | | | | |X| |X|
-|s-archaeol| |S-archaeol| |X| | | | | | | | | | | | | | | | | | | | | | |
-|s-carbamoylation| |S-carbamoylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|s-cyanation| |S-Cyanation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|s-cysteinylation| |S-cysteinylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|s-diacylglycerol| |S-diacylglycerol| |X| | | | | | | | | | | | | | | | | | | | | | |
-|s-linked_glycosylation| |S-linked Glycosylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|s-nitrosylation| |S-nitrosylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|s-palmitoylation| |S-palmitoylation| |X| | | | | | | | | | | | | | | | | | | | | | |
-|thiocarboxylation| |Thiocarboxylation| | | | | |X| | | | | | | | | | | | | | | | | | |
-|ubiquitination|Ubiquitination|Ubiquitination| |X| | | | | | |X| | | | | |X|X| | | | | |X| |X|
-|umpylation| |UMPylation| | | | | | | | | | | | | | | |X|X| | |X| | | | |
-|2-hydroxyisobutyrylation|2-Hydroxyisobutyrylation| | | | | | | | | |X| | | | | | | | | | | |X| | |X|
-
+°: for PTM types that exist in the CPLM/dbPTM version of FLAMS the list of amino acids that could carry the modification type was left the same, however, for the newly added types the list was inferred from the downloaded entries that were sorted into that type and might not be biologically relevant. Ypu can update the list in MODIFICATIONS in *setup.py*.
 
 ## Contact
 

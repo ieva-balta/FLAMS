@@ -1,0 +1,94 @@
+FLAMS PTMs	A (Ala)	C (Cys)	D (Asp)	E (Glu)	F (Phe)	G (Gly)	H (His)	I (Ile)	K (Lys)	L (Leu)	M (Met)	N (Asn)	P (Pro)	Q (Gln)	R (Arg)	S (Ser)	T (Thr)	V (Val)	W (Trp)	Y (Tyr)	Acylations	Ubs
+acetylation	X	X	X	X		X			X		X		X		X	X	X	X		X	X	
+adp-ribosylation		X	X	X		X	X		X			X			X	X				X		
+adp-riboxanation			X				X					X		X	X	X						
+amidation	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X		
+ampylation																X	X			X		
+benzoylation									X												X	
+beta-hydroxybutyrylation									X												X	
+biotinylation									X													
+blocked_amino_end	X	X	X	X		X	X	X		X	X	X	X	X	X	X	X	X				
+bromination	X	X	X		X	X	X	X	X	X			X	X	X			X	X	X		
+butyrylation									X												X	
+carboxyethylation									X													
+carboxylation									X													
+cholesterol_ester						X																
+citrullination															X							
+crotonylation									X												X	
+cyclopeptide	X	X	X	X	X	X		X	X	X	X	X	X	X	X	X			X	X		
+cysteinylation	X	X		X		X	X	X	X	X		X	X	X	X	X	X	X	X	X		
+c-linked_glycosylation																			X			
+deamidation												X		X								
+deamination									X													
+decanoylation																X	X					
+decarboxylation			X														X					
+dehydration	X	X	X			X	X		X	X		X			X	X	X	X		X		
+dephosphorylation																X	X			X		
+disulfide_bond		X																				
+d-glucuronoylation						X																
+fadylation	X	X				X	X	X	X	X		X			X	X	X	X		X		
+farnesylation		X																				
+formation_of_an_isopeptide_bond				X										X								
+formylation						X			X		X										X	
+genarylation		X				X		X		X		X		X	X				X	X		
+geranylgeranylation		X																				
+glutamylation	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X		
+glutarylation									X												X	
+glutathionylation		X																				
+glycation									X													
+gmpylation		X																				
+gpi-anchor	X	X	X			X						X				X	X					
+histidylation	X					X	X	X	X	X		X				X		X				
+hydroxylation		X	X	X	X		X	X	X	X		X	X		X	X	X	X	X	X		
+hypusine			X	X					X			X				X						
+imidazolation	X	X					X		X	X	X	X		X	X	X	X	X				
+iodination																				X		
+isomerization	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X		
+lactoylation									X													
+lipoylation									X													
+malonylation									X												X	
+methylation	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X		X		
+myristoylation		X				X			X													
+neddylation									X													X
+nitration																				X		
+n-carbamoylation	X																					
+n-linked_glycosylation			X					X	X			X			X	X	X	X	X			
+n-palmitoylation		X				X			X													
+octanoylation																X	X					
+oxidation		X								X	X					X			X			
+o-linked_glycosylation									X				X			X	X			X		
+o-palmitoleoylation																X						
+o-palmitoylation																X	X					
+palmitoylation	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X		
+phosphatidylethanolamine_amidation						X																
+phosphoglycerylation									X													
+phosphorylation	X	X	X	X	X	X	X	X	X	X		X	X	X	X	X	X	X	X	X		
+prenylation				X															X			
+propionylation									X												X	
+pupylation									X													X
+pyridoxal_phosphate_addition	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X	X		
+pyrrolidone_carboxylic_acid				X										X								
+pyrrolylation		X																				
+pyruvate		X														X						
+quinone																						
+serotonylation														X								
+stearoylation		X																				
+succinylation		X							X										X		X	
+sulfation		X														X	X			X		
+sulfhydration		X																				
+sulfilimine_crosslink									X		X						X					
+sulfoxidation											X											
+sumoylation									X													X
+s-archaeol		X																				
+s-carbamoylation		X																				
+s-cyanation		X																				
+s-cysteinylation		X																				
+s-diacylglycerol		X																				
+s-linked_glycosylation		X																				
+s-nitrosylation		X																				
+s-palmitoylation		X																				
+thiocarboxylation						X																
+thioester_crosslink																						
+ubiquitination		X							X						X	X						X
+umpylation																X	X			X		
+2-hydroxyisobutyrylation									X												X	
