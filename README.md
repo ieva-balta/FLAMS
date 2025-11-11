@@ -4,7 +4,7 @@ This repository is a **modified fork** of [FLAMS](https://github.com/hannelorelo
 
 The goal of the project was to adapt FLAMS to function with **[UniProt](https://www.uniprot.org/) as primary PTM information source**. We label this fork as FLAMS v1.2.0, since the position-based search logic remains unchanged and only the database source was modified. This project was done by *Ieva Baltā* (ieva-balta), *Maria Jose Caceres Valdiviezo* (majocava), and *Natasya Limanta* (naaattella), under the supervision of *Hannelore Login* (hannelorelongin).
 
-To acknowledge contributions clearly, any scripts or modules we modified include our names as additional authors alongside the original author(s).
+To acknowledge contributions clearly, any scripts or modules we modified include our names as additional authors alongside the original authors.
 
 # FLAMS: Find Lysine Acylations & other Modification Sites
 
@@ -95,7 +95,7 @@ With the following command, you search whether the *Mycobabcterium smegmatis*' F
 
 `FLAMS --id A0QQ22 -p 537 -m Acylations -o FadD2.tsv`
 
-With the following commands, you search what modification could the Q at the 6th position of the *Homo sapiens* Histone H3.1 (UniProt ID: P68431). 
+With the following commands, you search what modification could the Q at the 6th position of the *Homo sapiens* Histone H3.1 (UniProt ID: P68431) have. 
 
 `FLAMS --id P68431 -p 6 -m Q-All -o Q-All_P68431.tsv`
 
@@ -123,7 +123,8 @@ The output file contains 13 columns:
 * Sources: source type of matched protein modification°°
 * Source IDs: evidence links of matched protein modification°°
 
-°: window can be smaller than the [-5;+5] window if the sequence alignment ends sooner, which can happen for modified sites near the start/end of the protein
+°: window can be smaller than the [-5;+5] window if the sequence alignment ends sooner, which can happen for modified sites near the start/end of the protein.
+
 °°: These three columns are parallel lists separated by semicolons — the n-th entry in ECO codes corresponds to the n-th entry in both Sources and Source IDs.
 
 ## Supported PTMs
@@ -149,6 +150,104 @@ If you wish to use other filters, you can modify the *uniprot.py* script (valid_
 ### Supported PTM types
 
 An overview of the PTM types, how to call them in FLAMS, and on which amino acid they can be found is given in the table below. This table can also be found as a tab seperated file named FLAMS_supported_ptms_v20.txt .
+
+|FLAMS PTM name|A (Ala)|C (Cys)|D (Asp)|E (Glu)|F (Phe)|G (Gly)|H (His)|I (Ile)|K (Lys)|L (Leu)|M (Met)|N (Asn)|P (Pro)|Q (Gln)|R (Arg)|S (Ser)|T (Thr)|V (Val)|W (Trp)|Y (Tyr)|Acylations|Ubs|
+|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|
+|acetylation|X|X|X|X| |X| | |X| |X| |X| |X|X|X|X| |X|X| |
+|adp-ribosylation| |X|X|X| |X|X| |X| | |X| | |X|X| | | |X| | |
+|adp-riboxanation| | |X| | | |X| | | | |X| |X|X|X| | | | | | |
+|amidation|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | |
+|ampylation| | | | | | | | | | | | | | | |X|X| | |X| | |
+|benzoylation| | | | | | | | |X| | | | | | | | | | | |X| |
+|beta-hydroxybutyrylation| | | | | | | | |X| | | | | | | | | | | |X| |
+|biotinylation| | | | | | | | |X| | | | | | | | | | | | | |
+|blocked_amino_end|X|X|X|X| |X|X|X| |X|X|X|X|X|X|X|X|X| | | | |
+|bromination|X|X|X| |X|X|X|X|X|X| | |X|X|X| | |X|X|X| | |
+|butyrylation| | | | | | | | |X| | | | | | | | | | | |X| |
+|carboxyethylation| | | | | | | | |X| | | | | | | | | | | | | |
+|carboxylation| | | | | | | | |X| | | | | | | | | | | | | |
+|cholesterol_ester| | | | | |X| | | | | | | | | | | | | | | | |
+|citrullination| | | | | | | | | | | | | | |X| | | | | | | |
+|crotonylation| | | | | | | | |X| | | | | | | | | | | |X| |
+|cyclopeptide|X|X|X|X|X|X| |X|X|X|X|X|X|X|X|X| | |X|X| | |
+|cysteinylation|X|X| |X| |X|X|X|X|X| |X|X|X|X|X|X|X|X|X| | |
+|c-linked_glycosylation| | | | | | | | | | | | | | | | | | |X| | | |
+|deamidation| | | | | | | | | | | |X| |X| | | | | | | | |
+|deamination| | | | | | | | |X| | | | | | | | | | | | | |
+|decanoylation| | | | | | | | | | | | | | | |X|X| | | | | |
+|decarboxylation| | |X| | | | | | | | | | | | | |X| | | | | |
+|dehydration|X|X|X| | |X|X| |X|X| |X| | |X|X|X|X| |X| | |
+|dephosphorylation| | | | | | | | | | | | | | | |X|X| | |X| | |
+|disulfide_bond| |X| | | | | | | | | | | | | | | | | | | | |
+|d-glucuronoylation| | | | | |X| | | | | | | | | | | | | | | | |
+|fadylation|X|X| | | |X|X|X|X|X| |X| | |X|X|X|X| |X| | |
+|farnesylation| |X| | | | | | | | | | | | | | | | | | | | |
+|formation_of_an_isopeptide_bond| | | |X| | | | | | | | | |X| | | | | | | | |
+|formylation| | | | | |X| | |X| |X| | | | | | | | | |X| |
+|genarylation| |X| | | |X| |X| |X| |X| |X|X| | | |X|X| | |
+|geranylgeranylation| |X| | | | | | | | | | | | | | | | | | | | |
+|glutamylation|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | |
+|glutarylation| | | | | | | | |X| | | | | | | | | | | |X| |
+|glutathionylation| |X| | | | | | | | | | | | | | | | | | | | |
+|glycation| | | | | | | | |X| | | | | | | | | | | | | |
+|gmpylation| |X| | | | | | | | | | | | | | | | | | | | |
+|gpi-anchor|X|X|X| | |X| | | | | |X| | | |X|X| | | | | |
+|histidylation|X| | | | |X|X|X|X|X| |X| | | |X| |X| | | | |
+|hydroxylation| |X|X|X|X| |X|X|X|X| |X|X| |X|X|X|X|X|X| | |
+|hypusine| | |X|X| | | | |X| | |X| | | |X| | | | | | |
+|imidazolation|X|X| | | | |X| |X|X|X|X| |X|X|X|X|X| | | | |
+|iodination| | | | | | | | | | | | | | | | | | | |X| | |
+|isomerization|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | |
+|lactoylation| | | | | | | | |X| | | | | | | | | | | | | |
+|lipoylation| | | | | | | | |X| | | | | | | | | | | | | |
+|malonylation| | | | | | | | |X| | | | | | | | | | | |X| |
+|methylation|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| |X| | |
+|myristoylation| |X| | | |X| | |X| | | | | | | | | | | | | |
+|neddylation| | | | | | | | |X| | | | | | | | | | | | |X|
+|nitration| | | | | | | | | | | | | | | | | | | |X| | |
+|n-carbamoylation|X| | | | | | | | | | | | | | | | | | | | | |
+|n-linked_glycosylation| | |X| | | | |X|X| | |X| | |X|X|X|X|X| | | |
+|n-palmitoylation| |X| | | |X| | |X| | | | | | | | | | | | | |
+|octanoylation| | | | | | | | | | | | | | | |X|X| | | | | |
+|oxidation| |X| | | | | | | |X|X| | | | |X| | |X| | | |
+|o-linked_glycosylation| | | | | | | | |X| | | |X| | |X|X| | |X| | |
+|o-palmitoleoylation| | | | | | | | | | | | | | | |X| | | | | | |
+|o-palmitoylation| | | | | | | | | | | | | | | |X|X| | | | | |
+|palmitoylation|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | |
+|phosphatidylethanolamine_amidation| | | | | |X| | | | | | | | | | | | | | | | |
+|phosphoglycerylation| | | | | | | | |X| | | | | | | | | | | | | |
+|phosphorylation|X|X|X|X|X|X|X|X|X|X| |X|X|X|X|X|X|X|X|X| | |
+|prenylation| | | |X| | | | | | | | | | | | | | |X| | | |
+|propionylation| | | | | | | | |X| | | | | | | | | | | |X| |
+|pupylation| | | | | | | | |X| | | | | | | | | | | | |X|
+|pyridoxal_phosphate_addition|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | |
+|pyrrolidone_carboxylic_acid| | | |X| | | | | | | | | |X| | | | | | | | |
+|pyrrolylation| |X| | | | | | | | | | | | | | | | | | | | |
+|pyruvate| |X| | | | | | | | | | | | | |X| | | | | | |
+|quinone| | | | | | | | | | | | | | | | | | | | | | |
+|serotonylation| | | | | | | | | | | | | |X| | | | | | | | |
+|stearoylation| |X| | | | | | | | | | | | | | | | | | | | |
+|succinylation| |X| | | | | | |X| | | | | | | | | |X| |X| |
+|sulfation| |X| | | | | | | | | | | | | |X|X| | |X| | |
+|sulfhydration| |X| | | | | | | | | | | | | | | | | | | | |
+|sulfilimine_crosslink| | | | | | | | |X| |X| | | | | |X| | | | | |
+|sulfoxidation| | | | | | | | | | |X| | | | | | | | | | | |
+|sumoylation| | | | | | | | |X| | | | | | | | | | | | |X|
+|s-archaeol| |X| | | | | | | | | | | | | | | | | | | | |
+|s-carbamoylation| |X| | | | | | | | | | | | | | | | | | | | |
+|s-cyanation| |X| | | | | | | | | | | | | | | | | | | | |
+|s-cysteinylation| |X| | | | | | | | | | | | | | | | | | | | |
+|s-diacylglycerol| |X| | | | | | | | | | | | | | | | | | | | |
+|s-linked_glycosylation| |X| | | | | | | | | | | | | | | | | | | | |
+|s-nitrosylation| |X| | | | | | | | | | | | | | | | | | | | |
+|s-palmitoylation| |X| | | | | | | | | | | | | | | | | | | | |
+|thiocarboxylation| | | | | |X| | | | | | | | | | | | | | | | |
+|thioester_crosslink| | | | | | | | | | | | | | | | | | | | | | |
+|ubiquitination| |X| | | | | | |X| | | | | |X|X| | | | | |X|
+|umpylation| | | | | | | | | | | | | | | |X|X| | |X| | |
+|2-hydroxyisobutyrylation| | | | | | | | |X| | | | | | | | | | | |X| |
+
+
 
 |FLAMS PTM name|CPLM name|dbPTM name|A (Ala)|C (Cys)|D (Asp)|E (Glu)|F (Phe)|G (Gly)|H (His)|I (Ile)|K (Lys)|L (Leu)|M (Met)|N (Asn)|P (Pro)|Q (Gln)|R (Arg)|S (Ser)|T (Thr)|V (Val)|W (Trp)|Y (Tyr)|CPLM-Acylations|CPLM-Ubs|CPLM-Others|CPLM-All|
 |:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|
