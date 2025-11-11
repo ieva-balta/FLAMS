@@ -81,7 +81,7 @@ Optional arguments:
 * `dataDir` is the path to the directory where intermediate files (the UniProt sequence files) are stored. [default: $PWD/data]
 * `threadsBLAST` is a BLAST parameter, allows you to speed up the search by multithreading. [default: 1]
 * `evalueBLAST` is a BLAST parameter, allows you to filter out low quality BLAST hits. [default: 0.01]
-* `modification` is a space-separated list of modifications (all lower case) to search for at the given position. Possible values are any (combinations) of the CPLM and dbPTM modifications. We also provide aggregated combinations for each amino acid ($AA-All), and the CPLM combinations. For a full list of all supported PTMs, and how they are named, see the [Supported PTM types](#supported-ptm-types) section of the README. In general, PTMs are written all lowercase, and spaces within a PTM name are replaced by underscores. [default: K-All]
+* `modification` is a space-separated list of modifications (all lower case) to search for at the given position. We also provide aggregated combinations for each amino acid ($AA-All), and Acylations and Ubs. For a full list of all supported PTMs, and how they are named, see the [Supported PTM types](#supported-ptm-types) section of the README. In general, PTMs are written all lowercase, and spaces within a PTM name are replaced by underscores. [default: K-All]
 
 ### Example use case
 
