@@ -247,7 +247,7 @@ An overview of the PTM types, how to call them in FLAMS, and on which amino acid
 |umpylation| | | | | | | | | | | | | | | |X|X| | |X| | |
 |2-hydroxyisobutyrylation| | | | | | | | |X| | | | | | | | | | | |X| |
 
-°: for PTM types that exist in the CPLM/dbPTM version of FLAMS the list of amino acids that could carry the modification type was left the same, however, for the newly added types the list was inferred from the downloaded entries that were sorted into that type and might not be biologically relevant. Ypu can update the list in MODIFICATIONS in *setup.py*.
+°: for PTM types that exist in the CPLM/dbPTM version of FLAMS the list of amino acids that could carry the modification type was left the same, however, for the newly added types the list was inferred from the downloaded entries that were sorted into that type and might not be biologically relevant. You can update the list in MODIFICATIONS in *setup.py*.
 
 ## Contact
 
