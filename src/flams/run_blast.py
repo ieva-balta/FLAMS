@@ -93,7 +93,11 @@ class ModificationHeader:
     species: str
     eco_codes: str
     sources: str
-    evidence_link: str
+    # evidence_link: str
+    lss_database: str
+    lss_ids: str
+    lss_confidence_scores: str
+
 
     @staticmethod
     def parse(title: str) -> "ModificationHeader":
@@ -103,7 +107,7 @@ class ModificationHeader:
             r"(?P<position>\d+)\|"
             r"(?P<length>\d+)\|"
             r"(?P<database>\S+)"
-            r" (?P<protein_name>\S+)\|(?P<modification>\S+)\|(?P<species>\S+) \[(?P<eco_codes>\S+)\|(?P<sources>\S+)\|(?P<evidence_link>.+)\]"
+            r" (?P<protein_name>\S+)\|(?P<modification>\S+)\|(?P<species>\S+) \[(?P<eco_codes>\S+)\|(?P<sources>\S+)\|(?P<lss_database>\S+)\|(?P<lss_ids>\S+)\|(?P<lss_confidence_scores>.+)\]"
         )
 
         match = re.match(regex, title)
