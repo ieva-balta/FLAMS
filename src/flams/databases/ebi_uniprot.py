@@ -50,7 +50,8 @@ def init_logging(outdir):
 
 
 def fetch_uniprot_accessions():
-    url = f"{UNIPROT_URL}?query=existence:1&fields=accession&format=json&size={UNIPROT_PAGE_SIZE}"
+    # url = f"{UNIPROT_URL}?query=existence:1&fields=accession&format=json&size={UNIPROT_PAGE_SIZE}"
+    url = f"{UNIPROT_URL}?query=existence:1&fields=accession&includeIsoform=true&format=json&size={UNIPROT_PAGE_SIZE}"
     accessions = []
 
     logging.info("Fetching UniProt accessions (existence:1)")
