@@ -17,6 +17,8 @@ import requests
 import logging
 import re
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
 from . import setup
 
 """ uniprot
@@ -65,19 +67,16 @@ def get_fasta(PTM_modification_dict, data_dir):
     records_file = os.path.join(data_dir, f"_deduplicated_records-{setup.version}.csv.tmp")
 
     if not os.path.exists(records_file) or os.path.getsize(records_file) == 0:
-        logging.error(f"Records file not found. Please make sure to download UniProt records first, using 'download_uniprot_records.py' script. Exiting FLAMS...")
-        sys.exit()
+        logging.info(f"Records file not found. Proceeding to download entries from UniProt.")
+        accessions = download_with_rest_api(data_dir, version=setup.version)
+        download_with_ebi_api(data_dir, accessions, version=setup.version)
+        merge_rest_ebi_outputs(data_dir)
+        df = pd.read_csv(records_file, header=0)
     else:
         df = pd.read_csv(records_file, header=0)
 
-    sequence_file = os.path.join(data_dir, f"_sequences-{setup.version}.csv.tmp")
-
-    if not os.path.exists(sequence_file) or os.path.getsize(sequence_file) == 0:
-        logging.error(f"Sequence file not found. Please make sure to download UniProt records first, using 'download_uniprot_records.py' script. Exiting FLAMS...")
-        sys.exit()
-
-
     # classifies records into PTM types and stores fasta files per modification type
+    logging.info(f"Sorting records into modification types and creating fasta files.")
     classified = sort_uniprot_records(df, PTM_modification_dict, data_dir)
 
     # finds unclassified records 
@@ -117,35 +116,25 @@ def sort_uniprot_records(uniprot_records, PTM_modification_dict, data_dir):
 
     """
     # make new dataframe
-    classified_records = pd.DataFrame(columns = ["Accession", "Position", "Length", "Entry_type",
-                                                    "Protein", "Feature_type", "Description", "Organism",
-                                                    "ECO_codes", "Sources", 
-                                                    "LSS_Database", "LSS_IDs", "LSS_Confidence_scores"])
+    classified_records = pd.DataFrame(columns = ["Accession", "Position", 
+                                                # "Length", "Entry_type",
+                                                # "Protein", 
+                                                "Feature_type", "Description", 
+                                                # "Organism",
+                                                "ECO_codes", "Sources", 
+                                                "LSS_Database", "LSS_IDs", "LSS_Confidence_scores"])
 
     # parses through modification dictionary
     for modification, m_type in PTM_modification_dict.items():
-        # # gets the RegEx descriptors for the modification type
-        # m_db = m_type.dbs[0]
-        # regex = m_db.descriptor
+       
         # finds all records matching the specific RegEx
         df_mod_type = find_modification_type(uniprot_records, m_type, data_dir)
 
         if df_mod_type.empty:
             continue
-
-        # ### for development purposes - can remove later
-        # # stores records per modification type
-        # df_mod_type.to_csv(f"{data_dir}/{modification}-{m_type.version}.csv", index=False)
         
         # adds the records of this modification to the dataframe of all classified records
         classified_records = pd.concat([classified_records, df_mod_type], ignore_index=True)
-
-        # # outputs a fasta file per modification type
-        # fasta_records = df_to_fasta(df_mod_type)
-        # with open(f"{data_dir}/{modification}-{m_type.version}.fasta", "w", encoding="UTF-8") as out:
-        #     SeqIO.write(fasta_records, out, "fasta")
-        
-        # logging.info(f"Fasta file with {len(df_mod_type)} records for modifictation '{modification}' created and stored at {data_dir}.")
     
     return classified_records
     
@@ -213,6 +202,7 @@ def df_to_fasta(PTM_type_df, m_type, m_version, data_dir):
     with open(os.path.join(data_dir, f"{m_type}-{m_version}.fasta"), "a") as f:
         for _, row in PTM_df.iterrows():
             # replaces the NoneType  with N/A (needed for run_blast.py)
+
             protein = row["Protein"] or "N/A"
             sources = row["Sources"] or "N/A"
             lss_database = row["LSS_Database"] or "N/A"
@@ -235,229 +225,418 @@ def df_to_fasta(PTM_type_df, m_type, m_version, data_dir):
                 )
 
             SeqIO.write(record, f, "fasta")
-        logging.info(f"Fasta file with {suffix} records for modifictation '{m_type}' created and stored at {data_dir}.")    
+        logging.info(f"Fasta file with {suffix} records for modifictation '{m_type}' created and stored at '{data_dir}'.")    
 
-    # # parses through the dataframe
-    # for idx, row in PTM_type_df.iterrows():
-    #     # replaces the NoneType protein names with N/A (needed for run_blast.py)
-    #     protein = row["Protein"]
-    #     if not protein:
-    #         protein = "N/A"
-        
-    #     seq = Seq(row["Sequence"])
-    #     # adds unique id instead of accession (needed for making BLAST databases)
-    #     id = f'{row["Unique_ID"]}|{str(row["Position"])}|{row["Length"]}|{row["Entry_type"]}'
-    #     rec = SeqRecord(
-    #                 seq,
-    #                 id=id,
-    #                 description=f'{protein}|{row["Description"]}|{row["Organism"]} [{row["ECO_codes"]}|{row["Sources"]}|{row["Source_ids"]}]',
-    #             )
 
-    #     fasta_records.append(rec)
+def merge_rest_ebi_outputs(data_dir):
 
-    # return fasta_records
+    rest_file = os.path.join(data_dir, f"_deduplicated_rest_api_records-{setup.version}.csv.tmp")
+    ebi_file = os.path.join(data_dir, f"_deduplicated_ebi_api_records-{setup.version}.csv.tmp")
+    merge_file = os.path.join(data_dir, f"_deduplicated_records-{setup.version}.csv.tmp")
 
-# def deduplicate_records(uniprot_records):
-#     """
+    if not os.path.exists(rest_file) or os.path.getsize(rest_file) == 0:
+        logging.info(f"No REST API records found to merge.")
+        return
+    if not os.path.exists(ebi_file) or os.path.getsize(ebi_file) == 0:
+        logging.info(f"No EBI API records found to merge.")
+        return
 
-#     This function takes a pandas dataframe of uniprot records and deduplicates it
-#     based on the combination of Accession, PTM position, and PTM description.
-#     Additionally, it concatinates the ECO codes and source information from the duplicated entries.
+    # reads rest and ebi files
+    df_rest = pd.read_csv(rest_file, header=0)
+    df_ebi = pd.read_csv(ebi_file, header=0)
 
-#     Parameters
-#     ----------
-#     uniprot_records: pd.Dataframes
-#         Pandas dataframe of uniprot records
+    # merges rest and ebi dataframes
+    merged_df = pd.concat([df_rest, df_ebi], ignore_index=True)
 
-#     """
+    merged_df.to_csv(merge_file, index=False)
 
-#     # columns to group by
-#     group_cols = ["Accession", "Position", "Description"]
+# columns for the csv of info 
+info_columns = ["Accession", "Position", 
+                            "Feature_type", "Description", 
+                            "ECO_codes", "Sources", # for all
+                            "LSS_Database", "LSS_IDs", "LSS_Confidence_scores"# Only for large scale study data (from EBI API)
+                            ] 
 
-#     # aggregated dataframes
-#     collapsed = (
-#         uniprot_records.groupby(group_cols, as_index=False)
-#         .agg({
-#             "Unique_ID": "first",
-#             "Accession": "first",
-#             "Position": "first",
-#             "Length": "first",
-#             "Entry_type": "first",
-#             "Protein": "first",
-#             "Feature_type": "first",
-#             "Description": "first",
-#             "Organism": "first",
-#             # combine these fields by joining unique non-null values
-#             "ECO_codes": lambda x: ";".join(sorted(set(filter(None, x)))),
-#             "Sources": lambda x: ";".join(sorted(set(filter(None, x)))),
-#             "Source_ids": lambda x: ";".join(sorted(set(filter(None, x)))),
-#             "Sequence": "first"
-#         })
-#     )
+# to store general info separately (useful for EBI API)
+general_columns = ["Accession", "Length", "Entry_type", "Protein", "Organism","Sequence"]
 
-#     return collapsed
+
+def download_with_ebi_api(data_dir, accession_list, version=None, threads=40):
+    """
+    takes accession list and stores entries from ebi api
+    """
+    if version is None:
+        version = setup.version
+
+    # temporary file output path
+    out_info = f"{data_dir}/_deduplicated_ebi_api_records-{version}.csv.tmp"
+    processed_path = f"{data_dir}/_processed_ebi_accessions-{version}.txt"
+
+    # EBI API URL
+    base_url_ebi = "https://www.ebi.ac.uk/proteins/api/proteomics/ptm"
+    headers = {"Accept": "application/json"}
+
+    logging.info(f"Starting entry download using EBI API. Total accessions to go through: {len(accession_list)}")
+
+    processed = set()
+    if os.path.isfile(processed_path):
+        with open(processed_path) as f:
+            processed = {line.strip() for line in f}
+
+    to_process = [acc for acc in accession_list if acc not in processed]
+    logging.info(f"Total remaining accessions: {len(to_process)}")
     
-# def get_uniprot_records(data_dir):
-#     """
-#     fetches all uniprot ptm records
-#     outputs a dataframe of all records + info
 
-#     This function fetches all relevant uniprot entries (existence:1 and valid_eco_codes) and stores them in a pandas dataframe.
+    # Create batches of accessions
+    # to process accesions in batches
+    batch_size = 100
+    batches = list(batch_accessions(to_process, batch_size))
+    logging.info(f"Total batches to process: {len(batches)}")
 
-#     Parameters
-#     ----------
-#     data_dir: str
-#         Location for storing data
+    with ThreadPoolExecutor(max_workers=threads) as ex:
 
-#     """
-#     logging.info(f"Fetching entries from UniProt, please wait.")
+        # Submit each batch to the thread pool
+        futures = {ex.submit(fetch_ptm_for_batch, batch, base_url_ebi, headers): batch for batch in batches}
 
-#     base_url = "https://rest.uniprot.org/uniprotkb/search"
-#     headers = {"Accept": "application/json"}
-#     url = f"{base_url}?query=existence:1&format=json&size=500"
+        new_batch_processed = 0
 
-#     # for pagination purposes
-#     tally = 0
 
-#     # to store data
-#     dataframe = []
+        for f in as_completed(futures):
+            current_batch = futures[f]
+            new_batch_processed += len(current_batch)
+            try:
+                rows, processed_accs = f.result()
+                
+                if rows:
+                    write_ebi_output(rows, out_info)
+                    
+                # Log success for the batch
+                logging.info(
+                    f"Batch processed ({new_batch_processed} accs): "
+                    f"{len(rows)} PTM sites found."
+                )
 
-#     # to keep track of modified residues all together
-#     tally_per_feature = 0
+                # Update processed.txt with all accessions in the batch
+                with open(processed_path, "a") as p:
+                    for acc in current_batch:
+                        p.write(acc + "\n")
 
-#     while url:
-#         response = requests.get(url, headers=headers)
-#         response.raise_for_status()
-#         data = response.json()
 
-#        # parse through results
-#         for entry in data.get("results", []):
-#             accession = entry.get("primaryAccession")
-#             sequence = entry.get("sequence", {}).get("value", "")
-#             name = entry.get("genes", [{}])[0].get("geneName", {}).get("value", "")
-#             organism = entry.get("organism", {}).get("scientificName", "")
+            except Exception as e:
+                # Log an error for the batch but do NOT mark as processed
+                # so it can be retried on the next run
+                logging.error(
+                    f"ERROR processing batch of {len(current_batch)} accessions "
+                    f"starting with {current_batch[0]}: {e}"
+                )
 
-#             # storing database
-#             entry_type = entry.get("entryType", "")
-#             if "Swiss-Prot" in entry_type:
-#                 entry_type = "Swiss-Prot"
-#             if "TrEMBL" in entry_type:
-#                 entry_type = "TrEMBL"
 
-#             # removes white space
-#             entry_type = entry_type.replace(" ", "__")
-#             protein_name = f"{name}".replace(" ","__")
-#             organism_name = f"{organism}".replace(" ","__")
-#             length = len(sequence)
+
+    logging.info("PTM download using EBI API is done.")
+
+def write_ebi_output(all_df_rows, out_info):
+    # writes to temporary csv to avoid data loss
+    df = pd.DataFrame(all_df_rows, columns=info_columns)
+    if not os.path.exists(out_info) or os.path.getsize(out_info) == 0:
+        df.to_csv(out_info, index=False, mode="w")        # includes header
+    else:
+        df.to_csv(out_info, index=False, mode="a", header=False)
+
+def fetch_ptm_for_batch(batch_accessions, base_url_ebi, headers):
+    acc_list = ",".join(batch_accessions)
+    url_ebi = f"{base_url_ebi}?accession={acc_list}&size=100"
+
+    response = requests.get(url_ebi, headers=headers)
+    
+    response.raise_for_status() # Raise error for a bad request
+
+    data = response.json()
+    all_df_rows = []
+    processed_accessions = set()
+
+    # go through ieach entry in batch
+    for entry in data:
+        rows = process_ebi_entry(entry)
+        all_df_rows.extend(rows)
+
+        if "accession" in entry:
+            processed_accessions.add(entry["accession"])
+
+    return all_df_rows, list(processed_accessions)
+
+
+def process_ebi_entry(entry):
+
+    df_rows = []
+
+    # to deduplicate the PTMs from EBI
+    ptms_ebi = {}
+
+    accession = entry.get("accession", "")
+
+    for feature in entry.get("features", []):
+        feature_type = feature.get("type", "")
+        if feature_type not in ["PROTEOMICS_PTM"]:
+            continue
+
+        # peptide start position
+        pep_start = int(feature.get("begin", 0))
+
+        #eco codes
+        ecos = set()
+        for evidence in feature.get("evidences", []):
+            eco = evidence.get("code","")
+            if eco not in valid_ECO_codes:
+                continue
+            ecos.add(eco)
+
+        # PTM description
+        for ptm in feature.get("ptms", []):
+                    
+            #description
+            desc = ptm.get("name", "").replace(" ", "__")
+
+            # get modified amino acid position 
+            pos_in_peptide = int(ptm.get("position", 0))
+            position = pep_start + pos_in_peptide - 1
+
+            lss_databases = set(ptm.get("sources", []))
+
+            #ptmxchange ids and sources and confidence scores
+            x_ids = set()
+            pubmed_ids = set()
+            conf_scores = set()
+            for reference in ptm.get("dbReferences", []):
+                x_ids.add(reference.get("id", "").replace(" ", "__"))
+                pubmed_ids.add(reference.get("properties", {}).get("Pubmed ID", "").replace(" ", "__"))
+                conf_scores.add(reference.get("properties", {}).get("Confidence score", "").replace(" ", "__"))
+                    
+            # deduplicates based on position + description
+            ptm_id = f"{position}|{desc}"
+            ptm_desc = [ecos, lss_databases, x_ids, pubmed_ids, conf_scores]
+
+            if ptm_id not in ptms_ebi:
+                ptms_ebi[ptm_id] = ptm_desc
+            else:
+                ptms_ebi[ptm_id][0].update(ecos)
+                ptms_ebi[ptm_id][1].update(lss_databases)
+                ptms_ebi[ptm_id][2].update(x_ids)
+                ptms_ebi[ptm_id][3].update(pubmed_ids)
+                ptms_ebi[ptm_id][4].update(conf_scores)
+
+    # appends to dataframe
+    for key, item in ptms_ebi.items():
+        ecos_set = item[0]
+        if not ecos_set:
+            continue
+        if item[3] == {} or item[3] == {""}:
+            pubmed_ids_str = ""
+        else:
+            pubmed_ids_str = f"PubMed:{';'.join(item[3])}"
+        df_rows.append([accession, key.split("|")[0],
+                            "PROTEOMICS__PTM", key.split("|")[1],
+                            ";".join(ecos_set), pubmed_ids_str, # for all
+                            ";".join(item[1]), ";".join(item[2]), ":".join(item[4]) # Only for large scale study data
+                            ]) 
+
+    return df_rows
+
+def batch_accessions(accession_list, batch_size):
+    for i in range(0, len(accession_list), batch_size):
+        yield accession_list[i:i + batch_size]
+
+def download_with_rest_api(data_dir, version=None):
+    """
+    downlaod and store sentris form rest
+    ouputs an accession list for ebi api
+    """
+    if version is None:
+        version = setup.version
+        
+    # temporary file output path
+    out_info = f"{data_dir}/_deduplicated_rest_api_records-{version}.csv.tmp"
+    out_seq = f"{data_dir}/_sequences-{version}.csv.tmp"
+
+    # REST URL
+    base_url_rest = "https://rest.uniprot.org/uniprotkb/search"
+    headers = {"Accept": "application/json"}
+    url_rest = f"{base_url_rest}?query=existence:1&includeIsoform=true&format=json&size=500"
+
+    # for pagination purposes
+    tally = 0
+
+    # to store data
+    dataframe = []
+    # to store general info separately (useful for EBI API)
+    general_info = []
+
+    # to store accession code for EBI API
+    accession_list = []
+
+    logging.info(f"Fetching entries from UniProt, please wait.")
+
+    while url_rest:
+        response = requests.get(url_rest, headers=headers)
+        response.raise_for_status()
+        data = response.json()
+
+        results = data.get("results", [])
+
+        # parse through results
+        for entry in results:
+            df_rows = []
+            gen_rows = []
+
+            accession = entry.get("primaryAccession")
+            sequence = entry.get("sequence", {}).get("value", "")
+            length = len(sequence)
+            name = entry.get("genes", [{}])[0].get("geneName", {}).get("value", "")
+            organism = entry.get("organism", {}).get("scientificName", "")
+
+            # storing database
+            entry_type = entry.get("entryType", "")
+            if "Swiss-Prot" in entry_type:
+                entry_type = "Swiss-Prot"
+            if "TrEMBL" in entry_type:
+                entry_type = "TrEMBL"
             
-#             # finds PTM sites from REST
-#             # finds relevant feature types
-#             for feature in entry.get("features", []):
-#                 feature_type = feature.get("type")
-#                 if feature.get("type") not in ["Modified residue",
-#                             # "Chain",
-#                             "Modified residue (large scale data)", 
-#                             "Lipidation", 
-#                             "Glycosylation",
-#                             "Disulfide bond",
-#                             "Cross-link"]:
-#                     continue
+            # removes white space
+            entry_type = entry_type.replace(" ", "__")
+            protein_name = f"{name}".replace(" ","__")
+            organism_name = f"{organism}".replace(" ","__")
 
-#                 # PTM description
-#                 desc = feature.get("description", "")
-
-#                 #special case  - disulfide bonds
-#                 if feature_type == "Disulfide bond":
-#                     desc = "Disulfide bond"
-
-#                 # remove the notes from the description
-#                 if ";" in desc:
-#                     desc = desc.split(";")[0].strip()
-
-#                 #special case - "removed"
-#                 if desc.lower() == "removed":
-#                     continue
-
-#                 #special case - microbial infection
-#                 if "microbial infection" in desc.lower():
-#                     desc = desc.replace("(Microbial infection) ", "")
-
-#                 # gets positions for start and end (matters for crosslinks, bond formation, to record both amino acids)
-#                 pos_start = feature.get("location", {}).get("start", {}).get("value", "N/A")
-#                 pos_end = feature.get("location", {}).get("end", {}).get("value", "N/A")
-
-#                 # gets evidence ECO|source|ids
-#                 ECOs = []
-#                 sources = []
-#                 ids = []
-#                 for ev in feature.get("evidences", []):
-#                     eco = ev.get("evidenceCode", "")
-#                     # skips if the evidnece is from the valid eco codes
-#                     if eco not in valid_ECO_codes:
-#                         continue
-#                     source = ev.get("source", "")
-#                     source_id = str(ev.get("id", ""))
-#                     ECOs.append(eco)
-#                     sources.append(source)
-#                     ids.append(source_id)
-#                 ECO_str = ";".join(ECOs) 
-#                 # skips if there are no ECOs
-#                 if not ECOs:
-#                     continue 
-#                 source_str = ";".join(sources) if sources else ""
-#                 ids_str = ";".join(ids) if ids else ""
-
+            # stores accession for EBI API
+            accession_list.append(accession)
+            # stores sequence separately
+            gen_rows.append([accession, length, entry_type, protein_name, organism_name, sequence])
+    
                 
+            ### finds PTM sites from REST
 
-#                 # removes white space
-#                 feature_type_name = f"{feature_type}".replace(" ", "__")
-#                 desc = f"{desc}".replace(" ","__")
-                
-#                 # adds ID to differentiate
-#                 unique_id = f"{accession}_{tally_per_feature}"
-#                 tally_per_feature += 1
+            # to deduplicate the PTMs from REST
+            ptms_rest = {}
 
-#                 # appends to dataframe
-#                 # add with start position
-#                 dataframe.append([unique_id, accession, pos_start, length, entry_type, 
-#                                     protein_name, feature_type_name, desc, organism_name, 
-#                                     ECO_str, source_str, ids_str, sequence])
+            # finds relevant feature types
+            for feature in entry.get("features", []):
+                feature_type = feature.get("type")
+                if feature.get("type") not in ["Modified residue",
+                                # "Chain",
+                                "Modified residue (large scale data)", 
+                                "Lipidation", 
+                                "Glycosylation",
+                                "Disulfide bond",
+                                "Cross-link"]:
+                    continue
 
-#                 # adds ID to differentiate
-#                 unique_id = f"{accession}_{tally_per_feature}"
-#                 tally_per_feature += 1
-                
-#                 # adds the end position
-#                 dataframe.append([unique_id, accession, pos_end, length, entry_type, 
-#                                     protein_name, feature_type_name, desc, organism_name, 
-#                                     ECO_str, source_str, ids_str, sequence])
-            
-#         tally += len(data["results"])
-#         total = response.headers.get("x-total-results", "?")
-#         logging.info("Retrieved %d of %s total results", tally, total)
+                # PTM description
+                desc = feature.get("description", "")
 
-#         url = response.links.get("next", {}).get("url")
-#         if tally >= int(total):
-#             break
+                #special case  - disulfide bonds
+                if feature_type == "Disulfide bond":
+                    desc = "Disulfide bond"
 
-#     # adds headers to dataframe
-#     dataframe = pd.DataFrame(dataframe, columns = ["Unique_ID", "Accession", "Position", "Length", "Entry_type",
-#                                                     "Protein", "Feature_type", "Description", "Organism",
-#                                                     "ECO_codes", "Sources", "Source_ids", "Sequence"])
+                # remove the notes from the description
+                if ";" in desc:
+                    desc = desc.split(";")[0].strip()
 
-#     logging.info(f"Entry download is done. {len(dataframe)} records stored for further deduplication.")
+                #special case - "removed"
+                if desc.lower() == "removed":
+                    continue
 
-#     ### for development purposes - can remove later
-#     # stores all records
-#     dataframe.to_csv(f"{data_dir}/all_records-{setup.version}.csv", index=False)
+                #special case - microbial infection
+                if "microbial infection" in desc.lower():
+                    desc = desc.replace("(Microbial infection) ", "")
 
-#     # deduplicates based on Accession + position + description and combines source info
-#     collapsed = deduplicate_records(dataframe)
+                # gets positions for start and end (matters for crosslinks, bond formation, to record both amino acids)
+                pos_start = feature.get("location", {}).get("start", {}).get("value", "N/A")
+                pos_end = feature.get("location", {}).get("end", {}).get("value", "N/A")
 
-#     logging.info(f"Deduplication is done. {len(collapsed)} records stored for further processing.")
+                # gets evidence ECO|sources
+                ECOs = set()
+                sources = set()
+                for ev in feature.get("evidences", []):
+                    eco = ev.get("evidenceCode", "")
+                    # skips if the evidnece is from the valid eco codes
+                    if eco not in valid_ECO_codes:
+                        continue
+                    source_site = ev.get("source", "")
+                    source_id = str(ev.get("id", ""))
+                    source = f"{source_site}:{source_id}" 
+                    ECOs.add(eco)
+                    sources.add(source)
+                # ECO_str = ";".join(ECOs) 
+                # # skips if there are no ECOs
+                # if not ECOs:
+                #     continue 
+                # source_str = ";".join(sources) if sources else ""
 
-#     ### for development purposes - can remove later
-#     # stores deduplicated records
-#     collapsed.to_csv(f"{data_dir}/deduplicated_records-{setup.version}.csv", index=False)
+                # removes white space
+                feature_type_name = f"{feature_type}".replace(" ", "__")
+                desc = f"{desc}".replace(" ","__")
+                    
+                # deduplicates based on position + description
+                ptm_id = f"{pos_start}|{desc}"
+                ptm_desc = [ECOs, sources, feature_type_name]
 
-#     return collapsed
+                if ptm_id not in ptms_rest:
+                    ptms_rest[ptm_id] = ptm_desc
+                else:
+                    ptms_rest[ptm_id][0].update(ECOs)
+                    ptms_rest[ptm_id][1].update(sources)
+
+                if pos_start != pos_end:
+                    ptm_id = f"{pos_end}|{desc}"
+                    if ptm_id not in ptms_rest:
+                        ptms_rest[ptm_id] = ptm_desc
+                    else:
+                        ptms_rest[ptm_id][0].update(ECOs)
+                        ptms_rest[ptm_id][1].update(sources)
+
+            # appends to dataframe
+            for key, item in ptms_rest.items():
+                ecos_set = item[0]
+                if not ecos_set:
+                    continue
+                df_rows.append([accession, key.split("|")[0], 
+                            item[2], key.split("|")[1], 
+                            ";".join(ecos_set), ";".join(item[1]), # for all
+                            "", "", ""# Only for large scale study data
+                            ])
+
+            dataframe.extend(df_rows)
+            general_info.extend(gen_rows)
+
+        # writes to temporary csv to avoid data loss
+        df = pd.DataFrame(dataframe, columns=info_columns)
+        general_df = pd.DataFrame(general_info, columns=general_columns)
+
+        if not os.path.exists(out_info) or os.path.getsize(out_info) == 0:
+            df.to_csv(out_info, index=False, mode="w")        # includes header
+        else:
+            df.to_csv(out_info, index=False, mode="a", header=False)
+
+        # Free memory for next page
+        dataframe = []
+        del df
+
+        if not os.path.exists(out_seq) or os.path.getsize(out_seq) == 0:
+            general_df.to_csv(out_seq, index=False, mode="w")        # includes header
+        else:
+            general_df.to_csv(out_seq, index=False, mode="a", header=False)
+        # Free memory for next page
+        general_info = []
+        del general_df
+
+        # pagination
+        tally += len(data["results"])
+        total = response.headers.get("x-total-results", "?")
+        logging.info("Retrieved %d of %s total results using REST API", tally, total)
+
+        url_rest = response.links.get("next", {}).get("url")
+        if tally >= int(total):
+            break
+
+    logging.info(f"Entry download using REST API is done. {os.path.getsize(out_info)} records stored at {out_info}.") 
+    logging.info(f"General information for entries stored at {out_seq}.") 
+    return accession_list
+
