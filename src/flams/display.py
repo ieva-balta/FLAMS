@@ -23,6 +23,8 @@ def create_output(output_filename, amino_acid_x, blast_records, len):
     ----------
     output_filename: str
         Output file name
+    amino_acid_x: str
+        Amino acid containing the post-translational modification under investigation
     blast_records: array
         Array containing BLAST records that met search criteria of FLAMS run.
     len: int
@@ -80,7 +82,7 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
         for blast_record in blast_records:
             for alignment in blast_record.alignments:
                 for hsp in alignment.hsps:
-                    # Parsing header of format UniProtID|xPosition|length|db proteinName|modificationType|speciesNoSpaces [eco_codes|sources|evidenceLink]
+                    # Parsing header of format UniProtID|xPosition|length|db proteinName|modificationType|speciesNoSpaces [eco_codes|sources|lss_database|lss_ids|lss_confidence_scores]
                     headerSplitSpace = (alignment.title).split()  # split up header into list, seperated by space
                     generalDescr1 = headerSplitSpace[0]
                     generalDescr2 = headerSplitSpace[1]
