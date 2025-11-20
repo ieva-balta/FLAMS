@@ -119,13 +119,15 @@ The output file contains 13 columns:
 * BLAST identity: % identity of BLASTp search of the matched protein against your query protein
 * BLAST coverage: % coverage of BLASTp search of the matched protein against your query protein
 * Database: UniProt subdatabase (Swiss-Prot or TrEMBL)
-* ECO codes: evidence codes of matched protein modification°°
-* Sources: source type of matched protein modification°°
-* Source IDs: evidence links of matched protein modification°°
+* ECO codes: evidence codes of matched protein modification
+* Sources: source type and evidence links of matched protein modification, format type:ID, for large-scale study data only PubMed IDs are displayed
+* LSS Database: large-scale study database of matched protein modification (PTMXchange or PRIDE)°°
+* LSS IDs: large-scale study IDs of matched protein modification°°
+* LSS Confidence scores: large-scale study confidence scores of matched protein modification (Gold, Silver, Bronze)°°
 
 °: window can be smaller than the [-5;+5] window if the sequence alignment ends sooner, which can happen for modified sites near the start/end of the protein.
 
-°°: These three columns are parallel lists separated by semicolons — the n-th entry in ECO codes corresponds to the n-th entry in both Sources and Source IDs.
+°°: only displayed for the PTMs inferred from large-scale study data fetched using EBI Proteomics API; only for acetylation, phosphorylation, sumoylation and ubiquitination.
 
 ## Supported PTMs
 
