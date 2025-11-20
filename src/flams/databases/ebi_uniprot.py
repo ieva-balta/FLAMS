@@ -406,35 +406,109 @@ def main():
 
 
     with ThreadPoolExecutor(max_workers=args.threads) as ex:
-        # submit each batch to the thread pool
         futures = {ex.submit(fetch_ptms_for_batch, batch): batch for batch in batches}
 
         for f in as_completed(futures):
             current_batch = futures[f]
+
             try:
-                rows, processed_accs = f.result()
-                
-                if rows:
-                    append_rows_to_csv(rows, csv_path)
-                    
-                # log success for the batch
-                logging.info(
-                    f"Batch processed ({len(current_batch)} accs): "
-                    f"{len(rows)} PTM sites found."
-                )
-
-                # update processed.txt with all accessions in the batch
-                with open(processed_path, "a") as p:
-                    # for acc in current_batch:
-                    for acc in processed_accs:
-                        p.write(acc + "\n")
-
+                rows, returned = f.result()
             except Exception as e:
-                # log error for the batch but do NOT mark as processed so it can be retried on the next run
                 logging.error(
-                    f"ERROR processing batch of {len(current_batch)} accessions "
-                    f"starting with {current_batch[0]}: {e}"
+                    f"FIRST attempt FAILED for batch starting with {current_batch[0]} "
+                    f"({len(current_batch)} accs): {e}"
                 )
+                rows, returned = [], []  # treat as empty result
+
+            # find missing accessions
+            requested = set(current_batch)
+            returned = set(returned)
+            missing = list(requested - returned)
+
+            # write PTM rows found in first attempt
+            if rows:
+                append_rows_to_csv(rows, csv_path)
+
+            # write successes from first attempt
+            with open(processed_path, "a") as p:
+                for acc in returned:
+                    p.write(acc + "\n")
+
+            logging.info(
+                f"Batch: {len(current_batch)} req | {len(returned)} returned | "
+                f"{len(missing)} missing"
+            )
+
+            # retry once for missing accessions
+            if missing:
+                logging.warning(f"Retrying {len(missing)} missing accessions once...")
+
+                try:
+                    retry_rows, retry_returned = fetch_ptms_for_batch(missing)
+                    retry_returned = set(retry_returned)
+
+                    # Write retry PTM rows
+                    if retry_rows:
+                        append_rows_to_csv(retry_rows, csv_path)
+
+                    # Write retry successes
+                    with open(processed_path, "a") as p:
+                        for acc in retry_returned:
+                            p.write(acc + "\n")
+
+                    still_missing = set(missing) - retry_returned
+
+                    logging.info(
+                        f"Retry: {len(retry_returned)} recovered | {len(still_missing)} NOT_FOUND"
+                    )
+
+                    # Write NOT_FOUND labels
+                    if still_missing:
+                        with open(processed_path, "a") as p:
+                            for acc in still_missing:
+                                p.write(f"{acc}\tNOT_FOUND\n")
+
+                except Exception as e2:
+                    logging.error(
+                        f"Retry FAILED for batch starting with {current_batch[0]}: {e2}"
+                    )
+
+                    # Mark them all NOT_FOUND
+                    with open(processed_path, "a") as p:
+                        for acc in missing:
+                            p.write(f"{acc}\tNOT_FOUND\n")
+
+
+    # with ThreadPoolExecutor(max_workers=args.threads) as ex:
+    #     # submit each batch to the thread pool
+    #     futures = {ex.submit(fetch_ptms_for_batch, batch): batch for batch in batches}
+
+    #     for f in as_completed(futures):
+    #         current_batch = futures[f]
+    #         try:
+    #             rows, processed_accs = f.result()
+                
+    #             if rows:
+    #                 append_rows_to_csv(rows, csv_path)
+                    
+    #             # log success for the batch
+    #             logging.info(
+    #                 f"Batch processed ({len(current_batch)} accs): "
+    #                 f"{len(rows)} PTM sites found."
+    #             )
+
+    #             # update processed.txt with all accessions in the batch
+    #             with open(processed_path, "a") as p:
+    #                 # for acc in current_batch:
+    #                 for acc in processed_accs:
+    #                     p.write(acc + "\n")
+
+    #         except Exception as e:
+    #             # log error for the batch but do NOT mark as processed so it can be retried on the next run
+    #             logging.error(
+    #                 f"ERROR processing batch of {len(current_batch)} accessions "
+    #                 f"starting with {current_batch[0]}: {e}"
+    #             )
 
     
     logging.info("All PTMs fetched. Starting deduplication...")
