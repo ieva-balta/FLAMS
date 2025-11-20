@@ -79,9 +79,13 @@ class ModificationHeader:
     eco_codes: str
         Evidence code for each modification
     sources: str
-        Evidence sources for each modification
-    evidence_link: str
-        Evidence links for each modification (PubMed, PDB etc.)
+        Evidence sources for each modification, formatted as 'source:id'
+    lss_database: str
+        Large-scale study database(s) in which the modification was found
+    lss_ids: str
+        Large-scale study identifier(s) for the modification
+    lss_confidence_scores: str
+        Confidence score(s) assigned to the modification in large-scale study/studies
 
     """
     uniprot_id: str
@@ -93,7 +97,6 @@ class ModificationHeader:
     species: str
     eco_codes: str
     sources: str
-    # evidence_link: str
     lss_database: str
     lss_ids: str
     lss_confidence_scores: str
@@ -103,7 +106,7 @@ class ModificationHeader:
     def parse(title: str) -> "ModificationHeader":
 
         regex = (
-            r"(?P<uniprot_id>[A-Z0-9_]+)\|"
+            r"(?P<uniprot_id>[A-Z0-9_\-]+)\|"
             r"(?P<position>\d+)\|"
             r"(?P<length>\d+)\|"
             r"(?P<database>\S+)"
