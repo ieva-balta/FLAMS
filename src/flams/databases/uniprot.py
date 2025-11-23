@@ -139,7 +139,7 @@ def sort_uniprot_records(uniprot_records, PTM_modification_dict, data_dir):
     # make new dataframe
     classified_records = pd.DataFrame({
         col: pd.Series(dtype=info_dtypes[col]) 
-        for col in info_columns
+        for col in info_columnsgit 
     })
 
     # parses through modification dictionary
