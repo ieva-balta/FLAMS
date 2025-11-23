@@ -23,6 +23,8 @@ def create_output(output_filename, amino_acid_x, blast_records, len):
     ----------
     output_filename: str
         Output file name
+    amino_acid_x: str
+        Amino acid containing the post-translational modification under investigation
     blast_records: array
         Array containing BLAST records that met search criteria of FLAMS run.
     len: int
@@ -72,13 +74,15 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
                 "Database",
                 "ECO codes",
                 "Sources",
-                "Source IDs"
+                "LSS Database",
+                "LSS IDs",
+                "LSS Confidence scores"
             ]
         )
         for blast_record in blast_records:
             for alignment in blast_record.alignments:
                 for hsp in alignment.hsps:
-                    # Parsing header of format UniProtID|xPosition|length|db proteinName|modificationType|speciesNoSpaces [eco_codes|sources|evidenceLink]
+                    # Parsing header of format UniProtID|xPosition|length|db proteinName|modificationType|speciesNoSpaces [eco_codes|sources|lss_database|lss_ids|lss_confidence_scores]
                     headerSplitSpace = (alignment.title).split()  # split up header into list, seperated by space
                     generalDescr1 = headerSplitSpace[0]
                     generalDescr2 = headerSplitSpace[1]
@@ -108,10 +112,10 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
                     #     cplm_evidenceLink = "NA"
                     #     dbptm_evidenceCode = dbDescr.split("|")[1]
                     #     dbptm_evidenceLink = dbDescr.split("|")[2][:-1]
-                    ecos, sources, s_ids = dbDescr.split("|")
+                    ecos, sources, lss_database, lss_ids, lss_confidence_scores = dbDescr.split("|")
                     # removes the [] left from the header
                     ecos = ecos.replace("[", "")
-                    s_ids = s_ids.replace("]", "")
+                    lss_confidence_scores = lss_confidence_scores.replace("]", "")
 
                     # BLAST properties
                     eval = hsp.expect
@@ -138,7 +142,9 @@ def _display_result(output_filename, amino_acid_x, blast_records, len):
                             db,
                             ecos, 
                             sources, 
-                            s_ids
+                            lss_database,
+                            lss_ids,
+                            lss_confidence_scores
                         ]
                     )
 
@@ -168,13 +174,17 @@ def _deduplicate_output(amino_acid_x, output_pre_dedupl, output_filename):
                         # "CPLM ID" : "first", "CPLM evidence code" : "first", "CPLM evidence links" : "first",
                         # "dbPTM evidence code" : "first", "dbPTM evidence links" : "first",
                         "Database": "first",
-                        "ECO codes" : "first", "Sources" : "first", "Source IDs": "first"
+                        "ECO codes" : "first", "Sources" : "first",
+                        "LSS Database": "first",
+                        "LSS IDs": "first",
+                        "LSS Confidence scores": "first"
                         }).reset_index()
     df2 = df2.reindex(["Uniprot ID", "Protein name", "Modification", f"{amino_acid_x} location", f"{amino_acid_x} window", "Species",
     "BLAST E-value", "BLAST identity", "BLAST coverage",
     # "CPLM ID", "CPLM evidence code", "CPLM evidence links",
     # "dbPTM evidence code", "dbPTM evidence links",
-    "Database", "ECO codes", "Sources", "Source IDs"], axis = 1)
+    "Database", "ECO codes", "Sources", 
+    "LSS Database", "LSS IDs", "LSS Confidence scores"], axis = 1)
     df2.to_csv(output_filename, sep="\t", index = False)
 
 
