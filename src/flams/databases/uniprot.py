@@ -46,7 +46,7 @@ info_columns = ["Accession", "Position",
 # dtypes for the records files
 info_dtypes = {
     "Accession": "string",
-    "Position": "string",
+    "Position": "Int64",
     "Feature_type": "string",
     "Description": "string",
     "ECO_codes": "string",
@@ -62,7 +62,7 @@ general_columns = ["Accession", "Length", "Entry_type", "Protein", "Organism","S
 # dtypes for the general sequence info file
 general_dtypes = {
     "Accession": "string",
-    "Length": "string",
+    "Length": "Int64",
     "Entry_type": "string",
     "Protein": "string",
     "Organism": "string",
@@ -97,9 +97,11 @@ def get_fasta(PTM_modification_dict, data_dir):
         download_with_ebi_api(data_dir, accessions, version=setup.version)
         # merges both files into one
         merge_rest_ebi_outputs(data_dir)
-        df = pd.read_csv(records_file, header=0, dtype=info_dtypes)
+        df = pd.read_csv(records_file, header=0, low_memory=False)
+        df = df.astype(info_dtypes)
     else:
-        df = pd.read_csv(records_file, header=0, dtype=info_dtypes)
+        df = pd.read_csv(records_file, header=0, low_memory=False)
+        df = df.astype(info_dtypes)
 
     # classifies records into PTM types and stores fasta files per modification type
     logging.info(f"Sorting records into modification types and creating fasta files.")
@@ -135,7 +137,10 @@ def sort_uniprot_records(uniprot_records, PTM_modification_dict, data_dir):
 
     """
     # make new dataframe
-    classified_records = pd.DataFrame(columns = info_columns)
+    classified_records = pd.DataFrame({
+        col: pd.Series(dtype=info_dtypes[col]) 
+        for col in info_columns
+    })
 
     # parses through modification dictionary
     for modification, m_type in PTM_modification_dict.items():
@@ -194,7 +199,7 @@ def find_modification_type(uniprot_records, PTM_modification_type, data_dir):
 
     ### for development purposes - can remove later
     # stores records per modification type
-    df_filtered.to_csv(f"{data_dir}/{m_type}-{m_version}.csv", index=False, dtype=info_dtypes)
+    df_filtered.to_csv(f"{data_dir}/{m_type}-{m_version}.csv", index=False)
 
     return df_filtered
 
@@ -216,7 +221,8 @@ def df_to_fasta(PTM_type_df, m_type, m_version, data_dir):
     """
     # reads sequence file containing general information on each entry
     sequence_file = os.path.join(data_dir, f"_sequences-{setup.version}.csv.tmp")
-    seq_df = pd.read_csv(sequence_file, header=0, dtype=general_dtypes)
+    seq_df = pd.read_csv(sequence_file, header=0, low_memory=False)
+    seq_df = seq_df.astype(general_dtypes)
 
     # adds sequences and general information to PTM dataframe
     PTM_df = PTM_type_df.merge(seq_df, how="left", on="Accession")
@@ -230,11 +236,25 @@ def df_to_fasta(PTM_type_df, m_type, m_version, data_dir):
         for _, row in PTM_df.iterrows():
 
             # replaces the NoneType  with N/A (needed for run_blast.py)
-            protein = row["Protein"] or "N/A"
-            sources = row["Sources"] or "N/A"
-            lss_database = row["LSS_Database"] or "N/A"
-            lss_ids = row["LSS_IDs"] or "N/A"
-            lss_confidence_scores = row["LSS_Confidence_scores"] or "N/A"
+            protein = row["Protein"]
+            if pd.isna(protein) or protein == "":
+                protein = "N/A"
+
+            sources = row["Sources"]
+            if pd.isna(sources) or sources == "":
+                sources = "N/A"
+
+            lss_database = row["LSS_Database"]
+            if pd.isna(lss_database) or lss_database == "":
+                lss_database = "N/A"
+
+            lss_ids = row["LSS_IDs"]
+            if pd.isna(lss_ids) or lss_ids == "":
+                lss_ids = "N/A"
+
+            lss_confidence_scores = row["LSS_Confidence_scores"]
+            if pd.isna(lss_confidence_scores) or lss_confidence_scores == "":
+                lss_confidence_scores = "N/A"
             
             # adds unique id instead of accession (needed for making BLAST databases)
             unique_id = f"{row['Accession']}_{tally}"
@@ -279,14 +299,16 @@ def merge_rest_ebi_outputs(data_dir):
         return
 
     # reads rest and ebi files
-    df_rest = pd.read_csv(rest_file, header=0, dtype=info_dtypes)
-    df_ebi = pd.read_csv(ebi_file, header=0, dtype=info_dtypes)
+    df_rest = pd.read_csv(rest_file, header=0, low_memory=False)
+    df_rest = df_rest.astype(info_dtypes)
+    df_ebi = pd.read_csv(ebi_file, header=0, low_memory=False)
+    df_ebi = df_ebi.astype(info_dtypes)
 
     # merges rest and ebi dataframes
     merged_df = pd.concat([df_rest, df_ebi], ignore_index=True)
 
     # writes merged dataframe to file
-    merged_df.to_csv(merge_file, index=False, dtype=info_dtypes)
+    merged_df.to_csv(merge_file, index=False)
     logging.info(f"Merged records file created and stored at {merge_file}.")
 
 def download_with_ebi_api(data_dir, accession_list, version=None, threads=40):
@@ -385,12 +407,12 @@ def write_ebi_output(all_df_rows, out_info):
     out_info: str
         Output file path for the CSV file
     """
-    df = pd.DataFrame(all_df_rows, columns=info_columns, dtype=info_dtypes)
+    df = pd.DataFrame(all_df_rows, columns=info_columns)
+    df = df.astype(info_dtypes)
     if not os.path.exists(out_info) or os.path.getsize(out_info) == 0:
-        df.to_csv(out_info, index=False, mode="w", dtype=info_dtypes)        # includes header
+        df.to_csv(out_info, index=False, mode="w")        # includes header
     else:
-        df.to_csv(out_info, index=False, mode="a", header=False, dtype=info_dtypes)
-
+        df.to_csv(out_info, index=False, mode="a", header=False)
 def fetch_ptm_for_batch(batch_accessions, base_url_ebi, headers):
     """
     
@@ -703,8 +725,10 @@ def download_with_rest_api(data_dir, version=None):
             general_info.extend(gen_rows)
 
         # writes to a temporary csv to avoid data loss
-        df = pd.DataFrame(dataframe, columns=info_columns, dtype=info_dtypes)
-        general_df = pd.DataFrame(general_info, columns=general_columns, dtype=general_dtypes)
+        df = pd.DataFrame(dataframe, columns=info_columns)
+        df = df.astype(info_dtypes)
+        general_df = pd.DataFrame(general_info, columns=general_columns)
+        general_df = general_df.astype(general_dtypes)
 
         if not os.path.exists(out_info) or os.path.getsize(out_info) == 0:
             df.to_csv(out_info, index=False, mode="w")        # includes header
