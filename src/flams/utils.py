@@ -28,7 +28,7 @@ def get_data_dir(app_name="flams"):
     """
 
     # HPC default path
-    default_path = "/data/leuven/368/vsc36826/flams/flams2/dbs/"
+    default_path = "/data/leuven/368/vsc36826/flams/flams2/dbs_2211/"
 
 
     # # Ensure data dir exists and return.
