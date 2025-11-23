@@ -119,13 +119,15 @@ The output file contains 13 columns:
 * BLAST identity: % identity of BLASTp search of the matched protein against your query protein
 * BLAST coverage: % coverage of BLASTp search of the matched protein against your query protein
 * Database: UniProt subdatabase (Swiss-Prot or TrEMBL)
-* ECO codes: evidence codes of matched protein modification°°
-* Sources: source type of matched protein modification°°
-* Source IDs: evidence links of matched protein modification°°
+* ECO codes: evidence codes of matched protein modification
+* Sources: source type and evidence links of matched protein modification, format type:ID, for large-scale study data only PubMed IDs are displayed
+* LSS Database: large-scale study database of matched protein modification (PTMXchange or PRIDE)°°
+* LSS IDs: large-scale study IDs of matched protein modification°°
+* LSS Confidence scores: large-scale study confidence scores of matched protein modification (Gold, Silver, Bronze)°°
 
 °: window can be smaller than the [-5;+5] window if the sequence alignment ends sooner, which can happen for modified sites near the start/end of the protein.
 
-°°: These three columns are parallel lists separated by semicolons — the n-th entry in ECO codes corresponds to the n-th entry in both Sources and Source IDs.
+°°: only displayed for the PTMs inferred from large-scale study data fetched using EBI Proteomics API; only for acetylation, phosphorylation, sumoylation and ubiquitination.
 
 ## Supported PTMs
 
@@ -145,7 +147,7 @@ FLAMS updates its search databases regularly. To get an overview of the supporte
 Please note that the software doesn't store all UniProt entries. Only the entries with [experimental evidence at protein level](https://www.uniprot.org/help/protein_existence) (existence:1) and features with [Evidence Code Ontology (ECO) identifiers](https://www.uniprot.org/help/evidences) 0000269, 0000314, 0007744, or 0007829 are stored. 
 
 **Modification of database:**
-If you wish to use other filters, you can modify the *uniprot.py* script (valid_ECO_codes for the ECO code filter and/or the url in get_uniprot_records() for existence code). You can make changes in the MODIFICATION dictionary in *setup.py* to add/remove modification types, edit amino acid lists, or the regular expressions used to group entries. All changes should be paired with a change of the version number in *setup.py* to download a new version of the database.
+If you wish to use other filters, you can modify the *uniprot.py* script (valid_ECO_codes for the ECO code filter and/or the url in download_with_rest_api() for existence code). You can make changes in the MODIFICATION dictionary in *setup.py* to add/remove modification types, edit amino acid lists, or the regular expressions used to group entries. All changes should be paired with a change of the version number in *setup.py* to download a new version of the database.
 
 ### Supported PTM types
 
