@@ -29,7 +29,7 @@ A bioinformatics tool to analyze the conservation of post-translational modifica
 
 ## Introduction
 
-FLAMS is a bioinformatics tool to analyze the conservation of post-translational modifications, by means of a position-based search against the UniProt database(The UniProt Consortium , UniProt: the Universal Protein Knowledgebase in 2025, Nucleic Acids Research, Volume 53, Issue D1, 6 January 2025, Pages D609–D617). FLAMS can be used (i) to quickly verify whether modifications in a specific protein have been reported before, (ii) to assess whether findings in one species might translate to other species, and (iii) to systematically assess the novelty and conservation of reported  modification sites.
+FLAMS is a bioinformatics tool to analyze the conservation of post-translational modifications, by means of a position-based search against the UniProt database(The UniProt Consortium, UniProt: the Universal Protein Knowledgebase in 2025, Nucleic Acids Research, Volume 53, Issue D1, 6 January 2025, Pages D609–D617). FLAMS can be used (i) to quickly verify whether modifications in a specific protein have been reported before, (ii) to assess whether findings in one species might translate to other species, and (iii) to systematically assess the novelty and conservation of reported  modification sites.
 
 The tool takes as input a protein (identifier or sequence) and the position of an amino acid. This repository contains the command-line tool `FLAMS`, which obtains an overview of the previously reported post-translational modifications matching your query, by using the following scripts:
 
@@ -157,49 +157,49 @@ An overview of the PTM types, how to call them in FLAMS, and on which amino acid
 |:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|
 |acetylation|X|X|X|X| |X| | |X| |X| |X| |X|X|X|X| |X|X| |
 |adp-ribosylation| |X|X|X| |X|X| |X| | |X| | |X|X| | | |X| | |
-|adp-riboxanation| | |X| | | |X| | | | |X| |X|X|X| | | | | | |
+|adp-riboxanation| | | | | | | | | | | | | | |X| | | | | | | |
 |amidation|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | |
 |ampylation| | | | | | | | | | | | | | | |X|X| | |X| | |
 |benzoylation| | | | | | | | |X| | | | | | | | | | | |X| |
 |beta-hydroxybutyrylation| | | | | | | | |X| | | | | | | | | | | |X| |
 |biotinylation| | | | | | | | |X| | | | | | | | | | | | | |
 |blocked_amino_end|X|X|X|X| |X|X|X| |X|X|X|X|X|X|X|X|X| | | | |
-|bromination|X|X|X| |X|X|X|X|X|X| | |X|X|X| | |X|X|X| | |
+|bromination| | | | | | |X| | | | | | | | | | | |X|X| | |
 |butyrylation| | | | | | | | |X| | | | | | | | | | | |X| |
 |carboxyethylation| | | | | | | | |X| | | | | | | | | | | | | |
 |carboxylation| | | | | | | | |X| | | | | | | | | | | | | |
 |cholesterol_ester| | | | | |X| | | | | | | | | | | | | | | | |
 |citrullination| | | | | | | | | | | | | | |X| | | | | | | |
 |crotonylation| | | | | | | | |X| | | | | | | | | | | |X| |
-|cyclopeptide|X|X|X|X|X|X| |X|X|X|X|X|X|X|X|X| | |X|X| | |
-|cysteinylation|X|X| |X| |X|X|X|X|X| |X|X|X|X|X|X|X|X|X| | |
+|cyclopeptide|X|X|X|X|X|X| |X|X|X|X|X|X| |X|X| | |X| | | |
+|cysteinylation| |X|X|X|X| |X| | | |X| | | |X| |X| |X|X| | |
 |c-linked_glycosylation| | | | | | | | | | | | | | | | | | |X| | | |
 |deamidation| | | | | | | | | | | |X| |X| | | | | | | | |
 |deamination| | | | | | | | |X| | | | | | | | | | | | | |
 |decanoylation| | | | | | | | | | | | | | | |X|X| | | | | |
 |decarboxylation| | |X| | | | | | | | | | | | | |X| | | | | |
-|dehydration|X|X|X| | |X|X| |X|X| |X| | |X|X|X|X| |X| | |
+|dehydration| |X|X| | | | | | | | | | | | |X|X| | |X| | |
 |dephosphorylation| | | | | | | | | | | | | | | |X|X| | |X| | |
 |disulfide_bond| |X| | | | | | | | | | | | | | | | | | | | |
 |d-glucuronoylation| | | | | |X| | | | | | | | | | | | | | | | |
-|fadylation|X|X| | | |X|X|X|X|X| |X| | |X|X|X|X| |X| | |
+|fadylation| |X| | | | |X| | | | | | | | | | | | | | | |
 |farnesylation| |X| | | | | | | | | | | | | | | | | | | | |
 |formation_of_an_isopeptide_bond| | | |X| | | | | | | | | |X| | | | | | | | |
 |formylation| | | | | |X| | |X| |X| | | | | | | | | |X| |
-|genarylation| |X| | | |X| |X| |X| |X| |X|X| | | |X|X| | |
+|genarylation| |X| | | | | | | | | | | | | | | | |X| | | |
 |geranylgeranylation| |X| | | | | | | | | | | | | | | | | | | | |
-|glutamylation|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | |
+|glutamylation| |X| |X| |X| | |X| | | | |X| | | | | | | | |
 |glutarylation| | | | | | | | |X| | | | | | | | | | | |X| |
 |glutathionylation| |X| | | | | | | | | | | | | | | | | | | | |
 |glycation| | | | | | | | |X| | | | | | | | | | | | | |
 |gmpylation| |X| | | | | | | | | | | | | | | | | | | | |
 |gpi-anchor|X|X|X| | |X| | | | | |X| | | |X|X| | | | | |
-|histidylation|X| | | | |X|X|X|X|X| |X| | | |X| |X| | | | |
+|histidylation| |X| | | | |X| | | | | | | | | | | | |X| | |
 |hydroxylation| |X|X|X|X| |X|X|X|X| |X|X| |X|X|X|X|X|X| | |
-|hypusine| | |X|X| | | | |X| | |X| | | |X| | | | | | |
-|imidazolation|X|X| | | | |X| |X|X|X|X| |X|X|X|X|X| | | | |
+|hypusine| | | | | | | | |X| | | | | | | | | | | | | |
+|imidazolation|X|X| | | |X| | |X| |X| | |X|X|X| | | | | | |
 |iodination| | | | | | | | | | | | | | | | | | | |X| | |
-|isomerization|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | |
+|isomerization|X|X| | |X|X| |X|X|X|X|X| | |X|X|X|X|X| | | |
 |lactoylation| | | | | | | | |X| | | | | | | | | | | | | |
 |lipoylation| | | | | | | | |X| | | | | | | | | | | | | |
 |malonylation| | | | | | | | |X| | | | | | | | | | | |X| |
@@ -215,24 +215,24 @@ An overview of the PTM types, how to call them in FLAMS, and on which amino acid
 |o-linked_glycosylation| | | | | | | | |X| | | |X| | |X|X| | |X| | |
 |o-palmitoleoylation| | | | | | | | | | | | | | | |X| | | | | | |
 |o-palmitoylation| | | | | | | | | | | | | | | |X|X| | | | | |
-|palmitoylation|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | |
+|palmitoylation|X|X| | | |X| | |X|X| | | | | |X|X| | | | | |
 |phosphatidylethanolamine_amidation| | | | | |X| | | | | | | | | | | | | | | | |
 |phosphoglycerylation| | | | | | | | |X| | | | | | | | | | | | | |
 |phosphorylation|X|X|X|X|X|X|X|X|X|X| |X|X|X|X|X|X|X|X|X| | |
-|prenylation| | | |X| | | | | | | | | | | | | | |X| | | |
+|prenylation| | | | | | | | | | | | | | | | | | |X| | | |
 |propionylation| | | | | | | | |X| | | | | | | | | | | |X| |
 |pupylation| | | | | | | | |X| | | | | | | | | | | | |X|
-|pyridoxal_phosphate_addition|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X| | |
+|pyridoxal_phosphate_addition| | |X| | | | | |X| | | | | | | | | | | | | |
 |pyrrolidone_carboxylic_acid| | | |X| | | | | | | | | |X| | | | | | | | |
 |pyrrolylation| |X| | | | | | | | | | | | | | | | | | | | |
 |pyruvate| |X| | | | | | | | | | | | | |X| | | | | | |
-|quinone| | | | | | | | | | | | | | | | | | | | | | |
+|quinone| |X| | | | | | |X| | | | | | | | | |X|X| | |
 |serotonylation| | | | | | | | | | | | | |X| | | | | | | | |
 |stearoylation| |X| | | | | | | | | | | | | | | | | | | | |
 |succinylation| |X| | | | | | |X| | | | | | | | | |X| |X| |
 |sulfation| |X| | | | | | | | | | | | | |X|X| | |X| | |
 |sulfhydration| |X| | | | | | | | | | | | | | | | | | | | |
-|sulfilimine_crosslink| | | | | | | | |X| |X| | | | | |X| | | | | |
+|sulfilimine_crosslink| | | | | | | | |X| |X| | | | | | | | | | | |
 |sulfoxidation| | | | | | | | | | |X| | | | | | | | | | | |
 |sumoylation| | | | | | | | |X| | | | | | | | | | | | |X|
 |s-archaeol| |X| | | | | | | | | | | | | | | | | | | | |
@@ -244,7 +244,7 @@ An overview of the PTM types, how to call them in FLAMS, and on which amino acid
 |s-nitrosylation| |X| | | | | | | | | | | | | | | | | | | | |
 |s-palmitoylation| |X| | | | | | | | | | | | | | | | | | | | |
 |thiocarboxylation| | | | | |X| | | | | | | | | | | | | | | | |
-|thioester_crosslink| | | | | | | | | | | | | | | | | | | | | | |
+|thioester_crosslink| |X| | | |X| | | | | | | |X| | | | | | | | |
 |ubiquitination| |X| | | | | | |X| | | | | |X|X| | | | | |X|
 |umpylation| | | | | | | | | | | | | | | |X|X| | |X| | |
 |2-hydroxyisobutyrylation| | | | | | | | |X| | | | | | | | | | | |X| |
@@ -265,7 +265,7 @@ In addition, FLAMS relies on third-party software & databases:
 
 Altschul, S.F. *et al* (1990) "Basic local alignment search tool." J. Mol. Biol. 215:403-410.
 
-The UniProt Consortium , UniProt: the Universal Protein Knowledgebase in 2025, Nucleic Acids Research, Volume 53, Issue D1, 6 January 2025, Pages D609–D617
+The UniProt Consortium, UniProt: the Universal Protein Knowledgebase in 2025, Nucleic Acids Research, Volume 53, Issue D1, 6 January 2025, Pages D609–D617
 
 ## License
 
