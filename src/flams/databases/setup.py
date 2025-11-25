@@ -106,7 +106,7 @@ MODIFICATIONS = {
         [
             ModificationDatabase(uniprot, [r"ADP[-_\s]*ribox[-\w_]*"])
         ],
-        ['Q', 'H', 'N', 'R', 'D', 'S']
+        ['R']
     ), # NEW TYPE
     "amidation": ModificationType(
         "amidation", version,
@@ -161,7 +161,7 @@ MODIFICATIONS = {
         [
             ModificationDatabase(uniprot, [r"[-\w_]*bromo[-\w_]*"])
         ],
-        ['V', 'I', 'Y', 'F', 'L', 'K', 'D', 'W', 'Q', 'H', 'R', 'G', 'P', 'A', 'C']
+        ['H', 'W', 'Y']
     ), # NEW TYPE
     "butyrylation": ModificationType(
         "butyrylation", version,
@@ -225,14 +225,14 @@ MODIFICATIONS = {
         [
             ModificationDatabase(uniprot, [r"[-\w_]*cyclo(?:peptide)?[-\w_]*"])
         ],
-        ['E', 'S', 'P', 'L', 'W', 'D', 'Q', 'F', 'M', 'K', 'C', 'I', 'G', 'Y', 'N', 'A', 'R']
+        ['L', 'R', 'K', 'W', 'M', 'S', 'A', 'E', 'I', 'N', 'C', 'F', 'P', 'D', 'G']
     ), # NEW TYPE
     "cysteinylation": ModificationType(
         "cysteinylation", version,
         [
             ModificationDatabase(uniprot, [r"[_\w-]*cysteinyl[_\w-]*"])
         ],
-        ['Q', 'T', 'W', 'L', 'K', 'V', 'Y', 'R', 'I', 'S', 'H', 'N', 'A', 'C', 'P', 'G', 'E']
+        ['C', 'Y', 'T', 'M', 'E', 'W', 'R', 'H', 'F', 'D']
     ), # NEW TYPE
     "c-linked_glycosylation": ModificationType(
         "c-linked_glycosylation", version,
@@ -277,7 +277,7 @@ MODIFICATIONS = {
     "dehydration": ModificationType(
         "dehydration", version,
         [ModificationDatabase(uniprot, [r"[-\w_]*dehydro[-\w_]*"])],
-        ['R', 'A', 'V', 'C', 'K', 'N', 'Y', 'D', 'S', 'L', 'T', 'H', 'G']
+        ['D', 'Y', 'S', 'C', 'T']
     ), # NEW TYPE
     "dephosphorylation": ModificationType(
         "dephosphorylation", version,
@@ -310,7 +310,7 @@ MODIFICATIONS = {
     "fadylation" : ModificationType(
         "fadylation", version,
         [ModificationDatabase(uniprot, [r"FAD[-\w_]*"])],
-        ['V', 'G', 'S', 'I', 'L', 'R', 'Y', 'C', 'K', 'A', 'T', 'H', 'N']
+        ['C', 'H']
     ), # NEW TYPE
     "farnesylation": ModificationType(
         "farnesylation", version,
@@ -347,7 +347,7 @@ MODIFICATIONS = {
     "genarylation": ModificationType(
         "genarylation", version,
         [ModificationDatabase(uniprot, [r"[_\w-]*geranyl[_\w-]*"])],
-        ['G', 'Q', 'I', 'R', 'L', 'C', 'W', 'Y', 'N']
+        ['C', 'W']
     ), # NEW TYPE
     "geranylgeranylation": ModificationType(
         "geranylgeranylation", version,
@@ -360,7 +360,7 @@ MODIFICATIONS = {
     "glutamylation" : ModificationType(
         "glutamylation", version,
         [ModificationDatabase(uniprot, [r"[-\w_]*glutamyl[-\w_]*"])],
-        ['M', 'H', 'I', 'N', 'T', 'C', 'R', 'S', 'Y', 'Q', 'K', 'G', 'A', 'E', 'D', 'V', 'W', 'F', 'P', 'L']
+        ['E', 'G', 'K', 'C', 'Q']
     ), # NEW TYPE
     "glutarylation": ModificationType(
         "glutarylation", version,
@@ -402,7 +402,7 @@ MODIFICATIONS = {
     "histidylation": ModificationType(
         "histidylation", version,
         [ModificationDatabase(uniprot, [r"[-\w_]*histidyl[-\w_]*"])],
-        ['G', 'N', 'V', 'H', 'I', 'A', 'K', 'L', 'S']
+        ['C', 'H', 'Y']
     ), # NEW TYPE
     # "hmgylation": ModificationType(
     #     "hmgylation", 1.4, [ModificationDatabase(cplmv4, "HMGylation")],
@@ -427,12 +427,12 @@ MODIFICATIONS = {
     "hypusine": ModificationType(
         "hypusine", version,
         [ModificationDatabase(uniprot, [r"[-\w_]*hypusine[-\w_]*"])],
-        ['D', 'K', 'S', 'E', 'N']
+        ['K']
     ), # NEW TYPE
     "imidazolation": ModificationType(
         "imidazolation", version,
         [ModificationDatabase(uniprot, [r"[-\w_]*imidazol[-\w_]*"])],
-        ['L', 'Q', 'S', 'A', 'C', 'V', 'M', 'R', 'N', 'K', 'T', 'H']
+        ['M', 'A', 'C', 'K', 'S', 'G', 'R', 'Q']
     ), # NEW TYPE
     "iodination": ModificationType(
         "iodination", version,
@@ -445,7 +445,7 @@ MODIFICATIONS = {
     "isomerization": ModificationType(
         "isomerization", version,
         [ModificationDatabase(uniprot, [r"(?:^|-)[dl]-[_\w-]*"])],
-        ['K', 'N', 'D', 'I', 'V', 'G', 'P', 'T', 'C', 'E', 'Q', 'Y', 'F', 'W', 'L', 'S', 'M', 'A', 'H', 'R']
+        ['R', 'K', 'G', 'I', 'M', 'N', 'C', 'F', 'V', 'A', 'W', 'L', 'T', 'S']
     ), # NEW TYPE
     "lactoylation": ModificationType(
         "lactoylation", version,
@@ -583,7 +583,7 @@ MODIFICATIONS = {
     "palmitoylation": ModificationType(
         "palmitoylation", version,
         [ModificationDatabase(uniprot, [r"[_\w-]*palmitoyl[_\w-]*"])],
-        ['H', 'P', 'Y', 'C', 'S', 'D', 'R', 'L', 'E', 'F', 'A', 'K', 'G', 'Q', 'I', 'N', 'V', 'M', 'T', 'W']
+        ['L', 'K', 'S', 'G', 'T', 'A', 'C']
     ), # NEW TYPE
     "phosphatidylethanolamine_amidation": ModificationType(
         "phosphatidylethanolamine_amidation", version, 
@@ -612,7 +612,7 @@ MODIFICATIONS = {
     "prenylation": ModificationType(
         "prenylation", version,
         [ModificationDatabase(uniprot, [r"[_\w-]*prenyl[_\w-]*"])],
-        ['W', 'E']
+        ['W']
     ), # NEW TYPE
     "propionylation": ModificationType(
         "propionylation", version,
@@ -633,7 +633,7 @@ MODIFICATIONS = {
     "pyridoxal_phosphate_addition": ModificationType(
         "pyridoxal_phosphate_addition", version,
         [ModificationDatabase(uniprot, [r"[_\w-]*pyridoxal__phosphate[_\w-]*"])],
-        ['D', 'H', 'C', 'W', 'I', 'L', 'F', 'A', 'K', 'E', 'T', 'N', 'V', 'Y', 'R', 'S', 'G', 'P', 'Q', 'M']
+        ['K', 'D']
     ), # NEW TYPE
     "pyrrolidone_carboxylic_acid": ModificationType(
         "pyrrolidone_carboxylic_acid", version, 
@@ -662,7 +662,7 @@ MODIFICATIONS = {
     "quinone": ModificationType(
         "quinone", version,
         [ModificationDatabase(uniprot, [r"[_\w-]*quinone[_\w-]*"])],
-        []
+        ['Y', 'W', 'C', 'K']
     ), # NEW TYPE
     "serotonylation" : ModificationType(
         "serotonylation", version,
@@ -707,7 +707,7 @@ MODIFICATIONS = {
     "sulfilimine_crosslink": ModificationType(
         "sulfilimine_crosslink", version,
         [ModificationDatabase(uniprot, [r"[_\w-]*sulfilimine[_\w-]*"])],
-        ['M', 'T', 'K']
+        ['M', 'K']
     ), # NEW TYPE
     "sulfoxidation" : ModificationType(
         "sulfoxidation", version,
@@ -800,7 +800,7 @@ MODIFICATIONS = {
     "thioester_crosslink": ModificationType(
         "thioester_crosslink", version,
         [ModificationDatabase(uniprot, [r"[_\w-]*thioester[_\w-]*"])],
-        []
+        ['Q', 'C', 'G']
     ), # NEW TYPE
     "ubiquitination": ModificationType(
         "ubiquitination", version,
