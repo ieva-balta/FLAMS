@@ -112,12 +112,12 @@ def get_fasta(PTM_modification_dict, data_dir):
 
     ### for development purposes - can remove later
     # stores a list of classified and unclassified records
-    classified.to_csv(f"{data_dir}/classified-{setup.version}.csv", index=False)
+    classified.to_csv(f"{data_dir}/_classified-{setup.version}.csv", index=False)
 
     # stores unclassified records
     # this is what logs unclassified entries basically
-    unclassified.to_csv(f"{data_dir}/unclassified-{setup.version}.csv", index=False)
-    logging.info(f"CSV file for unclassified entries was created and stored at {data_dir}/unclassified-{setup.version}.csv.")
+    unclassified.to_csv(f"{data_dir}/_unclassified-{setup.version}.csv", index=False)
+    logging.info(f"CSV file for unclassified entries was created and stored at {data_dir}/_unclassified-{setup.version}.csv.")
 
 
 def sort_uniprot_records(uniprot_records, PTM_modification_dict, data_dir):
@@ -139,7 +139,7 @@ def sort_uniprot_records(uniprot_records, PTM_modification_dict, data_dir):
     # make new dataframe
     classified_records = pd.DataFrame({
         col: pd.Series(dtype=info_dtypes[col]) 
-        for col in info_columnsgit 
+        for col in info_columns 
     })
 
     # parses through modification dictionary
@@ -230,6 +230,10 @@ def df_to_fasta(PTM_type_df, m_type, m_version, data_dir):
     # counts number of records written
     tally = 0
 
+    # stores rejected entries based on the amino acid not matching the expected ones in setup.MODIFICATIONS
+    # for now only for disulfide bonds
+    rejected_entries = []
+
     # writes to a fasta file
     with open(os.path.join(data_dir, f"{m_type}-{m_version}.fasta"), "a") as f:
 
@@ -271,9 +275,48 @@ def df_to_fasta(PTM_type_df, m_type, m_version, data_dir):
                     id=id,
                     description=f'{protein}|{row["Description"]}|{row["Organism"]} [{row["ECO_codes"]}|{sources}|{lss_database}|{lss_ids}|{lss_confidence_scores}]',
                 )
+            # for disulfide bonds, checks if the amino acid at the position is 'C'
+            # remove 'm_type == "disulfide_bond"' condition if you want to implement this check for all modification types
+            if m_type == "disulfide_bond" and (not is_pos_aa(record, m_type)):
+                rejected_entries.append([row["Accession"], row["Position"], m_type, row["Description"]])
+                continue
             # writes to fasta
             SeqIO.write(record, f, "fasta")
         logging.info(f"Fasta file with {tally} records for modifictation '{m_type}' created and stored at '{data_dir}'.")
+    # logs rejected entries based on amino acid check
+    if rejected_entries:
+        rejected_df = pd.DataFrame(rejected_entries, columns=["Accession", "Position", "Modification_type", "Description"])
+        rejected_df.to_csv(f"{data_dir}/{m_type}-{m_version}_rejected.csv", index=False)
+        logging.info(f"Some entries were rejected because amino acid at the specified position did not match the expected amino acid for modification type '{m_type}'.")
+        logging.info(f"CSV file for {len(rejected_df)} rejected entries for modification type '{m_type}' created and stored at {data_dir}/{m_type}-{m_version}_rejected.csv.")
+
+def is_pos_aa(record, m_type):
+    """
+    This is the helper function that checks if the modified amino acid of the downloaded record
+    is one of the amino acids specified in setup.MODIFICATIONS for the specified modification type.
+
+    For now used only for the modification type 'disulfide_bond' to check for a 'C'.
+
+    Parameters
+    ----------
+    record: SeqRecord
+        A fasta record
+    m_type: str
+        Modification type name
+    """
+    # gets position and sequence out of the record
+    position = int(record.id.split('|')[1]) - 1  # converts 1-based to 0-based index
+    sequence = record.seq
+    # gets amino acid at position
+    aa_at_pos = str(sequence[position])
+
+    # gets the amino acid listed for this modification type
+    PTM_mod_type = setup.MODIFICATIONS[m_type]
+    aa_list = PTM_mod_type.aas
+
+    # checks if the amino acid at the position is in the list
+    return aa_at_pos in aa_list
+
 
 def merge_rest_ebi_outputs(data_dir):
     """
