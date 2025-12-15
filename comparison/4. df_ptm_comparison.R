@@ -188,7 +188,7 @@ create_vector = function(path) {
   for (header in headers) {
     parts = strsplit(header, " ")[[1]]
     seq_id = parts[1]
-    id_parts = strsplit(seq_id, "\\|", fixed = TRUE)[[1]]
+    id_parts = strsplit(seq_id, "\\|")[[1]]
     up_id = id_parts[1]
     pos = id_parts[2]
     if (grepl("_", up_id, fixed = TRUE)) {
@@ -314,4 +314,5 @@ ggsave(
   width = 24,
   height = 7,
   bg = "transparent"
+
 )
